@@ -1,4 +1,4 @@
-#include "App.h"
+#include "oglApp.h"
 
 namespace byhj
 {
@@ -6,11 +6,11 @@ namespace ogl
 {
 
 
-std::shared_ptr<App> App::app;
+std::shared_ptr<OGLApp> OGLApp::m_oglApp = nullptr;
 
-void App::Run(std::shared_ptr<App> the_app)
+void OGLApp::Run(std::shared_ptr<OGLApp> the_OGLApp)
 {	
-    app = the_app;
+    m_oglApp = the_OGLApp;
 
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit()) 
@@ -19,13 +19,13 @@ void App::Run(std::shared_ptr<App> the_app)
 		return;
 	}
 
-	v_InitInfo();
 
 #ifdef _DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
+
 	GLFWwindow *Triangle = glfwCreateWindow(windowInfo.Width, windowInfo.Height,
-		                                  windowInfo.title.c_str(), nullptr, nullptr);
+		                                    windowInfo.title.c_str(), nullptr, nullptr);
 	glfwSetWindowPos(Triangle, windowInfo.posX, windowInfo.posY);
 	glfwMakeContextCurrent(Triangle);
 
@@ -71,7 +71,7 @@ void App::Run(std::shared_ptr<App> the_app)
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	v_Init();
+	v_init();
 
 	glViewport(0, 0, windowInfo.Width, windowInfo.Height);
 
@@ -81,26 +81,26 @@ void App::Run(std::shared_ptr<App> the_app)
 		v_Movement(Triangle);
 
 		//Render for the object
-		v_Render();
+		v_render();
 
 		glfwSwapBuffers(Triangle);
 	}
-	v_Shutdown();
+	v_shutdown();
 
 	glfwTerminate();
 }
 
-float App::GetAspect() const
+float OGLApp::GetAspect() const
 {
 	return static_cast<float>(ScreenWidth) / static_cast<float>(ScreenHeight);
 }
 
-int App::GetScreenWidth() const 
+int OGLApp::GetScreenWidth() const 
 {
 	return ScreenWidth;
 }
 
-int App::GetScreenHeight() const 
+int OGLApp::GetScreenHeight() const 
 {
 	return ScreenHeight;
 }

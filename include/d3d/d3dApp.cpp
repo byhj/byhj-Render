@@ -1,4 +1,4 @@
-#include "App.h"
+#include "D3DApp.h"
 
 namespace byhj
 {
@@ -7,15 +7,15 @@ namespace d3d
 {
 
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-static App *AppHandle = 0;
+static D3DApp *D3DAppHandle = 0;
 
-int App::Run()
+int D3DApp::Run()
 {	
-	InitApp();
+	bool ret = init_window();
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
-	while (true)
+	while (ret)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) )
 		{
@@ -26,25 +26,21 @@ int App::Run()
 		}
 		else 
 		{
-			v_Update();
-			v_Render();
+           v_update();
+		   v_render();
+
 		}
 
 	}
-	v_Shutdown();
+
+	v_shutdown();
+
 	return (int)msg.wParam;
 }
 
-void App::InitApp()
-{
-	init_window();
-
-	v_Init();
-
-}
 
 
-bool App::init_window()
+bool D3DApp::init_window()
 {
 	//Set the window in the middle of screen
 	m_ScreenWidth = GetSystemMetrics(SM_CXSCREEN) * 0.75;
@@ -54,7 +50,7 @@ bool App::init_window()
 	m_ScreenNear = 0.1f;
 	m_ScreenFar  = 1000.0f;
 
-	AppHandle = this;
+	D3DAppHandle = this;
 	m_hInstance = GetModuleHandle(NULL);
 
 	WNDCLASSEX wc;	
@@ -105,7 +101,7 @@ bool App::init_window()
 }
 
 
-LRESULT CALLBACK App::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -154,7 +150,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 		// All other messages pass to the message handler in the system class.
 	default:
 		{
-			return AppHandle->MessageHandler(hwnd, umessage, wparam, lparam);
+			return D3DAppHandle->MessageHandler(hwnd, umessage, wparam, lparam);
 		}
 	}
 }

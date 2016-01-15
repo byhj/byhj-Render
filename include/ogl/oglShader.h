@@ -5,10 +5,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <windows.h>
 #include <memory>
+#include "shader.h"
 
 #ifdef _WIN32
+#include <windows.h>
 #define WINDOW_PLATFORM
 #endif
 
@@ -18,14 +19,13 @@ namespace byhj
 namespace ogl
 {
 
-class Shader
+class OGLShader : public byhj::Shader
 {
 
 public:
-	Shader() : m_Program(0), m_Name("Shader") {}
-	Shader(std::string shaderName) :m_Program(0), m_Name(shaderName) {}
-
-	~Shader(){}
+	OGLShader();
+    OGLShader(std::string name);
+	~OGLShader();
 
 public:
 	void init();
@@ -41,8 +41,7 @@ public:
 private:
 	char *textFileRead( char *fn) ;
 
-	GLuint m_Program;   //Shaderprogram
-	std::string m_Name;   //Shaderclass name
+	GLuint m_program;   
 };
 
 }

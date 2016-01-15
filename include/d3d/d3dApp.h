@@ -1,31 +1,33 @@
 #ifndef APP_H
 #define APP_H
 
-#include <string>
+//use window sdk, not the mfc sdk parts;
 #define WIN32_LEAN_AND_MEAN
 
-#if defined(DEBUG) || defined(_DEBUG)
-#define _CRTDBG_MAP_ALLOC
-#include <crtdbg.h>
-#endif
 
 #include <WindowsX.h>
 #include <windows.h>
-#include <d3dx11.h>
 #include <dxgi.h>
 #include <d3d11.h>
-#include <xnamath.h>
 #include <d3dcommon.h>
-#include <D3DX11async.h>
 
+#include <string>
 #include <ctime>
 #include <algorithm>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <memory>
 
-#include "d3dDebug.h"
+#include "d3d/Utility.h"
+#include "app.h"
+
+#include <DirectXMath.h>
+#include <wrl.h>
+
+using namespace DirectX;
+using namespace Microsoft::WRL;
 
 namespace byhj
 {
@@ -33,28 +35,25 @@ namespace byhj
 namespace d3d
 {
 
-class App
+class D3DApp : public App
 {
 public:
-	App() :m_AppName(L"DirectX11: "), m_WndClassName(L"D3DWindow")
-	{
-
-	}
-	virtual ~App() {}
+	D3DApp();
+	virtual ~D3DApp();
 
 	void InitApp();
 	int Run();
 	LRESULT CALLBACK MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	virtual	void v_Init()  = 0;
-	virtual void v_Shutdown() = 0;
-	virtual void v_Render()   = 0;
-	virtual void v_Update() = 0;
+	void v_init()   override;
+	void v_update() override;
+	void v_render() override;
+	void v_update() override;
 
 	// Convenience overrides for handling mouse input.
-	virtual void v_OnMouseDown(WPARAM btnState, int x, int y){ }
-	virtual void v_OnMouseUp(WPARAM btnState, int x, int y)  { }
-	virtual void v_OnMouseMove(WPARAM btnState, int x, int y){ }
+	virtual void v_OnMouseDown(WPARAM btnState, int x, int y)  { }
+	virtual void v_OnMouseUp(WPARAM btnState, int x, int y)    { }
+	virtual void v_OnMouseMove(WPARAM btnState, int x, int y)  { }
 	virtual void v_OnMouseWheel(WPARAM btnState, int x, int y) { }
 
 protected:
@@ -65,12 +64,12 @@ protected:
 	int   m_PosX;
 	int   m_PosY;
 
-	LPCTSTR m_AppName;
-	LPCTSTR m_WndClassName;
+	LPCTSTR m_AppName      = L"DirectX11:";
+	LPCTSTR m_WndClassName = L"Window";
 
 	//void      GetVideoCardInfo(char &, int &);
 	HINSTANCE GetAppInst() const { return m_hInstance; }
-	HWND      GetHwnd()    const { return m_hWnd; }
+	HWND     GetHwnd()    const { return m_hWnd; }
 	float     GetAspect()  const { return (float)m_ScreenWidth / m_ScreenHeight; }
 
 private:

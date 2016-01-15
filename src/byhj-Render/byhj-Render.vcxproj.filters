@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ogl">
+      <UniqueIdentifier>{f89919cf-851b-4ad7-acd8-59f0bfb06146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="d3d">
+      <UniqueIdentifier>{b786a5b9-10c3-4bbe-8b97-bebc2c241645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gui">
+      <UniqueIdentifier>{72f8406b-0806-4fca-8130-9b1d15257d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="render.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="textureMgr.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglApp.h">
+      <Filter>ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dApp.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="app.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglShader.h">
+      <Filter>ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dRender.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglRender.h">
+      <Filter>ogl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="render.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="textureMgr.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp">
+      <Filter>ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="app.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp">
+      <Filter>ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dRender.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglRender.cpp">
+      <Filter>ogl</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

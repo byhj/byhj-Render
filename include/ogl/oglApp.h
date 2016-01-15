@@ -6,10 +6,12 @@
 
 #include <iostream>
 #include <string>
-#include <windows.h>
 #include <memory>
 
+#include "app.h"
+
 #ifdef _WIN32
+#include <windows.h>
 const int ScreenWidth  = static_cast<int>( GetSystemMetrics(SM_CXSCREEN) * 0.75 );
 const int ScreenHeight = static_cast<int>(  GetSystemMetrics(SM_CYSCREEN) * 0.75 );
 
@@ -28,21 +30,20 @@ namespace byhj
 namespace ogl
 {
 
-class App 
+class OGLApp : public App
 {
 	public:
-		App() {}
-		virtual ~App() {}
+		OGLApp();
+		OGLApp(const OGLApp &oglApp);
+		virtual ~OGLApp();
 
 	public:
-		void Run(std::shared_ptr<App> the_app);
+		void v_init() override; 
+		void v_update() override;
+		void v_render() override;
+		void v_shutdown() override;
 
-		//Override
-		virtual void v_InitInfo() = 0;
-		virtual void v_Init()	  = 0;
-		virtual void v_Update() {}
-		virtual void v_Render()	  = 0;
-		virtual void v_Shutdown() = 0;
+		void Run(std::shared_ptr<OGLApp> the_app);
 
 		virtual void v_KeyCallback(GLFWwindow* Triangle, int key, int scancode, int action, int mode) 
 		{
@@ -76,19 +77,19 @@ class App
 		int   GetScreenHeight() const ;
 
 	protected:
-	    static  std::shared_ptr<App> app;
+	    static  std::shared_ptr<OGLApp> m_oglApp;
 
 	    static void glfw_key(GLFWwindow * Triangle, int key, int scancode, int action, int mode) 
 	    {
-	    	app->v_KeyCallback(Triangle,  key,  scancode, action,  mode);
+	    	m_oglApp->v_KeyCallback(Triangle,  key,  scancode, action,  mode);
 	    }
 	    static void glfw_mouse(GLFWwindow* Triangle, double xpos, double ypos)
 	    {
-	    	app->v_MouseCallback(Triangle,  xpos, ypos);
+	    	m_oglApp->v_MouseCallback(Triangle,  xpos, ypos);
 	    }
 	    static void glfw_scroll(GLFWwindow* Triangle, double xoffset, double yoffset)
 	    {
-	    	app->v_ScrollCallback(Triangle,  xoffset, yoffset);
+	    	m_oglApp->v_ScrollCallback(Triangle,  xoffset, yoffset);
 	    }
 	    
 	};  //class
