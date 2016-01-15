@@ -9,14 +9,15 @@
 #include <memory>
 
 #include "app.h"
+#include "oglRender.h"
 
 #ifdef _WIN32
 #include <windows.h>
-const int ScreenWidth  = static_cast<int>( GetSystemMetrics(SM_CXSCREEN) * 0.75 );
-const int ScreenHeight = static_cast<int>(  GetSystemMetrics(SM_CYSCREEN) * 0.75 );
+const int ScreenWidth  = static_cast<int>( GetSystemMetrics(SM_CXSCREEN) )  * 0.8;
+const int ScreenHeight = static_cast<int>(  GetSystemMetrics(SM_CYSCREEN) ) * 0.8;
 
-const int PosX = (GetSystemMetrics(SM_CXSCREEN) - ScreenWidth)  ;
-const int PosY = (GetSystemMetrics(SM_CYSCREEN) - ScreenHeight) ;
+const int PosX = (GetSystemMetrics(SM_CXSCREEN) - ScreenWidth);
+const int PosY = (GetSystemMetrics(SM_CYSCREEN) - ScreenHeight);
 
 #else
 const int ScreenWidth = 1200;
@@ -32,18 +33,15 @@ namespace ogl
 
 class OGLApp : public App
 {
-	public:
-		OGLApp();
-		OGLApp(const OGLApp &oglApp);
-		virtual ~OGLApp();
+    private:
 
 	public:
-		void v_init() override; 
-		void v_update() override;
-		void v_render() override;
-		void v_shutdown() override;
+		OGLApp() {}
+		virtual ~OGLApp() {}
 
-		void Run(std::shared_ptr<OGLApp> the_app);
+	public:
+
+		void v_run() override;
 
 		virtual void v_KeyCallback(GLFWwindow* Triangle, int key, int scancode, int action, int mode) 
 		{
@@ -90,7 +88,7 @@ class OGLApp : public App
 	    static void glfw_scroll(GLFWwindow* Triangle, double xoffset, double yoffset)
 	    {
 	    	m_oglApp->v_ScrollCallback(Triangle,  xoffset, yoffset);
-	    }
+	    } 
 	    
 	};  //class
 

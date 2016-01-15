@@ -22,6 +22,7 @@
 
 #include "d3d/Utility.h"
 #include "app.h"
+#include "d3dRender.h"
 
 #include <DirectXMath.h>
 #include <wrl.h>
@@ -38,17 +39,13 @@ namespace d3d
 class D3DApp : public App
 {
 public:
-	D3DApp();
-	virtual ~D3DApp();
+	D3DApp()         {}
+	virtual ~D3DApp(){}
 
-	void InitApp();
-	int Run();
+	void v_run() override;
+
 	LRESULT CALLBACK MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	void v_init()   override;
-	void v_update() override;
-	void v_render() override;
-	void v_update() override;
 
 	// Convenience overrides for handling mouse input.
 	virtual void v_OnMouseDown(WPARAM btnState, int x, int y)  { }
@@ -76,8 +73,8 @@ private:
 	bool init_window();
 
 private:
-	HINSTANCE m_hInstance;
-	HWND      m_hWnd;
+	HINSTANCE  m_hInstance;
+	HWND       m_hWnd;
 };
 
 

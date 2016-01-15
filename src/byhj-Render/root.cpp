@@ -10,12 +10,6 @@ namespace byhj
 	{
 	}
 
-	App* Root::init()
-	{
-
-	}
-
-
 	 Root* Root::getInstance()
 	{
 		static Root * pInstance = new Root();

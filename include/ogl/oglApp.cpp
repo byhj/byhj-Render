@@ -8,9 +8,9 @@ namespace ogl
 
 std::shared_ptr<OGLApp> OGLApp::m_oglApp = nullptr;
 
-void OGLApp::Run(std::shared_ptr<OGLApp> the_OGLApp)
+void OGLApp::v_run()
 {	
-    m_oglApp = the_OGLApp;
+    m_oglApp = std::make_shared<OGLApp>(*this);
 
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit()) 
@@ -71,7 +71,7 @@ void OGLApp::Run(std::shared_ptr<OGLApp> the_OGLApp)
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	v_init();
+	m_pRender->v_init();
 
 	glViewport(0, 0, windowInfo.Width, windowInfo.Height);
 
@@ -80,12 +80,12 @@ void OGLApp::Run(std::shared_ptr<OGLApp> the_OGLApp)
 		glfwPollEvents();
 		v_Movement(Triangle);
 
-		//Render for the object
-		v_render();
+		m_pRender->v_update();
+		m_pRender->v_render();
 
 		glfwSwapBuffers(Triangle);
 	}
-	v_shutdown();
+	m_pRender->v_shutdown();
 
 	glfwTerminate();
 }

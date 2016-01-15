@@ -1,6 +1,8 @@
 #ifndef app_H
 #define app_H
 
+#include "render.h"
+
 namespace byhj
 {
 	class App
@@ -10,13 +12,15 @@ namespace byhj
 		App(const App &app);
 		virtual ~App();
 
-		virtual void v_init()      {}
-		virtual void v_update()    {}
-		virtual void v_render()    {}
-		virtual void v_shutdown()  {}
+		virtual void v_run() {};
+		virtual void v_end() {};
 
-	private:
-
+		void setRender(Render *pRender)
+		{
+			m_pRender = pRender;
+		}
+	protected:
+		Render *m_pRender = nullptr;
 	};
 }
 #endif

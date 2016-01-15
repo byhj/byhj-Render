@@ -9,9 +9,10 @@ namespace d3d
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 static D3DApp *D3DAppHandle = 0;
 
-int D3DApp::Run()
+void D3DApp::v_run()
 {	
 	bool ret = init_window();
+	m_pRender->v_init();
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
@@ -26,18 +27,16 @@ int D3DApp::Run()
 		}
 		else 
 		{
-           v_update();
-		   v_render();
+            m_pRender->v_update();
+			m_pRender->v_render();
 
 		}
 
 	}
 
-	v_shutdown();
+	m_pRender->v_shutdown();
 
-	return (int)msg.wParam;
 }
-
 
 
 bool D3DApp::init_window()
@@ -62,7 +61,7 @@ bool D3DApp::init_window()
 	wc.hInstance = m_hInstance;
 	wc.hIcon = LoadIcon(NULL, IDI_WINLOGO);	
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);	
-	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 2);
+	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 3);
 	wc.lpszMenuName = NULL;	
 	wc.lpszClassName = m_WndClassName;	
 	wc.hIconSm = LoadIcon(NULL, IDI_WINLOGO); 

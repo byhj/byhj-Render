@@ -1,40 +1,28 @@
 #include "sample.h"
+#include "ogl/oglRender.h"
+#include "d3d/d3dRender.h"
+#include "d3d/d3dApp.h"
 
 namespace byhj
 {
 	Sample::Sample()
 	{
+		m_pRoot = Root::getInstance();
+		m_pApp = new ogl::OGLApp();
+	    m_pApp->setRender(new OGLRender() );
+		m_pRoot->setApp(m_pApp);
 	}
 
 	Sample::~Sample()
 	{
 
 	}
-
-	void Sample::init()
-	{
-	}
-
-	void Sample::update()
-	{
-	}
-
-	void Sample::render()
-	{
-	}
-
-	void Sample::update()
-	{
-	}
-
+    
 	void Sample::run()
 	{
-		init();
+		m_pRoot->beginScene();
 
-		update();
-
-		render();
-
-		shutdown();
+		m_pRoot->endScene();
 	}
+
 }

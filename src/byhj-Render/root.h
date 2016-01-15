@@ -19,16 +19,24 @@ namespace byhj
 		//void addRender(Render *render);
 		//Render* getRender(std::string named);
 		//void    setRender(Render *render);
+		void setApp(App *pApp)
+		{
+			m_pApp = pApp;
+		}
+		
 
-		App * init();
-
-		void beginRender();
-		void endRender();
-		void shutdown();
+		void beginScene()
+		{
+			m_pApp->v_run();
+		}
+		void endScene()
+		{
+			m_pApp->v_end();
+		}
 
 	private:
-		App    *m_pApp;
-		Render *m_pActiveRender;
+		App    *m_pApp = nullptr;
+		Render *m_pActiveRender = nullptr;
 
 		std::string m_configName;
 

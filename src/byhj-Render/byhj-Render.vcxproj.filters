@@ -22,6 +22,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="sample">
+      <UniqueIdentifier>{2130befc-e4a0-4b90-87bb-16a380df0678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
@@ -45,17 +48,17 @@
     <ClInclude Include="app.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dShader.h">
-      <Filter>d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglShader.h">
-      <Filter>ogl</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dRender.h">
       <Filter>d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglRender.h">
       <Filter>ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="root.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="sample.h">
+      <Filter>sample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -77,23 +80,23 @@
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
       <Filter>d3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
-      <Filter>d3d</Filter>
-    </ClCompile>
     <ClCompile Include="shader.cpp">
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="app.cpp">
       <Filter>include</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglShader.cpp">
-      <Filter>ogl</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dRender.cpp">
       <Filter>d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglRender.cpp">
       <Filter>ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="root.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="sample.cpp">
+      <Filter>sample</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
