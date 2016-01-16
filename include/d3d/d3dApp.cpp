@@ -3,15 +3,13 @@
 namespace byhj
 {
 
-namespace d3d
-{
-
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 static D3DApp *D3DAppHandle = 0;
 
 void D3DApp::v_run()
 {	
 	bool ret = init_window();
+
 	m_pRender->v_init();
 
 	MSG msg;
@@ -27,6 +25,9 @@ void D3DApp::v_run()
 		}
 		else 
 		{
+			m_pGui->v_update();
+			m_pGui->v_render();
+
             m_pRender->v_update();
 			m_pRender->v_render();
 
@@ -34,6 +35,7 @@ void D3DApp::v_run()
 
 	}
 
+	m_pGui->v_render();
 	m_pRender->v_shutdown();
 
 }
@@ -154,7 +156,5 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 	}
 }
 
-
-}
 
 }

@@ -4,6 +4,7 @@
 #include <gl/glew.h>
 
 #include "object.h"
+#include "AntTweakBar.h"
 
 namespace byhj
 {
@@ -13,6 +14,10 @@ namespace byhj
 
 	Triangle();
 	~Triangle();
+
+	void init_buffer();
+	void init_vertexArray();
+	void init_shader();
 
 	private:
 

@@ -28,8 +28,6 @@ const int PosY = 100;
 
 namespace byhj 
 {
-namespace ogl
-{
 
 class OGLApp : public App
 {
@@ -54,6 +52,8 @@ class OGLApp : public App
 		virtual void v_Movement(GLFWwindow *Triangle) {}
 		virtual void v_MouseCallback(GLFWwindow* Triangle, double xpos, double ypos) {}
 		virtual void v_ScrollCallback(GLFWwindow* Triangle, double xoffset, double yoffset) {}
+		int   getSW() const ;
+		int   getSH() const ;
 
 	protected:
 		struct WindowInfo
@@ -71,8 +71,7 @@ class OGLApp : public App
 		}windowInfo;
 
 		float GetAspect() const ;
-		int   GetScreenWidth() const ;
-		int   GetScreenHeight() const ;
+
 
 	protected:
 	    static  std::shared_ptr<OGLApp> m_oglApp;
@@ -91,9 +90,6 @@ class OGLApp : public App
 	    } 
 	    
 	};  //class
-
-}  //namespace 
-
 
 }
 

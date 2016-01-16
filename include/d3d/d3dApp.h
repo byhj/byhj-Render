@@ -33,9 +33,6 @@ using namespace Microsoft::WRL;
 namespace byhj
 {
 
-namespace d3d
-{
-
 class D3DApp : public App
 {
 public:
@@ -77,8 +74,6 @@ private:
 	HWND       m_hWnd;
 };
 
-
-}
 
 }
 #endif

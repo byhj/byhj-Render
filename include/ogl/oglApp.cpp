@@ -2,9 +2,6 @@
 
 namespace byhj
 {
-namespace ogl
-{
-
 
 std::shared_ptr<OGLApp> OGLApp::m_oglApp = nullptr;
 
@@ -72,6 +69,7 @@ void OGLApp::v_run()
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
 	m_pRender->v_init();
+	m_pGui->v_init(windowInfo.Width, windowInfo.Height);
 
 	glViewport(0, 0, windowInfo.Width, windowInfo.Height);
 
@@ -81,10 +79,14 @@ void OGLApp::v_run()
 		v_Movement(Triangle);
 
 		m_pRender->v_update();
+		m_pGui->v_update();
+
 		m_pRender->v_render();
+		m_pGui->v_render();
 
 		glfwSwapBuffers(Triangle);
 	}
+	m_pGui->v_shutdown();
 	m_pRender->v_shutdown();
 
 	glfwTerminate();
@@ -95,16 +97,15 @@ float OGLApp::GetAspect() const
 	return static_cast<float>(ScreenWidth) / static_cast<float>(ScreenHeight);
 }
 
-int OGLApp::GetScreenWidth() const 
+int OGLApp::getSW() const 
 {
 	return ScreenWidth;
 }
 
-int OGLApp::GetScreenHeight() const 
+int OGLApp::getSH() const 
 {
 	return ScreenHeight;
 }
 
 
-}
 }

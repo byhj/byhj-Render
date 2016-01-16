@@ -2,6 +2,7 @@
 #define app_H
 
 #include "render.h"
+#include "gui.h"
 
 namespace byhj
 {
@@ -19,8 +20,13 @@ namespace byhj
 		{
 			m_pRender = pRender;
 		}
+		void setGui(Gui *pGui)
+		{
+			m_pGui = pGui;
+		}
 	protected:
 		Render *m_pRender = nullptr;
+		Gui    *m_pGui = nullptr;
 	};
 }
 #endif

@@ -116,6 +116,7 @@
     <ClInclude Include="app.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="d3dRender.h" />
+    <ClInclude Include="gui.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="render.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="textureMgr.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="triangleGui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
@@ -131,6 +133,7 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="d3dRender.cpp" />
+    <ClCompile Include="gui.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="oglRender.cpp" />
@@ -140,6 +143,13 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="textureMgr.cpp" />
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="triangleGui.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="triangle.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="triangle.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

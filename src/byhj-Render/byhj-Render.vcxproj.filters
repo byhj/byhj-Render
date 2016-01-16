@@ -22,7 +22,7 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="sample">
+    <Filter Include="samples">
       <UniqueIdentifier>{2130befc-e4a0-4b90-87bb-16a380df0678}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -52,19 +52,25 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="sample.h">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClInclude>
     <ClInclude Include="oglRender.h">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClInclude>
     <ClInclude Include="d3dRender.h">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClInclude>
     <ClInclude Include="object.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="gui.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="triangleGui.h">
+      <Filter>samples</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,19 +102,35 @@
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="sample.cpp">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClCompile>
     <ClCompile Include="oglRender.cpp">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClCompile>
     <ClCompile Include="d3dRender.cpp">
-      <Filter>sample</Filter>
+      <Filter>samples</Filter>
     </ClCompile>
     <ClCompile Include="object.cpp">
       <Filter>include</Filter>
     </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="triangleGui.cpp">
+      <Filter>samples</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="triangle.frag">
+      <Filter>shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="triangle.vert">
+      <Filter>shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
