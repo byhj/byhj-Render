@@ -13,7 +13,7 @@ namespace byhj
     
 	void OGLRender::v_init()
 	{
-			m_triangle.Init();
+
 	}
 
 	void OGLRender::v_update()

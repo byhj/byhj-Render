@@ -117,12 +117,16 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="d3dRender.h" />
     <ClInclude Include="gui.h" />
+    <ClInclude Include="modelMgr.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="resourceMgr.h" />
     <ClInclude Include="root.h" />
     <ClInclude Include="sample.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="shaderMgr.h" />
+    <ClInclude Include="soundMgr.h" />
     <ClInclude Include="textureMgr.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="triangleGui.h" />
@@ -135,21 +139,19 @@
     <ClCompile Include="d3dRender.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="modelMgr.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="render.cpp" />
+    <ClCompile Include="resourceMgr.cpp" />
     <ClCompile Include="root.cpp" />
     <ClCompile Include="sample.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="shaderMgr.cpp" />
+    <ClCompile Include="soundMgr.cpp" />
     <ClCompile Include="textureMgr.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="triangleGui.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="triangle.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="triangle.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

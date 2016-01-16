@@ -25,15 +25,15 @@
     <Filter Include="samples">
       <UniqueIdentifier>{2130befc-e4a0-4b90-87bb-16a380df0678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mgr">
+      <UniqueIdentifier>{fd6904ea-1519-4050-bbbc-b2f6cdc5edaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="textureMgr.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
@@ -72,6 +72,21 @@
     <ClInclude Include="triangleGui.h">
       <Filter>samples</Filter>
     </ClInclude>
+    <ClInclude Include="soundMgr.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="textureMgr.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderMgr.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceMgr.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="modelMgr.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,9 +96,6 @@
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="textureMgr.cpp">
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
@@ -122,15 +134,20 @@
     <ClCompile Include="triangleGui.cpp">
       <Filter>samples</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="triangle.frag">
-      <Filter>shader</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="triangle.vert">
-      <Filter>shader</Filter>
-    </FxCompile>
+    <ClCompile Include="textureMgr.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="shaderMgr.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="soundMgr.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="resourceMgr.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="modelMgr.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
