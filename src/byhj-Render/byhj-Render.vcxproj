@@ -112,30 +112,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
-    <ClInclude Include="..\..\include\d3d\d3dRender.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
-    <ClInclude Include="..\..\include\ogl\oglRender.h" />
     <ClInclude Include="app.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="d3dRender.h" />
+    <ClInclude Include="object.h" />
+    <ClInclude Include="oglRender.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="root.h" />
     <ClInclude Include="sample.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="textureMgr.h" />
+    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
-    <ClCompile Include="..\..\include\d3d\d3dRender.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglRender.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="d3dRender.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="object.cpp" />
+    <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="root.cpp" />
     <ClCompile Include="sample.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="textureMgr.cpp" />
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -48,17 +48,23 @@
     <ClInclude Include="app.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dRender.h">
-      <Filter>d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglRender.h">
-      <Filter>ogl</Filter>
-    </ClInclude>
     <ClInclude Include="root.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="sample.h">
       <Filter>sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>sample</Filter>
+    </ClInclude>
+    <ClInclude Include="oglRender.h">
+      <Filter>sample</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dRender.h">
+      <Filter>sample</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,17 +92,23 @@
     <ClCompile Include="app.cpp">
       <Filter>include</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dRender.cpp">
-      <Filter>d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglRender.cpp">
-      <Filter>ogl</Filter>
-    </ClCompile>
     <ClCompile Include="root.cpp">
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="sample.cpp">
       <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="oglRender.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="d3dRender.cpp">
+      <Filter>sample</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>include</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
