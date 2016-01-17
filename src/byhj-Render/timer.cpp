@@ -3,9 +3,6 @@
 namespace byhj
 {
 
-namespace d3d
-{
-
 
 Timer::Timer(): m_SecondsPerCount(0.0),
 	m_DeltaTime(0.0), 
@@ -132,6 +129,5 @@ void Timer::Count()
 }
 
 
-}
 
 }

@@ -112,12 +112,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
+    <ClInclude Include="..\..\include\d3d\d3dFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
+    <ClInclude Include="..\..\include\ogl\oglFont.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="app.h" />
-    <ClInclude Include="camera.h" />
     <ClInclude Include="d3dRender.h" />
+    <ClInclude Include="font.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="mgr.h" />
@@ -133,17 +135,21 @@
     <ClInclude Include="shaderMgr.h" />
     <ClInclude Include="soundMgr.h" />
     <ClInclude Include="textureMgr.h" />
+    <ClInclude Include="timer.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="triangleGui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="d3dRender.cpp" />
+    <ClCompile Include="font.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -160,6 +166,7 @@
     <ClCompile Include="shaderMgr.cpp" />
     <ClCompile Include="soundMgr.cpp" />
     <ClCompile Include="textureMgr.cpp" />
+    <ClCompile Include="timer.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="triangleGui.cpp" />
   </ItemGroup>

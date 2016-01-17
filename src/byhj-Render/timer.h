@@ -6,10 +6,6 @@
 namespace byhj
 {
 
-namespace d3d
-{
-
-
 class Timer
 {
 public:
@@ -36,8 +32,6 @@ private:
 	bool m_Stopped;
 
 };
-
-}
 
 }
 
