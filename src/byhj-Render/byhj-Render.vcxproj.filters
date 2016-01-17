@@ -22,9 +22,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="samples">
-      <UniqueIdentifier>{2130befc-e4a0-4b90-87bb-16a380df0678}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mgr">
       <UniqueIdentifier>{fd6904ea-1519-4050-bbbc-b2f6cdc5edaf}</UniqueIdentifier>
     </Filter>
@@ -48,26 +45,11 @@
     <ClInclude Include="root.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="sample.h">
-      <Filter>samples</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>samples</Filter>
-    </ClInclude>
-    <ClInclude Include="oglRender.h">
-      <Filter>samples</Filter>
-    </ClInclude>
-    <ClInclude Include="d3dRender.h">
-      <Filter>samples</Filter>
-    </ClInclude>
     <ClInclude Include="object.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="gui.h">
       <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="triangleGui.h">
-      <Filter>samples</Filter>
     </ClInclude>
     <ClInclude Include="soundMgr.h">
       <Filter>mgr</Filter>
@@ -111,11 +93,23 @@
     <ClInclude Include="..\..\include\ogl\oglFont.h">
       <Filter>ogl</Filter>
     </ClInclude>
+    <ClInclude Include="geometry.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmap.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="terrain.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\dxutHelper.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\effectHelper.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="render.cpp">
       <Filter>include</Filter>
     </ClCompile>
@@ -137,26 +131,11 @@
     <ClCompile Include="root.cpp">
       <Filter>include</Filter>
     </ClCompile>
-    <ClCompile Include="sample.cpp">
-      <Filter>samples</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>samples</Filter>
-    </ClCompile>
-    <ClCompile Include="oglRender.cpp">
-      <Filter>samples</Filter>
-    </ClCompile>
-    <ClCompile Include="d3dRender.cpp">
-      <Filter>samples</Filter>
-    </ClCompile>
     <ClCompile Include="object.cpp">
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="gui.cpp">
       <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="triangleGui.cpp">
-      <Filter>samples</Filter>
     </ClCompile>
     <ClCompile Include="textureMgr.cpp">
       <Filter>mgr</Filter>
@@ -199,6 +178,21 @@
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglFont.cpp">
       <Filter>ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="bitmap.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="terrain.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\effectHelper.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\dxutHelper.cpp">
+      <Filter>d3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

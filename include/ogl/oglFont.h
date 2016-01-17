@@ -14,7 +14,7 @@
 
 namespace byhj {
 
-	/// Holds all state information relevant to a character as loaded using FreeType
+	// Holds all state information relevant to a character as loaded using FreeType
 	struct Character {
 		GLuint TextureID;   // ID handle of the glyph texture
 		glm::ivec2 Size;    // Size of glyph
@@ -34,7 +34,7 @@ namespace byhj {
 		void init_shader();
 		void init_buffer();
 
-		OGLShader m_FontShader;
+		OGLShader m_FontShader = "Font Shader";
 
 		std::map<GLchar, Character> Characters;
 		GLuint m_vao, m_vbo;

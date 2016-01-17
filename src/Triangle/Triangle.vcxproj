@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E2ABEED1-CF21-4872-89D1-CA7F10B3BC97}</ProjectGuid>
-    <RootNamespace>byhjRender</RootNamespace>
+    <ProjectGuid>{7B1A93DA-F28A-4A86-A81A-33C66E3E318F}</ProjectGuid>
+    <RootNamespace>Triangle</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -111,63 +111,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\d3d\d3dApp.h" />
-    <ClInclude Include="..\..\include\d3d\d3dFont.h" />
-    <ClInclude Include="..\..\include\d3d\d3dShader.h" />
-    <ClInclude Include="..\..\include\d3d\dxutHelper.h" />
-    <ClInclude Include="..\..\include\d3d\effectHelper.h" />
-    <ClInclude Include="..\..\include\ogl\oglApp.h" />
-    <ClInclude Include="..\..\include\ogl\oglFont.h" />
-    <ClInclude Include="..\..\include\ogl\oglShader.h" />
-    <ClInclude Include="app.h" />
-    <ClInclude Include="bitmap.h" />
-    <ClInclude Include="font.h" />
-    <ClInclude Include="geometry.h" />
-    <ClInclude Include="gui.h" />
-    <ClInclude Include="mesh.h" />
-    <ClInclude Include="mgr.h" />
-    <ClInclude Include="model.h" />
-    <ClInclude Include="modelMgr.h" />
-    <ClInclude Include="object.h" />
-    <ClInclude Include="render.h" />
-    <ClInclude Include="resourceMgr.h" />
-    <ClInclude Include="root.h" />
-    <ClInclude Include="shader.h" />
-    <ClInclude Include="shaderMgr.h" />
-    <ClInclude Include="soundMgr.h" />
-    <ClInclude Include="terrain.h" />
-    <ClInclude Include="textureMgr.h" />
-    <ClInclude Include="timer.h" />
+    <ClCompile Include="d3dRender.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="sample.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="triangleGui.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
-    <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
-    <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
-    <ClCompile Include="..\..\include\d3d\dxutHelper.cpp" />
-    <ClCompile Include="..\..\include\d3d\effectHelper.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="bitmap.cpp" />
-    <ClCompile Include="camera.cpp" />
-    <ClCompile Include="font.cpp" />
-    <ClCompile Include="geometry.cpp" />
-    <ClCompile Include="gui.cpp" />
-    <ClCompile Include="mesh.cpp" />
-    <ClCompile Include="mgr.cpp" />
-    <ClCompile Include="model.cpp" />
-    <ClCompile Include="modelMgr.cpp" />
-    <ClCompile Include="object.cpp" />
-    <ClCompile Include="render.cpp" />
-    <ClCompile Include="resourceMgr.cpp" />
-    <ClCompile Include="root.cpp" />
-    <ClCompile Include="shader.cpp" />
-    <ClCompile Include="shaderMgr.cpp" />
-    <ClCompile Include="soundMgr.cpp" />
-    <ClCompile Include="terrain.cpp" />
-    <ClCompile Include="textureMgr.cpp" />
-    <ClCompile Include="timer.cpp" />
+    <ClInclude Include="d3dRender.h" />
+    <ClInclude Include="oglRender.h" />
+    <ClInclude Include="sample.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="triangleGui.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

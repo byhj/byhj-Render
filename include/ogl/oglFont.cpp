@@ -149,11 +149,11 @@ namespace byhj
 
 	void OGLFont::init_shader()
 	{
-
 		m_FontShader.attach(GL_VERTEX_SHADER, "text.vert");
 		m_FontShader.attach(GL_FRAGMENT_SHADER, "text.frag");
 		m_FontShader.link();
 		m_FontShader.use();
+		m_FontShader.info();
 		m_program = m_FontShader.getProgram();
 	}
 
