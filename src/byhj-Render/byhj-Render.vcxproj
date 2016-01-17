@@ -117,6 +117,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="d3dRender.h" />
     <ClInclude Include="gui.h" />
+    <ClInclude Include="mgr.h" />
     <ClInclude Include="modelMgr.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="oglRender.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="d3dRender.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mgr.cpp" />
     <ClCompile Include="modelMgr.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="oglRender.cpp" />

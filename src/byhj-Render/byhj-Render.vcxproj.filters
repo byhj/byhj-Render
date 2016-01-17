@@ -87,6 +87,9 @@
     <ClInclude Include="modelMgr.h">
       <Filter>mgr</Filter>
     </ClInclude>
+    <ClInclude Include="mgr.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -147,6 +150,9 @@
       <Filter>mgr</Filter>
     </ClCompile>
     <ClCompile Include="modelMgr.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="mgr.cpp">
       <Filter>mgr</Filter>
     </ClCompile>
   </ItemGroup>
