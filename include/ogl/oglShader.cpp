@@ -4,9 +4,6 @@
 namespace byhj
 {
 
-namespace ogl
-{
-
 //read the Shadercode
 char * OGLShader::textFileRead( char *fn) {  //read the OGLShader code
 	FILE *fp;  
@@ -169,13 +166,12 @@ void OGLShader::use() const
 void OGLShader::end() const
 {
 	glUseProgram(0);
+	glDeleteProgram(m_program);
 }
 
-GLuint OGLShader::GetProgram() const
+GLuint OGLShader::getProgram() const
 {
 	return m_program;
-}
-
 }
 
 }

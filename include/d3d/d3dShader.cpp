@@ -1,4 +1,4 @@
-#include "Shader.h"
+#include "d3dShader.h"
 
 #include <d3dcompiler.h>
 #include "d3d/Utility.h"
@@ -6,18 +6,14 @@
 namespace byhj
 {
 
-namespace d3d
-{
-
-
-void Shader::init(ID3D11Device *pD3D11Device, const std::vector<D3D11_INPUT_ELEMENT_DESC> &vInputDesc)
+void D3DShader::init(ID3D11Device *pD3D11Device, const std::vector<D3D11_INPUT_ELEMENT_DESC> &vInputDesc)
 {
 	this->pD3D11Device = pD3D11Device;
 	this->vInputLayoutDesc = vInputDesc;
 
 }
 
-HRESULT Shader::CompileShaderFromFile(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
+HRESULT D3DShader::CompileShaderFromFile(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut)
 {
 	HRESULT hr = S_OK;
 
@@ -52,138 +48,68 @@ HRESULT Shader::CompileShaderFromFile(WCHAR* szFileName, LPCSTR szEntryPoint, LP
 }
 
 
-void Shader::attachVS(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel)
+void D3DShader::attach(ShaderType shaderType, WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel)
 {	
 	HRESULT result;
-	ID3DBlob* VertexShaderBuffer = 0;
+	ID3DBlob* pShaderBlob = nullptr;
 
-	CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, &VertexShaderBuffer);
+	CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, &pShaderBlob);
 	
+	if (shaderType == D3D_VERTEX_SHADER)
+	{
 
-	// Create the vertex shader from the buffer.
-	result = pD3D11Device->CreateVertexShader(VertexShaderBuffer->GetBufferPointer(), VertexShaderBuffer->GetBufferSize(), NULL, &pVS_Shader);
+	result = pD3D11Device->CreateVertexShader(pShaderBlob->GetBufferPointer(), pShaderBlob->GetBufferSize(), NULL, &pVS_Shader);
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	auto numElements = vInputLayoutDesc.size();
-	result = pD3D11Device->CreateInputLayout(&vInputLayoutDesc[0], numElements, VertexShaderBuffer->GetBufferPointer(), 
-	                                     	VertexShaderBuffer->GetBufferSize(), &pInputLayout);
+	result = pD3D11Device->CreateInputLayout(&vInputLayoutDesc[0], numElements, pShaderBlob->GetBufferPointer(), 
+	                                     	pShaderBlob->GetBufferSize(), &pInputLayout);
 
+	} else if (shaderType == D3D_PIXEL_SHADER) {
+		result = pD3D11Device->CreatePixelShader(pShaderBlob->GetBufferPointer(), pShaderBlob->GetBufferSize(), NULL, &pPS_Shader);
 
-	// Release the vertex shader buffer and pixel shader buffer since they are no longer needed.
-	VertexShaderBuffer->Release();
-	VertexShaderBuffer = 0;
+	} else if (shaderType == D3D_GEOMETRY_SHADER) {
+	   result = pD3D11Device->CreateGeometryShader(pShaderBlob->GetBufferPointer(), pShaderBlob->GetBufferSize(), NULL, &pGS_Shader);
+	
+	} else if (shaderType == D3D_HULL_SHADER) {
+		result = pD3D11Device->CreateHullShader(pShaderBlob->GetBufferPointer(), pShaderBlob->GetBufferSize(), NULL, &pHS_Shader);
+	
+	} else if (shaderType == D3D_GEOMETRY_SHADER) {
+	
+		result = pD3D11Device->CreateDomainShader(pShaderBlob->GetBufferPointer(), pShaderBlob->GetBufferSize(), NULL, &pDS_Shader);
+	} 
 
-}
-
-void Shader::attachHS(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel)
-{	
-	HRESULT result;
-	ID3DBlob* errorMessage = 0;
-	ID3DBlob* HullShaderBuffer = 0;
-
-	CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, &HullShaderBuffer);
-
-	// Create the vertex shader from the buffer.
-	result = pD3D11Device->CreateHullShader(HullShaderBuffer->GetBufferPointer(), HullShaderBuffer->GetBufferSize(), NULL, &pHS_Shader);
-
-	// Release the vertex shader buffer and pixel shader buffer since they are no longer needed.
-	HullShaderBuffer->Release();
-	HullShaderBuffer = 0;
-}
-void Shader::attachDS(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel)
-{	
-	HRESULT result;
-	ID3DBlob* errorMessage = 0;
-	ID3DBlob* DomainShaderBuffer = 0;
-
-	CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, &DomainShaderBuffer);
-
-	// Create the vertex shader from the buffer.
-	result = pD3D11Device->CreateDomainShader(DomainShaderBuffer->GetBufferPointer(), DomainShaderBuffer->GetBufferSize(), NULL, &pDS_Shader);
-
-	// Release the vertex shader buffer and pixel shader buffer since they are no longer needed.
-	DomainShaderBuffer->Release();
-	DomainShaderBuffer = 0;
+	// Release the shader buffer since they are no longer needed.
+	pShaderBlob->Release();
+	pShaderBlob = 0;
 
 }
 
-void Shader::attachGS(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel)
-{	
-	HRESULT result;
-	ID3DBlob* errorMessage = 0;
-	ID3DBlob* GeometryShaderBuffer = 0;
 
-	CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, &GeometryShaderBuffer);
-
-	// Create the vertex shader from the buffer.
-	result = pD3D11Device->CreateGeometryShader(GeometryShaderBuffer->GetBufferPointer(), GeometryShaderBuffer->GetBufferSize(), NULL, &pGS_Shader);
-
-	// Release the vertex shader buffer and pixel shader buffer since they are no longer needed.
-	GeometryShaderBuffer->Release();
-	GeometryShaderBuffer = 0;
-
-}
-
-void Shader::attachCS(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel)
-{	
-	HRESULT result;
-	ID3DBlob* errorMessage = 0;
-	ID3DBlob* ComputeShaderBuffer = 0;
-
-
-	CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, &ComputeShaderBuffer);
-
-	// Create the vertex shader from the buffer.
-	result = pD3D11Device->CreateComputeShader(ComputeShaderBuffer->GetBufferPointer(), ComputeShaderBuffer->GetBufferSize(), NULL, &pCS_Shader);
-
-
-	// Release the vertex shader buffer and pixel shader buffer since they are no longer needed.
-	ComputeShaderBuffer->Release();
-	ComputeShaderBuffer = 0;
-
-}
-
-void Shader::attachPS(WCHAR* szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel)
-{	
-	HRESULT result;
-	ID3DBlob* errorMessage = 0;
-	ID3DBlob* PixelShaderBuffer = 0;
-
-
-	CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, &PixelShaderBuffer);
-
-	// Create the vertex shader from the buffer.
-	result = pD3D11Device->CreatePixelShader(PixelShaderBuffer->GetBufferPointer(), PixelShaderBuffer->GetBufferSize(), NULL, &pPS_Shader);
-
-
-	// Release the vertex shader buffer and pixel shader buffer since they are no longer needed.
-	PixelShaderBuffer->Release();
-	PixelShaderBuffer = 0;
-
-}
-
-void Shader::use(ID3D11DeviceContext *pD3D11DeviceContext)
+void D3DShader::use(ID3D11DeviceContext *pD3D11DeviceContext)
 {
 	pD3D11DeviceContext->IASetInputLayout(pInputLayout.Get());
 
-	//Not Conside Computer now
-	if (pVS_Shader != 0)
+	if (pVS_Shader != nullptr) {
 		pD3D11DeviceContext->VSSetShader(pVS_Shader.Get(), NULL, 0);
-	if (pHS_Shader != 0)						   
+    }
+	if (pHS_Shader  != nullptr) {						   
 		pD3D11DeviceContext->HSSetShader(pHS_Shader.Get(), NULL, 0);
-	if (pDS_Shader != 0)						
+	}
+	if (pDS_Shader  != nullptr) {					
 		pD3D11DeviceContext->DSSetShader(pDS_Shader.Get(), NULL, 0);
-	if (pGS_Shader != 0)					
+	}
+	if (pGS_Shader != nullptr) {					
 		pD3D11DeviceContext->GSSetShader(pGS_Shader.Get(), NULL, 0);
-	if (pVS_Shader != 0)						  
+	}
+	if (pVS_Shader  != nullptr) {					  
 		pD3D11DeviceContext->PSSetShader(pPS_Shader.Get(), NULL, 0);
+	}
 }
 
-void Shader::end()
+void D3DShader::end()
 {
 
 }
 
-}
 
 }

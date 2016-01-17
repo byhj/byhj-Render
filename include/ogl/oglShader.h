@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+
 #include "shader.h"
 
 #ifdef _WIN32
@@ -14,9 +15,6 @@
 #endif
 
 namespace byhj
-{
-
-namespace ogl
 {
 
 class OGLShader : public byhj::Shader
@@ -35,7 +33,7 @@ public:
 	void use() const; 
 	void end() const;
 
-	GLuint GetProgram() const;
+	GLuint getProgram() const;
 
 
 private:
@@ -46,6 +44,5 @@ private:
 
 }
 
-}
 #endif
 

@@ -90,6 +90,18 @@
     <ClInclude Include="mgr.h">
       <Filter>mgr</Filter>
     </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglShader.h">
+      <Filter>ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -154,6 +166,18 @@
     </ClCompile>
     <ClCompile Include="mgr.cpp">
       <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp">
+      <Filter>ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>d3d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

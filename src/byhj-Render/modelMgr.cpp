@@ -15,8 +15,10 @@ namespace byhj
 	std::shared_ptr<ModelMgr> getInstance()
 	{
 		static std::shared_ptr<ModelMgr>  pInstance = std::make_shared<ModelMgr>();
-		if (pInstance != nullptr)
+
+		if (pInstance != nullptr) {
 			return pInstance;
+		}
 	}
 
 	void ModelMgr::loadObj(std::string modelName)
