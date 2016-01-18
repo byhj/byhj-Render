@@ -13,7 +13,7 @@ namespace byhj
 		EffectHelper();
 		~EffectHelper();
 
-		void init(std::string effectFile);
+		void init(ID3D11Device *pD3D11Device, std::string effectFile);
 		void render();
 		void shutdown();
 

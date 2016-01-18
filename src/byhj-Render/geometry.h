@@ -39,8 +39,17 @@ namespace byhj
 
 	namespace ogl {
 		struct Vertex {
+
+			Vertex();
+			Vertex(const  glm::vec3 &pos, const glm::vec3 &normal, const glm::vec2 &tc)
+				:position(pos), normal(normal), texcoord(tc) {}
+
+			Vertex(float px, float py, float pz,
+				float nx, float ny, float nz,
+				float u, float v) : position(px, py, pz), normal(nx, ny, nz), texcoord(u, v) {}
+
 			glm::vec3 position;
-			glm::vec3 noromal;
+			glm::vec3 normal;
 			glm::vec2 texcoord;
 		};
 
@@ -67,13 +76,13 @@ namespace byhj
 		/// Creates a sphere centered at the origin with the given radius.  The
 		/// slices and stacks parameters control the degree of tessellation.
 
-		void CreateSphere(float radius, UINT sliceCount, UINT stackCount, d3d::MeshData& mesh);
-		void CreateSphere(float radius, UINT sliceCount, UINT stackCount, ogl::MeshData& mesh);
+		void createSphere(float radius, UINT sliceCount, UINT stackCount, d3d::MeshData& mesh);
+		void createSphere(float radius, UINT sliceCount, UINT stackCount, ogl::MeshData& mesh);
 
 
-		void CreateCylinder(float bottomRadius, float topRadius, float height, UINT sliceCount, UINT stackCount, d3d::MeshData& mesh);
-		void CreateCylinder(float bottomRadius, float topRadius, float height, UINT sliceCount, UINT stackCount, ogl::MeshData& mesh);
-
+		// void createCylinder(float bottomRadius, float topRadius, float height, UINT sliceCount, UINT stackCount, d3d::MeshData& mesh);
+		// void createCylinder(float bottomRadius, float topRadius, float height, UINT sliceCount, UINT stackCount, ogl::MeshData& mesh);
+		// 
 
 	private:
 

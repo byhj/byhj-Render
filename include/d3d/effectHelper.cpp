@@ -10,7 +10,7 @@ namespace byhj
 	{
 	}
 
-	void EffectHelper::init(std::string effectFile)
+	void EffectHelper::init(ID3D11Device *pD3D11Device, std::string effectFile)
 	{
 		DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
 #ifdef _DEBUG
@@ -40,12 +40,6 @@ namespace byhj
 #endif
 
 		m_pEffectTechnique = m_pEffect->GetTechniqueByName("Render");
-		m_pTexSRV          = m_pEffect->GetVariableByName("texDiffuse")->AsShaderResource();
-		m_pModel           = m_pEffect->GetVariableByName("Model")->AsMatrix();
-		m_pView            = m_pEffect->GetVariableByName("View")->AsMatrix();
-		m_pProj            = m_pEffect->GetVariableByName("Proj")->AsMatrix();
-		m_pWaviness        = m_pEffect->GetVariableByName("Waviness")->AsScalar();
-		m_pTime            = m_pEffect->GetVariableByName("Time")->AsScalar();
 
 		std::vector<D3D11_INPUT_ELEMENT_DESC> vInputLayoutDesc;
 		D3D11_INPUT_ELEMENT_DESC inputLayoutDesc;

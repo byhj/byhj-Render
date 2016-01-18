@@ -31,7 +31,7 @@ namespace byhj
 
 	   GLuint getOGLTextureByName(std::string fileName) ;
 	   ID3D11ShaderResourceView * getD3DTextureByName(std::string name) ;
-	   	ID3D11ShaderResourceView *pTextureSRV = nullptr;
+	   ID3D11ShaderResourceView *pTextureSRV = nullptr;
 	private:
           std::unordered_map<std::string, GLuint> m_oglTextures;
 		  std::unordered_map<std::string, ID3D11ShaderResourceView*> m_d3dTextures; 

@@ -2,13 +2,31 @@
 
 namespace byhj
 {
-   Mesh::Mesh()
-   {
-   }
 
-   Mesh::~Mesh()
-   {
-   }
+	namespace ogl {
+
+		Mesh::Mesh()
+		{
+		}
+
+		Mesh::~Mesh()
+		{
+		}
+
+	}
+    
+	namespace d3d {
+	
+		Mesh::Mesh()
+		{
+
+		}
+
+		Mesh::~Mesh()
+		{
+
+		}
+	}
 
 
 }
