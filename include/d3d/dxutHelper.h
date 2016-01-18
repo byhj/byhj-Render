@@ -1,11 +1,11 @@
 #ifndef DXUTHelper_H
 #define DXUTHelper_H
 
-#include "DXUT.h"
-#include "SDKmisc.h"
-#include "DXUTcamera.h"
-#include "DXUTgui.h"
-#include "DXUTsettingsdlg.h"
+#include "DXUT/DXUT.h"
+#include "DXUT/SDKmisc.h"
+#include "DXUT/DXUTcamera.h"
+#include "DXUT/DXUTgui.h"
+#include "DXUT/DXUTsettingsdlg.h"
 
 namespace byhj
 {
@@ -14,11 +14,11 @@ namespace byhj
 		DXUTHelper();
 		~DXUTHelper();
 
-	public:
+		static std::shared_ptr<DXUTHelper> getInsance();
 
-		void Init();
-		void Render();
-		void Shutdown();
+		void init();
+		void render();
+		void shutdown();
 
 	private:
 
@@ -81,15 +81,11 @@ namespace byhj
 
 		void CALLBACK AppD3D11ReleasingSwapChain(void* pUserContext);
 		void CALLBACK AppD3D11DestroyDevice(void* pUserContext);
-
-
 #pragma endregion
 
-		byhj::RenderSystem g_RenderSystem;
 		int m_ScreenWidth = 0;
 		int m_ScreenHeight = 0;
 
-		static std::shared_ptr<DXUTHelper> pDXUTHelper;
 	};
 }
 

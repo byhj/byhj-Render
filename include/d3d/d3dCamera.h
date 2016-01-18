@@ -1,5 +1,5 @@
-#ifndef Camera_H
-#define Camera_H
+#ifndef D3DD3DCamera_H
+#define D3DD3DCamera_H
 
 #include <d3d11.h>
 #include <vector>
@@ -10,49 +10,19 @@ using namespace DirectX;
 namespace byhj
 {
 
-namespace d3d
-{
-
-const float Pi = 3.1415926535f;
-
-class Camera
+class D3DCamera
 {
 public:
-    Camera():m_Theta(1.5f * Pi), m_Phi(0.25f * Pi), m_Radius(15.0f)
-	{
-		m_LastMousePos.x = 0;
-		m_LastMousePos.y = 0;
-		XMMATRIX I = XMMatrixIdentity();
-		XMStoreFloat4x4(&m_World,  I);
-		XMStoreFloat4x4(&m_View ,  I);
-		XMStoreFloat4x4(&m_Proj ,  I);
-	}
-
+    D3DCamera();
+	virtual ~D3DCamera();
 	void update();
-	XMFLOAT4X4 GetViewMatrix() const 
-	{
-		return m_View;
-	}
-    XMFLOAT4X4 GetProjMatrix() const
-	{
-		return m_Proj;
-	}
-	XMFLOAT3 GetPos()
-	{
-		return pos;
-	}
-	XMFLOAT3 GetTarget()
-	{
-		return target;
-	}
-	XMFLOAT3 GetUp()
-	{
-		return up;
-	}
-	void SetRadius(float r)
-	{
-		m_Radius = r;
-	}
+
+	XMFLOAT4X4 getViewMat() const;
+    XMFLOAT4X4 getProjMat() const;
+	XMFLOAT3   getPos() const;
+	XMFLOAT3   getTarget() const;
+	XMFLOAT3   getUp() const;
+
 	void OnMouseDown(WPARAM btnState, int x, int y, HWND hWnd);
 	void OnMouseMove(WPARAM btnState, int x, int y);
 	void OnMouseUp(WPARAM btnState, int x, int y);
@@ -74,7 +44,6 @@ private:
 	float m_aspect;
 };
 
-}
 }
 
 #endif

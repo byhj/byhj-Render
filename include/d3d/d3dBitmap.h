@@ -1,11 +1,11 @@
-#ifndef BITMAP_H
-#define BITMAP_H
+#ifndef D3DBitmap_H
+#define D3DBitmap_H
 
 #include <d3d11.h>
 #include <DirectXMath.h>
 #include <vector>
 
-#include "d3d/Shader.h"
+#include "d3d/d3dShader.h"
 #include "d3d/Utility.h"
 
 using namespace DirectX;
@@ -13,20 +13,20 @@ using namespace DirectX;
 
 namespace byhj
 {
-	class Bitmap
+	class D3DBitmap
 	{
 	public:
-		Bitmap() = default;
-		Bitmap(const Bitmap &) = default;
-		~Bitmap() = default;
+		D3DBitmap() = default;
+		D3DBitmap(const D3DBitmap &) = default;
+		~D3DBitmap() = default;
 
 
-		void Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd, WCHAR *texFile);
-		void Render(ID3D11DeviceContext *pD3D11DeviceContext, const XMFLOAT4X4 &Model,
+		void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd, WCHAR *texFile);
+		void render(ID3D11DeviceContext *pD3D11DeviceContext, const XMFLOAT4X4 &Model,
 			const XMFLOAT4X4 &View, const XMFLOAT4X4&Proj);
-		void Update();
-		void Shutdown();
-		void SetPos(int sw, int sh, int posX, int posY, int width, int height);
+		void update();
+		void shutdown();
+		void setPos(int sw, int sh, int posX, int posY, int width, int height);
 
 
 	private:
@@ -60,7 +60,7 @@ namespace byhj
 		int m_sw;
 		int m_sh;
 
-		d3d::Shader D3DRTTShader;
+		D3DShader D3DRTTShader;
 	};
 
 }
