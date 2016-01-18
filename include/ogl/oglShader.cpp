@@ -36,7 +36,7 @@ char * OGLShader::textFileRead( char *fn) {  //read the OGLShader code
 			fclose(fp);  
 		} 
 		else 
-			std::cout << "Fail to open the OGLShader file" << std::endl;
+			std::cout << "Fail to open the Shader file" << std::endl;
 	}  
 	return content;  
 }  
@@ -48,7 +48,9 @@ void OGLShader::init()
 	m_program = glCreateProgram();
 }
 
-void OGLShader::attach(int type, char* filename) //连接不同种类OGLShader
+
+//Attach different type shader
+void OGLShader::attach(int type, char* filename) 
 {
 	auto mem = textFileRead(filename);
 	GLuint handle = glCreateShader(type);

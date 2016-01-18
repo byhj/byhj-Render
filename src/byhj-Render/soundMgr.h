@@ -13,6 +13,7 @@ namespace byhj
 {
     class SoundMgr : Mgr
 	{
+	public:
 	  SoundMgr();
 	  ~SoundMgr();
 	   

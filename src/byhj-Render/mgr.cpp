@@ -15,4 +15,9 @@ namespace byhj
 	{
 		m_dir = dir;
 	}
+
+	std::string Mgr::getDir() const
+	{
+		return m_dir;
+	}
 }

@@ -13,6 +13,7 @@ namespace byhj
 	  virtual ~Mgr();
 
 	  void setDir(std::string dir);
+	  std::string getDir() const;
 
   protected:
 	  std::string m_dir = "../../media/";

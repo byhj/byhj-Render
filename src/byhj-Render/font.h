@@ -10,7 +10,7 @@ namespace byhj
 		Font(); 
 		~Font();
 
-	private:
+	protected:
 		std::string m_dir;
 	};
 }

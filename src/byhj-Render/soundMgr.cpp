@@ -18,6 +18,13 @@ namespace byhj
 
 	}
 
+	std::shared_ptr<SoundMgr> getInstance()
+	{
+		static std::shared_ptr<SoundMgr> pInstance = std::make_shared<SoundMgr>();
+
+		return pInstance;
+	}
+
 	void SoundMgr::loadSound(std::string soundFile)
 	{
 	}

@@ -27,28 +27,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="render.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dApp.h">
       <Filter>d3d</Filter>
     </ClInclude>
-    <ClInclude Include="shader.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="app.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="root.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="object.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="gui.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="soundMgr.h">
@@ -84,9 +69,6 @@
     <ClInclude Include="timer.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="font.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dFont.h">
       <Filter>d3d</Filter>
     </ClInclude>
@@ -108,11 +90,50 @@
     <ClInclude Include="..\..\include\d3d\effectHelper.h">
       <Filter>d3d</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dCamera.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dBitmap.h">
+      <Filter>d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="sky.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="skyDome.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="skyBox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="skyPlane.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="fontMgr.h">
+      <Filter>mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="app.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="gui.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="render.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="root.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="render.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>include</Filter>
     </ClCompile>
@@ -122,19 +143,7 @@
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
       <Filter>d3d</Filter>
     </ClCompile>
-    <ClCompile Include="shader.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="app.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="root.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
     <ClCompile Include="object.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="gui.cpp">
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="textureMgr.cpp">
@@ -170,9 +179,6 @@
     <ClCompile Include="timer.cpp">
       <Filter>include</Filter>
     </ClCompile>
-    <ClCompile Include="font.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dFont.cpp">
       <Filter>d3d</Filter>
     </ClCompile>
@@ -193,6 +199,45 @@
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\dxutHelper.cpp">
       <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dCamera.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dBitmap.cpp">
+      <Filter>d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="sky.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="skyDemo.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="skyBox.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="skyPlane.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="fontMgr.cpp">
+      <Filter>mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="app.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="render.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="root.cpp">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>include</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

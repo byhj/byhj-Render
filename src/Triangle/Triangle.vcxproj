@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -111,6 +111,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
+    <ClCompile Include="..\byhj-Render\app.cpp" />
+    <ClCompile Include="..\byhj-Render\gui.cpp" />
+    <ClCompile Include="..\byhj-Render\render.cpp" />
+    <ClCompile Include="..\byhj-Render\root.cpp" />
+    <ClCompile Include="..\byhj-Render\shader.cpp" />
     <ClCompile Include="d3dRender.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
@@ -119,6 +126,13 @@
     <ClCompile Include="triangleGui.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\ogl\oglApp.h" />
+    <ClInclude Include="..\..\include\ogl\oglShader.h" />
+    <ClInclude Include="..\byhj-Render\app.h" />
+    <ClInclude Include="..\byhj-Render\gui.h" />
+    <ClInclude Include="..\byhj-Render\render.h" />
+    <ClInclude Include="..\byhj-Render\root.h" />
+    <ClInclude Include="..\byhj-Render\shader.h" />
     <ClInclude Include="d3dRender.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="sample.h" />

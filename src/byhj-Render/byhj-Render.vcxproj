@@ -111,7 +111,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\d3d\d3dBitmap.h" />
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
+    <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />
     <ClInclude Include="..\..\include\d3d\dxutHelper.h" />
@@ -121,7 +123,9 @@
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="app.h" />
     <ClInclude Include="bitmap.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="font.h" />
+    <ClInclude Include="fontMgr.h" />
     <ClInclude Include="geometry.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="mesh.h" />
@@ -134,13 +138,19 @@
     <ClInclude Include="root.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="shaderMgr.h" />
+    <ClInclude Include="sky.h" />
+    <ClInclude Include="skyBox.h" />
+    <ClInclude Include="skyDome.h" />
+    <ClInclude Include="skyPlane.h" />
     <ClInclude Include="soundMgr.h" />
     <ClInclude Include="terrain.h" />
     <ClInclude Include="textureMgr.h" />
     <ClInclude Include="timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\d3d\d3dBitmap.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
     <ClCompile Include="..\..\include\d3d\dxutHelper.cpp" />
@@ -152,6 +162,7 @@
     <ClCompile Include="bitmap.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="font.cpp" />
+    <ClCompile Include="fontMgr.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -164,6 +175,10 @@
     <ClCompile Include="root.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shaderMgr.cpp" />
+    <ClCompile Include="sky.cpp" />
+    <ClCompile Include="skyBox.cpp" />
+    <ClCompile Include="skyDemo.cpp" />
+    <ClCompile Include="skyPlane.cpp" />
     <ClCompile Include="soundMgr.cpp" />
     <ClCompile Include="terrain.cpp" />
     <ClCompile Include="textureMgr.cpp" />

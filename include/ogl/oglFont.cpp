@@ -11,8 +11,9 @@ namespace byhj
 
 	}
 
-	void OGLFont::init()
+	void OGLFont::init(std::string fontFile /* = "arial.ttf" */)
 	{
+		m_FontFile = fontFile;
 		init_buffer();
 		init_shader();
 	}
@@ -77,7 +78,7 @@ namespace byhj
 
 		// Load font as face
 		FT_Face face;
-		if (FT_New_Face(ft, "../../../media/fonts/arial.ttf", 0, &face))
+		if (FT_New_Face(ft, (m_dir + m_FontFile).c_str(), 0, &face))
 			std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
 
 		// Set size to load glyphs as
@@ -149,6 +150,7 @@ namespace byhj
 
 	void OGLFont::init_shader()
 	{
+		m_FontShader.init();
 		m_FontShader.attach(GL_VERTEX_SHADER, "text.vert");
 		m_FontShader.attach(GL_FRAGMENT_SHADER, "text.frag");
 		m_FontShader.link();

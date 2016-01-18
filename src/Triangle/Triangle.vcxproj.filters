@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{11383700-0e13-4e0a-8519-61a2920ebe87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,6 +36,27 @@
     <ClCompile Include="d3dRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\byhj-Render\shader.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\app.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\gui.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\render.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\root.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="triangleGui.h">
@@ -49,6 +73,27 @@
     </ClInclude>
     <ClInclude Include="d3dRender.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\shader.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\app.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\gui.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\render.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\root.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglApp.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglShader.h">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

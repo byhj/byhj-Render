@@ -27,7 +27,7 @@ namespace byhj {
 		OGLFont();
 		~OGLFont();
 
-		void init();
+		void init(std::string fontFile = "arial.ttf");
 		void render(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
 
 	private:
@@ -39,6 +39,7 @@ namespace byhj {
 		std::map<GLchar, Character> Characters;
 		GLuint m_vao, m_vbo;
     	GLuint m_program;
+		std::string m_FontFile;
 	};
 }
 #endif
