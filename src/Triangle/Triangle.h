@@ -14,12 +14,9 @@ namespace byhj
 
 	Triangle();
 	~Triangle();
-
-	void init_buffer();
-	void init_vertexArray();
-	void init_shader();
-
+   
 	private:
+		void init_buffer();
 
 	};
 }

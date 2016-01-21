@@ -10,6 +10,7 @@ namespace byhj
 		m_pRender = new OGLRender();
 		m_pGui = new TriangleGui();
 		m_pApp = new OGLApp();
+
 	    m_pApp->setRender(m_pRender);
 	    m_pApp->setGui(m_pGui);
 

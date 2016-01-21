@@ -2,6 +2,9 @@
 #define OGLRender_H
 
 #include "render.h"
+#include "Triangle.h"
+#include "oglRender.h"
+
 #include <gl/glew.h>
 
 namespace byhj
@@ -18,7 +21,14 @@ namespace byhj
 		void v_shutdown();
 
 	private:
+		void init_buffer();
+		void init_shader();
+		void init_texture();
+
 		GLuint m_program;
+		GLuint m_vao; m_vbo;
+		Triangle m_triangle;
+		OGLShader m_TriangleShader;
 	};
 }
 #endif
