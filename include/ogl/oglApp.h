@@ -34,8 +34,8 @@ class OGLApp : public App
     private:
 
 	public:
-		OGLApp() {}
-		virtual ~OGLApp() {}
+		OGLApp() = default;
+		virtual ~OGLApp() = default;
 
 	public:
 
@@ -74,7 +74,7 @@ class OGLApp : public App
 
 
 	protected:
-	    static  std::shared_ptr<OGLApp> m_oglApp;
+	    static  OGLApp* m_oglApp;
 
 	    static void glfw_key(GLFWwindow * Triangle, int key, int scancode, int action, int mode) 
 	    {

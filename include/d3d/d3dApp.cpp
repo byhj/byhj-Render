@@ -6,7 +6,7 @@ namespace byhj
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 static D3DApp *D3DAppHandle = 0;
 
-void D3DApp::v_run()
+void D3DApp::v_run(std::shared_ptr<App> the_app)
 {	
 	bool ret = init_window();
 

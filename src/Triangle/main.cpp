@@ -2,8 +2,9 @@
 
 int main()
 {
-	byhj::Sample sample;
-	sample.run();
+	byhj::Sample *sample = new byhj::Sample();
+	sample->run();
+	delete sample;
 
 	return 0;
 }

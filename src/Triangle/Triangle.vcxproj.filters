@@ -33,9 +33,6 @@
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="d3dRender.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\byhj-Render\shader.cpp">
       <Filter>Render</Filter>
     </ClCompile>
@@ -71,9 +68,6 @@
     <ClInclude Include="sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="d3dRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\byhj-Render\shader.h">
       <Filter>Render</Filter>
     </ClInclude>
@@ -95,5 +89,13 @@
     <ClInclude Include="..\..\include\ogl\oglShader.h">
       <Filter>Render</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="triangle.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="triangle.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

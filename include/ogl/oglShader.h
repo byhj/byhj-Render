@@ -21,9 +21,9 @@ class OGLShader : public byhj::Shader
 {
 
 public:
-	OGLShader();
-    OGLShader(std::string name);
-	~OGLShader();
+	OGLShader() = default;
+	OGLShader(std::string name) :m_name(name) {}
+	~OGLShader() = default;
 
 public:
 	void init();
@@ -38,7 +38,7 @@ public:
 
 private:
 	char *textFileRead( char *fn) ;
-
+	std::string m_name;
 	GLuint m_program;   
 };
 

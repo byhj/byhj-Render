@@ -3,6 +3,7 @@
 
 #include "render.h"
 #include "gui.h"
+#include <memory>
 
 namespace byhj
 {
@@ -10,23 +11,18 @@ namespace byhj
 	{
 	public:
 		App();
-		App(const App &app);
+		App(const App &app) = default;
 		virtual ~App();
 
 		virtual void v_run() {};
 		virtual void v_end() {};
 
-		void setRender(Render *pRender)
-		{
-			m_pRender = pRender;
-		}
-		void setGui(Gui *pGui)
-		{
-			m_pGui = pGui;
-		}
+		void setRender(std::shared_ptr<Render> pRender);
+		void setGui(std::shared_ptr<Gui> pGui);
+
 	protected:
-		Render *m_pRender = nullptr;
-		Gui    *m_pGui = nullptr;
+		std::shared_ptr<Render> m_pRender = nullptr;
+		std::shared_ptr<Gui   > m_pGui = nullptr;
 	};
 }
 #endif

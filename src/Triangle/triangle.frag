@@ -2,13 +2,11 @@
 
 in VS_OUT {
   vec4 color;
-};
+}vs_out;
 
 layout (location = 0) out vec4 fragColor;
 
 void main(void)
 {
-   vs_out vs_out;
-   
    fragColor = vs_out.color;
 }

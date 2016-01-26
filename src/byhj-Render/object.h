@@ -10,8 +10,8 @@ namespace byhj
 	{
 	public:
 
-		Object();
-		virtual ~Object();
+		Object() = default;
+		virtual ~Object() = default;
 
 		const GLfloat *getVertexData()  const;
 		const GLuint  *getIndexData()   const;

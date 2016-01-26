@@ -10,9 +10,9 @@ namespace byhj
 	{
 	}
 
-	void Root::setApp(App *pApp)
+	void Root::setApp(App *app)
 	{
-		m_pApp = pApp;
+		m_pApp = app;
 	}
 
 
@@ -20,15 +20,16 @@ namespace byhj
 	{
 		m_pApp->v_run();
 	}
+
 	void Root::endScene()
 	{
 		Root::m_pApp->v_end();
 	}
 
 
-	 Root* Root::getInstance()
+	std::shared_ptr<Root> Root::getInstance()
 	{
-		static Root * pInstance = new Root();
+		static std::shared_ptr<Root> pInstance = std::make_shared<Root>();
 		return pInstance;
 	}
 }

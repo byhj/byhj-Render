@@ -20,12 +20,9 @@ namespace byhj
 		void run();
 
 	private:
-
-		Root *m_pRoot = nullptr;
-
-		OGLRender *m_pRender = nullptr;
-		OGLApp  *m_pApp = nullptr;
-		TriangleGui *m_pGui = nullptr;
+		std::shared_ptr<TriangleGui>m_pGui = nullptr;
+		std::shared_ptr<OGLRender> m_pRender = nullptr;
+		OGLApp* m_pApp = nullptr;
 
 	};
 }

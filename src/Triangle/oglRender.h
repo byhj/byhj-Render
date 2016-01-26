@@ -4,6 +4,7 @@
 #include "render.h"
 #include "Triangle.h"
 #include "oglRender.h"
+#include "ogl/oglShader.h"
 
 #include <gl/glew.h>
 
@@ -26,7 +27,7 @@ namespace byhj
 		void init_texture();
 
 		GLuint m_program;
-		GLuint m_vao; m_vbo;
+		GLuint m_vao, m_ibo, m_vbo;
 		Triangle m_triangle;
 		OGLShader m_TriangleShader;
 	};

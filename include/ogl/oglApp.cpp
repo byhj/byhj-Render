@@ -3,11 +3,11 @@
 namespace byhj
 {
 
-std::shared_ptr<OGLApp> OGLApp::m_oglApp = nullptr;
+OGLApp* OGLApp::m_oglApp = nullptr;
 
 void OGLApp::v_run()
 {	
-    m_oglApp = std::make_shared<OGLApp>(*this);
+	m_oglApp = this;
 
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit()) 
@@ -21,7 +21,7 @@ void OGLApp::v_run()
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
 
-	GLFWwindow *Triangle = glfwCreateWindow(windowInfo.Width, windowInfo.Height,
+ 	GLFWwindow *Triangle = glfwCreateWindow(windowInfo.Width, windowInfo.Height,
 		                                    windowInfo.title.c_str(), nullptr, nullptr);
 	glfwSetWindowPos(Triangle, windowInfo.posX, windowInfo.posY);
 	glfwMakeContextCurrent(Triangle);

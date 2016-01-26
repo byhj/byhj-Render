@@ -4,6 +4,7 @@
 #include "render.h"
 #include "app.h"
 #include <string>
+#include <memory>
 
 namespace byhj
 {
@@ -13,19 +14,17 @@ namespace byhj
 		Root();
 		virtual ~Root();
 
-		static Root* getInstance();
+		static std::shared_ptr<Root> getInstance();
 
-		
-		//void addRender(Render *render);
-		//Render* getRender(std::string named);
-		//void    setRender(Render *render);
-		void setApp(App *pApp);
+	
+		void setApp(App *app);
+
 		void beginScene();
 		void endScene();
 
 
 	private:
-		App    *m_pApp = nullptr;
+		App *m_pApp = nullptr;
 		Render *m_pActiveRender = nullptr;
 
 		std::string m_configName;

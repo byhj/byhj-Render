@@ -118,7 +118,6 @@
     <ClCompile Include="..\byhj-Render\render.cpp" />
     <ClCompile Include="..\byhj-Render\root.cpp" />
     <ClCompile Include="..\byhj-Render\shader.cpp" />
-    <ClCompile Include="d3dRender.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="sample.cpp" />
@@ -133,11 +132,14 @@
     <ClInclude Include="..\byhj-Render\render.h" />
     <ClInclude Include="..\byhj-Render\root.h" />
     <ClInclude Include="..\byhj-Render\shader.h" />
-    <ClInclude Include="d3dRender.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="sample.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="triangleGui.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="triangle.frag" />
+    <None Include="triangle.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

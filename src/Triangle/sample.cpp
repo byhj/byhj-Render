@@ -5,28 +5,28 @@ namespace byhj
 {
 	Sample::Sample()
 	{
-		m_pRoot = Root::getInstance();
 
-		m_pRender = new OGLRender();
-		m_pGui = new TriangleGui();
+
+		m_pRender = std::make_shared<OGLRender>();
+		m_pGui = std::make_shared<TriangleGui>();
 		m_pApp = new OGLApp();
 
 	    m_pApp->setRender(m_pRender);
 	    m_pApp->setGui(m_pGui);
 
-		m_pRoot->setApp(m_pApp);
+		Root::getInstance()->setApp(m_pApp);
 	}
 
 	Sample::~Sample()
 	{
-
+		delete m_pApp;
 	}
     
 	void Sample::run()
 	{
-		m_pRoot->beginScene();
+		Root::getInstance()->beginScene();
 
-		m_pRoot->endScene();
+		Root::getInstance()->endScene();
 	}
 
 }
