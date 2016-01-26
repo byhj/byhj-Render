@@ -15,14 +15,14 @@ namespace byhj
 
 	public:
 		Sample(); 
-		~Sample();
+		~Sample() = default;
 	
 		void run();
 
 	private:
 		std::shared_ptr<TriangleGui>m_pGui = nullptr;
 		std::shared_ptr<OGLRender> m_pRender = nullptr;
-		OGLApp* m_pApp = nullptr;
+		std::shared_ptr<OGLApp> m_pApp = nullptr;
 
 	};
 }

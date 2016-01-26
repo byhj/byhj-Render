@@ -2,15 +2,6 @@
 
 namespace byhj
 {
-	App::App()
-	{
-
-	}
-
-	App::~App()
-	{
-
-	}
 	void App::setRender(std::shared_ptr<Render> pRender)
 	{
 		m_pRender = pRender;

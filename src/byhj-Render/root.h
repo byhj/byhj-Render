@@ -11,21 +11,20 @@ namespace byhj
 	class Root
 	{
 	public:
-		Root();
-		virtual ~Root();
+		Root() = default;
+		virtual ~Root() = default;
 
 		static std::shared_ptr<Root> getInstance();
 
 	
-		void setApp(App *app);
+		void setApp(std::shared_ptr<App> app);
 
 		void beginScene();
 		void endScene();
 
 
 	private:
-		App *m_pApp = nullptr;
-		Render *m_pActiveRender = nullptr;
+		std::shared_ptr<App> m_pApp = nullptr;
 
 		std::string m_configName;
 

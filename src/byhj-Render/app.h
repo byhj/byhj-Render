@@ -10,9 +10,9 @@ namespace byhj
 	class App
 	{
 	public:
-		App();
+		App() = default;
 		App(const App &app) = default;
-		virtual ~App();
+		virtual ~App() = default;
 
 		virtual void v_run() {};
 		virtual void v_end() {};

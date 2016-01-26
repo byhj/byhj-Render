@@ -1,10 +1,10 @@
 #include "sample.h"
+#include <vld.h>
 
 int main()
 {
-	byhj::Sample *sample = new byhj::Sample();
+	auto sample = std::make_shared<byhj::Sample>();
 	sample->run();
-	delete sample;
 
 	return 0;
 }

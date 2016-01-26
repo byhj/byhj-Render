@@ -54,6 +54,9 @@
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
       <Filter>Render</Filter>
     </ClCompile>
+    <ClCompile Include="..\byhj-Render\timer.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="triangleGui.h">
@@ -87,6 +90,9 @@
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglShader.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\timer.h">
       <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>

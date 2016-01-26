@@ -118,6 +118,7 @@
     <ClCompile Include="..\byhj-Render\render.cpp" />
     <ClCompile Include="..\byhj-Render\root.cpp" />
     <ClCompile Include="..\byhj-Render\shader.cpp" />
+    <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="sample.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="..\byhj-Render\render.h" />
     <ClInclude Include="..\byhj-Render\root.h" />
     <ClInclude Include="..\byhj-Render\shader.h" />
+    <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="sample.h" />
     <ClInclude Include="Triangle.h" />

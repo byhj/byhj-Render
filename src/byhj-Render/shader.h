@@ -8,9 +8,9 @@ namespace byhj
 	class Shader
 	{
 	public:
-	  Shader();
+	  Shader() = default;
 	  Shader(std::string name);
-	  virtual ~Shader();
+	  virtual ~Shader() = default;
 
 	protected:
 		std::string m_name;

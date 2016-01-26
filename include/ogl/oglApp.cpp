@@ -3,11 +3,11 @@
 namespace byhj
 {
 
-OGLApp* OGLApp::m_oglApp = nullptr;
+//OGLApp* OGLApp::m_oglApp = nullptr;
 
 void OGLApp::v_run()
 {	
-	m_oglApp = this;
+//	m_oglApp = this;
 
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit()) 
@@ -23,13 +23,13 @@ void OGLApp::v_run()
 
  	GLFWwindow *Triangle = glfwCreateWindow(windowInfo.Width, windowInfo.Height,
 		                                    windowInfo.title.c_str(), nullptr, nullptr);
-	glfwSetWindowPos(Triangle, windowInfo.posX, windowInfo.posY);
+	glfwSetWindowPos(Triangle, windowInfo.posX - 100, windowInfo.posY - 100);
 	glfwMakeContextCurrent(Triangle);
 
 	//Key and Mouse callback function
-	glfwSetKeyCallback(Triangle, glfw_key);
-	glfwSetCursorPosCallback(Triangle, glfw_mouse);
-	glfwSetScrollCallback(Triangle, glfw_scroll);
+	//glfwSetKeyCallback(Triangle, glfw_key);
+	//glfwSetCursorPosCallback(Triangle, glfw_mouse);
+	//glfwSetScrollCallback(Triangle, glfw_scroll);
 
 	// GLFW Options
 //	glfwSetInputMode(Triangle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);

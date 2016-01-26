@@ -2,15 +2,8 @@
 
 namespace byhj
 {
-	Root::Root()
-	{
-	}
 
-	Root::~Root()
-	{
-	}
-
-	void Root::setApp(App *app)
+	void Root::setApp(std::shared_ptr<App> app)
 	{
 		m_pApp = app;
 	}

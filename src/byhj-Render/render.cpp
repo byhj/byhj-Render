@@ -3,11 +3,5 @@
 namespace byhj
 {
 
-	Render::Render()
-	{
-	}
 
-	Render::~Render()
-	{
-	}
 }

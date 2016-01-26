@@ -6,15 +6,14 @@ namespace byhj
 	class Render
 	{
 	public:
-		Render();
-		virtual ~Render();
+		Render() = default;
+		virtual ~Render() = default;
 
-		virtual void v_init()      {}
-		virtual void v_update()    {}
-		virtual void v_render()    {}
-		virtual void v_shutdown()  {}
+		virtual void v_init()      = 0;
+		virtual void v_update()    = 0;
+		virtual void v_render()    = 0;
+		virtual void v_shutdown()  = 0;
 
-  	private:
 
 	};
 }

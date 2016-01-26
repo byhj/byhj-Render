@@ -4,7 +4,7 @@
 #include "render.h"
 #include "Triangle.h"
 #include "oglRender.h"
-#include "ogl/oglShader.h"
+
 
 #include <gl/glew.h>
 
@@ -14,7 +14,7 @@ namespace byhj
 	{
 	public:
 		OGLRender();
-		~OGLRender();
+		virtual ~OGLRender() = default;
 
 		void v_init();
 		void v_update();
@@ -22,14 +22,8 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		void init_buffer();
-		void init_shader();
-		void init_texture();
+	std::shared_ptr<Triangle> m_triangle;
 
-		GLuint m_program;
-		GLuint m_vao, m_ibo, m_vbo;
-		Triangle m_triangle;
-		OGLShader m_TriangleShader;
 	};
 }
 #endif
