@@ -4,16 +4,17 @@
 #include <gl/glew.h>
 #include <vector>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "ogl/oglShader.h"
 
 namespace byhj
 {
-	class Triangle 
+	class Cube
 	{
 	public:
 
-	Triangle()  = default;
-	~Triangle() = default;
+	Cube()  = default;
+	~Cube() = default;
 
 	void init();
 	void update();
@@ -30,10 +31,12 @@ namespace byhj
 	    GLuint m_vao;
 	    GLuint m_ibo;
 	    GLuint m_vbo;
-	    
+		GLuint u_model;
+		GLuint u_view;
+		GLuint u_proj;
 	   std::vector<GLfloat> m_VertexData;
 	   std::vector<GLuint>  m_IndexData;
-	   OGLShader m_TriangleShader ={ "TriangleShader" };
+	   OGLShader m_CubeShader ={ "CubeShader" };
 	};
 }
 #endif

@@ -14,19 +14,10 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{f9a5277a-e755-461b-8149-71acba3b7020}</UniqueIdentifier>
+      <UniqueIdentifier>{a0feaae9-ca9c-48e7-a5b3-488fd430785b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="oglRender.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sample.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render</Filter>
     </ClCompile>
@@ -54,20 +45,23 @@
     <ClCompile Include="..\byhj-Render\timer.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="triangleGui.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="oglRender.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="sample.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeGui.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="oglRender.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sample.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>Render</Filter>
     </ClInclude>
@@ -95,18 +89,24 @@
     <ClInclude Include="..\byhj-Render\timer.h">
       <Filter>Render</Filter>
     </ClInclude>
-    <ClInclude Include="triangleGui.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="sample.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="oglRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeGui.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="triangle.frag">
+    <None Include="cube.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="triangle.vert">
+    <None Include="cube.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -1,15 +1,15 @@
-#ifndef TriangleGui_H
-#define TriangleGui_H
+#ifndef CubeGui_H
+#define CubeGui_H
 
 #include "gui.h"
 
 namespace byhj
 {
-	class TriangleGui : public Gui
+	class CubeGui : public Gui
 	{
 	public:
-		TriangleGui() = default;
-		~TriangleGui() = default;
+		CubeGui() = default;
+		~CubeGui() = default;
 
 		void v_init(int sw, int sh) override;
 

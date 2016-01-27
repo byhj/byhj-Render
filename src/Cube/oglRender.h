@@ -2,7 +2,7 @@
 #define OGLRender_H
 
 #include "render.h"
-#include "Triangle.h"
+#include "cube.h"
 #include <memory>
 #include <gl/glew.h>
 
@@ -20,7 +20,7 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		Triangle *m_triangle = nullptr;
+		Cube *m_cube = nullptr;
 	};
 }
 #endif

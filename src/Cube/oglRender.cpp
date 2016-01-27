@@ -17,28 +17,35 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		m_triangle = new Triangle;
+		m_cube = new Cube;
 
-       m_triangle->init();
+       m_cube->init();
 	}
 
 	void OGLRender::v_update()
 	{
-		m_triangle->update();
+		m_cube->update();
 	}
 
     void OGLRender::v_render()
-    {
-		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, &black[0]);
+	{
+		glEnable(GL_DEPTH_TEST);
 
-		m_triangle->render();
+
+		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
+		glClearBufferfv(GL_COLOR, 0, black);
+		static const GLfloat one[] ={ 1.0f };
+		glClearBufferfv(GL_DEPTH, 0, one);
+
+
+
+		m_cube->render();
 
     }
 	void OGLRender::v_shutdown()
 	{
-		m_triangle->shutdown();
+		m_cube->shutdown();
 
-		delete m_triangle;
+		delete m_cube;
 	}
 }

@@ -3,10 +3,9 @@
 
 #include "root.h"
 #include "ogl/oglApp.h"
-#include "triangleGui.h"
 #include "ogl/oglRender.h"
-#include "d3d/d3dRender.h"
-#include "d3d/d3dApp.h"
+#include "triangleGui.h"
+
 #include <memory>
 
 namespace byhj
@@ -15,16 +14,17 @@ namespace byhj
 	{
 
 	public:
-		Sample();
+		Sample() = default;
 		~Sample() = default;
 	
+		void init();
 		void run();
+		void end();
 
-	private:
-		std::shared_ptr<TriangleGui>m_pGui = nullptr;
-		std::shared_ptr<OGLRender> m_pRender;
-		//std::shared_ptr<OGLApp> m_pApp = nullptr;
-
+	private:					
+		TriangleGui *m_pGui 	= nullptr;
+		OGLApp      *m_pApp 	= nullptr;
+		OGLRender    *m_pRender = nullptr;
 	};
 }
 #endif

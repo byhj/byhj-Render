@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{95044105-2398-4E6B-BADB-D67F2136D38B}</ProjectGuid>
-    <RootNamespace>Test</RootNamespace>
+    <ProjectGuid>{4FE8D57F-F9D2-47B5-8A50-7BC25B353893}</ProjectGuid>
+    <RootNamespace>Cube</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -123,8 +123,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="sample.cpp" />
-    <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="triangleGui.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="CubeGui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -138,12 +138,12 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="sample.h" />
-    <ClInclude Include="Triangle.h" />
-    <ClInclude Include="triangleGui.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="CubeGui.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="triangle.frag" />
-    <None Include="triangle.vert" />
+    <None Include="cube.frag" />
+    <None Include="cube.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

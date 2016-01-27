@@ -5,7 +5,7 @@ namespace byhj
 {
 	void Sample::init()
 	{
-		TriangleGui *m_pGui = new TriangleGui;
+		CubeGui     *m_pGui = new CubeGui;
 		OGLApp      *m_pApp = new OGLApp;
 		OGLRender   *m_pRender = new OGLRender;
 

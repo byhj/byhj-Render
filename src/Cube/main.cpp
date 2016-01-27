@@ -1,8 +1,8 @@
 #include "sample.h"
 
-#ifdef _DEBUG
-#include <vld.h>
-#endif
+// #ifdef _DEBUG
+// #include <vld.h>
+// #endif
 
 int main()
 {
