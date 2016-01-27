@@ -35,11 +35,19 @@ class OGLApp : public App
 
 	public:
 		OGLApp() = default;
-		virtual ~OGLApp() = default;
+		~OGLApp() = default;
 
 	public:
 
+		void setRender(Render *pRender);
+		void setGui(Gui *pGui);
+
+protected:
+	Render*  m_pRender = nullptr;
+	Gui  * m_pGui = nullptr;
+
 		void v_run() override;
+		void v_end() override;
 
 		virtual void v_KeyCallback(GLFWwindow* Triangle, int key, int scancode, int action, int mode) 
 		{
@@ -71,24 +79,6 @@ class OGLApp : public App
 		}windowInfo;
 
 		float GetAspect() const ;
-
-
-	protected:
-	    static  OGLApp* m_oglApp;
-
-	    static void glfw_key(GLFWwindow * Triangle, int key, int scancode, int action, int mode) 
-	    {
-	    	m_oglApp->v_KeyCallback(Triangle,  key,  scancode, action,  mode);
-	    }
-	    static void glfw_mouse(GLFWwindow* Triangle, double xpos, double ypos)
-	    {
-	    	m_oglApp->v_MouseCallback(Triangle,  xpos, ypos);
-	    }
-	    static void glfw_scroll(GLFWwindow* Triangle, double xoffset, double yoffset)
-	    {
-	    	m_oglApp->v_ScrollCallback(Triangle,  xoffset, yoffset);
-	    } 
-	    
 	};  //class
 
 }

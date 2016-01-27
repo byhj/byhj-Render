@@ -2,8 +2,8 @@
 #define OGLRender_H
 
 #include "render.h"
-#include "triangle.h"
-
+#include "Triangle.h"
+#include <memory>
 #include <gl/glew.h>
 
 namespace byhj
@@ -20,7 +20,7 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		Triangle m_triangle;
+		Triangle *m_triangle = nullptr;
 	};
 }
 #endif

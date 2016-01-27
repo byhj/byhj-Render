@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "byhj-Render", "src\byhj-Ren
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Triangle", "src\Triangle\Triangle.vcxproj", "{7B1A93DA-F28A-4A86-A81A-33C66E3E318F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "src\Test\Test.vcxproj", "{95044105-2398-4E6B-BADB-D67F2136D38B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{7B1A93DA-F28A-4A86-A81A-33C66E3E318F}.Release|x64.Build.0 = Release|x64
 		{7B1A93DA-F28A-4A86-A81A-33C66E3E318F}.Release|x86.ActiveCfg = Release|Win32
 		{7B1A93DA-F28A-4A86-A81A-33C66E3E318F}.Release|x86.Build.0 = Release|Win32
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Debug|x64.ActiveCfg = Debug|x64
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Debug|x64.Build.0 = Debug|x64
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Debug|x86.ActiveCfg = Debug|Win32
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Debug|x86.Build.0 = Debug|Win32
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Release|x64.ActiveCfg = Release|x64
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Release|x64.Build.0 = Release|x64
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Release|x86.ActiveCfg = Release|Win32
+		{95044105-2398-4E6B-BADB-D67F2136D38B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

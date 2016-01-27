@@ -3,11 +3,9 @@
 namespace byhj
 {
 
-//OGLApp* OGLApp::m_oglApp = nullptr;
 
 void OGLApp::v_run()
 {	
-//	m_oglApp = this;
 
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit()) 
@@ -15,7 +13,6 @@ void OGLApp::v_run()
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		return;
 	}
-
 
 #ifdef _DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
@@ -25,11 +22,6 @@ void OGLApp::v_run()
 		                                    windowInfo.title.c_str(), nullptr, nullptr);
 	glfwSetWindowPos(Triangle, windowInfo.posX - 100, windowInfo.posY - 100);
 	glfwMakeContextCurrent(Triangle);
-
-	//Key and Mouse callback function
-	//glfwSetKeyCallback(Triangle, glfw_key);
-	//glfwSetCursorPosCallback(Triangle, glfw_mouse);
-	//glfwSetScrollCallback(Triangle, glfw_scroll);
 
 	// GLFW Options
 //	glfwSetInputMode(Triangle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -86,8 +78,9 @@ void OGLApp::v_run()
 
 		glfwSwapBuffers(Triangle);
 	}
-	m_pGui->v_shutdown();
+
 	m_pRender->v_shutdown();
+	m_pGui->v_shutdown();
 
 	glfwTerminate();
 }
@@ -107,5 +100,16 @@ int OGLApp::getSH() const
 	return ScreenHeight;
 }
 
+void OGLApp::v_end()
+{
 
+}
+void OGLApp::setRender(Render *pRender)
+{
+	m_pRender = pRender;
+}
+void OGLApp::setGui(Gui *pGui)
+{
+	m_pGui = pGui;
+}
 }

@@ -3,7 +3,7 @@
 namespace byhj
 {
 
-	void Root::setApp(std::shared_ptr<App> app)
+	void Root::setApp(App *app)
 	{
 		m_pApp = app;
 	}

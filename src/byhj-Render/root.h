@@ -17,14 +17,14 @@ namespace byhj
 		static std::shared_ptr<Root> getInstance();
 
 	
-		void setApp(std::shared_ptr<App> app);
+		void setApp(App *app);
 
 		void beginScene();
 		void endScene();
 
 
 	private:
-		std::shared_ptr<App> m_pApp = nullptr;
+		App *m_pApp = nullptr;
 
 		std::string m_configName;
 

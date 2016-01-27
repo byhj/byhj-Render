@@ -17,7 +17,7 @@
 namespace byhj
 {
 
-class OGLShader : public byhj::Shader
+class OGLShader
 {
 
 public:
@@ -37,9 +37,10 @@ public:
 
 
 private:
-	char *textFileRead( char *fn) ;
+	std::string textFileRead( char *fn) ;
+
+	GLuint m_program;  
 	std::string m_name;
-	GLuint m_program;   
 };
 
 }

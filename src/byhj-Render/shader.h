@@ -9,11 +9,7 @@ namespace byhj
 	{
 	public:
 	  Shader() = default;
-	  Shader(std::string name);
 	  virtual ~Shader() = default;
-
-	protected:
-		std::string m_name;
 	};
 }
 #endif

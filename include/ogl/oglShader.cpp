@@ -5,25 +5,26 @@ namespace byhj
 {
 
 //read the Shadercode
-char * OGLShader::textFileRead( char *fn) {  //read the OGLShader code
-	FILE *fp;  
+std::string OGLShader::textFileRead( char *fn) {  //read the OGLShader code
+
+	FILE *fp = nullptr;  
 	char *content = NULL;  
 	int count=0;  
 
 	if (fn != NULL) {  
 
-		fopen_s(&fp , fn, "rt");
+		fp = fopen(fn, "r");
 		if (!fp){
-
 #ifdef WINDOW_PLATFORM
 			MessageBox(NULL, L"Can not open the Shader file", L"Error",  MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
 			std::cerr << "Can not open the Shader file:" << fn << std::endl;
 
-#endif
-			return NULL;
+#endif		
+			fclose(fp);  
+			return content;
 		}
-		if (fp != NULL) {  
+		else {  
 			fseek(fp, 0, SEEK_END);  
 			count = ftell(fp);  
 			rewind(fp);  
@@ -35,10 +36,11 @@ char * OGLShader::textFileRead( char *fn) {  //read the OGLShader code
 			}  
 			fclose(fp);  
 		} 
-		else 
-			std::cout << "Fail to open the Shader file" << std::endl;
 	}  
-	return content;  
+	std::string shardSrc(content);
+	free(content);
+
+	return shardSrc;
 }  
 
 
@@ -52,7 +54,8 @@ void OGLShader::init()
 //Attach different type shader
 void OGLShader::attach(int type, char* filename) 
 {
-	auto mem = textFileRead(filename);
+	std::string src = textFileRead(filename);
+	auto mem = src.c_str();
 	GLuint handle = glCreateShader(type);
 	glShaderSource(handle, 1, (const GLchar**)(&mem), 0);
 
