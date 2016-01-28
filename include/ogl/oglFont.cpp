@@ -11,15 +11,20 @@ namespace byhj
 
 	}
 
-	void OGLFont::init(std::string fontFile /* = "arial.ttf" */)
+	void OGLFont::init(GLfloat sw, GLfloat sh, std::string fontFile /* = "arial.ttf" */)
 	{
+		m_sw = sw;
+		m_sh = sh;
 		m_FontFile = fontFile;
 		init_buffer();
 		init_shader();
+		init_vertexArray();
 	}
 
 	void OGLFont::render(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 	{
+		glEnable(GL_CULL_FACE);
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -60,12 +65,25 @@ namespace byhj
 			// Render quad
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 			// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-			x += (ch.Advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+			x += (ch.Advance >> 6) * scale; // Bit shift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
 		}
 
 		glBindVertexArray(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glDisable(GL_BLEND);
+		glDisable(GL_CULL_FACE);
+	}
+
+	void OGLFont::update()
+	{
+
+	}
+
+	void OGLFont::shutdown()
+	{
+		glDeleteVertexArrays(1, &m_vao);
+		glDeleteBuffers(1, &m_vbo);
+		glDeleteProgram(m_program);
 	}
 
 	void OGLFont::init_buffer()
@@ -134,29 +152,42 @@ namespace byhj
 		FT_Done_Face(face);
 		FT_Done_FreeType(ft);
 
-
-		// Configure VAO/VBO for texture quads
-		glGenVertexArrays(1, &m_vao);
 		glGenBuffers(1, &m_vbo);
-		glBindVertexArray(m_vao);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
 	}
 
+	void OGLFont::init_vertexArray()
+	{
+		// Configure VAO/VBO for texture quads
+		glGenVertexArrays(1, &m_vao);
+		glBindVertexArray(m_vao);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+        glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
+	
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
 
 	void OGLFont::init_shader()
 	{
 		m_FontShader.init();
-		m_FontShader.attach(GL_VERTEX_SHADER, "text.vert");
-		m_FontShader.attach(GL_FRAGMENT_SHADER, "text.frag");
+		m_FontShader.attach(GL_VERTEX_SHADER, "font.vert");
+		m_FontShader.attach(GL_FRAGMENT_SHADER, "font.frag");
 		m_FontShader.link();
-		m_FontShader.use();
 		m_FontShader.info();
 		m_program = m_FontShader.getProgram();
+
+		glUseProgram(m_program);
+
+		auto mvp_loc = glGetUniformLocation(m_program, "mvp");
+		glm::mat4 orthoProj = glm::ortho(0.0f, m_sw, 0.0f, m_sh);
+		glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, &orthoProj[0][0]);
+
+		glUseProgram(0);
 	}
 
 }

@@ -10,6 +10,7 @@
 
 #include "app.h"
 #include "oglRender.h"
+#include "oglFont.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -41,10 +42,12 @@ class OGLApp : public App
 
 		void setRender(Render *pRender);
 		void setGui(Gui *pGui);
+		void setFont(OGLFont *pFont);
 
 protected:
 	Render*  m_pRender = nullptr;
 	Gui  * m_pGui = nullptr;
+	OGLFont *m_pFont = new OGLFont;
 
 		void v_run() override;
 		void v_end() override;
@@ -60,9 +63,10 @@ protected:
 		virtual void v_Movement(GLFWwindow *Triangle) {}
 		virtual void v_MouseCallback(GLFWwindow* Triangle, double xpos, double ypos) {}
 		virtual void v_ScrollCallback(GLFWwindow* Triangle, double xoffset, double yoffset) {}
+		
 		int   getSW() const ;
 		int   getSH() const ;
-
+		void countFps();
 	protected:
 		struct WindowInfo
 		{
@@ -77,6 +81,11 @@ protected:
 			int Height;
 			int posX, posY;
 		}windowInfo;
+
+		std::string m_GLRenderer;
+		std::string m_GLVersion;
+		std::string m_GLSLVersion;
+		GLuint m_fps = 0;
 
 		float GetAspect() const ;
 	};  //class

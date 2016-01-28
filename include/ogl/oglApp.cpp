@@ -44,6 +44,11 @@ void OGLApp::v_run()
 	const GLubyte *vendor = glGetString( GL_VENDOR );  
 	const GLubyte *version = glGetString( GL_VERSION );  
 	const GLubyte *glslVersion = glGetString( GL_SHADING_LANGUAGE_VERSION );  
+	
+	m_GLRenderer = (const char *)renderer;
+	m_GLVersion  = (const char *)version;
+	m_GLSLVersion = (const char *)glslVersion;
+
 	GLint major, minor;  
 	glGetIntegerv(GL_MAJOR_VERSION, &major);  
 	glGetIntegerv(GL_MINOR_VERSION, &minor);  
@@ -54,12 +59,13 @@ void OGLApp::v_run()
 	std::cout << "GLSL Version : " << glslVersion << std::endl;    
 	std::cout << "--------------------------------------------------------------------------------" 
 		      << std::endl;
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major); //opengl 4.3
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major); 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
+	m_pFont->init(windowInfo.Width, windowInfo.Height);
 	m_pRender->v_init();
 	m_pGui->v_init(windowInfo.Width, windowInfo.Height);
 
@@ -70,11 +76,19 @@ void OGLApp::v_run()
 		glfwPollEvents();
 		v_Movement(Triangle);
 
+		countFps();
+
 		m_pRender->v_update();
 		m_pGui->v_update();
 
+	
 		m_pRender->v_render();
 		m_pGui->v_render();
+
+		m_pFont->render("Graphics card: " + m_GLRenderer, 10, windowInfo.Height - 30);
+		m_pFont->render("GL Version: " + m_GLVersion, 10, windowInfo.Height - 60);
+		m_pFont->render("GLSL Version: " + m_GLSLVersion, 10, windowInfo.Height - 90);
+		m_pFont->render("FPS: " + std::to_string(m_fps), 10, 30);
 
 		glfwSwapBuffers(Triangle);
 	}
@@ -112,4 +126,25 @@ void OGLApp::setGui(Gui *pGui)
 {
 	m_pGui = pGui;
 }
+
+void OGLApp::countFps()
+{
+	static float currTime = glfwGetTime();
+	static float lastTime = glfwGetTime();
+	static float Time = 0.0f;
+
+	currTime = glfwGetTime();
+	Time += currTime - lastTime;
+
+	static int cnt = 0;
+	if (Time >= 1.0f)
+	{
+		m_fps = cnt;
+		cnt = 0;
+		Time = 0.0f;
+	}
+	++cnt;
+	lastTime = currTime;
+}
+
 }

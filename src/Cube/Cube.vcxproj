@@ -112,8 +112,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
+    <ClCompile Include="..\byhj-Render\font.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
     <ClCompile Include="..\byhj-Render\object.cpp" />
     <ClCompile Include="..\byhj-Render\render.cpp" />
@@ -128,8 +130,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
+    <ClInclude Include="..\..\include\ogl\oglFont.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
+    <ClInclude Include="..\byhj-Render\font.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
     <ClInclude Include="..\byhj-Render\object.h" />
     <ClInclude Include="..\byhj-Render\render.h" />
@@ -144,6 +148,8 @@
   <ItemGroup>
     <None Include="cube.frag" />
     <None Include="cube.vert" />
+    <None Include="font.frag" />
+    <None Include="font.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

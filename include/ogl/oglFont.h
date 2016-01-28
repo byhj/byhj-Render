@@ -27,15 +27,18 @@ namespace byhj {
 		OGLFont();
 		~OGLFont();
 
-		void init(std::string fontFile = "arial.ttf");
-		void render(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+		void init(GLfloat sw, GLfloat sh, std::string fontFile = "consolai.ttf");
+		void render(std::string text, GLfloat x, GLfloat y, GLfloat scale = 0.5f, glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f) );
+		void update();
+		void shutdown();
 
 	private:
 		void init_shader();
 		void init_buffer();
+		void init_vertexArray();
 
 		OGLShader m_FontShader = "Font Shader";
-
+		GLfloat m_sw, m_sh;
 		std::map<GLchar, Character> Characters;
 		GLuint m_vao, m_vbo;
     	GLuint m_program;

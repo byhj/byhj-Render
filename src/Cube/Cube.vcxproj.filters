@@ -16,35 +16,17 @@
     <Filter Include="Render">
       <UniqueIdentifier>{a0feaae9-ca9c-48e7-a5b3-488fd430785b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render\ogl">
+      <UniqueIdentifier>{4b866f62-9a76-445b-8034-0a2709ea99c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\d3d">
+      <UniqueIdentifier>{acbe6360-f424-47e9-8f5d-175199a8c5e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\render">
+      <UniqueIdentifier>{f80c569e-23fa-48da-b42b-028e777468c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\include\ogl\oglApp.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglShader.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\app.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\gui.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\object.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\render.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\root.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\shader.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\timer.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -60,35 +42,41 @@
     <ClCompile Include="CubeGui.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglFont.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\shader.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\timer.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\render.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\root.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\object.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\gui.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\app.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\font.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ogl\oglApp.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglShader.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\app.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\gui.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\object.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\render.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\root.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\shader.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\timer.h">
-      <Filter>Render</Filter>
-    </ClInclude>
     <ClInclude Include="sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,12 +89,51 @@
     <ClInclude Include="CubeGui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglApp.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglFont.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglShader.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\timer.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\shader.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\render.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\root.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\object.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\gui.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\font.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\app.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cube.vert">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="cube.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="font.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="font.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

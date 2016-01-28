@@ -8,7 +8,7 @@ namespace byhj
 		TwWindowSize(sw, sh);
 
 		m_pBar = TwNewBar("CubeGui");
-		TwDefine(" CubeGui label='CubeGui' position='10 10' alpha=30 help='Use this bar to edit the tess.' ");
+		TwDefine(" CubeGui label='CubeGui' position='1300 10' alpha=30 help='Use this bar to edit the tess.' ");
 		//TwAddVarRW(m_pBar, "speed",);
 	
 	}

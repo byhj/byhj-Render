@@ -18,8 +18,7 @@ namespace byhj
 	void OGLRender::v_init()
 	{
 		m_cube = new Cube;
-
-       m_cube->init();
+        m_cube->init();
 	}
 
 	void OGLRender::v_update()
@@ -37,8 +36,6 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-
-
 		m_cube->render();
 
     }
@@ -48,4 +45,5 @@ namespace byhj
 
 		delete m_cube;
 	}
+
 }
