@@ -5,7 +5,7 @@ namespace byhj
 {
 
 //read the Shadercode
-std::string OGLShader::textFileRead( char *fn) {  //read the OGLShader code
+std::string OGLShader::textFileRead(const char *fn) {  //read the OGLShader code
 
 	FILE *fp = nullptr;  
 	char *content = NULL;  
@@ -52,7 +52,7 @@ void OGLShader::init()
 
 
 //Attach different type shader
-void OGLShader::attach(int type, char* filename) 
+void OGLShader::attach(int type, const char* filename) 
 {
 	std::string src = textFileRead(filename);
 	auto mem = src.c_str();

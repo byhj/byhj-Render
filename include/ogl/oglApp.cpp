@@ -2,33 +2,103 @@
 
 namespace byhj
 {
+OGLApp * OGLApp::app = nullptr;
+	////////////////////////////////////////////////////////////////////////////////////////
 
+	void OGLApp::v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+	{
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, GL_TRUE);
+		if (key == GLFW_KEY_C && action == GLFW_PRESS)
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////////////////////
+
+	void OGLApp::glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode)
+	{
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, GL_TRUE);
+
+#ifdef USE_ANT
+		TwEventKeyGLFW(key, action);
+
+		app->v_KeyCallback(window, key, scancode, action, mode);
+#endif
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
+
+	void OGLApp::glfw_mouse(GLFWwindow* window, double xpos, double ypos)
+	{
+#ifdef USE_ANT
+		TwEventMousePosGLFW(xpos, ypos);
+
+		app->v_MouseCallback(window, xpos, ypos);
+#endif
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
+
+	void OGLApp::glfw_scroll(GLFWwindow* window, double xoffset, double yoffset)
+	{
+#ifdef USE_ANT
+		TwEventMouseWheelGLFW(xoffset);
+
+		app->v_ScrollCallback(window, xoffset, yoffset);
+#endif
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
+	void OGLApp::glfw_mouseButton(GLFWwindow *window, int x, int y, int z)
+	{
+		TwEventMouseButtonGLFW(x, y);
+	}
+	void OGLApp::glfw_char(GLFWwindow *window, unsigned int x)
+	{
+		TwEventCharGLFW(x, GLFW_PRESS);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////
 
 void OGLApp::v_run()
 {	
-
+	app = this;
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit()) 
 	{
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		return;
 	}
+	auto sw = WindowInfo::getInstance()->getWidth();
+	auto sh = WindowInfo::getInstance()->getHeight();
 
 #ifdef _DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
 
- 	GLFWwindow *Triangle = glfwCreateWindow(windowInfo.Width, windowInfo.Height,
-		                                    windowInfo.title.c_str(), nullptr, nullptr);
-	glfwSetWindowPos(Triangle, windowInfo.posX - 100, windowInfo.posY - 100);
-	glfwMakeContextCurrent(Triangle);
+ 	GLFWwindow *pWindow = glfwCreateWindow(sw, sh, WindowInfo::getInstance()->getTitle().c_str(), nullptr, nullptr);
+	glfwSetWindowPos(pWindow, WindowInfo::getInstance()->getPosX() - 100, WindowInfo::getInstance()->getPosY() - 100);
+	glfwMakeContextCurrent(pWindow);
 
+	glfwSetCursorPosCallback(pWindow, glfw_mouse);          // - Directly redirect GLFW mouse position events to AntTweakBar
+	glfwSetScrollCallback(pWindow, glfw_scroll);    // - Directly redirect GLFW mouse wheel events to AntTweakBar
+	glfwSetKeyCallback(pWindow, glfw_key);                         // - Directly redirect GLFW key events to AntTweakBar
+#ifdef USE_ANT
+	glfwSetMouseButtonCallback(pWindow, glfw_mouseButton); // - Directly redirect GLFW mouse button events to AntTweakBar
+	glfwSetCharCallback(pWindow, glfw_char);                      // - Directly redirect GLFW char events to AntTweakBar
+#endif
+																 //glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+																 // GLFW Options
+	//glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	// GLFW Options
+
 //	glfwSetInputMode(Triangle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	if (Triangle == NULL)
+	if (pWindow == NULL)
 	{
-		std::cerr << "Failed to create GLFW Triangle" << std::endl;
+		std::cerr << "Failed to create GLFW pWindow" << std::endl;
 		glfwTerminate();
 		return ;
 	}	
@@ -65,54 +135,34 @@ void OGLApp::v_run()
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	m_pFont->init(windowInfo.Width, windowInfo.Height);
+	m_pFont->init(sw, sh);
 	m_pRender->v_init();
-	m_pGui->v_init(windowInfo.Width, windowInfo.Height);
 
-	glViewport(0, 0, windowInfo.Width, windowInfo.Height);
+	glViewport(0, 0, sw, sh);
 
-	while (!glfwWindowShouldClose(Triangle)) 
+	while (!glfwWindowShouldClose(pWindow))
 	{
 		glfwPollEvents();
-		v_Movement(Triangle);
+		v_Movement(pWindow);
 
 		countFps();
 
 		m_pRender->v_update();
-		m_pGui->v_update();
-
-	
 		m_pRender->v_render();
-		m_pGui->v_render();
 
-		m_pFont->render("Graphics card: " + m_GLRenderer, 10, windowInfo.Height - 30);
-		m_pFont->render("GL Version: " + m_GLVersion, 10, windowInfo.Height - 60);
-		m_pFont->render("GLSL Version: " + m_GLSLVersion, 10, windowInfo.Height - 90);
+		m_pFont->render("Graphics card: " + m_GLRenderer, 10, sh - 30);
+		m_pFont->render("GL Version: " + m_GLVersion, 10, sh - 60);
+		m_pFont->render("GLSL Version: " + m_GLSLVersion, 10, sh - 90);
 		m_pFont->render("FPS: " + std::to_string(m_fps), 10, 30);
 
-		glfwSwapBuffers(Triangle);
+		glfwSwapBuffers(pWindow);
 	}
 
 	m_pRender->v_shutdown();
-	m_pGui->v_shutdown();
 
 	glfwTerminate();
 }
 
-float OGLApp::GetAspect() const
-{
-	return static_cast<float>(ScreenWidth) / static_cast<float>(ScreenHeight);
-}
-
-int OGLApp::getSW() const 
-{
-	return ScreenWidth;
-}
-
-int OGLApp::getSH() const 
-{
-	return ScreenHeight;
-}
 
 void OGLApp::v_end()
 {
@@ -122,10 +172,7 @@ void OGLApp::setRender(Render *pRender)
 {
 	m_pRender = pRender;
 }
-void OGLApp::setGui(Gui *pGui)
-{
-	m_pGui = pGui;
-}
+
 
 void OGLApp::countFps()
 {

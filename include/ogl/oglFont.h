@@ -3,6 +3,7 @@
 
 #include "font.h"
 #include "ogl/oglShader.h"
+#include "shaderMgr.h"
 
 #include <freetype/ft2build.h>
 #include FT_FREETYPE_H

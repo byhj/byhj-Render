@@ -27,7 +27,7 @@ public:
 
 public:
 	void init();
-	void attach(int type, char *filename);
+	void attach(int type, const char *filename);
 	void link();
 	void info();
 	void use() const; 
@@ -37,7 +37,7 @@ public:
 
 
 private:
-	std::string textFileRead( char *fn) ;
+	std::string textFileRead(const char *fn) ;
 
 	GLuint m_program;  
 	std::string m_name;

@@ -174,9 +174,11 @@ namespace byhj
 
 	void OGLFont::init_shader()
 	{
+		auto dir = ShaderMgr::getInstance()->getDir();
+		
 		m_FontShader.init();
-		m_FontShader.attach(GL_VERTEX_SHADER, "font.vert");
-		m_FontShader.attach(GL_FRAGMENT_SHADER, "font.frag");
+		m_FontShader.attach(GL_VERTEX_SHADER, (dir + "font.vert").c_str() );
+		m_FontShader.attach(GL_FRAGMENT_SHADER, (dir + "font.frag").c_str() );
 		m_FontShader.link();
 		m_FontShader.info();
 		m_program = m_FontShader.getProgram();

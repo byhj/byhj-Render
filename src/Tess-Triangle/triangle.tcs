@@ -1,0 +1,29 @@
+#version 430 core
+
+layout (vertices = 3) out;
+
+in VS_OUT
+{
+   vec3 Pos;
+}vs_out[];
+
+out TC_OUT
+{
+  vec3 Pos;
+}tc_out[];
+
+uniform int tessInner;
+uniform int tessOuter;
+
+void main(void)
+{
+   if (gl_InvocationID == 0)
+   {
+     gl_TessLevelInner[0] = tessInner;
+	 gl_TessLevelOuter[0] = tessOuter;
+	 gl_TessLevelOuter[1] = tessOuter;
+	 gl_TessLevelOuter[2] = tessOuter;
+   }
+
+   tc_out[gl_InvocationID].Pos = vs_out[gl_InvocationID].Pos;
+}

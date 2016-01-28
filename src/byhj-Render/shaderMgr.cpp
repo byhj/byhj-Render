@@ -13,9 +13,9 @@ namespace byhj
 
 	}
 
-	std::shared_ptr<ShaderMgr> getInstance()
+	std::shared_ptr<ShaderMgr> ShaderMgr::getInstance()
 	{
-		static std::shared_ptr<ShaderMgr> pInstance = std::make_shared<ShaderMgr>();
+		static auto pInstance = std::make_shared<ShaderMgr>();
 		
 		return pInstance;
 	}
