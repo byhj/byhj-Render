@@ -12,7 +12,7 @@ namespace byhj
 
 	}
 
-	std::shared_ptr<ModelMgr> getInstance()
+	std::shared_ptr<ModelMgr> ModelMgr::getInstance()
 	{
 		static std::shared_ptr<ModelMgr>  pInstance = std::make_shared<ModelMgr>();
 

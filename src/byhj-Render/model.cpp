@@ -1,11 +1,29 @@
 #include "model.h"
+#include "modelMgr.h"
 
 namespace byhj
 {
+	// Draws the model, and thus all its meshes
+	void Model::draw(GLuint program)
+	{
+		glUseProgram(program);
+
+		for (GLuint i = 0; i < m_OGLMeshes.size(); i++)
+		{
+			m_OGLMeshes[i].draw(program);
+		}
+
+		glUseProgram(0);
+	}
+
+
 	void Model::loadModel(std::string modelFile, LoadType loadType)
 	{
+		auto dir = ModelMgr::getInstance()->getDir();
+		auto fileDir = dir + modelFile;
+
 		Assimp::Importer importer;
-		const aiScene *pScene = importer.ReadFile(modelFile, aiProcess_Triangulate | aiProcess_FlipUVs);
+		const aiScene *pScene = importer.ReadFile("E:/GitHub/byhj-Render/media/objects/" + modelFile, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 		if (!pScene|| pScene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !pScene->mRootNode) {
 			std::cerr << "Fail to load the model ( " << modelFile << ") : "  
@@ -13,7 +31,7 @@ namespace byhj
 		}
 
 		m_LoadType = loadType;
-		m_dir = modelFile.substr(0, modelFile.find_last_of('/'));
+		m_dir = modelFile.substr(0, fileDir.find_last_of('/'));
 		processNode(pScene->mRootNode, pScene);
 	}
 
@@ -23,13 +41,13 @@ namespace byhj
 			aiMesh *pMesh = pScene->mMeshes[pNode->mMeshes[i]];
 
 	        if (m_LoadType == LoadType::OGL) {
-				ogl::Mesh meshData;
+				OGLMesh meshData;
 				processMesh(pMesh, pScene, meshData);
 				m_OGLMeshes.push_back(meshData);
 			} else {
-				d3d::Mesh meshData;
-				processMesh(pMesh, pScene, meshData);
-				m_D3DMeshes.push_back(meshData);
+				//d3d::Mesh meshData;
+				//processMesh(pMesh, pScene, meshData);
+				//m_D3DMeshes.push_back(meshData);
 			}
 		}
 
@@ -38,16 +56,16 @@ namespace byhj
 		}
 	}
 
-	void Model::processMesh(aiMesh *mesh, const aiScene *scene, ogl::Mesh &oglMesh)
+	void Model::processMesh(aiMesh *mesh, const aiScene *scene, OGLMesh &oglMesh)
 	{
 		// Data to fill
-		std::vector<ogl::Vertex> vertices;
+		std::vector<OGLMesh::Vertex> vertices;
 		std::vector<GLuint> indices;
-		std::vector<ogl::Texture> textures;
+		std::vector<OGLMesh::Texture> textures;
 
 		// Walk through each of the mesh's vertices
 		for (GLuint i = 0; i < mesh->mNumVertices; i++) {
-			ogl::Vertex vertex;
+			OGLMesh::Vertex vertex;
 			glm::vec3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
 			// Positions
 			vector.x = mesh->mVertices[i].x;
@@ -97,18 +115,18 @@ namespace byhj
 			// Normal: texture_normalN
 
 			// 1. Diffuse maps
-			std::vector<ogl::Texture> diffuseMaps = this->loadOGLTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+			std::vector<OGLMesh::Texture> diffuseMaps = this->loadOGLTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 			// 2. Specular maps
-			std::vector<ogl::Texture> specularMaps = this->loadOGLTextures(material, aiTextureType_SPECULAR, "texture_specular");
+			std::vector<OGLMesh::Texture> specularMaps = this->loadOGLTextures(material, aiTextureType_SPECULAR, "texture_specular");
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		}
 
 		// Return a mesh object created from the extracted mesh data
-		std::swap(oglMesh, ogl::Mesh(vertices, indices, textures) );
+		std::swap(oglMesh, OGLMesh(vertices, indices, textures) );
 
 	}
-
+/*
 	void Model::processMesh(aiMesh *mesh, const aiScene *scene, d3d::Mesh &d3dMesh)
 	{
 		// Data to fill
@@ -178,12 +196,13 @@ namespace byhj
           std::swap(d3dMesh, d3d::Mesh(vertices, indices, textures) );
 
 	}
+*/
 
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 // The required info is returned as a Texture struct.
-	std::vector<ogl::Texture> Model::loadOGLTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+	std::vector<OGLMesh::Texture> Model::loadOGLTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
 	{
-		std::vector<ogl::Texture> textures;
+		std::vector<OGLMesh::Texture> textures;
 		for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 		{
 			aiString str;
@@ -205,7 +224,7 @@ namespace byhj
 					// If texture hasn't been loaded already, load it
 
 				TextureMgr::getInstance()->loadOGLTexture(m_dir + str.C_Str());
-				ogl::Texture texture;
+				OGLMesh::Texture texture;
 				texture.id = TextureMgr::getInstance()->getOGLTextureByName(str.C_Str());
 				texture.type = typeName;
 				texture.path = str;
@@ -217,7 +236,7 @@ namespace byhj
 	}
 
 
-
+/*
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 // The required info is returned as a Texture struct.
 	std::vector<d3d::Texture> Model::loadD3DTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
@@ -252,4 +271,5 @@ namespace byhj
 		}
 		return textures;
 	}
+	*/
 }

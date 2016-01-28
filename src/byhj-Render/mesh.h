@@ -23,12 +23,9 @@ using namespace DirectX;
 
 namespace byhj
 {
-	enum LoadType{
-		OGL,
-	    D3D
-	};
-	namespace ogl {
 
+	class OGLMesh {
+	public:
 		struct Vertex {
 			glm::vec3 position;
 			glm::vec3 normal;
@@ -41,27 +38,31 @@ namespace byhj
 			aiString path;
 		};
 
-		class Mesh {
 		public:
-			Mesh();
-			Mesh(const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices, const std::vector<Texture> &textures)
+			OGLMesh() = default;
+			OGLMesh(const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices, const std::vector<Texture> &textures)
 			{
 				m_VertexData = vertices;
 				m_IndexData  = indices;
 				m_Textures   = textures;
+
+				setup();
 			}
-			Mesh(const Mesh &mesh);
-			~Mesh();
+			OGLMesh(const OGLMesh &mesh) = default;
+			~OGLMesh() = default;
+			void draw(GLuint program);
+			void setup();
 
 		private:
+			GLuint m_vao, m_ibo, m_vbo;
+
 			std::vector<Vertex> m_VertexData;
 			std::vector<GLuint> m_IndexData;
 			std::vector<Texture>m_Textures;
-		};
-    } //namespace ogl
-
-	namespace d3d {
-	
+	};
+	/*
+	class D3DMesh {
+	public:
 		struct Vertex {
 			XMFLOAT3 position;
 			XMFLOAT3 normal;
@@ -73,24 +74,24 @@ namespace byhj
 			std::string type;
 			aiString path;
 		};
-		class Mesh {
+
 		public:
-			Mesh() = default;
-			Mesh(const std::vector<Vertex> &vertices, const std::vector<UINT> &indices, const std::vector<Texture> textures)
+			D3DMesh() = default;
+			D3DMesh(const std::vector<Vertex> &vertices, const std::vector<UINT> &indices, const std::vector<Texture> textures)
 			{
 				m_VertexData = vertices;
 				m_IndexData  = indices;
 				m_Textures  = textures;
 			}
-			Mesh(const Mesh &mesh);
-			~Mesh();
+			D3DMesh(const D3DMesh &mesh);
+			~D3DMesh();
 
 		private:
 			std::vector<Vertex> m_VertexData;
 			std::vector<UINT> m_IndexData;
 			std::vector<Texture> m_Textures;
 		};
-	}
+		*/
 }
 
 #endif
