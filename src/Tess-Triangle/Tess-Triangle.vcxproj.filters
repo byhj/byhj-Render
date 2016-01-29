@@ -14,19 +14,22 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{5b3ede6d-5865-4f8d-afd5-13005b21422d}</UniqueIdentifier>
+      <UniqueIdentifier>{ec719e4f-f5d8-4594-833c-7dd77e9042cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{f27f1561-2150-4d24-b774-efe670d92f8a}</UniqueIdentifier>
+      <UniqueIdentifier>{ef46a214-9291-4fe5-a006-79ba354c7d53}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{aa3b1447-3b6c-4aa6-8032-0c8968409640}</UniqueIdentifier>
+      <UniqueIdentifier>{367e3c50-0182-46ab-8bdb-27c5a873c34c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{5be9074b-6c67-4cdf-86a3-5864221e6f57}</UniqueIdentifier>
+      <UniqueIdentifier>{e94d31b7-1045-4037-94b0-86358019fdb4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{3ce84a12-52e7-451e-83a6-ef1697b37fa0}</UniqueIdentifier>
+      <UniqueIdentifier>{62c6de7b-0bc4-436a-a82e-37230442ccbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\model">
+      <UniqueIdentifier>{e049dd8e-1605-406f-a580-c39afb80d377}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +37,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TessGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TessTriangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
@@ -69,6 +78,9 @@
     <ClInclude Include="..\byhj-Render\timer.h">
       <Filter>Render\render</Filter>
     </ClInclude>
+    <ClInclude Include="..\byhj-Render\windowInfo.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
     <ClInclude Include="..\byhj-Render\fontMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
@@ -84,14 +96,11 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
-    <ClInclude Include="TessGUI.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\byhj-Render\mesh.h">
+      <Filter>Render\model</Filter>
     </ClInclude>
-    <ClInclude Include="TessTriangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\windowInfo.h">
-      <Filter>Render\render</Filter>
+    <ClInclude Include="..\byhj-Render\model.h">
+      <Filter>Render\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +112,12 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TessTriangle.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TessGUI.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render\ogl</Filter>
@@ -137,6 +152,9 @@
     <ClCompile Include="..\byhj-Render\timer.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
+    <ClCompile Include="..\byhj-Render\windowInfo.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
     <ClCompile Include="..\byhj-Render\fontMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
@@ -152,14 +170,11 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="TessTriangle.cpp">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="..\byhj-Render\mesh.cpp">
+      <Filter>Render\model</Filter>
     </ClCompile>
-    <ClCompile Include="TessGUI.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\windowInfo.cpp">
-      <Filter>Render\render</Filter>
+    <ClCompile Include="..\byhj-Render\model.cpp">
+      <Filter>Render\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

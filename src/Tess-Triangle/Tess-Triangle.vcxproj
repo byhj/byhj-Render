@@ -118,7 +118,9 @@
     <ClInclude Include="..\byhj-Render\font.h" />
     <ClInclude Include="..\byhj-Render\fontMgr.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
+    <ClInclude Include="..\byhj-Render\mesh.h" />
     <ClInclude Include="..\byhj-Render\mgr.h" />
+    <ClInclude Include="..\byhj-Render\model.h" />
     <ClInclude Include="..\byhj-Render\modelMgr.h" />
     <ClInclude Include="..\byhj-Render\object.h" />
     <ClInclude Include="..\byhj-Render\render.h" />
@@ -141,7 +143,9 @@
     <ClCompile Include="..\byhj-Render\font.cpp" />
     <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
+    <ClCompile Include="..\byhj-Render\mesh.cpp" />
     <ClCompile Include="..\byhj-Render\mgr.cpp" />
+    <ClCompile Include="..\byhj-Render\model.cpp" />
     <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
     <ClCompile Include="..\byhj-Render\object.cpp" />
     <ClCompile Include="..\byhj-Render\render.cpp" />

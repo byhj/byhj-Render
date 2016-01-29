@@ -1,53 +1,58 @@
 #include "D3DApp.h"
-
+#include "windowInfo.h"
 namespace byhj
 {
 
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 static D3DApp *D3DAppHandle = 0;
 
+D3DApp::D3DApp()
+{
+
+}
+D3DApp::~D3DApp()
+{
+
+}
 void D3DApp::v_run()
 {	
 	bool ret = init_window();
 
-	m_pRender->v_init();
+	
+	//m_pRender->v_init(m_hWnd);
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
 	while (ret)
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) )
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
-			if(msg.message == WM_QUIT)
-				break;
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		else 
+		if (msg.message == WM_QUIT) {
+			ret = false;
+		}
+		else
 		{
-			m_pGui->v_update();
-			m_pGui->v_render();
-
-            m_pRender->v_update();
-			m_pRender->v_render();
-
+			//m_pRender->v_update();
+			//m_pRender->v_render();
+			ret = true;
 		}
 
 	}
-
-	m_pGui->v_render();
-	m_pRender->v_shutdown();
-
+	//m_pRender->v_shutdown();
+	return;
 }
 
 
 bool D3DApp::init_window()
 {
 	//Set the window in the middle of screen
-	m_ScreenWidth = GetSystemMetrics(SM_CXSCREEN) * 0.75;
-	m_ScreenHeight = GetSystemMetrics(SM_CYSCREEN) * 0.75;
-	m_PosX = (GetSystemMetrics(SM_CXSCREEN) - m_ScreenWidth)  / 2;
-	m_PosY = (GetSystemMetrics(SM_CYSCREEN) - m_ScreenHeight) / 2;
+	m_ScreenWidth = WindowInfo::getInstance()->getWidth();
+	m_ScreenHeight = WindowInfo::getInstance()->getHeight();
+	m_PosX = WindowInfo::getInstance()->getPosX();
+	m_PosY = WindowInfo::getInstance()->getPosY();
 	m_ScreenNear = 0.1f;
 	m_ScreenFar  = 1000.0f;
 
@@ -70,7 +75,7 @@ bool D3DApp::init_window()
 
 	if (!RegisterClassEx(&wc))
 	{
-		MessageBox(NULL, L"Registering Class Failded",	L"Error", MB_OK | MB_ICONERROR);
+		MessageBox(NULL, L"Registering Class Faild",	L"Error", MB_OK | MB_ICONERROR);
 		return 1;
 	}
 
@@ -97,41 +102,54 @@ bool D3DApp::init_window()
 	}
 
 	ShowWindow(m_hWnd, SW_SHOW);
+	SetForegroundWindow(m_hWnd);
+	SetFocus(m_hWnd);
 
 	return true;
 }
 
+void D3DApp::setRender(Render *pRender)
+{
+	m_pRender = pRender;
+}
 
+void D3DApp::v_end()
+{
+
+}
 LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
 	case WM_KEYDOWN:
 		{
-			if(wParam == VK_ESCAPE)
-				PostMessage(GetHwnd(), WM_DESTROY, 0, 0);
+		//	if(wParam == VK_ESCAPE)
+		//		PostMessage(m_hWnd, WM_DESTROY, 0, 0);
+			return 0;
 		}
-	case WM_LBUTTONDOWN:
-	case WM_MBUTTONDOWN:
-	case WM_RBUTTONDOWN:
-		v_OnMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+	case  WM_KEYUP:
+	{
 		return 0;
-	case WM_LBUTTONUP:
-	case WM_MBUTTONUP:
-	case WM_RBUTTONUP:
-		v_OnMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		return 0;
-	case WM_MOUSEMOVE:
-		v_OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		return 0;
-	case WM_MOUSEWHEEL:
-		v_OnMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam));
+	}
+	//  case WM_LBUTTONDOWN:
+	//  case WM_MBUTTONDOWN:
+	//  case WM_RBUTTONDOWN:
+	//  	v_OnMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+	//  	return 0;
+	//  case WM_LBUTTONUP:
+	//  case WM_MBUTTONUP:
+	//  case WM_RBUTTONUP:
+	//  	v_OnMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+	//  	return 0;
+	//  case WM_MOUSEMOVE:
+	//  	v_OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+	//  	return 0;
+	//  case WM_MOUSEWHEEL:
+	//  	v_OnMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam));
+	//  	// Any other messages send to the default message handler as our application won't make use of them.
 	default:
-		{
-			return DefWindowProc(hWnd, uMsg, wParam, lParam);
-		}
+		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	} 
-
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
@@ -150,9 +168,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 		}
 		// All other messages pass to the message handler in the system class.
 	default:
-		{
-			return D3DAppHandle->MessageHandler(hwnd, umessage, wparam, lparam);
-		}
+	{
+		return D3DAppHandle->MessageHandler(hwnd, umessage, wparam, lparam);
+	}
+
 	}
 }
 

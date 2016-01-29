@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "ogl/oglShader.h"
+#include "LightGUI.h"
 
 namespace byhj
 {
@@ -38,7 +39,7 @@ namespace byhj
 
 	   std::vector<GLfloat> m_VertexData;
 	   std::vector<GLuint>  m_IndexData;
-
+	   LightGui m_LightGui;
 	   OGLShader m_CubeShader ={ "CubeShader" };
 	};
 }

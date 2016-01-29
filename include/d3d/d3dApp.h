@@ -24,6 +24,7 @@
 #include "app.h"
 #include "d3dRender.h"
 
+
 #include <DirectXMath.h>
 #include <wrl.h>
 
@@ -36,11 +37,11 @@ namespace byhj
 class D3DApp : public App
 {
 public:
-	D3DApp()         {}
-	virtual ~D3DApp(){}
+	D3DApp()  ;
+	~D3DApp() ;
 
 	void v_run() override;
-
+	void v_end() override;
 	LRESULT CALLBACK MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 
@@ -49,6 +50,7 @@ public:
 	virtual void v_OnMouseUp(WPARAM btnState, int x, int y)    { }
 	virtual void v_OnMouseMove(WPARAM btnState, int x, int y)  { }
 	virtual void v_OnMouseWheel(WPARAM btnState, int x, int y) { }
+	void setRender(Render *pRender);
 
 protected:
 	int   m_ScreenWidth;
@@ -62,14 +64,14 @@ protected:
 	LPCTSTR m_WndClassName = L"Window";
 
 	//void      GetVideoCardInfo(char &, int &);
-	HINSTANCE GetAppInst() const { return m_hInstance; }
-	HWND     GetHwnd()    const { return m_hWnd; }
-	float     GetAspect()  const { return (float)m_ScreenWidth / m_ScreenHeight; }
+	HINSTANCE getAppInst() const { return m_hInstance; }
+	HWND      getHwnd()    const { return m_hWnd; }
+
 
 private:
+	Render *m_pRender = nullptr;
+
 	bool init_window();
-
-private:
 	HINSTANCE  m_hInstance;
 	HWND       m_hWnd;
 };

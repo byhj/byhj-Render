@@ -130,6 +130,7 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
+    <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
     <ClCompile Include="oglRender.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h" />
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
+    <ClInclude Include="LightGUI.h" />
     <ClInclude Include="MeshLoad.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="sample.h" />

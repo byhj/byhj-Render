@@ -102,6 +102,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LightGUI.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MeshLoad.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LightGUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

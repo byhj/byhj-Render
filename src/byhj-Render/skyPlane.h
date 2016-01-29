@@ -12,6 +12,6 @@ namespace byhj
 
 	private:
 
-	}
+	};
 }
 #endif

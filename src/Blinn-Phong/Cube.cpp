@@ -1,5 +1,6 @@
 #include  "cube.h"
 #include <glfw/glfw3.h>
+#include "windowInfo.h"
 
 namespace byhj
 {
@@ -52,6 +53,8 @@ namespace byhj
 
 	void Cube::init()
 	{
+		m_LightGui.v_init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+
 		init_shader();
 		init_buffer();
 		init_vertexArray();
@@ -87,11 +90,14 @@ namespace byhj
 
 	void Cube::update()
 	{
-
+		m_LightGui.v_update();
 	}
 
 	void Cube::render()
 	{
+
+		m_LightGui.v_render();
+
 		glBindVertexArray(m_vao);
 		glUseProgram(m_program);
 

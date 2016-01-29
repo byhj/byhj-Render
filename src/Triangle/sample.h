@@ -4,7 +4,6 @@
 #include "root.h"
 #include "ogl/oglApp.h"
 #include "ogl/oglRender.h"
-#include "triangleGui.h"
 
 #include <memory>
 
@@ -22,7 +21,6 @@ namespace byhj
 		void end();
 
 	private:					
-		TriangleGui *m_pGui 	= nullptr;
 		OGLApp      *m_pApp 	= nullptr;
 		OGLRender    *m_pRender = nullptr;
 	};

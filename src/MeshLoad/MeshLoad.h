@@ -8,6 +8,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "model.h"
+#include "LightGUI.h"
 #include "ogl/oglShader.h"
 
 namespace byhj
@@ -36,6 +37,8 @@ namespace byhj
 		OGLShader m_MeshLoadShader;
 		GLuint m_Program;
 		byhj::Model m_Model;
+		LightGui m_LightGui;
+
 	};
 }
 #endif

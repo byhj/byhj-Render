@@ -5,13 +5,10 @@ namespace byhj
 {
 	void Sample::init()
 	{
-		TriangleGui *m_pGui = new TriangleGui;
 		OGLApp      *m_pApp = new OGLApp;
 		OGLRender   *m_pRender = new OGLRender;
 
 		m_pApp->setRender(m_pRender);
-		m_pApp->setGui(m_pGui);
-		
 		Root::getInstance()->setApp(m_pApp);
 	}
 
@@ -25,7 +22,6 @@ namespace byhj
 	void Sample::end()
 	{
 		delete m_pApp;
-		delete m_pGui;
 		delete m_pRender;
 
 	}

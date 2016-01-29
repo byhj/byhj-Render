@@ -10,6 +10,8 @@ namespace byhj
 
 		m_Aspect = static_cast<GLfloat>(sw) / sh;
 
+		m_LightGui.v_init(sw, sh);
+
 		init_buffer();
 		init_shader();
 	}
@@ -18,6 +20,8 @@ namespace byhj
 	{
 
 		glUseProgram(m_Program);
+
+		m_LightGui.v_update();
 
 	    GLfloat time = glfwGetTime();
 
@@ -36,6 +40,7 @@ namespace byhj
 	{
 		glUseProgram(m_Program);
 
+		m_LightGui.v_render();
 		m_Model.draw(m_Program);
 
 		glUseProgram(0);

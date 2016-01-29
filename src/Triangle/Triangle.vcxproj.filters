@@ -14,15 +14,27 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{11383700-0e13-4e0a-8519-61a2920ebe87}</UniqueIdentifier>
+      <UniqueIdentifier>{9eff7c7c-c7e1-4bff-bd38-5ec53254836c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\ogl">
+      <UniqueIdentifier>{617d0b7c-1d83-4ba7-a256-4387b0808c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\d3d">
+      <UniqueIdentifier>{32f5cbd0-a06f-45c0-992d-becb9889f730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\render">
+      <UniqueIdentifier>{1361936f-c184-429f-b699-2ed5ac4f1547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\mgr">
+      <UniqueIdentifier>{f4695e94-f97c-4a9c-a501-db2e90c52dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\model">
+      <UniqueIdentifier>{2d12e707-899c-48b2-a9de-890c6cea7ebc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="triangleGui.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Header Files</Filter>
@@ -33,38 +45,65 @@
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\shader.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\app.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\gui.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\render.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\root.cpp">
-      <Filter>Render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
-      <Filter>Render</Filter>
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglFont.cpp">
+      <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
-      <Filter>Render</Filter>
+      <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\timer.cpp">
-      <Filter>Render</Filter>
+    <ClCompile Include="..\byhj-Render\app.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\font.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\gui.cpp">
+      <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\object.cpp">
-      <Filter>Render</Filter>
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\render.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\root.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\shader.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\timer.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\windowInfo.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\fontMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\mgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\modelMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\shaderMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\textureMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\mesh.cpp">
+      <Filter>Render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\model.cpp">
+      <Filter>Render\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="triangleGui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -74,32 +113,62 @@
     <ClInclude Include="sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\shader.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\app.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\gui.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\render.h">
-      <Filter>Render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\root.h">
-      <Filter>Render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
-      <Filter>Render</Filter>
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglFont.h">
+      <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglShader.h">
-      <Filter>Render</Filter>
+      <Filter>Render\ogl</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\timer.h">
-      <Filter>Render</Filter>
+    <ClInclude Include="..\byhj-Render\app.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\font.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\gui.h">
+      <Filter>Render\render</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\object.h">
-      <Filter>Render</Filter>
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\render.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\root.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\shader.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\timer.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\windowInfo.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\fontMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\mgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\modelMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\shaderMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\textureMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\mesh.h">
+      <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\model.h">
+      <Filter>Render\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

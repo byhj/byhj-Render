@@ -14,16 +14,22 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{a0feaae9-ca9c-48e7-a5b3-488fd430785b}</UniqueIdentifier>
+      <UniqueIdentifier>{39fc3069-999e-4a27-8392-bbac68f1ed3c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{4b866f62-9a76-445b-8034-0a2709ea99c0}</UniqueIdentifier>
+      <UniqueIdentifier>{786c5e93-f6f7-4bc8-b096-ecd507170cce}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{acbe6360-f424-47e9-8f5d-175199a8c5e9}</UniqueIdentifier>
+      <UniqueIdentifier>{a8ba2e8c-3ed2-4033-bbef-a2cc59f9fc28}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{f80c569e-23fa-48da-b42b-028e777468c5}</UniqueIdentifier>
+      <UniqueIdentifier>{2abc0517-d277-4323-afef-a3bbbe27a1a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\mgr">
+      <UniqueIdentifier>{d5e9dbf0-6179-4c5a-b018-1368367c1bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\model">
+      <UniqueIdentifier>{e7243a56-2bc2-4fa0-af25-0fc8d6bf97d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +57,16 @@
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\shader.cpp">
+    <ClCompile Include="..\byhj-Render\app.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\timer.cpp">
+    <ClCompile Include="..\byhj-Render\font.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\gui.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\object.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\render.cpp">
@@ -63,17 +75,35 @@
     <ClCompile Include="..\byhj-Render\root.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\object.cpp">
+    <ClCompile Include="..\byhj-Render\shader.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\gui.cpp">
+    <ClCompile Include="..\byhj-Render\timer.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\app.cpp">
+    <ClCompile Include="..\byhj-Render\windowInfo.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\font.cpp">
-      <Filter>Render\render</Filter>
+    <ClCompile Include="..\byhj-Render\fontMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\mgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\modelMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\shaderMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\textureMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\mesh.cpp">
+      <Filter>Render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\model.cpp">
+      <Filter>Render\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,10 +128,16 @@
     <ClInclude Include="..\..\include\ogl\oglShader.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\timer.h">
+    <ClInclude Include="..\byhj-Render\app.h">
       <Filter>Render\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\shader.h">
+    <ClInclude Include="..\byhj-Render\font.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\gui.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\object.h">
       <Filter>Render\render</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\render.h">
@@ -110,17 +146,35 @@
     <ClInclude Include="..\byhj-Render\root.h">
       <Filter>Render\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\object.h">
+    <ClInclude Include="..\byhj-Render\shader.h">
       <Filter>Render\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\gui.h">
+    <ClInclude Include="..\byhj-Render\timer.h">
       <Filter>Render\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\font.h">
+    <ClInclude Include="..\byhj-Render\windowInfo.h">
       <Filter>Render\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\app.h">
-      <Filter>Render\render</Filter>
+    <ClInclude Include="..\byhj-Render\fontMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\mgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\modelMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\shaderMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\textureMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\mesh.h">
+      <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\model.h">
+      <Filter>Render\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
