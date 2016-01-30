@@ -23,7 +23,7 @@ namespace byhj
 		auto fileDir = dir + modelFile;
 
 		Assimp::Importer importer;
-		const aiScene *pScene = importer.ReadFile("E:/GitHub/byhj-Render/media/objects/" + modelFile, aiProcess_Triangulate | aiProcess_FlipUVs);
+		const aiScene *pScene = importer.ReadFile(dir + modelFile, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 		if (!pScene|| pScene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !pScene->mRootNode) {
 			std::cerr << "Fail to load the model ( " << modelFile << ") : "  
@@ -31,7 +31,7 @@ namespace byhj
 		}
 
 		m_LoadType = loadType;
-		m_dir = modelFile.substr(0, fileDir.find_last_of('/'));
+		m_dir = fileDir.substr(0, fileDir.find_last_of('/') + 1);
 		processNode(pScene->mRootNode, pScene);
 	}
 
@@ -222,8 +222,8 @@ namespace byhj
 			if (!skip)
 			{   
 					// If texture hasn't been loaded already, load it
-
-				TextureMgr::getInstance()->loadOGLTexture(m_dir + str.C_Str());
+				TextureMgr::getInstance()->setDir(m_dir);
+				TextureMgr::getInstance()->loadOGLTexture(str.C_Str());
 				OGLMesh::Texture texture;
 				texture.id = TextureMgr::getInstance()->getOGLTextureByName(str.C_Str());
 				texture.type = typeName;

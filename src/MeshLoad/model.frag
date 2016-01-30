@@ -33,7 +33,7 @@ void main(void)
    float spec = pow(max(dot(halfDir, vs_out.Normal), 0.0), 32.0f);
    vec3 specular = spec * max(specularColor, 0.0f);
 
-    g_FragColor = normalize( vec4(diffuse + specular, 1.0f) );
+    g_FragColor = normalize( vec4(diffuse , 1.0f) );
 
-    g_FragColor = vec4(vec3(abs(vs_out.Normal.z)), 1.0f);
+   g_FragColor = vec4(vec3(abs(vs_out.Normal.z)), 1.0f);
 }

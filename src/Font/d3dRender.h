@@ -31,8 +31,8 @@ namespace byhj
 
 		void drawfps();
 		void drawInfo();
-		//D3DFont m_Font;
-		//Timer m_Timer;
+		D3DFont m_Font;
+		Timer m_Timer;
 
 		float fps = 0.0f;
 		int m_videoCardMemory;

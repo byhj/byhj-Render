@@ -25,7 +25,7 @@ namespace byhj
 
 	    GLfloat time = glfwGetTime();
 
-		glm::mat4 model = glm::rotate(glm::mat4(1.0f), time, glm::vec3(time, time, time) ); 
+		glm::mat4 model = glm::rotate(glm::mat4(1.0f), time, glm::vec3(0.0f, 1.0f, 0.0f) ); 
 		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.2f, 5.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) );
 		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);
 

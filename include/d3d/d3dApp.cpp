@@ -19,7 +19,7 @@ void D3DApp::v_run()
 	bool ret = init_window();
 
 	
-	//m_pRender->v_init(m_hWnd);
+	m_pRender->v_init(m_hWnd);
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
@@ -35,13 +35,13 @@ void D3DApp::v_run()
 		}
 		else
 		{
-			//m_pRender->v_update();
-			//m_pRender->v_render();
+			m_pRender->v_update();
+			m_pRender->v_render();
 			ret = true;
 		}
 
 	}
-	//m_pRender->v_shutdown();
+	m_pRender->v_shutdown();
 	return;
 }
 
@@ -75,7 +75,7 @@ bool D3DApp::init_window()
 
 	if (!RegisterClassEx(&wc))
 	{
-		MessageBox(NULL, L"Registering Class Faild",	L"Error", MB_OK | MB_ICONERROR);
+		MessageBox(NULL, L"Registering Class Fail",	L"Error", MB_OK | MB_ICONERROR);
 		return 1;
 	}
 
@@ -123,30 +123,30 @@ LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 	{
 	case WM_KEYDOWN:
 		{
-		//	if(wParam == VK_ESCAPE)
-		//		PostMessage(m_hWnd, WM_DESTROY, 0, 0);
+			if(wParam == VK_ESCAPE)
+				PostMessage(m_hWnd, WM_DESTROY, 0, 0);
 			return 0;
 		}
 	case  WM_KEYUP:
 	{
 		return 0;
 	}
-	//  case WM_LBUTTONDOWN:
-	//  case WM_MBUTTONDOWN:
-	//  case WM_RBUTTONDOWN:
-	//  	v_OnMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-	//  	return 0;
-	//  case WM_LBUTTONUP:
-	//  case WM_MBUTTONUP:
-	//  case WM_RBUTTONUP:
-	//  	v_OnMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-	//  	return 0;
-	//  case WM_MOUSEMOVE:
-	//  	v_OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-	//  	return 0;
-	//  case WM_MOUSEWHEEL:
-	//  	v_OnMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam));
-	//  	// Any other messages send to the default message handler as our application won't make use of them.
+    case WM_LBUTTONDOWN:
+    case WM_MBUTTONDOWN:
+    case WM_RBUTTONDOWN:
+    	v_OnMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+    	return 0;
+    case WM_LBUTTONUP:
+    case WM_MBUTTONUP:
+    case WM_RBUTTONUP:
+    	v_OnMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+    	return 0;
+    case WM_MOUSEMOVE:
+    	v_OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+    	return 0;
+    case WM_MOUSEWHEEL:
+    	v_OnMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam));
+    	// Any other messages send to the default message handler as our application won't make use of them.
 	default:
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	} 

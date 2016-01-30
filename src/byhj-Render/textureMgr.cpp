@@ -11,6 +11,10 @@ namespace byhj
 	{
 	}
 
+	void TextureMgr::setDir(std::string dir)
+	{
+		m_dir = dir;
+	}
 	std::shared_ptr<TextureMgr> TextureMgr::getInstance()
 	{
 		static std::shared_ptr<TextureMgr> pInsance = std::make_shared<TextureMgr>();
@@ -43,11 +47,12 @@ namespace byhj
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
-		m_oglTextures.insert(std::make_pair(texFile, texId));
+		m_oglTextures.insert(std::make_pair(fileName, texId));
 
 		SOIL_free_image_data(image);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+
 	void TextureMgr::loadOGLTexture(std::vector<std::string> &faces)
 	{
 		int width = 0, height = 0;

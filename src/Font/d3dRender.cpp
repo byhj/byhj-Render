@@ -171,8 +171,8 @@ namespace byhj
     
     void D3DRender::init_object()
     {
-    	//m_Timer.Reset();
-    	//m_Font.init(m_pD3D11Device.Get());
+    	m_Timer.Reset();
+    	m_Font.init(m_pD3D11Device);
     }
     
     void D3DRender::drawfps()
@@ -185,8 +185,8 @@ namespace byhj
     	WCHAR WinInfo[255];
     	swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight() );
 		drawfps();								  
-    //	m_Font.render(m_pD3D11DeviceContext.Get(), WinInfo, 22.0f, 10.0f, 40.0f);
-    //	m_Font.render(m_pD3D11DeviceContext.Get(), m_videoCardInfo.c_str(), 22.0f, 10.0f, 70.0f);
+     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 40.0f);
+     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 70.0f);
     }
 
 }

@@ -8,7 +8,7 @@ namespace byhj
 		D3DApp      *m_pApp = new D3DApp;
 		D3DRender   *m_pRender = new D3DRender;
 
-		//m_pApp->setRender(m_pRender);
+		m_pApp->setRender(m_pRender);
 		Root::getInstance()->setApp(m_pApp);
 	}
 

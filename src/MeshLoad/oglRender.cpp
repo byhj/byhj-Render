@@ -38,6 +38,7 @@ namespace byhj
     }
 	void OGLRender::v_shutdown()
 	{
+		delete m_MeshLoad;
 	}
 
 }

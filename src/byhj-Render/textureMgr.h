@@ -24,6 +24,7 @@ namespace byhj
 
 	   static std::shared_ptr<TextureMgr>  getInstance();
 
+	   void   setDir(std::string dir);
 	   void   loadOGLTexture(std::string fileName);
 	   void   loadOGLTexture(std::vector<std::string> &faces);
 	   void   loadOGLTexture(std::string fileName, GLenum image_format, GLint internal_format);

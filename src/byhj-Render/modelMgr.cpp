@@ -4,7 +4,7 @@ namespace byhj
 {
 	ModelMgr::ModelMgr()
 	{
-		m_dir += "models/";
+		m_dir += "objects/";
 	}
 
 	ModelMgr::~ModelMgr()
