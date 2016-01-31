@@ -14,39 +14,27 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{b28d6110-7134-44e4-8600-39ea7418b3ac}</UniqueIdentifier>
+      <UniqueIdentifier>{e43fa01b-6f7b-43b8-a7be-9af608653d3e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{56657e92-d6ef-44d7-af22-02d4865c1e3c}</UniqueIdentifier>
+      <UniqueIdentifier>{711b8c47-b84f-46ba-86cb-efc19cbed03a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{2188abfc-b536-413a-9477-c03feea008c3}</UniqueIdentifier>
+      <UniqueIdentifier>{4ee3e804-dc8c-4cc7-91e4-8f034066b6f7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{a180dd44-8a34-44ae-bf14-21c7b133e95c}</UniqueIdentifier>
+      <UniqueIdentifier>{811cda1f-676a-4f84-aa6d-3215e32dd793}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{2460effe-362d-46df-893c-93bbbbd9ee95}</UniqueIdentifier>
+      <UniqueIdentifier>{88634ea8-74d2-4af4-a83b-898754a68d75}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\model">
-      <UniqueIdentifier>{fe8cd4b8-189e-46ad-8c25-eacdd179333a}</UniqueIdentifier>
+      <UniqueIdentifier>{ec3bc4a9-99dd-46be-afe1-0189aeb12790}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MeshLoad.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sample.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="oglRender.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LightGUI.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render\ogl</Filter>
@@ -111,20 +99,23 @@
     <ClCompile Include="..\byhj-Render\model.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
+    <ClCompile Include="MeshLoad.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oglRender.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationGUI.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sample.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skybox.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MeshLoad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="oglRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sample.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LightGUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
@@ -188,12 +179,39 @@
     <ClInclude Include="..\byhj-Render\model.h">
       <Filter>Render\model</Filter>
     </ClInclude>
+    <ClInclude Include="MeshLoad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="oglRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skybox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="model.frag">
+    <None Include="skybox.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="model.vert">
+    <None Include="skybox.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="refract.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="refract.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="reflect.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="reflect.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

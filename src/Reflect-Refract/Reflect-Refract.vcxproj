@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A05632F2-D9F7-435E-8310-47B140468BC3}</ProjectGuid>
-    <RootNamespace>MeshLoad</RootNamespace>
+    <ProjectGuid>{21D1B0C4-A790-41FC-86FB-9C2FA7885B8E}</ProjectGuid>
+    <RootNamespace>ReflectRefract</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -132,11 +132,12 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
     <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="RotationGUI.cpp" />
     <ClCompile Include="sample.cpp" />
+    <ClCompile Include="skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -160,14 +161,19 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h" />
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="LightGUI.h" />
     <ClInclude Include="MeshLoad.h" />
     <ClInclude Include="oglRender.h" />
+    <ClInclude Include="RotationGUI.h" />
     <ClInclude Include="sample.h" />
+    <ClInclude Include="skybox.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="model.frag" />
-    <None Include="model.vert" />
+    <None Include="reflect.frag" />
+    <None Include="reflect.vert" />
+    <None Include="refract.frag" />
+    <None Include="refract.vert" />
+    <None Include="skybox.frag" />
+    <None Include="skybox.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
