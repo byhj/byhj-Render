@@ -14,22 +14,22 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{e5777293-5406-4d1c-9afe-5cef11c534a7}</UniqueIdentifier>
+      <UniqueIdentifier>{9908788b-aee9-477d-8515-fa80a7bc018e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{bc5ffa3d-2502-4757-a066-c5dff5636932}</UniqueIdentifier>
+      <UniqueIdentifier>{78dd239d-30ba-403d-8871-5bd453ee2b24}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{a77f2bd9-67de-4d91-b0f9-2f553d54719c}</UniqueIdentifier>
+      <UniqueIdentifier>{cd21022e-c726-4545-8611-0f7053cb50cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{1fd9c231-1fbf-4765-a234-bc338a6d52e8}</UniqueIdentifier>
+      <UniqueIdentifier>{5b4a078d-6491-40dd-aae0-786064f61ba6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{c1c02153-f28d-4198-98ae-e8e7db2be715}</UniqueIdentifier>
+      <UniqueIdentifier>{dbb690ec-70a0-4508-a421-4ec49a70b432}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\model">
-      <UniqueIdentifier>{4a7731b1-5504-451c-b3b3-8bd3e3baa388}</UniqueIdentifier>
+      <UniqueIdentifier>{f4935a51-6ca3-4170-9240-778c45e7a188}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +65,9 @@
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglFont.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
@@ -72,6 +75,9 @@
       <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\app.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\camera.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\font.cpp">
@@ -136,6 +142,9 @@
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglCamera.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglFont.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
@@ -143,6 +152,9 @@
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\app.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\camera.h">
       <Filter>Render\render</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\font.h">

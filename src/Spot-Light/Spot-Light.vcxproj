@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D049442B-B8EF-4D9D-9693-1AB5F66BDB5E}</ProjectGuid>
-    <RootNamespace>BlinnPhong</RootNamespace>
+    <ProjectGuid>{FA4D12C1-102B-4A14-9B84-52928A05E0C8}</ProjectGuid>
+    <RootNamespace>SpotLight</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -57,7 +57,6 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\byhj-Render(x86).props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -111,65 +110,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="cube.frag" />
-    <None Include="cube.vert" />
-    <None Include="font.frag" />
-    <None Include="font.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
-    <ClCompile Include="..\byhj-Render\app.cpp" />
-    <ClCompile Include="..\byhj-Render\camera.cpp" />
-    <ClCompile Include="..\byhj-Render\font.cpp" />
-    <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
-    <ClCompile Include="..\byhj-Render\gui.cpp" />
-    <ClCompile Include="..\byhj-Render\mesh.cpp" />
-    <ClCompile Include="..\byhj-Render\mgr.cpp" />
-    <ClCompile Include="..\byhj-Render\model.cpp" />
-    <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
-    <ClCompile Include="..\byhj-Render\object.cpp" />
-    <ClCompile Include="..\byhj-Render\render.cpp" />
-    <ClCompile Include="..\byhj-Render\root.cpp" />
-    <ClCompile Include="..\byhj-Render\shader.cpp" />
-    <ClCompile Include="..\byhj-Render\shaderMgr.cpp" />
-    <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
-    <ClCompile Include="..\byhj-Render\timer.cpp" />
-    <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="LightGUI.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\include\ogl\oglApp.h" />
-    <ClInclude Include="..\..\include\ogl\oglCamera.h" />
-    <ClInclude Include="..\..\include\ogl\oglFont.h" />
-    <ClInclude Include="..\..\include\ogl\oglShader.h" />
-    <ClInclude Include="..\byhj-Render\app.h" />
-    <ClInclude Include="..\byhj-Render\camera.h" />
-    <ClInclude Include="..\byhj-Render\font.h" />
-    <ClInclude Include="..\byhj-Render\fontMgr.h" />
-    <ClInclude Include="..\byhj-Render\gui.h" />
-    <ClInclude Include="..\byhj-Render\mesh.h" />
-    <ClInclude Include="..\byhj-Render\mgr.h" />
-    <ClInclude Include="..\byhj-Render\model.h" />
-    <ClInclude Include="..\byhj-Render\modelMgr.h" />
-    <ClInclude Include="..\byhj-Render\object.h" />
-    <ClInclude Include="..\byhj-Render\render.h" />
-    <ClInclude Include="..\byhj-Render\root.h" />
-    <ClInclude Include="..\byhj-Render\shader.h" />
-    <ClInclude Include="..\byhj-Render\shaderMgr.h" />
-    <ClInclude Include="..\byhj-Render\textureMgr.h" />
-    <ClInclude Include="..\byhj-Render\timer.h" />
-    <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="LightGUI.h" />
-    <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
