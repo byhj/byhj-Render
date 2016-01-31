@@ -51,7 +51,13 @@ namespace byhj
 			OGLMesh(const OGLMesh &mesh) = default;
 			~OGLMesh() = default;
 			void draw(GLuint program);
+			void drawInstance(GLuint program, GLuint amount);
+
 			void setup();
+
+			GLuint getVBO() const;
+			GLuint getVAO() const;
+			GLuint getIBO() const;
 
 		private:
 			GLuint m_vao, m_ibo, m_vbo;

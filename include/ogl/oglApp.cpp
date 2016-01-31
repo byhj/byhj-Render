@@ -167,6 +167,9 @@ void OGLApp::v_run()
 
 	m_pRender->v_shutdown();
 
+	delete m_camera;
+	delete m_pFont;
+
 	glfwTerminate();
 }
 

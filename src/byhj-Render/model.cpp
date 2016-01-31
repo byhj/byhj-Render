@@ -16,6 +16,27 @@ namespace byhj
 		glUseProgram(0);
 	}
 
+	void Model::drawInstance(GLuint program, GLuint amount)
+	{
+		glUseProgram(program);
+
+		for (GLuint i = 0; i < m_OGLMeshes.size(); i++)
+		{
+			m_OGLMeshes[i].drawInstance(program, amount);
+		}
+
+		glUseProgram(0);
+	}
+
+	int Model::getMeshCount() const 
+	{
+
+		return m_OGLMeshes.size();
+	}
+	GLuint Model::getMeshVAO(int index) const
+	{
+		return m_OGLMeshes.at(index).getVAO();
+	}
 
 	void Model::loadModel(std::string modelFile, LoadType loadType)
 	{
