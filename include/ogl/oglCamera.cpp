@@ -1,13 +1,11 @@
-#include "camera.h"
+#include "oglCamera.h"
 
 namespace byhj
 {
 
-namespace ogl
-{ 
 	// Processes input received from any keyboard-like input system. 
 	//Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-	void Camera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
+	void OGLCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
 	{
 		GLfloat velocity = this->MovementSpeed * deltaTime * 3.0f;
 		if (direction == FORWARD)
@@ -21,7 +19,7 @@ namespace ogl
 	}
 
 	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
-	void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
+	void OGLCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
 	{
 		xoffset *= this->MouseSensitivity;
 		yoffset *= this->MouseSensitivity;
@@ -44,7 +42,7 @@ namespace ogl
 	}
 
 	// Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
-	void Camera::ProcessMouseScroll(GLfloat yoffset)
+	void OGLCamera::ProcessMouseScroll(GLfloat yoffset)
 	{
 		this->Zoom -= yoffset;
 		if (this->Zoom <= 1.0f)
@@ -54,7 +52,7 @@ namespace ogl
 	}
 
 
-	void Camera::updateCameraVectors()
+	void OGLCamera::updateCameraVectors()
 	{
 		glm::vec3 front;
 		front.x = cos(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
@@ -68,7 +66,7 @@ namespace ogl
 
 
 	// Moves/alters the camera positions based on user input
-	void Camera::movement(GLFWwindow *Triangle)
+	void OGLCamera::movement(GLFWwindow *Triangle)
 	{
 		if (keys[GLFW_KEY_ESCAPE] )
 			glfwSetWindowShouldClose(Triangle, GL_TRUE);
@@ -90,7 +88,7 @@ namespace ogl
 	}
 
 	// Is called whenever a key is pressed/released via GLFW
-	void Camera::key_callback(GLFWwindow* Triangle, int key, int scancode, int action, int mode)
+	void OGLCamera::key_callback(GLFWwindow* Triangle, int key, int scancode, int action, int mode)
 	{
 		if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(Triangle, GL_TRUE);
@@ -101,7 +99,7 @@ namespace ogl
 			keys[key] = false;	
 	}
 
-	void Camera::mouse_callback(GLFWwindow* Triangle, double xpos, double ypos)
+	void OGLCamera::mouse_callback(GLFWwindow* Triangle, double xpos, double ypos)
 	{
 		if(firstMouse)
 		{
@@ -119,39 +117,37 @@ namespace ogl
 	}	
 
 
-	void Camera::scroll_callback(GLFWwindow* Triangle, double xoffset, double yoffset)
+	void OGLCamera::scroll_callback(GLFWwindow* Triangle, double xoffset, double yoffset)
 	{
 		ProcessMouseScroll(yoffset);
 	}
 
 	// Returns the view matrix calculated using Eular Angles and the LookAt Matrix
-	glm::mat4 Camera::GetViewMatrix() const
+	glm::mat4 OGLCamera::GetViewMatrix() const
 	{
 		return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
 	}
-	float Camera::GetZoom() const
+	float OGLCamera::GetZoom() const
 	{
 		return Zoom;
 	}
 
-	void Camera::update(GLfloat dt)
+	void OGLCamera::update(GLfloat dt)
 	{
 		deltaTime = dt;
 	}
 
-	void Camera::SetPos(const glm::vec3 &pos)
+	void OGLCamera::SetPos(const glm::vec3 &pos)
 	{
 		Position = pos;
 	}
 
-	glm::vec3 Camera::GetPos() const
+	glm::vec3 OGLCamera::GetPos() const
 	{
 		return Position;
 	}
-	glm::vec3 Camera::GetFront() const 
+	glm::vec3 OGLCamera::GetFront() const 
 	{
 		return Front;
 	}
-}
-
 }

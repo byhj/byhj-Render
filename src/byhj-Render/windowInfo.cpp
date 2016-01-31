@@ -23,7 +23,7 @@ namespace byhj
 	int WindowInfo::getPosY() const {
 		return posY;
 	}
-	int WindowInfo::getAspect() const {
+	float WindowInfo::getAspect() const {
 		return static_cast<float>(Width) / Height;
 	}
 

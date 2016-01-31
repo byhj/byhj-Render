@@ -37,5 +37,5 @@ void main(void)
 
     g_FragColor = normalize( vec4(diffuse + specular, 1.0f) );
 
-    g_FragColor = vec4(vec3(abs(vs_out.Normal.z)), 1.0f) * vec4(u_ambient, 1.0);
+    g_FragColor = vec4(vec3(abs(vs_out.Normal.z)), 1.0f) ;
 }

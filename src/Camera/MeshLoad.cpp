@@ -17,7 +17,7 @@ namespace byhj
 		init_shader();
 	}
 
-	void MeshLoad::Update()
+	void MeshLoad::Update(const glm::mat4 &camMat)
 	{
 
 		glUseProgram(m_Program);
@@ -27,8 +27,8 @@ namespace byhj
 
 	    GLfloat time = glfwGetTime();
 
-		glm::mat4 model = m_RotationGui.getRotationMat(); 
-		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.2f, 5.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) );
+		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f)) * m_RotationGui.getRotationMat();
+		glm::mat4 view  = camMat;
 		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
@@ -43,9 +43,15 @@ namespace byhj
 	{
 		glUseProgram(m_Program);
 
+		m_Model.draw(m_Program);
+
+		glDisable(GL_DEPTH_TEST);
+
 		m_RotationGui.v_render();
 		m_LightGui.v_render();
-		m_Model.draw(m_Program);
+
+		glEnable(GL_DEPTH_TEST);
+
 
 		glUseProgram(0);
 	}

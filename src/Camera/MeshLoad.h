@@ -19,7 +19,7 @@ namespace byhj
 	public:
 
 		void Init(int sw, int sh);
-		void Update();
+		void Update(const glm::mat4 &camMat);
 		void Render();
         void Shutdown();
 

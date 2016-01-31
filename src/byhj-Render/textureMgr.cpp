@@ -53,7 +53,7 @@ namespace byhj
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void TextureMgr::loadOGLTexture(std::vector<std::string> &faces)
+	void TextureMgr::loadOGLTexture(std::string texName, std::vector<std::string> &faces)
 	{
 		int width = 0, height = 0;
 
@@ -75,7 +75,7 @@ namespace byhj
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-		m_oglTextures.insert(std::make_pair(faces[0], tex));
+		m_oglTextures.insert(std::make_pair(texName, tex));
 
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 

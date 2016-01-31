@@ -116,6 +116,12 @@
     <ClCompile Include="..\byhj-Render\model.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
+    <ClCompile Include="..\byhj-Render\camera.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="oglRender.h">
@@ -189,6 +195,12 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\model.h">
       <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\camera.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglCamera.h">
+      <Filter>Render\ogl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

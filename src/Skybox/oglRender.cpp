@@ -17,27 +17,33 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		m_MeshLoad = new MeshLoad;
-		m_MeshLoad->Init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		m_skybox = new Skybox;
+        m_skybox->init();
 	}
 
-	void OGLRender::v_update(const glm::mat4 &camMat)
+	void OGLRender::v_update()
 	{
-		m_MeshLoad->Update(camMat);
+		m_skybox->update();
 	}
 
     void OGLRender::v_render()
 	{
+		glEnable(GL_DEPTH_TEST);
+
+
 		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, black);
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		m_MeshLoad->Render();
+		m_skybox->render();
 
     }
 	void OGLRender::v_shutdown()
 	{
+		m_skybox->shutdown();
+
+		delete m_skybox;
 	}
 
 }

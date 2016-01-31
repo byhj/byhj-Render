@@ -11,6 +11,7 @@
 #include "app.h"
 #include "oglRender.h"
 #include "oglFont.h"
+#include "ogl/oglCamera.h"
 #include "windowInfo.h"
 
 #define USE_ANT
@@ -32,17 +33,30 @@ class OGLApp : public App
 		void setFont(OGLFont *pFont);
 
 protected:
-	Render*  m_pRender = nullptr;
-	OGLFont *m_pFont = new OGLFont;
+	Render    *m_pRender = nullptr;
+	OGLFont   *m_pFont = new OGLFont;
+	OGLCamera *m_camera = new OGLCamera;
 	static  OGLApp* app;
 
 		void v_run() override;
 		void v_end() override;
 
-		virtual void v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
-		virtual void v_Movement(GLFWwindow *window) {}
-		virtual void v_MouseCallback(GLFWwindow* window, double xpos, double ypos) {}
-		virtual void v_ScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {}
+		void v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+		{
+			m_camera->key_callback(window, key, scancode, action, mode);
+		}
+		void v_Movement(GLFWwindow *window) 
+		{
+			m_camera->movement(window);
+		}
+		void v_MouseCallback(GLFWwindow* window, double xpos, double ypos) 
+		{
+			m_camera->mouse_callback(window, xpos, ypos);
+		}
+		void v_ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+		{
+			m_camera->scroll_callback(window, xoffset, yoffset);
+		}
 
 		static void glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode);
 		static void glfw_mouse(GLFWwindow* window, double xpos, double ypos);

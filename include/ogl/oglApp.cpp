@@ -5,13 +5,13 @@ namespace byhj
 OGLApp * OGLApp::app = nullptr;
 	////////////////////////////////////////////////////////////////////////////////////////
 
-	void OGLApp::v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
-	{
-		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-			glfwSetWindowShouldClose(window, GL_TRUE);
-		if (key == GLFW_KEY_C && action == GLFW_PRESS)
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	}
+	// void OGLApp::v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+	// {
+	// 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	// 		glfwSetWindowShouldClose(window, GL_TRUE);
+	// 	if (key == GLFW_KEY_C && action == GLFW_PRESS)
+	// 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	// }
 
 
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +147,14 @@ void OGLApp::v_run()
 
 		countFps();
 
-		m_pRender->v_update();
+		static GLfloat lastFrame = static_cast<float>(glfwGetTime());
+		GLfloat currentFrame = static_cast<float>(glfwGetTime());
+		GLfloat deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		m_camera->update(deltaTime);
+
+		m_pRender->v_update(m_camera->GetViewMatrix());
 		m_pRender->v_render();
 
 		m_pFont->render("Graphics card: " + m_GLRenderer, 10, sh - 30);
