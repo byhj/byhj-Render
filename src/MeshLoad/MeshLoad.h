@@ -34,7 +34,7 @@ namespace byhj
 		}uniform_loc;
 
 		GLfloat m_Aspect = 1.0f;
-		OGLShader m_MeshLoadShader;
+		OGLShader m_MeshLoadShader = "Mesh Shader";
 		GLuint m_Program;
 		byhj::Model m_Model;
 		LightGui m_LightGui;

@@ -153,8 +153,11 @@ void OGLApp::v_run()
 		lastFrame = currentFrame;
 
 		m_camera->update(deltaTime);
-
+#ifdef USE_CAMERA
 		m_pRender->v_update(m_camera->GetViewMatrix());
+#else
+		m_pRender->v_update();
+#endif
 		m_pRender->v_render();
 
 		m_pFont->render("Graphics card: " + m_GLRenderer, 10, sh - 30);

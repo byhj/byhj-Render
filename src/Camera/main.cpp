@@ -1,3 +1,5 @@
+#define USE_CAMERA
+
 #include "sample.h"
 
 // #ifdef _DEBUG

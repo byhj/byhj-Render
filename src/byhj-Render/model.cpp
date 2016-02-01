@@ -49,6 +49,8 @@ namespace byhj
 		if (!pScene|| pScene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !pScene->mRootNode) {
 			std::cerr << "Fail to load the model ( " << modelFile << ") : "  
 				      << importer.GetErrorString() << std::endl;
+		}else {
+			std::cout << "Load Model: " << fileDir << std::endl;
 		}
 
 		m_LoadType = loadType;

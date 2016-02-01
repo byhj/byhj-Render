@@ -1,5 +1,6 @@
 #include "oglShader.h"
 #include <fstream>
+#include <iomanip>
 
 namespace byhj
 {
@@ -48,6 +49,7 @@ std::string OGLShader::textFileRead(const char *fn) {  //read the OGLShader code
 void OGLShader::init()
 {
 	m_program = glCreateProgram();
+	std::cout << "------------------------------" << m_name << " Message "<< "------------------------------" << std::endl;
 }
 
 
@@ -92,12 +94,12 @@ void OGLShader::link()
 	}
 
 	std::cout << m_name << " linked successful" << std::endl;
-	std::cout << "--------------------------------------------------------------------------------" << std::endl;
+	
 }
 
 void OGLShader::info()
 {
-	std::cout << "------------------------------" << m_name << " Interface-------------------------" 
+	std::cout << "                             " << m_name << " Interface                             " 
 		      << std::endl;
 
 	GLint outputs = 0;
