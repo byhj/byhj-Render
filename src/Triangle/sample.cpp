@@ -3,27 +3,39 @@
 
 namespace byhj
 {
+	Sample::Sample()
+	{
+		m_pApp = std::make_shared<OGLApp>();
+		m_pRender = std::make_shared<OGLRender>();
+	}
+
+	Sample::~Sample()
+	{
+		m_pApp = nullptr;
+		m_pRender = nullptr;
+		std::cout << "APP use count:" << m_pApp.use_count() << std::endl;
+		std::cout << "Render use count:" << m_pRender.use_count() << std::endl;
+	}
+
 	void Sample::init()
 	{
-		OGLApp      *m_pApp = new OGLApp;
-		OGLRender   *m_pRender = new OGLRender;
+		m_pApp->v_init();
 
-		m_pApp->setRender(m_pRender);
-		Root::getInstance()->setApp(m_pApp);
+		std::cout << "APP use count:" << m_pApp.use_count() << std::endl;
+		std::cout << "Render use count:" << m_pRender.use_count() << std::endl;
 	}
 
 	void Sample::run()
 	{
-		Root::getInstance()->beginScene();
-
-		Root::getInstance()->endScene();
+		m_pApp->v_run();
 	}
 
 	void Sample::end()
 	{
-		delete m_pApp;
-		delete m_pRender;
+		m_pApp->v_shutdown();
 
+		std::cout << "APP use count:" << m_pApp.use_count() << std::endl;
+		std::cout << "Render use count:" << m_pRender.use_count() << std::endl;
 	}
 
 }

@@ -3,5 +3,13 @@
 namespace byhj
 {
 
+	App::App()
+	{
 
+	}
+
+	App::~App()
+	{
+
+	}
 }

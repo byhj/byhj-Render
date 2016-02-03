@@ -13,8 +13,8 @@ namespace byhj
 	{
 	public:
 
-	Triangle()  = default;
-	~Triangle() = default;
+	Triangle() ;
+	~Triangle();
 
 	void init();
 	void update();
@@ -27,14 +27,11 @@ namespace byhj
 		void init_vertexArray();
 		void init_shader();
 
-	    GLuint m_program = OGL_ONE;
-	    GLuint m_vao = OGL_ONE;
-	    GLuint m_ibo = OGL_ONE;
-	    GLuint m_vbo = OGL_ONE;
-
-	   std::vector<GLfloat> m_VertexData;
-	   std::vector<GLuint>  m_IndexData;
-	   OGLShader m_TriangleShader ={ "TriangleShader" };
+		GLuint m_program;
+		GLuint m_vao;
+		GLuint m_ibo;
+		GLuint m_vbo;
+		std::shared_ptr<OGLShader> m_TriangleShader;
 	};
 }
 #endif

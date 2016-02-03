@@ -13,16 +13,16 @@ namespace byhj
 	{
 
 	public:
-		Sample() = default;
-		~Sample() = default;
+		Sample();
+		~Sample();
 	
 		void init();
 		void run();
 		void end();
 
 	private:					
-		OGLApp      *m_pApp 	= nullptr;
-		OGLRender    *m_pRender = nullptr;
+		std::shared_ptr<OGLApp>    m_pApp 	;
+		std::shared_ptr<OGLRender> m_pRender;
 	};
 }
 #endif

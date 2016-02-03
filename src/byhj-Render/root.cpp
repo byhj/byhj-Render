@@ -2,12 +2,22 @@
 
 namespace byhj
 {
+	Root::Root()
+	{
 
+	}
+	Root::~Root()
+	{
+
+	}
 	void Root::setApp(App *app)
+	{
+		//m_pApp = app;
+	}
+	void Root::setApp(std::shared_ptr<App> app)
 	{
 		m_pApp = app;
 	}
-
 
 	void Root::beginScene()
 	{
@@ -16,7 +26,7 @@ namespace byhj
 
 	void Root::endScene()
 	{
-		Root::m_pApp->v_end();
+		Root::m_pApp->v_shutdown();
 	}
 
 

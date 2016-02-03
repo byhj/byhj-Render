@@ -8,8 +8,8 @@ namespace byhj
 	class Shader
 	{
 	public:
-	  Shader() = default;
-	  virtual ~Shader() = default;
+	  Shader();
+	  virtual ~Shader();
 	};
 }
 #endif

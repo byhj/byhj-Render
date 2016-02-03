@@ -9,8 +9,8 @@ namespace byhj
 	class Render
 	{
 	public:
-		Render() = default;
-		virtual ~Render() = default;
+		Render();
+		virtual ~Render();
 
 		virtual void v_init() {}
 		virtual void v_init(HWND hWnd) {}

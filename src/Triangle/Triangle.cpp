@@ -18,9 +18,18 @@ namespace byhj
  	0, 1, 2,
  };
  static const GLsizei IndexSize = sizeof(IndexData);
- 
+
+ Triangle::Triangle()
+ {
+	 m_TriangleShader = std::make_shared<OGLShader>();
+ }
+ Triangle::~Triangle()
+ {
+	 m_TriangleShader = nullptr;
+ }
 	void Triangle::init()
 	{
+	
 		init_shader();
 		init_buffer();
 		init_vertexArray();
@@ -80,11 +89,11 @@ namespace byhj
 	}
 	void Triangle::init_shader()
 	{
-	  m_TriangleShader.init();
-	  m_TriangleShader.attach(GL_VERTEX_SHADER, "triangle.vert");
-	  m_TriangleShader.attach(GL_FRAGMENT_SHADER, "triangle.frag");
-	  m_TriangleShader.link();
-	  m_program = m_TriangleShader.getProgram();
+	 //  m_TriangleShader->init();
+	 //  m_TriangleShader->attach(GL_VERTEX_SHADER, "triangle.vert");
+	 //  m_TriangleShader->attach(GL_FRAGMENT_SHADER, "triangle.frag");
+	 //  m_TriangleShader->link();
+	 //  m_program = m_TriangleShader->getProgram();
 	}
 
 }

@@ -6,10 +6,10 @@
 
 int main()
 {
-	auto sample = std::make_shared<byhj::Sample>();
-	sample->init();
-	sample->run();
-	sample->end();
+	byhj::Sample sample;
+	sample.init();
+	sample.run();
+	sample.end();
 
 	return 0;
 }

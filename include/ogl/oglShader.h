@@ -21,9 +21,9 @@ class OGLShader
 {
 
 public:
-	OGLShader() = default;
+	OGLShader();
 	OGLShader(std::string name) :m_name(name) {}
-	~OGLShader() = default;
+	~OGLShader();
 
 public:
 	void init();

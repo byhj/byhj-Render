@@ -20,7 +20,7 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		Triangle *m_triangle = nullptr;
+		Triangle m_triangle;
 	};
 }
 #endif

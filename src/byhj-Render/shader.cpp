@@ -3,5 +3,13 @@
 namespace byhj
 {
 
+	Shader::Shader()
+	{
 
+	}
+
+	Shader::~Shader()
+	{
+
+	}
 }

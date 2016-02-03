@@ -1,3 +1,4 @@
+
 #ifndef root_H
 #define root_H
 
@@ -11,13 +12,14 @@ namespace byhj
 	class Root
 	{
 	public:
-		Root() = default;
-		virtual ~Root() = default;
+		Root() ;
+		~Root();
 
 		static std::shared_ptr<Root> getInstance();
 
 	
 		void setApp(App *app);
+		void setApp(std::shared_ptr<App> app);
 
 		void beginScene();
 		void endScene();
@@ -25,7 +27,7 @@ namespace byhj
 		void shutdown();
 
 	private:
-		App *m_pApp = nullptr;
+		std::shared_ptr<App> m_pApp;
 
 		std::string m_configName;
 

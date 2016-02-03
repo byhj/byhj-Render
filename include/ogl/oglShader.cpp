@@ -4,7 +4,14 @@
 
 namespace byhj
 {
+	OGLShader::OGLShader()
+	{
 
+	}
+	OGLShader::~OGLShader()
+	{
+
+	}
 //read the Shadercode
 std::string OGLShader::textFileRead(const char *fn) {  //read the OGLShader code
 
