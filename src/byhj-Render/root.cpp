@@ -25,4 +25,10 @@ namespace byhj
 		static std::shared_ptr<Root> pInstance = std::make_shared<Root>();
 		return pInstance;
 	}
+
+	void Root::shutdown()
+	{
+		m_pApp->v_shutdown();
+		m_pApp = nullptr;
+	}
 }

@@ -31,11 +31,12 @@ namespace byhj
 		glGenBuffers(1, &m_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glBufferData(GL_ARRAY_BUFFER, VertexSize, VertexData, GL_STATIC_DRAW);
-		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
 		glGenBuffers(1, &m_ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, IndexSize, IndexData, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 	void Triangle::init_vertexArray()
 	{
@@ -71,6 +72,10 @@ namespace byhj
 
 	void  Triangle::shutdown()
 	{
+		glDeleteProgram(m_program);
+		glDeleteBuffers(1, &m_ibo);
+		glDeleteBuffers(1, &m_vbo);
+		glDeleteVertexArrays(1, &m_vao);
 
 	}
 	void Triangle::init_shader()

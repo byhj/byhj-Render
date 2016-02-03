@@ -168,19 +168,19 @@ void OGLApp::v_run()
 		glfwSwapBuffers(pWindow);
 	}
 
-	m_pRender->v_shutdown();
-
-	delete m_camera;
-	delete m_pFont;
-
 	glfwTerminate();
 }
 
 
 void OGLApp::v_end()
 {
+	m_pRender->v_shutdown();
+	m_pRender = nullptr;
 
+	delete m_camera;
+	delete m_pFont;
 }
+
 void OGLApp::setRender(Render *pRender)
 {
 	m_pRender = pRender;

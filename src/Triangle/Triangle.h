@@ -5,6 +5,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "ogl/oglShader.h"
+#include "utility.h"
 
 namespace byhj
 {
@@ -26,10 +27,11 @@ namespace byhj
 		void init_vertexArray();
 		void init_shader();
 
-	    GLuint m_program;
-	    GLuint m_vao;
-	    GLuint m_ibo;
-	    GLuint m_vbo;
+	    GLuint m_program = OGL_ONE;
+	    GLuint m_vao = OGL_ONE;
+	    GLuint m_ibo = OGL_ONE;
+	    GLuint m_vbo = OGL_ONE;
+
 	   std::vector<GLfloat> m_VertexData;
 	   std::vector<GLuint>  m_IndexData;
 	   OGLShader m_TriangleShader ={ "TriangleShader" };

@@ -22,6 +22,7 @@ namespace byhj
 		void beginScene();
 		void endScene();
 
+		void shutdown();
 
 	private:
 		App *m_pApp = nullptr;

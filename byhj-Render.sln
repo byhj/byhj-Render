@@ -165,6 +165,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lens-Flare", "src\Lens-Flar
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tess-Geom", "src\Tess-Geom\Tess-Geom.vcxproj", "{0C45F4B6-3F32-4888-88BE-483EEC58265C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Transform-Feedback", "src\Transform-Feedback\Transform-Feedback.vcxproj", "{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -685,6 +687,14 @@ Global
 		{0C45F4B6-3F32-4888-88BE-483EEC58265C}.Release|x64.Build.0 = Release|x64
 		{0C45F4B6-3F32-4888-88BE-483EEC58265C}.Release|x86.ActiveCfg = Release|Win32
 		{0C45F4B6-3F32-4888-88BE-483EEC58265C}.Release|x86.Build.0 = Release|Win32
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Debug|x64.ActiveCfg = Debug|x64
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Debug|x64.Build.0 = Debug|x64
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Debug|x86.ActiveCfg = Debug|Win32
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Debug|x86.Build.0 = Debug|Win32
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Release|x64.ActiveCfg = Release|x64
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Release|x64.Build.0 = Release|x64
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Release|x86.ActiveCfg = Release|Win32
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -768,5 +778,6 @@ Global
 		{08DF0DD7-6A21-4F3A-AE69-5D07F89729C6} = {BD4D441B-1A89-4DE4-AEDF-6EF13C24669E}
 		{C4451800-9ED2-41A8-8FA7-D87DDE072679} = {9B9D6047-D1F9-4727-B25D-EC2AC251C607}
 		{0C45F4B6-3F32-4888-88BE-483EEC58265C} = {6C489D7E-03BA-42FF-922E-E761E787ECC8}
+		{C96955C8-F8F0-4B8D-BE74-04CD3C47D9AD} = {6C489D7E-03BA-42FF-922E-E761E787ECC8}
 	EndGlobalSection
 EndGlobal

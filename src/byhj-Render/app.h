@@ -12,9 +12,9 @@ namespace byhj
 	public:
 		App() = default;
 		virtual ~App() = default;
-
-		virtual void v_run() = 0;
 		virtual void v_end() = 0;
+		virtual void v_run() = 0;
+		virtual void v_shutdown() {};
 
 	};
 }
