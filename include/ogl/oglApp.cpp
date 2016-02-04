@@ -5,8 +5,6 @@ namespace byhj
 
 	OGLApp::OGLApp()
 	{
-	// m_pFont = new OGLFont;
-	// 	m_camera = new OGLCamera;
 	}
 
 	OGLApp::~OGLApp()
@@ -74,9 +72,9 @@ OGLApp * OGLApp::app = nullptr;
 
 	////////////////////////////////////////////////////////////////////////////////////////
 
-void OGLApp::run()
+void OGLApp::v_run()
 {	
-	//app = this;
+	app = this;
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit())
 	{
@@ -101,12 +99,12 @@ void OGLApp::run()
 	glfwSetMouseButtonCallback(pWindow, glfw_mouseButton); // - Directly redirect GLFW mouse button events to AntTweakBar
 	glfwSetCharCallback(pWindow, glfw_char);                      // - Directly redirect GLFW char events to AntTweakBar
 #endif
-																  //glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-																  // GLFW Options
-																  //	glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-																  // GLFW Options
+	//glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	// GLFW Options
+	//	glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	// GLFW Options
 
-																  //	glfwSetInputMode(Triangle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//	glfwSetInputMode(Triangle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	if (pWindow == NULL)
 	{
@@ -147,15 +145,17 @@ void OGLApp::run()
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	//	m_pFont.init(sw, sh);
+
+
 	v_init();
+	m_pFont.init(sw, sh);
 
 	glViewport(0, 0, sw, sh);
 
 	while (!glfwWindowShouldClose(pWindow))
 	{
 		glfwPollEvents();
-		// v_Movement(pWindow);
+		//v_Movement(pWindow);
 
 		countFps();
 
@@ -164,7 +164,7 @@ void OGLApp::run()
 		GLfloat deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		// m_camera->update(deltaTime);
+		//m_camera->update(deltaTime);
 #ifdef USE_CAMERA
 		m_pRender->v_update(m_camera->GetViewMatrix());
 #else
@@ -172,10 +172,10 @@ void OGLApp::run()
 #endif
 		v_render();
 
-		// m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 30);
-		// m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 60);
-		// m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 90);
-		// m_pFont.render("FPS: " + std::to_string(m_fps), 10, 30);
+		 m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 30);
+		 m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 60);
+		 m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 90);
+		 m_pFont.render("FPS: " + std::to_string(m_fps), 10, 30);
 
 		glfwSwapBuffers(pWindow);
 	}

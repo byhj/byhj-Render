@@ -30,37 +30,37 @@ class OGLApp : public App
 
 	public:
 
-	    void run();
+	    void v_run();
 
 		virtual void v_init()    {}
 		virtual void v_render()  {}
 		virtual void v_update()  {}
 		virtual void v_shutdown(){}
 protected:
-	//Render    *m_pRender = nullptr;
-	//OGLFont   m_pFont;
-	//OGLCamera *m_camera;
+
+	OGLFont   m_pFont;
+	OGLCamera m_camera;
 	int sw ;
 	int sh ;
 	static  OGLApp* app;
 
 
-		//  void v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
-		//  {
-		//  	m_camera->key_callback(window, key, scancode, action, mode);
-		//  }
-		//  void v_Movement(GLFWwindow *window)
-		//  {
-		//  	m_camera->movement(window);
-		//  }
-		//  void v_MouseCallback(GLFWwindow* window, double xpos, double ypos)
-		//  {
-		//  	m_camera->mouse_callback(window, xpos, ypos);
-		//  }
-		//  void v_ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
-		//  {
-		//  	m_camera->scroll_callback(window, xoffset, yoffset);
-		//  }
+	void v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+	{
+		m_camera.key_callback(window, key, scancode, action, mode);
+	}
+	void v_Movement(GLFWwindow *window)
+	{
+		m_camera.movement(window);
+	}
+	void v_MouseCallback(GLFWwindow* window, double xpos, double ypos)
+	{
+		m_camera.mouse_callback(window, xpos, ypos);
+	}
+	void v_ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+	{
+		m_camera.scroll_callback(window, xoffset, yoffset);
+	}
 
 		static void glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode);
 		static void glfw_mouse(GLFWwindow* window, double xpos, double ypos);

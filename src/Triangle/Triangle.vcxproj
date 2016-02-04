@@ -133,9 +133,7 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="oglApp.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,9 +158,7 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h" />
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="oglApp.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>

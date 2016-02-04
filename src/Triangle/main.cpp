@@ -1,13 +1,13 @@
 #include "oglRender.h"
 
- // #ifdef _DEBUG
- // #include <vld.h>
- // #endif
+// #ifdef _DEBUG
+// #include <vld.h>
+// #endif
 
 int main()
 {   
-	byhj::OGLRender render;
-	render.run();
+	byhj::App *app = new byhj::OGLRender;
+	app->v_run();
 
 	return 0;
 }

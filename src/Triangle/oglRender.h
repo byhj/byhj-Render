@@ -1,7 +1,8 @@
 #ifndef OGLRender_H
 #define OGLRender_H
 
-#include "oglApp.h"
+#include "ogl/oglApp.h"
+#include "Triangle.h"
 
 namespace byhj
 {

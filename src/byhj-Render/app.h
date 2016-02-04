@@ -18,6 +18,8 @@ namespace byhj
 		virtual void v_render() = 0;
 		virtual void v_shutdown() = 0;
 
+		virtual void v_run() = 0;
+
 	};
 }
 #endif
