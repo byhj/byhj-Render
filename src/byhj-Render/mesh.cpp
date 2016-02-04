@@ -26,7 +26,7 @@ namespace byhj
 				number = ss.str();
 
 
-				glUniform1f(glGetUniformLocation(program, (name + number).c_str()), i);
+				glUniform1i(glGetUniformLocation(program, (name + number).c_str()), i);
 				glBindTexture(GL_TEXTURE_2D, m_Textures[i].id);
 			}
 
@@ -69,7 +69,7 @@ namespace byhj
 				number = ss.str();
 
 
-				glUniform1f(glGetUniformLocation(program, (name + number).c_str()), i);
+				glUniform1i(glGetUniformLocation(program, (name + number).c_str()), i);
 				glBindTexture(GL_TEXTURE_2D, m_Textures[i].id);
 			}
 

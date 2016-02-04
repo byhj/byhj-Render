@@ -17,14 +17,12 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		m_triangle = new Triangle;
-
-       m_triangle->init();
+       m_triangle.init();
 	}
 
 	void OGLRender::v_update()
 	{
-		m_triangle->update();
+		m_triangle.update();
 	}
 
     void OGLRender::v_render()
@@ -32,13 +30,11 @@ namespace byhj
 		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, &black[0]);
 
-		m_triangle->render();
+		m_triangle.render();
 
     }
 	void OGLRender::v_shutdown()
 	{
-		m_triangle->shutdown();
-
-		delete m_triangle;
+		m_triangle.shutdown();
 	}
 }

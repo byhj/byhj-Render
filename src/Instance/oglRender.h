@@ -1,7 +1,8 @@
 #ifndef OGLRender_H
 #define OGLRender_H
 
-#include "render.h"
+#include "ogl/oglApp.h"
+#include "ogl/oglCamera.h"
 #include "asteroid.h"
 #include "Planet.h"
 
@@ -12,20 +13,26 @@
 
 namespace byhj
 {
-	class OGLRender : public Render
+	class OGLRender : public OGLApp
 	{
 	public:
 		OGLRender();
 		~OGLRender();
 
+		void v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode) override;
+		void v_movement(GLFWwindow *window) override;
+		void v_mouseCallback(GLFWwindow* window, double xpos, double ypos) override;
+		void v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset) override;
+
 		void v_init();
-		void v_update(const glm::mat4 &camMat);
+		void v_update();
 		void v_render();
 		void v_shutdown();
 
 	private:
-		Asteroid *m_Asteroid;
-		Planet   *m_Planet;
+		Asteroid m_Asteroid;
+		Planet   m_Planet;
+		OGLCamera m_camera;
 	};
 }
 #endif

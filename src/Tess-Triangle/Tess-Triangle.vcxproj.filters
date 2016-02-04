@@ -36,9 +36,6 @@
     <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sample.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TessGUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -104,9 +101,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sample.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>

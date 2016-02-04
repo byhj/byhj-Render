@@ -1,19 +1,18 @@
-#include "sample.h"
-
-// #ifdef _DEBUG
-// #pragma comment( linker, "/subsystem:\"console\" /entry:\"WinMainCRTStartup\"")
-// #endif
+#include "oglRender.h"
+#include "d3dRender.h"
+#include "root.h"
 
 // #ifdef _DEBUG
 // #include <vld.h>
 // #endif
 
-int main(int argc, char **argv)
+int main()
 {
-	auto sample = std::make_shared<byhj::Sample>();
-	sample->init();
-	sample->run();
-	sample->end();
+//	auto oglApp = std::make_shared<byhj::OGLRender>();
+	auto d3dApp = std::make_shared<byhj::D3DRender>();
+	byhj::Root::getInstance()->setRender(d3dApp);
+	byhj::Root::getInstance()->BeginScene();
+	byhj::Root::getInstance()->EndScene();
 
 	return 0;
 }

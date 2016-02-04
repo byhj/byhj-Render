@@ -102,9 +102,6 @@
     <ClCompile Include="RotationGUI.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="sample.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="LightGUI.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -186,9 +183,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RotationGUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LightGUI.h">

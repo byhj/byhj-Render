@@ -1,7 +1,7 @@
 #ifndef OGLRender_H
 #define OGLRender_H
 
-#include "render.h"
+#include "ogl/oglApp.h"
 #include "MeshLoad.h"
 #include "windowInfo.h"
 
@@ -10,7 +10,7 @@
 
 namespace byhj
 {
-	class OGLRender : public Render
+	class OGLRender : public OGLApp
 	{
 	public:
 		OGLRender();
@@ -22,7 +22,7 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		MeshLoad *m_MeshLoad;
+		MeshLoad m_MeshLoad;
 	};
 }
 #endif

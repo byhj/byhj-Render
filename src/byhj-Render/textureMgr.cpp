@@ -82,7 +82,6 @@ namespace byhj
 	}
 	void TextureMgr::loadD3DTexture(ID3D11Device *pD3D11Device, std::string filename)
 	{
-		HRESULT hr;
 	
 		//std::string texFile = m_dir + filename;
 		//std::wstring wTexFile(texFile.begin(), texFile.end());

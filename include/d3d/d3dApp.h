@@ -41,7 +41,11 @@ public:
 	~D3DApp() ;
 
 	void v_run() override;
-	void v_end() override;
+	virtual void v_init()     {}
+	virtual void v_update()   {}
+	virtual void v_render()   {}
+	virtual void v_shutdown() {}
+
 	LRESULT CALLBACK MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 
@@ -50,7 +54,6 @@ public:
 	virtual void v_OnMouseUp(WPARAM btnState, int x, int y)    { }
 	virtual void v_OnMouseMove(WPARAM btnState, int x, int y)  { }
 	virtual void v_OnMouseWheel(WPARAM btnState, int x, int y) { }
-	void setRender(Render *pRender);
 
 protected:
 	int   m_ScreenWidth;
@@ -69,9 +72,9 @@ protected:
 
 
 private:
-	Render *m_pRender = nullptr;
 
 	bool init_window();
+
 	HINSTANCE  m_hInstance;
 	HWND       m_hWnd;
 };

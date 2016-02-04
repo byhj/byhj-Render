@@ -138,7 +138,6 @@
     <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="RotationGUI.cpp" />
-    <ClCompile Include="sample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -167,7 +166,6 @@
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="Planet.h" />
     <ClInclude Include="RotationGUI.h" />
-    <ClInclude Include="sample.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="asteroid.frag" />

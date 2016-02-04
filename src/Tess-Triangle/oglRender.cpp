@@ -17,13 +17,12 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		m_TessTriangle = new TessTriangle;
-		m_TessTriangle->init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		m_TessTriangle.init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
 	}
 
 	void OGLRender::v_update()
 	{
-		m_TessTriangle->update();
+		m_TessTriangle.update();
 	}
 
     void OGLRender::v_render()
@@ -35,14 +34,12 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		m_TessTriangle->render();
+		m_TessTriangle.render();
 
     }
 	void OGLRender::v_shutdown()
 	{
-		m_TessTriangle->shutdown();
-
-		delete 	m_TessTriangle;
+		m_TessTriangle.shutdown();
 	}
 
 }

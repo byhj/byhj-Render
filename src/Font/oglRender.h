@@ -1,14 +1,14 @@
 #ifndef OGLRender_H
 #define OGLRender_H
 
-#include "render.h"
+#include "ogl/oglApp.h"
 #include "Triangle.h"
 #include <memory>
 #include <gl/glew.h>
 
 namespace byhj
 {
-	class OGLRender : public Render
+	class OGLRender : OGLApp
 	{
 	public:
 		OGLRender();

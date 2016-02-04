@@ -4,15 +4,16 @@ namespace byhj
 {
 	OGLRender::OGLRender()
 	{
+
 	}
 
 	OGLRender::~OGLRender()
 	{
+
 	}
     
 	void OGLRender::v_init()
-	{
-	
+	{	
 		m_triangle.init();
 	}
 

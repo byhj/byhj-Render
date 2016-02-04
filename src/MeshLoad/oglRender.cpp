@@ -17,13 +17,12 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		m_MeshLoad = new MeshLoad;
-		m_MeshLoad->Init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		m_MeshLoad.Init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
 	}
 
 	void OGLRender::v_update()
 	{
-		m_MeshLoad->Update();
+		m_MeshLoad.Update();
 	}
 
     void OGLRender::v_render()
@@ -33,12 +32,12 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		m_MeshLoad->Render();
+		m_MeshLoad.Render();
 
     }
 	void OGLRender::v_shutdown()
 	{
-		delete m_MeshLoad;
+
 	}
 
 }

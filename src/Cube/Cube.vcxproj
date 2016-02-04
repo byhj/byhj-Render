@@ -112,9 +112,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
     <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
+    <ClCompile Include="..\byhj-Render\camera.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
     <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
@@ -132,15 +134,15 @@
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
     <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="CubeGui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
+    <ClInclude Include="..\..\include\ogl\oglCamera.h" />
     <ClInclude Include="..\..\include\ogl\oglFont.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
+    <ClInclude Include="..\byhj-Render\camera.h" />
     <ClInclude Include="..\byhj-Render\font.h" />
     <ClInclude Include="..\byhj-Render\fontMgr.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
@@ -157,9 +159,7 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="CubeGui.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cube.frag" />

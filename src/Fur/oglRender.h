@@ -1,13 +1,13 @@
 #ifndef OGLRender_H
 #define OGLRender_H
 
-#include "render.h"
+#include "ogl/oglApp.h"
 #include "utility.h"
 #include "fur.h"
 
 namespace byhj
 {
-	class OGLRender  : public Render {
+	class OGLRender  : public OGLApp {
 	public:
 		OGLRender();
 		~OGLRender();

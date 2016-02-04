@@ -27,7 +27,7 @@ namespace byhj
 		m_LightGui.v_update();
 		m_RotationGui.v_update();
 
-	    GLfloat time = glfwGetTime();
+	    GLfloat time = static_cast<GLfloat>( glfwGetTime() );
 
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -30.0f)) * m_RotationGui.getRotationMat()
 			* glm::rotate(glm::mat4(1.0f), time / 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));

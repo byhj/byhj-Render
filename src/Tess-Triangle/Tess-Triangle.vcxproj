@@ -131,7 +131,6 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
     <ClInclude Include="TessGUI.h" />
     <ClInclude Include="TessTriangle.h" />
   </ItemGroup>
@@ -157,7 +156,6 @@
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
     <ClCompile Include="TessGUI.cpp" />
     <ClCompile Include="TessTriangle.cpp" />
   </ItemGroup>

@@ -15,11 +15,9 @@ D3DApp::~D3DApp()
 
 }
 void D3DApp::v_run()
-{	
+{
 	bool ret = init_window();
-
-	
-	m_pRender->v_init(m_hWnd);
+	v_init();
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
@@ -35,24 +33,23 @@ void D3DApp::v_run()
 		}
 		else
 		{
-			m_pRender->v_update();
-			m_pRender->v_render();
+			v_update();
+			v_render();
 			ret = true;
 		}
 
 	}
-	m_pRender->v_shutdown();
-	return;
-}
+	v_shutdown();
 
+}
 
 bool D3DApp::init_window()
 {
 	//Set the window in the middle of screen
 	m_ScreenWidth = WindowInfo::getInstance()->getWidth();
 	m_ScreenHeight = WindowInfo::getInstance()->getHeight();
-	m_PosX = WindowInfo::getInstance()->getPosX();
-	m_PosY = WindowInfo::getInstance()->getPosY();
+	m_PosX = WindowInfo::getInstance()->getPosX() - 150;
+	m_PosY = WindowInfo::getInstance()->getPosY() - 100;
 	m_ScreenNear = 0.1f;
 	m_ScreenFar  = 1000.0f;
 
@@ -108,15 +105,7 @@ bool D3DApp::init_window()
 	return true;
 }
 
-void D3DApp::setRender(Render *pRender)
-{
-	m_pRender = pRender;
-}
 
-void D3DApp::v_end()
-{
-
-}
 LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -127,10 +116,6 @@ LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 				PostMessage(m_hWnd, WM_DESTROY, 0, 0);
 			return 0;
 		}
-	case  WM_KEYUP:
-	{
-		return 0;
-	}
     case WM_LBUTTONDOWN:
     case WM_MBUTTONDOWN:
     case WM_RBUTTONDOWN:

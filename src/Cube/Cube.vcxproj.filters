@@ -14,29 +14,26 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{39fc3069-999e-4a27-8392-bbac68f1ed3c}</UniqueIdentifier>
+      <UniqueIdentifier>{b3ffe7aa-97b9-4376-a584-f3f5e2fc9a01}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{786c5e93-f6f7-4bc8-b096-ecd507170cce}</UniqueIdentifier>
+      <UniqueIdentifier>{f9506bce-22c8-4b13-a5fa-7a3102e0190b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{a8ba2e8c-3ed2-4033-bbef-a2cc59f9fc28}</UniqueIdentifier>
+      <UniqueIdentifier>{599c718e-0f71-42d8-bd5a-73c405e2740a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{2abc0517-d277-4323-afef-a3bbbe27a1a8}</UniqueIdentifier>
+      <UniqueIdentifier>{f23ae7e1-dcad-4696-b0cc-89237fb22947}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{d5e9dbf0-6179-4c5a-b018-1368367c1bdc}</UniqueIdentifier>
+      <UniqueIdentifier>{d3549245-48aa-413d-828e-8a9a2b6d9e51}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\model">
-      <UniqueIdentifier>{e7243a56-2bc2-4fa0-af25-0fc8d6bf97d7}</UniqueIdentifier>
+      <UniqueIdentifier>{03cc21ba-0e8d-4e20-974b-1058d3b3ce19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oglRender.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sample.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -45,10 +42,10 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="CubeGui.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglFont.cpp">
@@ -58,6 +55,9 @@
       <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\app.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\camera.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\font.cpp">
@@ -107,19 +107,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sample.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CubeGui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglCamera.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglFont.h">
@@ -129,6 +126,9 @@
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\app.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\camera.h">
       <Filter>Render\render</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\font.h">

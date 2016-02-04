@@ -132,7 +132,6 @@
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="skybox.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
@@ -157,7 +156,6 @@
     <ClCompile Include="skybox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="skybox.frag" />

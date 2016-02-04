@@ -12,9 +12,11 @@ namespace byhj
 	{
 
 	}
-	void D3DRender::v_init(HWND hWnd)
+	void D3DRender::v_init()
 	{
-		init_device(hWnd);
+		init_device();
+		init_camera();
+		init_object();
 	}
 
 	void D3DRender::v_update()
@@ -24,7 +26,16 @@ namespace byhj
 
 	void D3DRender::v_render()
 	{
+		float bgColor[4] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 
+		m_pD3D11DeviceContext->RSSetState(m_pRasterState);
+		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
+		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+		drawInfo();
+
+		m_pSwapChain->Present(0, 0);
 	}
 
     void D3DRender::v_shutdown()
@@ -33,7 +44,7 @@ namespace byhj
     }
 
 
-    void D3DRender::init_device(HWND hWnd)
+    void D3DRender::init_device()
     {
     
 		////////////////////////Create buffer desc////////////////////////////
@@ -55,7 +66,7 @@ namespace byhj
 		swapChainDesc.SampleDesc.Quality = 0;
 		swapChainDesc.BufferUsage        = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		swapChainDesc.BufferCount        = 1;
-		swapChainDesc.OutputWindow       = hWnd;
+		swapChainDesc.OutputWindow       = getHwnd();
 		swapChainDesc.Windowed           = TRUE;
 		swapChainDesc.SwapEffect         = DXGI_SWAP_EFFECT_DISCARD;
 
@@ -135,28 +146,9 @@ namespace byhj
     
     }
     
-    void D3DRender::beginScene()
-    {
-    	//Render 
-    	float bgColor[4] ={ 0.0f, 0.0f, 0.0f, 1.0f };
-    
-    	m_pD3D11DeviceContext->RSSetState(m_pRasterState);
-    	m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
-		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
-		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-    
-    }
-    
-    void D3DRender::endScene()
-    {
-		drawInfo();
-
-    	m_pSwapChain->Present(0, 0);
-    }
-    
     void D3DRender::init_camera()
     {
-    	//viewport Information
+    	//view port Information
     	D3D11_VIEWPORT vp;
     	ZeroMemory(&vp, sizeof(D3D11_VIEWPORT));
     	vp.TopLeftX = 0;
@@ -175,18 +167,38 @@ namespace byhj
     	m_Font.init(m_pD3D11Device);
     }
     
-    void D3DRender::drawfps()
-    {
+	void D3DRender::drawfps()
+	{
+		static bool flag = true;
+		if (flag)
+		{
+			m_Timer.Start();
+			flag = false;
+		}
 
-    }
-    
+		m_Timer.Count();
+		static int frameCnt = 0;
+		static float timeElapsed = 0.0f;
+		frameCnt++;
+		if (m_Timer.GetTotalTime() - timeElapsed >= 1.0f)
+		{
+			fps = frameCnt;
+			frameCnt = 0;
+			timeElapsed += 1.0f;
+		}
+
+		static WCHAR frameStr[255];
+		wsprintfW(frameStr, L"FPS: %u", (UINT)fps);
+
+		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 60);
+	}
     void D3DRender::drawInfo()
     {
     	WCHAR WinInfo[255];
     	swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight() );
 		drawfps();								  
-     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 40.0f);
-     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 70.0f);
+     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 20.0f);
+     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 60.0f);
     }
 
 }

@@ -39,42 +39,31 @@ class OGLApp : public App
 protected:
 
 	OGLFont   m_pFont;
-	OGLCamera m_camera;
+//	OGLCamera m_camera;
 	int sw ;
 	int sh ;
 	static  OGLApp* app;
 
 
-	void v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
-	{
-		m_camera.key_callback(window, key, scancode, action, mode);
-	}
-	void v_Movement(GLFWwindow *window)
-	{
-		m_camera.movement(window);
-	}
-	void v_MouseCallback(GLFWwindow* window, double xpos, double ypos)
-	{
-		m_camera.mouse_callback(window, xpos, ypos);
-	}
-	void v_ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
-	{
-		m_camera.scroll_callback(window, xoffset, yoffset);
-	}
+	virtual void v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {}
+	virtual void v_movement(GLFWwindow *window) {}
+	virtual void v_mouseCallback(GLFWwindow* window, double xpos, double ypos) {}
+	virtual void v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {}
 
-		static void glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode);
-		static void glfw_mouse(GLFWwindow* window, double xpos, double ypos);
-		static void glfw_scroll(GLFWwindow* window, double xoffset, double yoffset);
-		static void glfw_mouseButton(GLFWwindow *window, int x, int y, int z);
-		static void glfw_char(GLFWwindow *window, unsigned int x);
 
-		 void countFps();
-		 float GetAspect() const;
-	protected:
+	static void glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode);
+	static void glfw_mouse(GLFWwindow* window, double xpos, double ypos);
+	static void glfw_scroll(GLFWwindow* window, double xoffset, double yoffset);
+	static void glfw_mouseButton(GLFWwindow *window, int x, int y, int z);
+	static void glfw_char(GLFWwindow *window, unsigned int x);
+
+	 void countFps();
+	 float GetAspect() const;
+  protected:
 		std::string m_GLRenderer;
 		std::string m_GLVersion;
 		std::string m_GLSLVersion;
-		GLuint m_fps;
+		GLuint m_fps = 0;
 		GLFWwindow *pWindow;
 	
 	};  //class

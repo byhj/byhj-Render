@@ -136,7 +136,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -163,7 +162,6 @@
     <ClInclude Include="LightGUI.h" />
     <ClInclude Include="MeshLoad.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="model.frag" />

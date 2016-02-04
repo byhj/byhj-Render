@@ -13,16 +13,6 @@ namespace byhj
 	}
 
 OGLApp * OGLApp::app = nullptr;
-	////////////////////////////////////////////////////////////////////////////////////////
-
-	// void OGLApp::v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
-	// {
-	// 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	// 		glfwSetWindowShouldClose(window, GL_TRUE);
-	// 	if (key == GLFW_KEY_C && action == GLFW_PRESS)
-	// 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	// }
-
 
 	////////////////////////////////////////////////////////////////////////////////////////
 
@@ -33,9 +23,8 @@ OGLApp * OGLApp::app = nullptr;
 
 #ifdef USE_ANT
 		TwEventKeyGLFW(key, action);
-
-		// app->v_KeyCallback(window, key, scancode, action, mode);
 #endif
+		app->v_keyCallback(window, key, scancode, action, mode);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -44,9 +33,8 @@ OGLApp * OGLApp::app = nullptr;
 	{
 #ifdef USE_ANT
 		TwEventMousePosGLFW(xpos, ypos);
-
-		// app->v_MouseCallback(window, xpos, ypos);
 #endif
+		app->v_mouseCallback(window, xpos, ypos);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -55,9 +43,8 @@ OGLApp * OGLApp::app = nullptr;
 	{
 #ifdef USE_ANT
 		TwEventMouseWheelGLFW(xoffset);
-
-		// app->v_ScrollCallback(window, xoffset, yoffset);
 #endif
+		app->v_scrollCallback(window, xoffset, yoffset);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -155,7 +142,7 @@ void OGLApp::v_run()
 	while (!glfwWindowShouldClose(pWindow))
 	{
 		glfwPollEvents();
-		//v_Movement(pWindow);
+		v_movement(pWindow);
 
 		countFps();
 
@@ -164,12 +151,7 @@ void OGLApp::v_run()
 		GLfloat deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		//m_camera->update(deltaTime);
-#ifdef USE_CAMERA
-		m_pRender->v_update(m_camera->GetViewMatrix());
-#else
 		v_update();
-#endif
 		v_render();
 
 		 m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 30);
@@ -179,6 +161,8 @@ void OGLApp::v_run()
 
 		glfwSwapBuffers(pWindow);
 	}
+
+	v_shutdown();
 
 	glfwTerminate();
 }

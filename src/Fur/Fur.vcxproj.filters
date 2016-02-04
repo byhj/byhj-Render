@@ -99,9 +99,6 @@
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="sample.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="fur.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -177,9 +174,6 @@
       <Filter>Render\model</Filter>
     </ClInclude>
     <ClInclude Include="oglRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fur.h">

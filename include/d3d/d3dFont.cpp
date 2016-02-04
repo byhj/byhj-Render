@@ -25,7 +25,7 @@ namespace byhj
 			fontSize,// Font size
 			posX,// X position
 			posY,// Y position
-			0x000000ff,// Text color, 0xAaBbGgRr
+			0xffffffff,// Text color, 0xAaBbGgRr
 			FW1_RESTORESTATE// Flags (for example FW1_RESTORESTATE to keep context states unchanged)
 			);
 	}

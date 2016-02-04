@@ -141,7 +141,6 @@
     <ClCompile Include="MeshLoad.cpp" />
     <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="RotationGUI.cpp" />
-    <ClCompile Include="sample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -169,7 +168,6 @@
     <ClInclude Include="MeshLoad.h" />
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="RotationGUI.h" />
-    <ClInclude Include="sample.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

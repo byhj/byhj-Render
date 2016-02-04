@@ -17,13 +17,12 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		m_skybox = new Skybox;
-        m_skybox->init();
+        m_skybox.init();
 	}
 
 	void OGLRender::v_update()
 	{
-		m_skybox->update();
+		m_skybox.update();
 	}
 
     void OGLRender::v_render()
@@ -36,14 +35,12 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		m_skybox->render();
+		m_skybox.render();
 
     }
 	void OGLRender::v_shutdown()
 	{
-		m_skybox->shutdown();
-
-		delete m_skybox;
+		m_skybox.shutdown();
 	}
 
 }

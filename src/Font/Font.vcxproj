@@ -135,7 +135,6 @@
     <ClCompile Include="d3dRender.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +161,6 @@
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="d3dRender.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
