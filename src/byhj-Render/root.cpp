@@ -21,7 +21,7 @@ namespace byhj
 
 	void Root::beginScene()
 	{
-		m_pApp->v_run();
+
 	}
 
 	void Root::endScene()

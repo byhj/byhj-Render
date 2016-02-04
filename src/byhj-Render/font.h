@@ -8,7 +8,7 @@ namespace byhj
 	class Font {
 	public:
 		Font(); 
-		~Font();
+		virtual ~Font();
 
 	protected:
 		std::string m_dir;

@@ -9,11 +9,9 @@
 #include <memory>
 
 #include "app.h"
-#include "oglRender.h"
-#include "oglFont.h"
-#include "ogl/oglCamera.h"
 #include "windowInfo.h"
 #include <memory>
+#include "Triangle.h"
 
 #define USE_ANT
 
@@ -37,30 +35,10 @@ class OGLApp : public App
 		virtual void v_update()  {}
 		virtual void v_shutdown(){}
 protected:
-	//Render    *m_pRender = nullptr;
-	//OGLFont   m_pFont;
-	//OGLCamera *m_camera;
+
 	int sw ;
 	int sh ;
 	static  OGLApp* app;
-
-
-		//  void v_KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
-		//  {
-		//  	m_camera->key_callback(window, key, scancode, action, mode);
-		//  }
-		//  void v_Movement(GLFWwindow *window)
-		//  {
-		//  	m_camera->movement(window);
-		//  }
-		//  void v_MouseCallback(GLFWwindow* window, double xpos, double ypos)
-		//  {
-		//  	m_camera->mouse_callback(window, xpos, ypos);
-		//  }
-		//  void v_ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
-		//  {
-		//  	m_camera->scroll_callback(window, xoffset, yoffset);
-		//  }
 
 		static void glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode);
 		static void glfw_mouse(GLFWwindow* window, double xpos, double ypos);
@@ -70,13 +48,14 @@ protected:
 
 		 void countFps();
 		 float GetAspect() const;
+
 	protected:
 		std::string m_GLRenderer;
 		std::string m_GLVersion;
 		std::string m_GLSLVersion;
 		GLuint m_fps;
 		GLFWwindow *pWindow;
-	
+
 	};  //class
 
 }

@@ -27,11 +27,11 @@ namespace byhj
 		void init_vertexArray();
 		void init_shader();
 
-		GLuint m_program;
+		GLuint m_program ;
 		GLuint m_vao;
 		GLuint m_ibo;
 		GLuint m_vbo;
-		std::shared_ptr<OGLShader> m_TriangleShader;
+		OGLShader m_TriangleShader;
 	};
 }
 #endif

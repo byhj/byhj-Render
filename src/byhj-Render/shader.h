@@ -10,6 +10,7 @@ namespace byhj
 	public:
 	  Shader();
 	  virtual ~Shader();
+	
 	};
 }
 #endif

@@ -17,12 +17,12 @@
 namespace byhj
 {
 
-class OGLShader
+class OGLShader : public Shader
 {
 
 public:
 	OGLShader();
-	OGLShader(std::string name) :m_name(name) {}
+	OGLShader(std::string name);
 	~OGLShader();
 
 public:
@@ -30,14 +30,13 @@ public:
 	void attach(int type, const char *filename);
 	void link();
 	void info();
-	void use() const; 
-	void end() const;
+	void use(); 
+	void end();
 
-	GLuint getProgram() const;
+	GLuint getProgram();
 
-
+	std::string textFileRead(const char *fn);
 private:
-	std::string textFileRead(const char *fn) ;
 
 	GLuint m_program;  
 	std::string m_name;

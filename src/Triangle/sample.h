@@ -21,8 +21,7 @@ namespace byhj
 		void end();
 
 	private:					
-		std::shared_ptr<OGLApp>    m_pApp 	;
-		std::shared_ptr<OGLRender> m_pRender;
+		OGLRender *m_pRender;
 	};
 }
 #endif

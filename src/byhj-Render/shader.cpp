@@ -7,7 +7,6 @@ namespace byhj
 	{
 
 	}
-
 	Shader::~Shader()
 	{
 

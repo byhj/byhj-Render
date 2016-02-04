@@ -5,14 +5,22 @@
 namespace byhj
 {
 	OGLShader::OGLShader()
+		:m_program(0), m_name("")
 	{
 
 	}
+
+	OGLShader::OGLShader(std::string name) 
+		:m_name(name) 
+	{
+
+	}
+
 	OGLShader::~OGLShader()
 	{
 
 	}
-//read the Shadercode
+//read the Shader code
 std::string OGLShader::textFileRead(const char *fn) {  //read the OGLShader code
 
 	FILE *fp = nullptr;  
@@ -173,17 +181,17 @@ void OGLShader::info()
 	std::cout << "--------------------------------------------------------------------------------" << std::endl;
 }
 
-void OGLShader::use() const
+void OGLShader::use() 
 {
 	glUseProgram(m_program);
 }
-void OGLShader::end() const
+void OGLShader::end() 
 {
 	glUseProgram(0);
 	glDeleteProgram(m_program);
 }
 
-GLuint OGLShader::getProgram() const
+GLuint OGLShader::getProgram() 
 {
 	return m_program;
 }

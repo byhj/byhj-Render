@@ -1,15 +1,13 @@
-#include "sample.h"
+#include "oglRender.h"
 
-// #ifdef _DEBUG
-// #include <vld.h>
-// #endif
+ // #ifdef _DEBUG
+ // #include <vld.h>
+ // #endif
 
 int main()
-{
-	byhj::Sample sample;
-	sample.init();
-	sample.run();
-	sample.end();
+{   
+	byhj::OGLRender render;
+	render.run();
 
 	return 0;
 }

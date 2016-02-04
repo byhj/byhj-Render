@@ -108,6 +108,9 @@
     <ClCompile Include="..\byhj-Render\model.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
+    <ClCompile Include="oglApp.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="oglRender.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\model.h">
       <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="oglApp.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

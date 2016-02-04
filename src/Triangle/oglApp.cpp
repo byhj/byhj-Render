@@ -5,8 +5,6 @@ namespace byhj
 
 	OGLApp::OGLApp()
 	{
-	// m_pFont = new OGLFont;
-	// 	m_camera = new OGLCamera;
 	}
 
 	OGLApp::~OGLApp()
@@ -156,6 +154,7 @@ void OGLApp::run()
 	{
 		glfwPollEvents();
 		// v_Movement(pWindow);
+
 
 		countFps();
 

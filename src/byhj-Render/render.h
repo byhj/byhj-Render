@@ -12,14 +12,11 @@ namespace byhj
 		Render();
 		virtual ~Render();
 
-		virtual void v_init() {}
-		virtual void v_init(HWND hWnd) {}
-		virtual void v_update() {};
-		virtual void v_update(const glm::mat4 &camMat) {};
-		virtual void v_render()    = 0;
-		virtual void v_shutdown()  = 0;
-
-
+	public:
+		virtual void v_init() = 0;
+		virtual void v_update() = 0;
+		virtual void v_shutdown() = 0;
+		virtual void v_render() = 0;
 	};
 }
 #endif

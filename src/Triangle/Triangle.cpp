@@ -4,29 +4,29 @@ namespace byhj
 {
  ///////////////////Vertex Data////////////////////////////////
  
- static const GLfloat VertexData[] =
- {
- 	//Front
- 	-0.5f, -0.5f,  0.0f,
- 	0.5f, -0.5f,  0.0f,
- 	0.0f,  0.5f,  0.0f,
- };
- static const GLsizei VertexSize = sizeof(VertexData);
- 
- static const GLuint IndexData[] =
- {
- 	0, 1, 2,
- };
- static const GLsizei IndexSize = sizeof(IndexData);
+	static const GLfloat VertexData[] =
+	{
+		//Front
+		-0.5f, -0.5f,  0.0f,
+		0.5f, -0.5f,  0.0f,
+		0.0f,  0.5f,  0.0f,
+	};
+	static const GLsizei VertexSize = sizeof(VertexData);
 
- Triangle::Triangle()
- {
-	 m_TriangleShader = std::make_shared<OGLShader>();
- }
- Triangle::~Triangle()
- {
-	 m_TriangleShader = nullptr;
- }
+	static const GLuint IndexData[] =
+	{
+	   0, 1, 2,
+	};
+	static const GLsizei IndexSize = sizeof(IndexData);
+
+      Triangle::Triangle()
+     {
+     }
+
+     Triangle::~Triangle()
+     {
+     }
+
 	void Triangle::init()
 	{
 	
@@ -47,6 +47,7 @@ namespace byhj
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, IndexSize, IndexData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
+
 	void Triangle::init_vertexArray()
 	{
 	    glGenVertexArrays(1, &m_vao);
@@ -81,6 +82,7 @@ namespace byhj
 
 	void  Triangle::shutdown()
 	{
+
 		glDeleteProgram(m_program);
 		glDeleteBuffers(1, &m_ibo);
 		glDeleteBuffers(1, &m_vbo);
@@ -89,11 +91,11 @@ namespace byhj
 	}
 	void Triangle::init_shader()
 	{
-	 //  m_TriangleShader->init();
-	 //  m_TriangleShader->attach(GL_VERTEX_SHADER, "triangle.vert");
-	 //  m_TriangleShader->attach(GL_FRAGMENT_SHADER, "triangle.frag");
-	 //  m_TriangleShader->link();
-	 //  m_program = m_TriangleShader->getProgram();
+	    m_TriangleShader.init();
+	    m_TriangleShader.attach(GL_VERTEX_SHADER, "triangle.vert");
+	    m_TriangleShader.attach(GL_FRAGMENT_SHADER, "triangle.frag");
+	    m_TriangleShader.link();
+	    m_program = m_TriangleShader.getProgram();
 	}
 
 }
