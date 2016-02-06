@@ -13,20 +13,19 @@ namespace byhj
 	{
 
 	}
-	
+
 
 	void OGLRender::v_init()
 	{
-		m_cube = new Cube;
-        m_cube->init();
+		m_plane.init();
 	}
 
 	void OGLRender::v_update()
 	{
-		m_cube->update();
+		m_plane.update();
 	}
 
-    void OGLRender::v_render()
+	void OGLRender::v_render()
 	{
 		glEnable(GL_DEPTH_TEST);
 
@@ -36,14 +35,11 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		m_cube->render();
+		m_plane.render();
 
-    }
+	}
 	void OGLRender::v_shutdown()
 	{
-		m_cube->shutdown();
-
-		delete m_cube;
+		m_plane.shutdown();
 	}
-
 }

@@ -111,10 +111,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="cube.frag" />
-    <None Include="cube.vert" />
-    <None Include="font.frag" />
-    <None Include="font.vert" />
+    <None Include="light.frag" />
+    <None Include="light.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
@@ -138,11 +136,10 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="sample.cpp" />
+    <ClCompile Include="Plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -166,10 +163,9 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h" />
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="Cube.h" />
     <ClInclude Include="LightGUI.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="sample.h" />
+    <ClInclude Include="Plane.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

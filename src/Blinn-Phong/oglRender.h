@@ -1,14 +1,14 @@
 #ifndef OGLRender_H
 #define OGLRender_H
 
-#include "render.h"
-#include "cube.h"
+#include "ogl/oglapp.h"
+#include "plane.h"
 #include <memory>
 #include <gl/glew.h>
 
 namespace byhj
 {
-	class OGLRender : public Render
+	class OGLRender : public OGLApp
 	{
 	public:
 		OGLRender();
@@ -20,7 +20,7 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		Cube *m_cube = nullptr;
+		Plane m_plane;
 	};
 }
 #endif

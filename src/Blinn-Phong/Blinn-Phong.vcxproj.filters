@@ -33,27 +33,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cube.frag">
+    <None Include="light.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="font.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="font.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="cube.vert">
+    <None Include="light.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="oglRender.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sample.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -125,15 +113,12 @@
     <ClCompile Include="..\byhj-Render\model.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="oglRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LightGUI.h">
@@ -201,6 +186,9 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\model.h">
       <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
