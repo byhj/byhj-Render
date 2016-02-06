@@ -8,7 +8,7 @@ namespace byhj
 		pSoundEngine = irrklang::createIrrKlangDevice();
 
 		if (pSoundEngine == nullptr) {
-		   std::cerr << "Cound not init sound engine" << std::endl;
+		   std::cerr << "Can not init the sound engine" << std::endl;
 		}
 
 	}
@@ -18,7 +18,7 @@ namespace byhj
 
 	}
 
-	std::shared_ptr<SoundMgr> getInstance()
+	std::shared_ptr<SoundMgr> SoundMgr::getInstance()
 	{
 		static std::shared_ptr<SoundMgr> pInstance = std::make_shared<SoundMgr>();
 
