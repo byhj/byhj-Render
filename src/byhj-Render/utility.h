@@ -12,7 +12,7 @@ namespace byhj
 {
 #define ARRAY_SIZE(arr) sizeof(arr) / sizeof(arr[0])
 #define SAFE_DELETE(ptr) if (ptr != nullptr) { delete ptr; ptr = nullptr; }
-#define GL_BUFFER_OFFSET(arr) { (GLvoid*)(nullptr + offset) }
+#define GL_BUFFER_OFFSET(offset)  (GLvoid*)(NULL + offset) 
 
 const GLuint OGL_ZERO = 0x00000000;
 const GLuint OGL_ONE  = 0xffffffff;
