@@ -63,7 +63,7 @@ namespace byhj
 		glm::mat4 view  =  glm::lookAt(glm::vec3(0.0f, 3.5f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 proj  =  glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 
-		glm::vec3 camPos = glm::vec3(0.0f, 2.5f, 5.0f);
+		glm::vec3 camPos = glm::vec3(0.0f, 3.5f, 5.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &view[0][0]);
