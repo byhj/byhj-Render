@@ -53,7 +53,6 @@ namespace byhj {
 		init_shader();
 		init_buffer();
 		init_vertexArray();
-
 	}
 
 	void Bezier::update()
@@ -63,11 +62,10 @@ namespace byhj {
 
 	void Bezier::render()
 	{
-		static float currentTime =  glfwGetTime() / 1000.0f;
+		float currentTime =  glfwGetTime();
 		static double last_time = 0.0;
 		static double total_time = 0.0;
 
-		currentTime += 0.001;
 		total_time += (currentTime - last_time);
 		last_time = currentTime;
 		float t = (float)total_time;
@@ -90,26 +88,26 @@ namespace byhj {
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-
 		////////////////////////////////////////////////////////////////////////////
 		glUseProgram(m_bezierVar.program);
 		glBindVertexArray(m_bezierVar.vao);
 
 		glm::mat4 proj  = glm::perspective(50.0f, 1.0f, 1.0f, 1000.0f);
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -4.0f) )
-			* glm::rotate(glm::mat4(1.0f), t * 10.0f, glm::vec3(0.0f, 1.0f, 0.0f) )
-			* glm::rotate(glm::mat4(1.0f), t * 17.0f, glm::vec3(1.0f, 0.0f, 0.0f) );
+			* glm::rotate(glm::mat4(1.0f), glm::radians(t * 20.0f), glm::vec3(0.0f, 1.0f, 0.0f) )
+			* glm::rotate(glm::mat4(1.0f), glm::radians(t * 34.0f), glm::vec3(1.0f, 0.0f, 0.0f) );
 		glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(m_bezierVar.mv_loc, 1, GL_FALSE, &(view * model)[0][0]);
 		glUniformMatrix4fv(m_bezierVar.proj_loc, 1, GL_FALSE, &proj[0][0]);
 
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
-		//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		glPatchParameteri(GL_PATCH_VERTICES, 16);
 		glDrawArrays(GL_PATCHES, 0, 16);
+		
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		glBindVertexArray(0);
 		glUseProgram(0);
@@ -121,14 +119,12 @@ namespace byhj {
 		glm::mat4 mvp = proj * view * model;
 		glUniformMatrix4fv(m_cvVar.mvp_loc, 1, GL_FALSE, &mvp[0][0]);
 
-
-		// glPointSize(9.0f);
-		// glUniform4fv(m_cvVar.color_loc, 1, &(glm::vec4(0.2f, 0.7f, 0.9f, 1.0f))[0]);
-		// glDrawArrays(GL_POINTS, 0, 16);
-	
+		glPointSize(9.0f);
+		glUniform4fv(m_cvVar.color_loc, 1, &(glm::vec4(0.2f, 0.7f, 0.9f, 1.0f))[0]);
+		glDrawArrays(GL_POINTS, 0, 16);
 
 		glUniform4fv(m_cvVar.color_loc, 1, &(glm::vec4(0.7f, 0.9f, 0.2f, 1.0f))[0]);
-		glDrawElements(GL_LINES, 48, GL_UNSIGNED_SHORT, NULL);
+		glDrawElements(GL_LINES, 48, GL_UNSIGNED_INT, NULL);
 	
 		glBindVertexArray(0);
 		glUseProgram(0);
