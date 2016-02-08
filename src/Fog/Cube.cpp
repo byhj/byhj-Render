@@ -2,6 +2,7 @@
 #include <glfw/glfw3.h>
 #include "Utility.h"
 #include "textureMgr.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
@@ -89,6 +90,7 @@ namespace byhj
 		init_vertexArray();
 		init_texture();
 
+		m_fogGui.v_init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
 	}
 
 	void Cube::init_buffer()
@@ -156,6 +158,8 @@ namespace byhj
 
 		glBindVertexArray(0);
 		glUseProgram(0);
+
+		m_fogGui.v_render();
 	}
 
 	void  Cube::shutdown()

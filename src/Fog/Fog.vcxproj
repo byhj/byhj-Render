@@ -133,6 +133,7 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="FogGui.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="FogGui.h" />
     <ClInclude Include="oglRender.h" />
   </ItemGroup>
   <ItemGroup>

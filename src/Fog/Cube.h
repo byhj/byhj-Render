@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "ogl/oglShader.h"
-
+#include "FogGui.h"
 namespace byhj
 {
 	class Cube
@@ -39,6 +39,7 @@ namespace byhj
 		GLuint u_boxTex;
 	   std::vector<GLfloat> m_VertexData;
 	   std::vector<GLuint>  m_IndexData;
+	   FogGui m_fogGui;
 
 	   OGLShader m_CubeShader ={ "CubeShader" };
 	};
