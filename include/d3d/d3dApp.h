@@ -63,7 +63,7 @@ protected:
 	int   m_PosX;
 	int   m_PosY;
 
-	LPCTSTR m_AppName      = L"DirectX11:";
+	LPCTSTR m_AppName      = L"DirectX:";
 	LPCTSTR m_WndClassName = L"Window";
 
 	//void      GetVideoCardInfo(char &, int &);
