@@ -4,9 +4,16 @@ const float Infinity = FLT_MAX;
 
 namespace byhj
 {
-		void Geometry::createCube(float width, float height, float depth, d3d::MeshData &mesh)
+
+	std::shared_ptr<Geometry> Geometry::getInstance()
+	{
+		static auto pInstance = std::make_shared<Geometry>();
+		return pInstance;
+	}
+
+		void Geometry::createCube(float width, float height, float depth, D3DMeshData &mesh)
 		{
-			d3d::Vertex vertex[24];
+			D3DVertex vertex[24];
 
 			float w2 = 0.5f * width;
 			float h2 = 0.5f * height;
@@ -14,40 +21,40 @@ namespace byhj
 
 			//                    Position         Normal          TexCoord
 			// Fill in the front face vertex data.
-			vertex[0] = d3d::Vertex(-w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f);
-			vertex[1] = d3d::Vertex(-w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f);
-			vertex[2] = d3d::Vertex(+w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f);
-			vertex[3] = d3d::Vertex(+w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f);
+			vertex[0] = D3DVertex(-w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f);
+			vertex[1] = D3DVertex(-w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f);
+			vertex[2] = D3DVertex(+w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f);
+			vertex[3] = D3DVertex(+w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f);
 
 			// Fill in the back face vertex data.
-			vertex[4] = d3d::Vertex(-w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
-			vertex[5] = d3d::Vertex(+w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-			vertex[6] = d3d::Vertex(+w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
-			vertex[7] = d3d::Vertex(-w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
+			vertex[4] = D3DVertex(-w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+			vertex[5] = D3DVertex(+w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f);
+			vertex[6] = D3DVertex(+w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
+			vertex[7] = D3DVertex(-w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
 
 			// Fill in the top face vertex data.
-			vertex[8]  = d3d::Vertex(-w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
-			vertex[9]  = d3d::Vertex(-w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
-			vertex[10] = d3d::Vertex(+w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
-			vertex[11] = d3d::Vertex(+w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
+			vertex[8]  = D3DVertex(-w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
+			vertex[9]  = D3DVertex(-w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+			vertex[10] = D3DVertex(+w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
+			vertex[11] = D3DVertex(+w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
 
 			// Fill in the bottom face vertex data.
-			vertex[12] = d3d::Vertex(-w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f);
-			vertex[13] = d3d::Vertex(+w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
-			vertex[14] = d3d::Vertex(+w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f);
-			vertex[15] = d3d::Vertex(-w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f);
+			vertex[12] = D3DVertex(-w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f);
+			vertex[13] = D3DVertex(+w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
+			vertex[14] = D3DVertex(+w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f);
+			vertex[15] = D3DVertex(-w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f);
 
 			// Fill in the left face vertex data.
-			vertex[16] = d3d::Vertex(-w2, -h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
-			vertex[17] = d3d::Vertex(-w2, +h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-			vertex[18] = d3d::Vertex(-w2, +h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-			vertex[19] = d3d::Vertex(-w2, -h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+			vertex[16] = D3DVertex(-w2, -h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+			vertex[17] = D3DVertex(-w2, +h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+			vertex[18] = D3DVertex(-w2, +h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+			vertex[19] = D3DVertex(-w2, -h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
 
 			// Fill in the right face vertex data.
-			vertex[20] = d3d::Vertex(+w2, -h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
-			vertex[21] = d3d::Vertex(+w2, +h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-			vertex[22] = d3d::Vertex(+w2, +h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-			vertex[23] = d3d::Vertex(+w2, -h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+			vertex[20] = D3DVertex(+w2, -h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+			vertex[21] = D3DVertex(+w2, +h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+			vertex[22] = D3DVertex(+w2, +h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+			vertex[23] = D3DVertex(+w2, -h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
 
 			mesh.VertexData.assign(vertex, vertex + 24);
 
@@ -80,9 +87,9 @@ namespace byhj
 			mesh.IndexData.assign(index, index + 36);
 		}
 
-		void Geometry::createCube(float width, float height, float depth, ogl::MeshData &mesh)
+		void Geometry::createCube(float width, float height, float depth, OGLMeshData &mesh)
 		{
-			ogl::Vertex vertex[24];
+			OGLVertex vertex[24];
 
 			float w2 = 0.5f * width;
 			float h2 = 0.5f * height;
@@ -90,40 +97,40 @@ namespace byhj
 
 			//                    Position         Normal          TexCoord
 			// Fill in the front face vertex data.
-			vertex[0] = ogl::Vertex(-w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f);
-			vertex[1] = ogl::Vertex(-w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f);
-			vertex[2] = ogl::Vertex(+w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f);
-			vertex[3] = ogl::Vertex(+w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f);
+			vertex[0] = OGLVertex(-w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f);
+			vertex[1] = OGLVertex(-w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f);
+			vertex[2] = OGLVertex(+w2, +h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f);
+			vertex[3] = OGLVertex(+w2, -h2, -d2, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f);
 
 			// Fill in the back face vertex data.
-			vertex[4] = ogl::Vertex(-w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
-			vertex[5] = ogl::Vertex(+w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-			vertex[6] = ogl::Vertex(+w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
-			vertex[7] = ogl::Vertex(-w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
+			vertex[4] = OGLVertex(-w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+			vertex[5] = OGLVertex(+w2, -h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f);
+			vertex[6] = OGLVertex(+w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
+			vertex[7] = OGLVertex(-w2, +h2, +d2, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
 
 			// Fill in the top face vertex data.
-			vertex[8]  = ogl::Vertex(-w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
-			vertex[9]  = ogl::Vertex(-w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
-			vertex[10] = ogl::Vertex(+w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
-			vertex[11] = ogl::Vertex(+w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
+			vertex[8]  = OGLVertex(-w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
+			vertex[9]  = OGLVertex(-w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+			vertex[10] = OGLVertex(+w2, +h2, +d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
+			vertex[11] = OGLVertex(+w2, +h2, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
 
 			// Fill in the bottom face vertex data.
-			vertex[12] = ogl::Vertex(-w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f);
-			vertex[13] = ogl::Vertex(+w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
-			vertex[14] = ogl::Vertex(+w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f);
-			vertex[15] = ogl::Vertex(-w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f);
+			vertex[12] = OGLVertex(-w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f);
+			vertex[13] = OGLVertex(+w2, -h2, -d2, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
+			vertex[14] = OGLVertex(+w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f);
+			vertex[15] = OGLVertex(-w2, -h2, +d2, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f);
 
 			// Fill in the left face vertex data.
-			vertex[16] = ogl::Vertex(-w2, -h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
-			vertex[17] = ogl::Vertex(-w2, +h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-			vertex[18] = ogl::Vertex(-w2, +h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-			vertex[19] = ogl::Vertex(-w2, -h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+			vertex[16] = OGLVertex(-w2, -h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+			vertex[17] = OGLVertex(-w2, +h2, +d2, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+			vertex[18] = OGLVertex(-w2, +h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+			vertex[19] = OGLVertex(-w2, -h2, -d2, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
 
 			// Fill in the right face vertex data.
-			vertex[20] = ogl::Vertex(+w2, -h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
-			vertex[21] = ogl::Vertex(+w2, +h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-			vertex[22] = ogl::Vertex(+w2, +h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-			vertex[23] = ogl::Vertex(+w2, -h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+			vertex[20] = OGLVertex(+w2, -h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+			vertex[21] = OGLVertex(+w2, +h2, -d2, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+			vertex[22] = OGLVertex(+w2, +h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+			vertex[23] = OGLVertex(+w2, -h2, +d2, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f);
 
 			mesh.VertexData.assign(vertex, vertex + 24);
 
@@ -157,17 +164,17 @@ namespace byhj
 		}
 		//void CreateSphere(int radius, MeshData &mesh);
 
-		void Geometry::createPlane(float width, float depth, d3d::MeshData &mesh)
+		void Geometry::createPlane(float width, float depth, D3DMeshData &mesh)
 		{
 
 			float w2 = width  * 0.5f;
 			float d2 = depth * 0.5f;
 
-			ogl::Vertex vertex[4];
-			vertex[0] = ogl::Vertex(-w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
-			vertex[1] = ogl::Vertex(-w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
-			vertex[2] = ogl::Vertex(w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
-			vertex[3] = ogl::Vertex(w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
+			D3DVertex vertex[4];
+			vertex[0] = D3DVertex(-w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
+			vertex[1] = D3DVertex(-w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+			vertex[2] = D3DVertex(w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
+			vertex[3] = D3DVertex(w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
 
 			mesh.VertexData.assign(vertex, vertex + 4);
 
@@ -182,17 +189,17 @@ namespace byhj
 			mesh.IndexData.assign(index, index + 6);
 		}
 
-		void Geometry::createPlane(float width, float depth, ogl::MeshData &mesh)
+		void Geometry::createPlane(float width, float depth, OGLMeshData &mesh)
 		{
 
 			float w2 = width  * 0.5f;
 			float d2 = depth * 0.5f;
 
-			ogl::Vertex vertex[4];
-			vertex[0] = ogl::Vertex(-w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
-			vertex[1] = ogl::Vertex(-w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
-			vertex[2] = ogl::Vertex(w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
-			vertex[3] = ogl::Vertex(w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
+			OGLVertex vertex[4];
+			vertex[0] = OGLVertex(-w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f);
+			vertex[1] = OGLVertex(-w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+			vertex[2] = OGLVertex(w2, 0.0f, d2, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
+			vertex[3] = OGLVertex(w2, 0.0f, -d2, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f);
 
 			mesh.VertexData.assign(vertex, vertex + 4);
 
@@ -207,7 +214,7 @@ namespace byhj
 			mesh.IndexData.assign(index, index + 6);
 		}
 
-		void Geometry::createGrid(float width, float depth, UINT m, UINT n, d3d::MeshData& mesh)
+		void Geometry::createGrid(float width, float depth, UINT m, UINT n, D3DMeshData& mesh)
 		{
 			UINT vertexCount = m * n;
 			UINT faceCount   = (m - 1) * (n - 1) * 2;
@@ -253,7 +260,7 @@ namespace byhj
 				}
 			}
 		}
-		void Geometry::createGrid(float width, float depth, UINT m, UINT n, ogl::MeshData& mesh)
+		void Geometry::createGrid(float width, float depth, UINT m, UINT n, OGLMeshData& mesh)
 		{
 			UINT vertexCount = m * n;
 			UINT faceCount   = (m - 1) * (n - 1) * 2;
@@ -301,7 +308,7 @@ namespace byhj
 		}
 
 
-		void Geometry::createSphere(float radius, UINT sliceCount, UINT stackCount, d3d::MeshData& meshData)
+		void Geometry::createSphere(float radius, UINT sliceCount, UINT stackCount, D3DMeshData& meshData)
 		{
 			//
 			// Compute the vertices stating at the top pole and moving down the stacks.
@@ -310,8 +317,8 @@ namespace byhj
 			// Poles: note that there will be texture coordinate distortion as there is
 			// not a unique point on the texture map to assign to the pole when mapping
 			// a rectangular texture onto a sphere.
-			d3d::Vertex topVertex(0.0f, +radius, 0.0f, 0.0f, +1.0f, 0.0f, 0.0f, 0.0f);
-			d3d::Vertex bottomVertex(0.0f, -radius, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
+			D3DVertex topVertex(0.0f, +radius, 0.0f, 0.0f, +1.0f, 0.0f, 0.0f, 0.0f);
+			D3DVertex bottomVertex(0.0f, -radius, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
 
 			meshData.VertexData.push_back(topVertex);
 
@@ -328,7 +335,7 @@ namespace byhj
 				{
 					float theta = j*thetaStep;
 
-					d3d::Vertex v;
+					D3DVertex v;
 
 					// spherical to cartesian
 					v.position.x = radius * sinf(phi) * cosf(theta);
@@ -396,7 +403,7 @@ namespace byhj
 			}
 		}
 
-		void Geometry::createSphere(float radius, UINT sliceCount, UINT stackCount, ogl::MeshData& meshData)
+		void Geometry::createSphere(float radius, UINT sliceCount, UINT stackCount, OGLMeshData& meshData)
 		{
 			//
 			// Compute the vertices stating at the top pole and moving down the stacks.
@@ -405,8 +412,8 @@ namespace byhj
 			// Poles: note that there will be texture coordinate distortion as there is
 			// not a unique point on the texture map to assign to the pole when mapping
 			// a rectangular texture onto a sphere.
-			ogl::Vertex topVertex(0.0f, +radius, 0.0f, 0.0f, +1.0f, 0.0f, 0.0f, 0.0f);
-			ogl::Vertex bottomVertex(0.0f, -radius, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
+			OGLVertex topVertex(0.0f, +radius, 0.0f, 0.0f, +1.0f, 0.0f, 0.0f, 0.0f);
+			OGLVertex bottomVertex(0.0f, -radius, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f);
 
 			meshData.VertexData.push_back(topVertex);
 
@@ -423,7 +430,7 @@ namespace byhj
 				{
 					float theta = j*thetaStep;
 
-					ogl::Vertex v;
+					OGLVertex v;
 
 					// spherical to cartesian
 					v.position.x = radius * sinf(phi) * cosf(theta);
