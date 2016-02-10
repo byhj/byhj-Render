@@ -1,5 +1,5 @@
-#ifndef d3dRender_H
-#define d3dRender_H
+#ifndef D3D11Render_H
+#define D3D11Render_H
 
 #include "d3d/d3dApp.h"
 #include "d3d/d3dFont.h"
@@ -12,11 +12,11 @@
 
 namespace byhj
 {
-	class D3DRender : public D3DApp
+	class D3D11Render : public D3DApp
 	{
 	public:
-		D3DRender();
-		~D3DRender();
+		D3D11Render();
+		~D3D11Render();
 
 		void v_init() ;
 		void v_update();

@@ -45,6 +45,7 @@ public:
 	virtual void v_update()   {}
 	virtual void v_render()   {}
 	virtual void v_shutdown() {}
+	virtual void v_setOGL() {}
 
 	LRESULT CALLBACK MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 

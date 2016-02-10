@@ -1,30 +1,30 @@
-#include "d3dRender.h"
+#include "D3D11Render.h"
 #include "windowInfo.h"
 
 namespace byhj
 {
 
-	D3DRender::D3DRender()
+	D3D11Render::D3D11Render()
 	{
 
 	}
-	D3DRender::~D3DRender()
+	D3D11Render::~D3D11Render()
 	{
 
 	}
-	void D3DRender::v_init()
+	void D3D11Render::v_init()
 	{
 		init_device();
 		init_camera();
 		init_object();
 	}
 
-	void D3DRender::v_update()
+	void D3D11Render::v_update()
 	{
 
 	}
 
-	void D3DRender::v_render()
+	void D3D11Render::v_render()
 	{
 		float bgColor[4] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 
@@ -38,13 +38,13 @@ namespace byhj
 		m_pSwapChain->Present(0, 0);
 	}
 
-    void D3DRender::v_shutdown()
+    void D3D11Render::v_shutdown()
     {
     
     }
 
 
-    void D3DRender::init_device()
+    void D3D11Render::init_device()
     {
     
 		////////////////////////Create buffer desc////////////////////////////
@@ -146,7 +146,7 @@ namespace byhj
     
     }
     
-    void D3DRender::init_camera()
+    void D3D11Render::init_camera()
     {
     	//view port Information
     	D3D11_VIEWPORT vp;
@@ -161,13 +161,13 @@ namespace byhj
     
     }
     
-    void D3DRender::init_object()
+    void D3D11Render::init_object()
     {
     	m_Timer.Reset();
     	m_Font.init(m_pD3D11Device);
     }
     
-	void D3DRender::drawfps()
+	void D3D11Render::drawfps()
 	{
 		static bool flag = true;
 		if (flag)
@@ -192,7 +192,7 @@ namespace byhj
 
 		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 60);
 	}
-    void D3DRender::drawInfo()
+    void D3D11Render::drawInfo()
     {
     	WCHAR WinInfo[255];
     	swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight() );

@@ -33,14 +33,14 @@ namespace byhj
 
 		static const UINT FrameCount = 2;
 
-		ComPtr<IDXGISwapChain3> m_pSwapChain;
-		ComPtr<ID3D12Device>    m_pD3D12Device;
-		ComPtr<ID3D12Fence>     m_pD3D12Fence;
-		ComPtr<ID3D12Resource>   m_pRenderTargets[FrameCount];
-		ComPtr<ID3D12CommandAllocator> m_pCommandAllocator;
-		ComPtr<ID3D12CommandQueue> m_pCommandQueue;
-		ComPtr<ID3D12DescriptorHeap> m_pRTVHeap;
-		ComPtr<ID3D12PipelineState> m_pPipelineState;
+		ComPtr<IDXGISwapChain3>           m_pSwapChain;
+		ComPtr<ID3D12Device>              m_pD3D12Device;
+		ComPtr<ID3D12Fence>               m_pD3D12Fence;
+		ComPtr<ID3D12Resource>            m_pRenderTargets[FrameCount];
+		ComPtr<ID3D12CommandAllocator>    m_pCommandAllocator;
+		ComPtr<ID3D12CommandQueue>        m_pCommandQueue;
+		ComPtr<ID3D12DescriptorHeap>      m_pRTVHeap;
+		ComPtr<ID3D12PipelineState>       m_pPipelineState;
 		ComPtr<ID3D12GraphicsCommandList> m_pCommandList;
 
 		UINT   m_RTVDescriptorSize;

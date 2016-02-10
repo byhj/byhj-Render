@@ -136,9 +136,10 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="d3d12Render.cpp" />
-    <ClCompile Include="d3dRender.cpp" />
+    <ClCompile Include="d3d11Render.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="oglWin32App.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -167,8 +168,9 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="d3d12Render.h" />
-    <ClInclude Include="d3dRender.h" />
+    <ClInclude Include="d3d11Render.h" />
     <ClInclude Include="oglRender.h" />
+    <ClInclude Include="oglWin32App.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

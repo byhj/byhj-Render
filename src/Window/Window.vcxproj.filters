@@ -39,9 +39,6 @@
     <ClCompile Include="d3d12Render.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="d3dRender.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -117,12 +114,15 @@
     <ClCompile Include="..\..\include\d3d\d3dFont.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
+    <ClCompile Include="d3d11Render.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oglWin32App.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3d12Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="d3dRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="oglRender.h">
@@ -202,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dFont.h">
       <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d11Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="oglWin32App.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

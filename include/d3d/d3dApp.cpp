@@ -98,6 +98,8 @@ bool D3DApp::init_window()
 		return 1;
 	}
 
+	v_setOGL();
+
 	ShowWindow(m_hWnd, SW_SHOW);
 	SetForegroundWindow(m_hWnd);
 	SetFocus(m_hWnd);
