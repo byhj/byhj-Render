@@ -133,12 +133,10 @@ void OGLApp::v_run()
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
 
-
-	v_init();
+	glViewport(0, 0, sw, sh);
 	m_pFont.init(sw, sh);
 
-	glViewport(0, 0, sw, sh);
-
+	v_init();
 	while (!glfwWindowShouldClose(pWindow))
 	{
 		glfwPollEvents();

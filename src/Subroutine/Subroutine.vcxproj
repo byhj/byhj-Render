@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3B7C4DBD-F13A-4B01-B213-73D29C9042FF}</ProjectGuid>
+    <RootNamespace>Subroutine</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\byhj-Render(x86).props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
+    <ClCompile Include="..\byhj-Render\app.cpp" />
+    <ClCompile Include="..\byhj-Render\camera.cpp" />
+    <ClCompile Include="..\byhj-Render\font.cpp" />
+    <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\gui.cpp" />
+    <ClCompile Include="..\byhj-Render\mesh.cpp" />
+    <ClCompile Include="..\byhj-Render\mgr.cpp" />
+    <ClCompile Include="..\byhj-Render\model.cpp" />
+    <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\object.cpp" />
+    <ClCompile Include="..\byhj-Render\render.cpp" />
+    <ClCompile Include="..\byhj-Render\root.cpp" />
+    <ClCompile Include="..\byhj-Render\shader.cpp" />
+    <ClCompile Include="..\byhj-Render\shaderMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\timer.cpp" />
+    <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="plane.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\ogl\oglApp.h" />
+    <ClInclude Include="..\..\include\ogl\oglCamera.h" />
+    <ClInclude Include="..\..\include\ogl\oglFont.h" />
+    <ClInclude Include="..\..\include\ogl\oglShader.h" />
+    <ClInclude Include="..\byhj-Render\app.h" />
+    <ClInclude Include="..\byhj-Render\camera.h" />
+    <ClInclude Include="..\byhj-Render\font.h" />
+    <ClInclude Include="..\byhj-Render\fontMgr.h" />
+    <ClInclude Include="..\byhj-Render\gui.h" />
+    <ClInclude Include="..\byhj-Render\mesh.h" />
+    <ClInclude Include="..\byhj-Render\mgr.h" />
+    <ClInclude Include="..\byhj-Render\model.h" />
+    <ClInclude Include="..\byhj-Render\modelMgr.h" />
+    <ClInclude Include="..\byhj-Render\object.h" />
+    <ClInclude Include="..\byhj-Render\render.h" />
+    <ClInclude Include="..\byhj-Render\root.h" />
+    <ClInclude Include="..\byhj-Render\shader.h" />
+    <ClInclude Include="..\byhj-Render\shaderMgr.h" />
+    <ClInclude Include="..\byhj-Render\textureMgr.h" />
+    <ClInclude Include="..\byhj-Render\timer.h" />
+    <ClInclude Include="..\byhj-Render\windowInfo.h" />
+    <ClInclude Include="oglRender.h" />
+    <ClInclude Include="Plane.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="subroutine.frag" />
+    <None Include="subroutine.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
