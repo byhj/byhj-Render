@@ -134,8 +134,9 @@ void OGLApp::v_run()
 	// Create a GLFWwindow object that we can use for GLFW's functions
 
 	glViewport(0, 0, sw, sh);
+#ifdef USE_FONT
 	m_pFont.init(sw, sh);
-
+#endif
 	v_init();
 	while (!glfwWindowShouldClose(pWindow))
 	{
@@ -151,12 +152,12 @@ void OGLApp::v_run()
 
 		v_update();
 		v_render();
-
+#ifdef USE_FONT
 		 m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 30);
 		 m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 60);
 		 m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 90);
 		 m_pFont.render("FPS: " + std::to_string(m_fps), 10, 30);
-
+#endif
 		glfwSwapBuffers(pWindow);
 	}
 

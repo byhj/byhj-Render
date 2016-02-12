@@ -93,6 +93,9 @@ namespace byhj
 
 	void Cube::render()
 	{
+		// Notice the gl_scissor_test , scissor test is that when you clear the
+		// framebuffer using glClear() or glClearBufferfv(), the first scissor rectangle is applied as well.
+		glEnable(GL_SCISSOR_TEST);
 		glBindVertexArray(m_vao);
 		glUseProgram(m_program);
 
@@ -100,6 +103,7 @@ namespace byhj
 
 		glBindVertexArray(0);
 		glUseProgram(0);
+		glDisable(GL_SCISSOR_TEST);
 	}
 
 	void  Cube::shutdown()
@@ -166,27 +170,27 @@ namespace byhj
 		auto sw = WindowInfo::getInstance()->getWidth();
 		auto sh = WindowInfo::getInstance()->getHeight();
 
-		// Each rectangle will be 7/16 of the screen
-		float viewport_width = (float)(7 * sw) / 16.0f;
-		float viewport_height = (float)(7 * sh) / 16.0f;
 
-		// Four rectangles - lower left first...
-		glViewportIndexedf(0, 0, 0, viewport_width, viewport_height);
 
-		// Lower right...
-		glViewportIndexedf(1,
-			sw - viewport_width, 0,
-			viewport_width, viewport_height);
-
-		// Upper left...
-		glViewportIndexedf(2,
-			0, sh - viewport_height,
-			viewport_width, viewport_height);
-
+		static const int width = sw;
+		static const int height = sh;
+		int scissor_width = (7 * width) / 16; // 7/16window
+		int scissor_height = (7 * height) / 16;
+		// Lower left...
+		glScissorIndexed(0,     //index
+			0, 0, //left bottom
+			scissor_width, scissor_height); // width height
+											// Lower right...
+		glScissorIndexed(1,
+			width - scissor_width, 0,
+			width - scissor_width, scissor_height);
+		//Upper left...
+		glScissorIndexed(2,
+			0, height - scissor_height,
+			scissor_width, scissor_height);
 		// Upper right...
-		glViewportIndexedf(3,
-			sw - viewport_width,
-			sh - viewport_height,
-			viewport_width, viewport_height);
+		glScissorIndexed(3,
+			width - scissor_width, height - scissor_height,
+			scissor_width, scissor_height);
 	}
 }

@@ -183,6 +183,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Subroutine", "src\Subroutin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Multi-Viewport", "src\Multi-Viewport\Multi-Viewport.vcxproj", "{0C79BFEA-80DC-455E-B13D-ADAE04FCFE20}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Multi-Scissor", "src\Multi-Scissor\Multi-Scissor.vcxproj", "{431003DB-6ADA-4410-B166-120399189D97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -775,6 +777,14 @@ Global
 		{0C79BFEA-80DC-455E-B13D-ADAE04FCFE20}.Release|x64.Build.0 = Release|x64
 		{0C79BFEA-80DC-455E-B13D-ADAE04FCFE20}.Release|x86.ActiveCfg = Release|Win32
 		{0C79BFEA-80DC-455E-B13D-ADAE04FCFE20}.Release|x86.Build.0 = Release|Win32
+		{431003DB-6ADA-4410-B166-120399189D97}.Debug|x64.ActiveCfg = Debug|x64
+		{431003DB-6ADA-4410-B166-120399189D97}.Debug|x64.Build.0 = Debug|x64
+		{431003DB-6ADA-4410-B166-120399189D97}.Debug|x86.ActiveCfg = Debug|Win32
+		{431003DB-6ADA-4410-B166-120399189D97}.Debug|x86.Build.0 = Debug|Win32
+		{431003DB-6ADA-4410-B166-120399189D97}.Release|x64.ActiveCfg = Release|x64
+		{431003DB-6ADA-4410-B166-120399189D97}.Release|x64.Build.0 = Release|x64
+		{431003DB-6ADA-4410-B166-120399189D97}.Release|x86.ActiveCfg = Release|Win32
+		{431003DB-6ADA-4410-B166-120399189D97}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -867,5 +877,6 @@ Global
 		{8D5ACADB-9ABF-498A-9304-E787C38D7C88} = {945A6EBD-8771-481C-9B34-977B07DA0C4D}
 		{3B7C4DBD-F13A-4B01-B213-73D29C9042FF} = {6C489D7E-03BA-42FF-922E-E761E787ECC8}
 		{0C79BFEA-80DC-455E-B13D-ADAE04FCFE20} = {6C489D7E-03BA-42FF-922E-E761E787ECC8}
+		{431003DB-6ADA-4410-B166-120399189D97} = {6C489D7E-03BA-42FF-922E-E761E787ECC8}
 	EndGlobalSection
 EndGlobal

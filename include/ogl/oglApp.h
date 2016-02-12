@@ -16,6 +16,7 @@
 #include <memory>
 
 #define USE_ANT
+//#define USE_FONT
 
 namespace byhj 
 {
