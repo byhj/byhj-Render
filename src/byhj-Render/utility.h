@@ -10,6 +10,22 @@ using namespace DirectX;
 
 namespace byhj
 {
+
+	// Random number generator
+	static unsigned int seed = 0x13371337;
+
+	static inline float random_float() //Ëæ»úÊý
+	{
+		float res;
+		unsigned int tmp;
+
+		seed *= 16807;
+		tmp = seed ^ (seed >> 4) ^ (seed << 15);
+		*((unsigned int *)&res) = (tmp >> 9) | 0x3F800000;
+
+		return (res - 1.0f);
+	}
+
 #define ARRAY_SIZE(arr) sizeof(arr) / sizeof(arr[0])
 #define SAFE_DELETE(ptr) if (ptr != nullptr) { delete ptr; ptr = nullptr; }
 #define GL_BUFFER_OFFSET(offset)  (GLvoid*)(NULL + offset) 
