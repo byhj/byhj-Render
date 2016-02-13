@@ -52,7 +52,25 @@ namespace byhj
 		SOIL_free_image_data(image);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+	void  TextureMgr::loadOGLTexture(std::vector<std::string> &texArray)
+	{
+		GLuint texId;
+		glCreateTextures(GL_TEXTURE_2D_ARRAY, 1, &texId);
+		glTextureStorage3D(texId, 1, GL_RGBA32F, 512, 512, texArray.size());
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		for (int i = 0; i != texArray.size(); ++i) {
+			std::string texFile = m_dir + texArray[i];
+			int width = 0, height = 0;
+			auto image = SOIL_load_image(texFile.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
+			glTextureSubImage3D(texId, 0, 0, 0, i, 512, 512, 1, GL_RGBA, GL_UNSIGNED_BYTE, image);
+			SOIL_free_image_data(image);
+		}
 
+
+		m_oglTextures.insert(std::make_pair(texArray[0], texId));
+
+	}
 	void TextureMgr::loadOGLTexture(std::string texName, std::vector<std::string> &faces)
 	{
 		int width = 0, height = 0;
