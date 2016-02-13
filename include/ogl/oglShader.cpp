@@ -4,6 +4,45 @@
 
 namespace byhj
 {
+	//read the Shader code
+	std::string textFileRead(const char *fn) {  //read the OGLShader code
+
+		FILE *fp = nullptr;
+		char *content = NULL;
+		int count=0;
+
+		if (fn != NULL) {
+
+			fp = fopen(fn, "r");
+			if (!fp) {
+#ifdef WINDOW_PLATFORM
+				MessageBox(NULL, L"Can not open the Shader file", L"Error", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+#else
+				std::cerr << "Can not open the Shader file:" << fn << std::endl;
+
+#endif		
+				fclose(fp);
+				return content;
+			}
+			else {
+				fseek(fp, 0, SEEK_END);
+				count = ftell(fp);
+				rewind(fp);
+
+				if (count > 0) {
+					content = (char *)malloc(sizeof(char) * (count + 1));
+					count = fread(content, sizeof(char), count, fp);
+					content[count] = '\0';
+				}
+				fclose(fp);
+			}
+		}
+		std::string shardSrc(content);
+		free(content);
+
+		return shardSrc;
+	}
+
 	OGLShader::OGLShader()
 		:m_program(0), m_name("")
 	{
@@ -20,44 +59,6 @@ namespace byhj
 	{
 
 	}
-//read the Shader code
-std::string OGLShader::textFileRead(const char *fn) {  //read the OGLShader code
-
-	FILE *fp = nullptr;  
-	char *content = NULL;  
-	int count=0;  
-
-	if (fn != NULL) {  
-
-		fp = fopen(fn, "r");
-		if (!fp){
-#ifdef WINDOW_PLATFORM
-			MessageBox(NULL, L"Can not open the Shader file", L"Error",  MB_OK | MB_ICONERROR | MB_TASKMODAL);
-#else
-			std::cerr << "Can not open the Shader file:" << fn << std::endl;
-
-#endif		
-			fclose(fp);  
-			return content;
-		}
-		else {  
-			fseek(fp, 0, SEEK_END);  
-			count = ftell(fp);  
-			rewind(fp);  
-
-			if (count > 0) {  
-				content = (char *)malloc(sizeof(char) * (count+1));  
-				count = fread(content,sizeof(char),count,fp);  
-				content[count] = '\0';  
-			}  
-			fclose(fp);  
-		} 
-	}  
-	std::string shardSrc(content);
-	free(content);
-
-	return shardSrc;
-}  
 
 
 

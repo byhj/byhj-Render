@@ -16,6 +16,7 @@
 
 namespace byhj
 {
+std::string textFileRead(const char *fn);
 
 class OGLShader : public Shader
 {
@@ -35,7 +36,6 @@ public:
 
 	GLuint getProgram();
 
-	std::string textFileRead(const char *fn);
 private:
 
 	GLuint m_program;  
