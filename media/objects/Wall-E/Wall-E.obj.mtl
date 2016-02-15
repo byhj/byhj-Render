@@ -1,0 +1,182 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.1.29665513)
+
+newmtl Panel_Metal
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Body Panel copy.jpg
+
+newmtl Body_Line
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Body Line copy.jpg
+
+newmtl JoinedMaterial_#34
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Arm Track copy.jpg
+
+newmtl JoinedMaterial_#33
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Arm Track Inside.jpg
+
+newmtl Body_Metal
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Body copy1.jpg
+
+newmtl JoinedMaterial_#18
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Power Panel copy.jpg
+
+newmtl JoinedMaterial_#28
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+
+newmtl JoinedMaterial_#32
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Arm Sliderz copy.jpg
+
+newmtl JoinedMaterial_#18
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Arm joint and extender copy.jpg
+
+newmtl JoinedMaterial_#17
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Arms copy.jpg
+
+newmtl JoinedMaterial_#119
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Hands copy.jpg
+
+newmtl JoinedMaterial_#54
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Neck copy.jpg
+
+newmtl JoinedMaterial_#60
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Brainstem copy.jpg
+
+newmtl JoinedMaterial_#82
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Eyes copy.jpg
+
+newmtl JoinedMaterial_#120
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Top Panels and Eyebrows copy.jpg
+
+newmtl JoinedMaterial_#127
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Legs copy.jpg
+
+newmtl JoinedMaterial_#26
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Treadz copy.jpg
+
+newmtl JoinedMaterial_#150
+kd 0.6 0.6 0.6
+ka 0 0 0
+ks 0 0 0
+ke 0 0 0
+d 1
+Ns 15.2
+illum 2
+map_kd /Maps/MUDDe Rollerz copy.jpg
+

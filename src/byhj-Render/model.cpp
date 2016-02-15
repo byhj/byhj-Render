@@ -6,14 +6,11 @@ namespace byhj
 	// Draws the model, and thus all its meshes
 	void Model::draw(GLuint program)
 	{
-		glUseProgram(program);
 
 		for (GLuint i = 0; i < m_OGLMeshes.size(); i++)
 		{
 			m_OGLMeshes[i].draw(program);
 		}
-
-		glUseProgram(0);
 	}
 
 	void Model::drawInstance(GLuint program, GLuint amount)
