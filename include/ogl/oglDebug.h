@@ -1,10 +1,9 @@
 #ifndef OGLDEBUG_H
 #define OGLDEBUG_H
 
-namespace byhj
-{
+#include <memory>
 
-namespace ogl
+namespace byhj
 {
 
 	class OGLDebug
@@ -13,16 +12,13 @@ namespace ogl
 		OGLDebug() 	 = default;
 		~OGLDebug()	 = default;
 
-		void Init();
-		void Debug();
+		static std::shared_ptr<OGLDebug> getInstance();
+		void debug();
 
 	private:
 
 
 	};
-
-
-}
 }
 
 #endif

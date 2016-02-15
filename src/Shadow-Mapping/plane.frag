@@ -43,7 +43,7 @@ void main()
     vec3 specular = spec * lightColor;    
 
     // Calculate shadow
-    float shadow = shadows ? ShadowCalculation(fs_in.FragPosLightSpace) : 0.0;                      
+    float shadow =  ShadowCalculation(fs_in.FragPosLightSpace) ;                      
     vec3 lighting = ( ambient + (1.0 - shadow) * (diffuse + specular) ) * color;    
     
     FragColor = vec4(lighting, 1.0f);

@@ -40,8 +40,8 @@ namespace byhj
 		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 		GLfloat near_plane = 1.0f, far_plane = 7.5f;
 		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-		glm::vec3 lightPos(-2.0f, 4.0f, -1.0f);
-		glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 3.0f);
+		glm::vec3 lightPos(-2.0f, 10.0f, -1.0f);
+		glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 5.0f);
 		glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(1.0));
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 		

@@ -72,7 +72,7 @@ void OGLApp::v_run()
 	sh = WindowInfo::getInstance()->getHeight();
 
 #ifdef _DEBUG
-	//glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
 
 	pWindow = glfwCreateWindow(sw, sh, WindowInfo::getInstance()->getTitle().c_str(), nullptr, nullptr);
