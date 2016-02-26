@@ -1,16 +1,18 @@
 #include "base.h"
 
-int APIENTRY WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
-	                  _In_ LPSTR lpCmdLine, _In_ int nShowCmd )
+#pragma comment(lib, "glslang.lib")
+#pragma comment(lib, "spirv-tools.lib")
+#pragma comment(lib, "spirv.lib")
+#pragma comment(lib, "oglcompiler.lib")
+#pragma comment(lib, "osdependent.lib")
+#pragma comment(lib, "vulkan-1.lib")
+
+int main(int argc, char **argv)
 {
-	MSG msg;
-	bool done;
 	Base base;
 	base.init();
-	base.createWindow();
-	base.prepare();
 	base.render();
 	base.shutdown();
 
-	 return (int)msg.wParam;
+	return 0;
 }
