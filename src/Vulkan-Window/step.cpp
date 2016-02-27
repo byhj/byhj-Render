@@ -413,6 +413,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	return (DefWindowProc(hWnd, uMsg, wParam, lParam));
 }
 void init_window(Sample &info) {
+
 	WNDCLASSEX win_class;
 	assert(info.width > 0);
 	assert(info.height > 0);
@@ -892,7 +893,8 @@ void init_uniform_buffer(Sample &info) {
         glm::vec3(0, 0, 0),  // and looks at the origin
         glm::vec3(0, -1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
         );
-    info.Model = glm::mat4(1.0f);
+    info.Model = glm::rotate(glm::mat4(1.0f), 30.0f, glm::vec3(0.0f, 1.0f, 0.0f) );
+
     info.MVP = info.Projection * info.View * info.Model;
 
     /* VULKAN_KEY_START */

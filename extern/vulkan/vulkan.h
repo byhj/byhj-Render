@@ -3633,6 +3633,8 @@ VKAPI_ATTR VkResult VKAPI_CALL vkCreateAndroidSurfaceKHR(
 #endif
 #endif /* VK_USE_PLATFORM_ANDROID_KHR */
 
+
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 #define VK_KHR_win32_surface 1
 #include <windows.h>

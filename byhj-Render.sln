@@ -207,6 +207,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX12-Window", "src\Dir
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vulkan-Window", "src\Vulkan-Window\Vulkan-Window.vcxproj", "{1ED218CB-84DD-494D-B0EC-9453AD634525}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vulkan-Triangle", "src\Vulkan-Triangle\Vulkan-Triangle.vcxproj", "{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -863,6 +865,14 @@ Global
 		{1ED218CB-84DD-494D-B0EC-9453AD634525}.Release|x64.Build.0 = Release|x64
 		{1ED218CB-84DD-494D-B0EC-9453AD634525}.Release|x86.ActiveCfg = Release|Win32
 		{1ED218CB-84DD-494D-B0EC-9453AD634525}.Release|x86.Build.0 = Release|Win32
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Debug|x64.ActiveCfg = Debug|x64
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Debug|x64.Build.0 = Debug|x64
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Debug|x86.ActiveCfg = Debug|Win32
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Debug|x86.Build.0 = Debug|Win32
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Release|x64.ActiveCfg = Release|x64
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Release|x64.Build.0 = Release|x64
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Release|x86.ActiveCfg = Release|Win32
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -967,5 +977,6 @@ Global
 		{EA5C2EE3-1F59-4453-ACA9-0367C24DF849} = {1A750ACF-1F72-46D4-9B2F-B5CE62398DB7}
 		{23E6D1B4-C8EC-4946-AE49-BA590D1A3366} = {878993CC-3E07-4D62-AB82-472D05088815}
 		{1ED218CB-84DD-494D-B0EC-9453AD634525} = {EA5C2EE3-1F59-4453-ACA9-0367C24DF849}
+		{4E93619E-C8DF-4262-B50C-AA4D9E2E46C6} = {EA5C2EE3-1F59-4453-ACA9-0367C24DF849}
 	EndGlobalSection
 EndGlobal

@@ -1,13 +1,14 @@
 #include "base.h"
 #include "cube_data.h"
 
-static Sample m_info;
+
 
 void Base::init()
 {
 	VkResult U_ASSERT_ONLY res;
 	char sample_title[] = "Draw Cube";
 	const bool depthPresent = true;
+
 	init_global_layer_properties(m_info);
 	init_instance_extension_names(m_info);
 	init_device_extension_names(m_info);
@@ -37,6 +38,9 @@ void Base::init()
 	init_descriptor_set(m_info, false);
 	init_pipeline_cache(m_info);
 	init_pipeline(m_info, depthPresent);
+
+
+
 }
 
 
@@ -166,7 +170,7 @@ void Base::render()
 	res = vkQueuePresentKHR(m_info.queue, &present);
 	assert(res == VK_SUCCESS);
 
-	wait_seconds(1);
+	//wait_seconds(1);
 	/* VULKAN_KEY_END */
 }
 

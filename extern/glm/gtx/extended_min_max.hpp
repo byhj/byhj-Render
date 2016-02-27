@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2014 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -24,146 +24,139 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 ///
-/// @ref gtx_extented_min_max
-/// @file glm/gtx/extented_min_max.inl
+/// @ref gtx_extended_min_max
+/// @file glm/gtx/extended_min_max.hpp
 /// @date 2007-03-14 / 2011-06-07
 /// @author Christophe Riccio
-///////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @see core (dependence)
+/// @see gtx_half_float (dependence)
+///
+/// @defgroup gtx_extented_min_max GLM_GTX_extented_min_max
+/// @ingroup gtx
+/// 
+/// Min and max functions for 3 to 4 parameters.
+/// 
+/// <glm/gtx/extented_min_max.hpp> need to be included to use these functionalities.
+///////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+// Dependency:
+#include "../glm.hpp"
+
+#if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
+#	pragma message("GLM: GLM_GTX_extented_min_max extension included")
+#endif
 
 namespace glm
 {
+	/// @addtogroup gtx_extented_min_max
+	/// @{
+
+	/// Return the minimum component-wise values of 3 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T>
-	GLM_FUNC_QUALIFIER T min(
+	GLM_FUNC_DECL T min(
 		T const & x, 
 		T const & y, 
-		T const & z)
-	{
-		return glm::min(glm::min(x, y), z);
-	}
+		T const & z);
 
+	/// Return the minimum component-wise values of 3 inputs
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> min
-	(
+	GLM_FUNC_DECL C<T> min(
 		C<T> const & x, 
 		typename C<T>::T const & y, 
-		typename C<T>::T const & z
-	)
-	{
-		return glm::min(glm::min(x, y), z);
-	}
+		typename C<T>::T const & z);
 
+	/// Return the minimum component-wise values of 3 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> min
-	(
+	GLM_FUNC_DECL C<T> min(
 		C<T> const & x, 
 		C<T> const & y, 
-		C<T> const & z
-	)
-	{
-		return glm::min(glm::min(x, y), z);
-	}
+		C<T> const & z);
 
+	/// Return the minimum component-wise values of 4 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T>
-	GLM_FUNC_QUALIFIER T min
-	(
+	GLM_FUNC_DECL T min(
 		T const & x, 
 		T const & y, 
 		T const & z, 
-		T const & w
-	)
-	{
-		return glm::min(glm::min(x, y), glm::min(z, w));
-	}
+		T const & w);
 
+	/// Return the minimum component-wise values of 4 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> min
-	(
+	GLM_FUNC_DECL C<T> min(
 		C<T> const & x, 
 		typename C<T>::T const & y, 
 		typename C<T>::T const & z, 
-		typename C<T>::T const & w
-	)
-	{
-		return glm::min(glm::min(x, y), glm::min(z, w));
-	}
+		typename C<T>::T const & w);
 
+	/// Return the minimum component-wise values of 4 inputs
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> min
-	(
+	GLM_FUNC_DECL C<T> min(
 		C<T> const & x, 
 		C<T> const & y, 
-		C<T> const & z, 
-		C<T> const & w
-	)
-	{
-		return glm::min(glm::min(x, y), glm::min(z, w));
-	}
+		C<T> const & z,
+		C<T> const & w);
 
+	/// Return the maximum component-wise values of 3 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T>
-	GLM_FUNC_QUALIFIER T max(
+	GLM_FUNC_DECL T max(
 		T const & x, 
 		T const & y, 
-		T const & z)
-	{
-		return glm::max(glm::max(x, y), z);
-	}
+		T const & z);
 
+	/// Return the maximum component-wise values of 3 inputs
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> max
-	(
+	GLM_FUNC_DECL C<T> max(
 		C<T> const & x, 
 		typename C<T>::T const & y, 
-		typename C<T>::T const & z
-	)
-	{
-		return glm::max(glm::max(x, y), z);
-	}
+		typename C<T>::T const & z);
 
+	/// Return the maximum component-wise values of 3 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> max
-	(
+	GLM_FUNC_DECL C<T> max(
 		C<T> const & x, 
 		C<T> const & y, 
-		C<T> const & z
-	)
-	{
-		return glm::max(glm::max(x, y), z);
-	}
+		C<T> const & z);
 
+	/// Return the maximum component-wise values of 4 inputs
+	/// @see gtx_extented_min_max
 	template <typename T>
-	GLM_FUNC_QUALIFIER T max
-	(
+	GLM_FUNC_DECL T max(
 		T const & x, 
 		T const & y, 
 		T const & z, 
-		T const & w
-	)
-	{
-		return glm::max(glm::max(x, y), glm::max(z, w));
-	}
+		T const & w);
 
+	/// Return the maximum component-wise values of 4 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> max
-	(
+	GLM_FUNC_DECL C<T> max(
 		C<T> const & x, 
 		typename C<T>::T const & y, 
 		typename C<T>::T const & z, 
-		typename C<T>::T const & w
-	)
-	{
-		return glm::max(glm::max(x, y), glm::max(z, w));
-	}
+		typename C<T>::T const & w);
 
+	/// Return the maximum component-wise values of 4 inputs 
+	/// @see gtx_extented_min_max
 	template <typename T, template <typename> class C>
-	GLM_FUNC_QUALIFIER C<T> max
-	(
+	GLM_FUNC_DECL C<T> max(
 		C<T> const & x, 
 		C<T> const & y, 
 		C<T> const & z, 
-		C<T> const & w
-	)
-	{
-		return glm::max(glm::max(x, y), glm::max(z, w));
-	}
+		C<T> const & w);
 
+	/// @}
 }//namespace glm
+
+#include "extended_min_max.inl"

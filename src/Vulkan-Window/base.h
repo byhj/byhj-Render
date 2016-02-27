@@ -41,6 +41,7 @@ public:
    void init();
    void render();
    void shutdown();
+   	Sample m_info;
 private:
 
 };

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2014 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -24,41 +24,20 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 ///
-/// @ref gtx_multiple
-/// @file glm/gtx/multiple.inl
-/// @date 2009-10-26 / 2011-06-07
+/// @ref gtx_float_normalize
+/// @file glm/gtx/float_normalize.inl
+/// @date 2015-09-25 / 2015-09-25
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
 
+#include <limits>
+
 namespace glm
 {
-	//////////////////////
-	// higherMultiple
-
-	template <typename genType>
-	GLM_FUNC_QUALIFIER genType higherMultiple(genType Source, genType Multiple)
-	{
-		return detail::compute_ceilMultiple<std::numeric_limits<genType>::is_iec559, std::numeric_limits<genType>::is_signed>::call(Source, Multiple);
-	}
-
 	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_FUNC_QUALIFIER vecType<T, P> higherMultiple(vecType<T, P> const & Source, vecType<T, P> const & Multiple)
+	GLM_FUNC_QUALIFIER vecType<float, P> floatNormalize(vecType<T, P> const & v)
 	{
-		return detail::functor2<T, P, vecType>::call(higherMultiple, Source, Multiple);
+		return vecType<float, P>(v) / static_cast<float>(std::numeric_limits<T>::max());
 	}
 
-	//////////////////////
-	// lowerMultiple
-
-	template <typename genType>
-	GLM_FUNC_QUALIFIER genType lowerMultiple(genType Source, genType Multiple)
-	{
-		return detail::compute_floorMultiple<std::numeric_limits<genType>::is_iec559, std::numeric_limits<genType>::is_signed>::call(Source, Multiple);
-	}
-
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_FUNC_QUALIFIER vecType<T, P> lowerMultiple(vecType<T, P> const & Source, vecType<T, P> const & Multiple)
-	{
-		return detail::functor2<T, P, vecType>::call(lowerMultiple, Source, Multiple);
-	}
 }//namespace glm

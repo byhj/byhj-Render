@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /// OpenGL Mathematics (glm.g-truc.net)
 ///
-/// Copyright (c) 2005 - 2014 G-Truc Creation (www.g-truc.net)
+/// Copyright (c) 2005 - 2015 G-Truc Creation (www.g-truc.net)
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -51,24 +51,46 @@ void print(const fvec4SIMD &v)
 }
 #endif
 
+#	ifdef GLM_STATIC_CONST_MEMBERS
+	const fquatSIMD fquatSIMD::ZERO(0, 0, 0, 0);
+	const fquatSIMD fquatSIMD::IDENTITY(1, 0, 0, 0);
+	const fquatSIMD fquatSIMD::X(0, 1, 0, 0);
+	const fquatSIMD fquatSIMD::Y(0, 0, 1, 0);
+	const fquatSIMD fquatSIMD::Z(0, 0, 0, 1);
+	const fquatSIMD fquatSIMD::W(1, 0, 0, 0);
+	const fquatSIMD fquatSIMD::XY(0, 1, 1, 0);
+	const fquatSIMD fquatSIMD::XZ(0, 1, 0, 1);
+	const fquatSIMD fquatSIMD::XW(1, 1, 0, 0);
+	const fquatSIMD fquatSIMD::YZ(0, 0, 1, 1);
+	const fquatSIMD fquatSIMD::YW(1, 0, 1, 0);
+	const fquatSIMD fquatSIMD::ZW(1, 0, 0, 1);
+	const fquatSIMD fquatSIMD::XYZ(0, 1, 1, 1);
+	const fquatSIMD fquatSIMD::XYW(1, 1, 1, 0);
+	const fquatSIMD fquatSIMD::XZW(1, 1, 0, 1);
+	const fquatSIMD fquatSIMD::YZW(1, 0, 1, 1);
+	const fquatSIMD fquatSIMD::XYZW(1, 1, 1, 1);
+#	endif
 
 //////////////////////////////////////
 // Implicit basic constructors
 
-GLM_FUNC_QUALIFIER fquatSIMD::fquatSIMD()
-#	ifdef GLM_FORCE_NO_CTOR_INIT
-		: Data(_mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f))
+#	if !GLM_HAS_DEFAULTED_FUNCTIONS || !defined(GLM_FORCE_NO_CTOR_INIT)
+	GLM_FUNC_QUALIFIER fquatSIMD::fquatSIMD()
+#		ifdef GLM_FORCE_NO_CTOR_INIT
+			: Data(_mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f))
+#		endif
+	{}
 #	endif
-{}
+
+#	if !GLM_HAS_DEFAULTED_FUNCTIONS
+	GLM_FUNC_QUALIFIER fquatSIMD::fquatSIMD(fquatSIMD const & q) :
+		Data(q.Data)
+	{}
+#	endif//!GLM_HAS_DEFAULTED_FUNCTIONS
 
 GLM_FUNC_QUALIFIER fquatSIMD::fquatSIMD(__m128 const & Data) :
 	Data(Data)
 {}
-
-GLM_FUNC_QUALIFIER fquatSIMD::fquatSIMD(fquatSIMD const & q) :
-	Data(q.Data)
-{}
-
 
 //////////////////////////////////////
 // Explicit basic constructors
@@ -83,25 +105,27 @@ GLM_FUNC_QUALIFIER fquatSIMD::fquatSIMD(quat const & q) :
 
 GLM_FUNC_QUALIFIER fquatSIMD::fquatSIMD(vec3 const & eulerAngles)
 {
-    vec3 c = glm::cos(eulerAngles * 0.5f);
+	vec3 c = glm::cos(eulerAngles * 0.5f);
 	vec3 s = glm::sin(eulerAngles * 0.5f);
 
-    Data = _mm_set_ps(
-        (c.x * c.y * c.z) + (s.x * s.y * s.z),
-        (c.x * c.y * s.z) - (s.x * s.y * c.z),
-        (c.x * s.y * c.z) + (s.x * c.y * s.z),
-        (s.x * c.y * c.z) - (c.x * s.y * s.z));
+	Data = _mm_set_ps(
+		(c.x * c.y * c.z) + (s.x * s.y * s.z),
+		(c.x * c.y * s.z) - (s.x * s.y * c.z),
+		(c.x * s.y * c.z) + (s.x * c.y * s.z),
+		(s.x * c.y * c.z) - (c.x * s.y * s.z));
 }
 
 
 //////////////////////////////////////
 // Unary arithmetic operators
 
-GLM_FUNC_QUALIFIER fquatSIMD& fquatSIMD::operator=(fquatSIMD const & q)
-{
-    this->Data = q.Data;
-    return *this;
-}
+#if !GLM_HAS_DEFAULTED_FUNCTIONS
+	GLM_FUNC_QUALIFIER fquatSIMD& fquatSIMD::operator=(fquatSIMD const & q)
+	{
+		this->Data = q.Data;
+		return *this;
+	}
+#endif//!GLM_HAS_DEFAULTED_FUNCTIONS
 
 GLM_FUNC_QUALIFIER fquatSIMD& fquatSIMD::operator*=(float const & s)
 {

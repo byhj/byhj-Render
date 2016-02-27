@@ -7,12 +7,21 @@
 #pragma comment(lib, "osdependent.lib")
 #pragma comment(lib, "vulkan-1.lib")
 
-int main(int argc, char **argv)
+int main()
 {
 	Base base;
 	base.init();
-	base.render();
+
+	bool done; // flag saying when app is complete
+	done = false; // initialize loop condition variable
+	while (!done) {
+		vkDeviceWaitIdle(base.m_info.device);
+			     base.render();
+		vkDeviceWaitIdle(base.m_info.device);
+	}
+
 	base.shutdown();
 
 	return 0;
 }
+
