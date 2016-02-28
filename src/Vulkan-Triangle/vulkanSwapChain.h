@@ -49,7 +49,6 @@ typedef struct _SwapChainBuffers {
 
 class VulkanSwapChain
 {
-
 private:
 	VkInstance instance;
 	VkDevice device;
