@@ -20,8 +20,6 @@
 #else
 #endif
 
-
-
 namespace Vulkan {
 
 namespace Debug {
@@ -47,6 +45,7 @@ namespace Debug {
 		VkInstance instance,
 		VkDebugReportFlagsEXT flags,
 		VkDebugReportCallbackEXT callBack);
+
 	// Clear debug callback
 	void freeDebugCallback(VkInstance instance);
 }

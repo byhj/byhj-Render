@@ -1,5 +1,32 @@
 #include "vulkanTextureLoader.h"
 
+VulkanTextureLoader::VulkanTextureLoader(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, VkCommandPool cmdPool)
+{
+	this->physicalDevice = physicalDevice;
+	this->device = device;
+	this->queue = queue;
+	this->cmdPool = cmdPool;
+	vkGetPhysicalDeviceMemoryProperties(physicalDevice, &deviceMemoryProperties);
+
+	// Create command buffer for submitting image barriers
+	// and converting tilings
+	VkCommandBufferAllocateInfo cmdBufInfo ={};
+	cmdBufInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+	cmdBufInfo.commandPool = cmdPool;
+	cmdBufInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+	cmdBufInfo.commandBufferCount = 1;
+
+	VkResult vkRes = vkAllocateCommandBuffers(device, &cmdBufInfo, &cmdBuffer);
+	assert(vkRes == VK_SUCCESS);
+}
+
+VulkanTextureLoader::~VulkanTextureLoader()
+{
+	vkFreeCommandBuffers(device, cmdPool, 1, &cmdBuffer);
+}
+
+
+
 	void  VulkanTextureLoader::loadTexture(const char* filename, VkFormat format, Vulkan::Texture *texture)
 	{
 		loadTexture(filename, format, texture, false);
@@ -472,3 +499,18 @@
 		}
 	}
 
+	// Try to find appropriate memory type for a memory allocation
+	VkBool32 VulkanTextureLoader::getMemoryType(uint32_t typeBits, VkFlags properties, uint32_t *typeIndex)
+	{
+		for (int i = 0; i < 32; i++) {
+			if ((typeBits & 1) == 1) {
+				if ((deviceMemoryProperties.memoryTypes[i].propertyFlags & properties) == properties)
+				{
+					*typeIndex = i;
+					return true;
+				}
+			}
+			typeBits >>= 1;
+		}
+		return false;
+	}

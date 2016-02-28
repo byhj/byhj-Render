@@ -2,6 +2,7 @@
 #include <iostream>
 
 namespace Vulkan {
+
 	namespace Debug {
 
 	int validationLayerCount = 9;
