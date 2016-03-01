@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{23E6D1B4-C8EC-4946-AE49-BA590D1A3366}</ProjectGuid>
-    <RootNamespace>DirectX12Window</RootNamespace>
+    <ProjectGuid>{0719DF5C-556C-46EC-8ED2-1DFB331D79A9}</ProjectGuid>
+    <RootNamespace>DirectX12Triangle</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,6 +139,7 @@
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="d3d12Render.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -169,6 +170,15 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="d3d12Render.h" />
+    <ClInclude Include="triangle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="triangle.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="triangle.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
