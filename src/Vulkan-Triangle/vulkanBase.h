@@ -229,6 +229,7 @@ public:
 		void *data,
 		VkBuffer *buffer,
 		VkDeviceMemory *memory);
+
 	// Overload that assigns buffer info to descriptor
 	VkBool32 createBuffer(
 		VkBufferUsageFlags usage,

@@ -54,6 +54,7 @@ private:
 	VkDevice device;
 	VkPhysicalDevice physicalDevice;
 	VkSurfaceKHR surface;
+
 	// Function pointers
 	PFN_vkGetPhysicalDeviceSurfaceSupportKHR fpGetPhysicalDeviceSurfaceSupportKHR;
 	PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR fpGetPhysicalDeviceSurfaceCapabilitiesKHR;

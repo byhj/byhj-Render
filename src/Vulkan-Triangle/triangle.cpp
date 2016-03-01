@@ -198,6 +198,7 @@ void Triangle::buildCmdBuffers()
 			0, nullptr,
 			0, nullptr,
 			1, &prePresentBarrier);
+
 		res = vkEndCommandBuffer(drawCmdBuffers[i]);
 		assert(!res);
 	}
@@ -460,8 +461,8 @@ void Triangle::initPipeline()
 	viewportState.scissorCount = 1;
 
 	//Enable dynamic states
-	//Descibes the dynamic states to be used with this pipelien 
-	//Dynamic states can be set evne after pipeline has been created
+	//Descibes the dynamic states to be used with this pipeline
+	//Dynamic states can be set even after pipeline has been created
 	//So there is no need to create new pipelines just for changing
 	//a viewport's demensions or a scissor box
 

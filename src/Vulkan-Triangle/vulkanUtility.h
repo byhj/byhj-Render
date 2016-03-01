@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+
 #ifdef _WIN32
 #include <windows.h>
 #include <fcntl.h>
@@ -27,8 +28,10 @@ namespace Vulkan {
 
 	// Check if extension is globally available
 	VkBool32 checkGlobalExtensionPresent(const char* extensionName);
+
 	// Check if extension is present on the given device
 	VkBool32 checkDeviceExtensionPresent(VkPhysicalDevice physicalDevice, const char* extensionName);
+
 	// Return string representation of a vulkan error string
 	std::string errorString(VkResult errorCode);
 
@@ -46,12 +49,16 @@ namespace Vulkan {
 
 	// Display error message and exit on fatal error
 	void exitFatal(std::string message, std::string caption);
+
 	// Load a text file (e.g. GLGL shader) into a std::string
 	std::string readTextFile(const char *fileName);
+
 	// Load a binary file into a buffer (e.g. SPIR-V)
 	char *readBinaryFile(const char *filename, size_t *psize);
+
 	// Load a SPIR-V shader
 	VkShaderModule loadShader(const char *fileName, VkDevice device, VkShaderStageFlagBits stage);
+
 	// Load a GLSL shader
 	// Note : Only for testing purposes, support for directly feeding GLSL shaders into Vulkan
 	// may be dropped at some point	
