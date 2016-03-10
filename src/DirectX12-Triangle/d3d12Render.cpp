@@ -203,6 +203,7 @@ namespace byhj {
 
 		m_pCommandList->Close();
 	}
+
 	void D3D12Render::waitForPreviousFrame()
 	{
 		//Waiting for the frame to complete before continuing is not best parctice.

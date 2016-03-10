@@ -32,43 +32,44 @@ namespace byhj
 
 	void MeshLoad::Update()
 	{
-
-		glUseProgram(m_Program);
-
-		glm::mat4 model = glm::mat4(1.0f); 
-		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) );
+		glm::mat4 model = glm::mat4(1.0f);
+		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
+
 		GLfloat near_plane = 1.0f, far_plane = 7.5f;
 		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
 		glm::vec3 lightPos(-2.0f, 10.0f, -1.0f);
 		glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 5.0f);
 		glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(1.0));
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
-		
+
+		glUseProgram(shadowProgram);
+
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &lightSpaceMatrix[0][0]);
 
 		glUseProgram(0);
 
-		glUseProgram(m_program);
-		glUniformMatrix4fv(glGetUniformLocation(m_program, "model"), 1, GL_FALSE, &model[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(m_program, "view"), 1, GL_FALSE, &view[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(m_program, "proj"), 1, GL_FALSE, &proj[0][0]);
-		glUniform3fv(glGetUniformLocation(m_program, "lightPos"), 1, &lightPos[0]);
-		glUniform3fv(glGetUniformLocation(m_program, "viewPos"), 1, &camPos[0]);
-		glUniformMatrix4fv(glGetUniformLocation(m_program, "lightSpaceMatrix"), 1, GL_FALSE, &lightSpaceMatrix[0][0]);
+		glUseProgram(lightProgram);
+
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "model"), 1, GL_FALSE, &model[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "view"), 1, GL_FALSE, &view[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "proj"), 1, GL_FALSE, &proj[0][0]);
+		glUniform3fv(glGetUniformLocation(lightProgram, "lightPos"), 1, &lightPos[0]);
+		glUniform3fv(glGetUniformLocation(lightProgram, "viewPos"), 1, &camPos[0]);
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "lightSpaceMatrix"), 1, GL_FALSE, &lightSpaceMatrix[0][0]);
 	
 		glUseProgram(0);
 	}
 
 	void MeshLoad::Render()
 	{
-		glUseProgram(m_Program);
+		glUseProgram(shadowProgram);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glClear(GL_DEPTH_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-		m_Model.draw(m_Program);
+		m_Model.draw(shadowProgram);
 		glBindVertexArray(planeVAO);
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -76,9 +77,11 @@ namespace byhj
 		glBindVertexArray(0);
 		glUseProgram(0);
 		
+		/////////////////////////////////////////////////////////////////////////////
+
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		glUseProgram(m_program);
+		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+		glUseProgram(lightProgram);
 
 		woodTex = TextureMgr::getInstance()->getOGLTextureByName("wood.png");
 		glActiveTexture(GL_TEXTURE0);
@@ -91,7 +94,7 @@ namespace byhj
 
 		glUniform1i(tex1_loc, 1);
 
-		m_Model.draw(m_program);
+		m_Model.draw(lightProgram);
 		glBindVertexArray(planeVAO);
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -134,20 +137,19 @@ namespace byhj
 		m_MeshLoadShader.attach(GL_FRAGMENT_SHADER, "shadow.frag");
 		m_MeshLoadShader.link();
 		m_MeshLoadShader.info();
+		shadowProgram = m_MeshLoadShader.getProgram();
+		uniform_loc.model = glGetUniformLocation(shadowProgram, "u_model");
+		uniform_loc.view  = glGetUniformLocation(shadowProgram, "u_lightMat");
 
-		m_Program = m_MeshLoadShader.getProgram();
-		uniform_loc.model = glGetUniformLocation(m_Program, "u_model");
-		uniform_loc.view  = glGetUniformLocation(m_Program, "u_lightMat");
 
 		PlaneShader.init();
 		PlaneShader.attach(GL_VERTEX_SHADER, "plane.vert");
 		PlaneShader.attach(GL_FRAGMENT_SHADER, "plane.frag");
 		PlaneShader.link();
 		PlaneShader.info();
-		m_program = PlaneShader.getProgram();
-		//CHECK_OGL_UNIFORM( m_tex, "Uniform can not gen" );
-		 tex_loc = glGetUniformLocation(m_program, "diffuseTexture");
-		 tex1_loc = glGetUniformLocation(m_program, "shadowMap");
+		lightProgram = PlaneShader.getProgram();
+		tex_loc = glGetUniformLocation( lightProgram, "diffuseTexture");
+		tex1_loc = glGetUniformLocation(lightProgram, "shadowMap");
 		TextureMgr::getInstance()->loadOGLTexture("wood.png");
 	}
 

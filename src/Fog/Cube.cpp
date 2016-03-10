@@ -95,6 +95,7 @@ namespace byhj
 
 	void Cube::init_buffer()
 	{
+		//send the vertex data to opengl vertex buffer 
 		glGenBuffers(1, &m_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glBufferData(GL_ARRAY_BUFFER, VertexSize, VertexData, GL_STATIC_DRAW);
@@ -105,11 +106,13 @@ namespace byhj
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, IndexSize, IndexData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
+
 	void Cube::init_vertexArray()
 	{
 	    glGenVertexArrays(1, &m_vao);
 	    glBindVertexArray(m_vao);
 	    
+		//Shader interface 0:vertex, 1:normal, 2:texcoord
 	    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 	    glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -117,7 +120,6 @@ namespace byhj
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 8, 0);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 8, GL_BUFFER_OFFSET(sizeof(GLfloat) * 3) );
 	    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 8, GL_BUFFER_OFFSET(sizeof(GLfloat) * 6) );
-	   
 	    
 	    glBindVertexArray(0);
 	    glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -126,6 +128,7 @@ namespace byhj
 
 	void Cube::init_texture()
 	{
+		//Load the cube texture
 		TextureMgr::getInstance()->loadOGLTexture("crate.bmp");
 
 	}
@@ -139,10 +142,11 @@ namespace byhj
 		glBindVertexArray(m_vao);
 		glUseProgram(m_program);
 
+		//Update model view proj matrix
 		auto time = glfwGetTime();
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f));
+			                          glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(u_model, 1, GL_FALSE, &model[0][0]);
@@ -150,10 +154,12 @@ namespace byhj
 		glUniformMatrix4fv(u_proj, 1, GL_FALSE, &proj[0][0]);
 		glUniform1i(u_boxTex, 0);
 
+		//Bind the texture for shader
 		GLuint texId = TextureMgr::getInstance()->getOGLTextureByName("crate.bmp");
-
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texId);
+
+		//Draw the cube
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glBindVertexArray(0);
@@ -164,11 +170,13 @@ namespace byhj
 
 	void  Cube::shutdown()
 	{
+		//release the handle
 		glDeleteProgram(m_program);
 		glDeleteVertexArrays(1, &m_vao);
 		glDeleteBuffers(1, &m_vbo);
 		glDeleteBuffers(1, &m_ibo);
 	}
+
 	void Cube::init_shader()
 	{
 	  m_CubeShader.init();
@@ -178,6 +186,7 @@ namespace byhj
 	  m_CubeShader.info();
 	  m_program = m_CubeShader.getProgram();
 
+	  //get uniform location 
 	  u_model = glGetUniformLocation(m_program, "u_model");
 	  u_view  = glGetUniformLocation(m_program, "u_view");
 	  u_proj  = glGetUniformLocation(m_program, "u_proj");

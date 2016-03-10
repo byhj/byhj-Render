@@ -47,9 +47,9 @@ namespace byhj
 		OGLShader PlaneShader = "Plane Shader";
 		GLfloat m_Aspect = 1.0f;
 		OGLShader m_MeshLoadShader = "Mesh Shader";
-		GLuint m_Program;
 		GLuint tex_loc, tex1_loc;
 		byhj::Model m_Model;
+		GLuint lightProgram, shadowProgram;
 
 	};
 }

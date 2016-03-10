@@ -37,9 +37,10 @@ namespace byhj
 		GLuint u_view;
 		GLuint u_proj;
 		GLuint u_boxTex;
-	   std::vector<GLfloat> m_VertexData;
-	   std::vector<GLuint>  m_IndexData;
-	   FogGui m_fogGui;
+
+	    std::vector<GLfloat> m_VertexData;
+	    std::vector<GLuint>  m_IndexData;
+	    FogGui m_fogGui;
 
 	   OGLShader m_CubeShader ={ "CubeShader" };
 	};

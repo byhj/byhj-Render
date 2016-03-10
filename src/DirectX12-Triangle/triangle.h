@@ -5,7 +5,7 @@
 #include <DirectXMath.h>
 #include <wrl.h>
 #include <assert.h>
-
+#include <allocators>
 #include "d3d/d3dx12.h"
 
 using namespace DirectX;
@@ -35,8 +35,10 @@ namespace byhj
 		ComPtr<ID3D12PipelineState> m_pPipelineState;
 		ComPtr<ID3D12RootSignature> m_pRootSignature;
 		ComPtr<ID3D12Resource>      m_pVertexBuffer;
+
+	    D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
 		const UINT VERTEX_NUM = 3;
 		const UINT VERTEX_BUFFER_SLOT = 0;
-		D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
+
 	};
 }
