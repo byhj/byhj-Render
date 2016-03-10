@@ -111,10 +111,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="fog.frag" />
-    <None Include="fog.vert" />
+    <None Include="textureArray.frag" />
+    <None Include="textureArray.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\extern\ktx.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
@@ -136,11 +137,12 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\extern\ktx.h" />
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dFont.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -162,8 +164,8 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h" />
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="Cube.h" />
     <ClInclude Include="oglRender.h" />
+    <ClInclude Include="texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

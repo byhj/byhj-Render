@@ -17,12 +17,15 @@ void main(void)
    vec3 normal = texture2D(normalTex, vs_out.texcoord).rgb;
    normal = normalize(normal * 2.0f - 1.0f);    
    vec3 color = texture2D(colorTex, vs_out.texcoord).rgb;
+
    // Ambient
     vec3 ambient = 0.1f * color;
+
     // Diffuse
     vec3 lightDir = normalize(vs_out.lightPos - vs_out.fragPos);
     float diff = max(dot(lightDir, normal), 0.0f);
     vec3 diffuse = diff * color;
+
 	    // Specular
     vec3 viewDir = normalize(vs_out.viewPos - vs_out.fragPos);
     vec3 reflectDir = reflect(-lightDir, normal);

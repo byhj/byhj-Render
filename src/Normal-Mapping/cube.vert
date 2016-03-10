@@ -29,6 +29,7 @@ void main()
     vec3 B = normalize(normalMatrix * g_Bitangent);
     vec3 N = normalize(normalMatrix * g_Normal);   
 	mat3 TBN = transpose(mat3(T, B, N));  
+
     vs_out.lightPos = TBN * lightPos;
     vs_out.viewPos  = TBN * viewPos;
     vs_out.fragPos  = TBN * g_Position;

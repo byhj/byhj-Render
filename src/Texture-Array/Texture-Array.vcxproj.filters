@@ -33,18 +33,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fog.frag">
+    <None Include="textureArray.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="fog.vert">
+    <None Include="textureArray.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oglRender.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -113,12 +110,15 @@
     <ClCompile Include="..\byhj-Render\model.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extern\ktx.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="oglRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
@@ -183,6 +183,12 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\model.h">
       <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\ktx.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

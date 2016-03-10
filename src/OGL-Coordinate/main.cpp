@@ -1,9 +1,9 @@
 
 
 /*
-(Model Matrix)                (Camera/View Matrix)        (Project Matrix)            /w
+(Model Matrix)                   (Camera/View Matrix)              (Project Matrix)           /w = -z
 Model Space --------------->  World Space ----------------> View Space --------------> Clip Space --->
-(Viewport)
+         (-1, 1£©                          (Viewport)
 Normalized Device Coordinate (NDC) Space  ----------------> (Screen)Window Space
 
 */

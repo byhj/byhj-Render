@@ -2,7 +2,7 @@
 #define OGLRender_H
 
 #include "ogl/oglApp.h"
-#include "Cube.h"
+#include "texture.h"
 
 namespace byhj {
 	class OGLRender : public OGLApp {
@@ -16,7 +16,7 @@ namespace byhj {
 		void v_shutdown();
 
 	private:
-		Cube m_cube;
+		Texture m_plane;
 	};
 
 }
