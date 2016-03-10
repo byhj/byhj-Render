@@ -25,11 +25,11 @@ namespace byhj
 	}
 
 	//Use SOIL to load the ogl texture
-	void TextureMgr::loadOGLTexture(std::string fileName)
+	GLuint TextureMgr::loadOGLTexture(std::string fileName, bool alpha)
 	{
 		std::string texFile = m_dir + fileName;
 		int width = 0, height = 0;
-		auto image = SOIL_load_image(texFile.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+		auto image = SOIL_load_image(texFile.c_str(), &width, &height, 0, alpha ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
 		
 		if (image == nullptr) {
 			std::cerr << "Fail to load the texture file:" << texFile << std::endl;
@@ -45,13 +45,16 @@ namespace byhj
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, alpha ? GL_RGBA : GL_RGB, width, height, 0,
+			         alpha ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		m_oglTextures.insert(std::make_pair(fileName, texId));
 
 		SOIL_free_image_data(image);
 		glBindTexture(GL_TEXTURE_2D, 0);
+
+		return texId;
 	}
 	void  TextureMgr::loadOGLTexture(std::vector<std::string> &texArray)
 	{
