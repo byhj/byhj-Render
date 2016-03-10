@@ -1,0 +1,44 @@
+
+struct VS_OUTPUT 
+{
+    float4 Pos : SV_POSITION;
+   	float2 Tex : TEXCOORD0;
+	float3 Normal: NORMAL;
+	float4 viewPos : TEXCOORD1;
+};
+
+Texture2D tex     : register(t0);
+Texture2D projTex : register(t1);
+
+SamplerState texSample : register(s0);
+
+float4 PS(VS_OUTPUT ps_in) : SV_TARGET
+{
+	// Set brightness of the light.
+  float brightness = 1.5f;
+  float3 lightDir  = float3(2.0f, 5.0f, -2.0f);
+  float lightIntensity = saturate(dot(ps_in.Normal, lightDir));
+  float4 diffuse = float4(0.8f, 0.8f, 0.8f, 1.0f);
+  float4 ambient = float4(0.15f, 0.15f, 0.15f, 1.0f);
+  diffuse *= (brightness * lightIntensity);
+  
+  float4 texColor = tex.Sample(texSample, ps_in.Tex);
+
+  // Calculate the projected texture coordinates.
+  float2 projectTexCoord;
+  projectTexCoord.x =  ps_in.viewPos.x / ps_in.viewPos.w / 2.0f + 0.5f;
+  projectTexCoord.y = -ps_in.viewPos.y / ps_in.viewPos.w / 2.0f + 0.5f;
+      // Determine if the projected coordinates are in the 0 to 1 range.  If it is then this pixel is inside the projected view port.
+  if( (saturate(projectTexCoord.x) == projectTexCoord.x) 
+      && (saturate(projectTexCoord.y) == projectTexCoord.y))
+  {
+     // Sample the color value from the projection texture using the sampler at the projected texture coordinate location.
+     texColor = projTex.Sample(texSample, projectTexCoord) * diffuse * texColor + ambient * texColor;
+  }
+  else
+  {
+	  texColor	= ambient * texColor;
+  }
+
+  return  texColor;
+}

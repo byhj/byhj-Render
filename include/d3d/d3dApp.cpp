@@ -143,19 +143,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 {
 	switch(umessage)
 	{
-	case WM_DESTROY:
-		{
-			PostQuitMessage(0);
-			return 0;
-		}
-	case WM_CLOSE:
-		{
-			PostQuitMessage(0);		
-			return 0;
-		}
-		// All other messages pass to the message handler in the system class.
-	default:
-	{
+	case WM_DESTROY: {
+		PostQuitMessage(0);
+		return 0;
+	}
+	case WM_CLOSE: {
+		PostQuitMessage(0);
+		return 0;
+	}
+				   // All other messages pass to the message handler in the system class.
+	default: {
 		return D3DAppHandle->MessageHandler(hwnd, umessage, wparam, lparam);
 	}
 

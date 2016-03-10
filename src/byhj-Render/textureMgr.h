@@ -13,6 +13,7 @@
 #include <SOIL.h>
 
 #include "DirectXTK/DDSTextureLoader.h"
+#pragma comment(lib, "DirectXTK.lib")
 
 namespace byhj
 {

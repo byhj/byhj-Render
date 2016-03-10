@@ -14,7 +14,8 @@ class D3DCamera
 {
 public:
     D3DCamera();
-	virtual ~D3DCamera();
+	~D3DCamera() = default;
+
 	void update();
 
 	XMFLOAT4X4 getViewMat() const;

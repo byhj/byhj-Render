@@ -9,6 +9,8 @@
 #include <wrl.h>
 #include "d3d/d3dx12.h"
 
+#pragma comment(lib, "d3d12.lib")
+
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
