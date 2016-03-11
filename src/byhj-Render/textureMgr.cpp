@@ -3,6 +3,60 @@
 
 namespace byhj
 {
+	/*
+	string 转换为 wstring
+	*/
+	std::wstring c2w(const char *pc)
+	{
+		std::wstring val = L"";
+
+		if (NULL == pc)
+		{
+			return val;
+		}
+		//size_t size_of_ch = strlen(pc)*sizeof(char);
+		//size_t size_of_wc = get_wchar_size(pc);
+		size_t size_of_wc;
+		size_t destlen = mbstowcs(0, pc, 0);
+		if (destlen == (size_t)(-1))
+		{
+			return val;
+		}
+		size_of_wc = destlen + 1;
+		wchar_t * pw  = new wchar_t[size_of_wc];
+		mbstowcs(pw, pc, size_of_wc);
+		val = pw;
+		delete pw;
+		return val;
+	}
+	/*
+	wstring 转换为 string
+	*/
+	std::string w2c(const wchar_t * pw)
+	{
+		std::string val = "";
+		if (!pw)
+		{
+			return val;
+		}
+		size_t size= wcslen(pw)*sizeof(wchar_t);
+		char *pc = NULL;
+		if (!(pc = (char*)malloc(size)))
+		{
+			return val;
+		}
+		size_t destlen = wcstombs(pc, pw, size);
+		/*转换不为空时，返回值为-1。如果为空，返回值0*/
+		if (destlen == (size_t)(0))
+		{
+			return val;
+		}
+		val = pc;
+		delete pc;
+		return val;
+	}
+
+
 	TextureMgr::TextureMgr()
 	{
 		m_dir += "textures/";
@@ -60,6 +114,7 @@ namespace byhj
 	GLuint TextureMgr::loadOGLDDS(std::string fileName)
 	{
 		std::string texFile = m_dir + fileName;
+		std::wstring wtexFile = c2w(texFile.c_str());
 
 		GLuint textureID;			// Create a texture ID as a GLuint
 		ILuint imageID;				// Create an image ID as a ULuint
@@ -67,8 +122,11 @@ namespace byhj
 
 		ilGenImages(1, &imageID); 		// Generate the image ID
 		ilBindImage(imageID); 			// Bind the image
+#ifdef _UNICODE
+		ILboolean success = ilLoadImage(wtexFile.c_str()); 	// Load the image file
+#else
 		ILboolean success = ilLoadImage(texFile.c_str()); 	// Load the image file
-
+#endif
 		if (success) {
 			glGenTextures(1, &textureID); //创建Opengl纹理接口
 			glBindTexture(GL_TEXTURE_2D, textureID);

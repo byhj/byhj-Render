@@ -14,4 +14,46 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="model.vert">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="ssao.frag">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="ssao.vert">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="blur.frag">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="blur.vert">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="light.frag">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="light.vert">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="model.frag">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

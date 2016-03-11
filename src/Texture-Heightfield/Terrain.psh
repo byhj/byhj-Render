@@ -1,0 +1,64 @@
+
+struct Light
+{
+   float4 ambient;
+   float4 diffuse;
+   float3 lightDir;
+   float  pad; 
+};
+
+cbuffer LightBuffer : register(b0)
+{
+   Light cbLight;
+};
+
+struct VS_OUT
+{
+    float4 Pos    : SV_POSITION;
+    float3 Normal : NORMAL;
+	float2 Tex    : TEXCOORD;
+};
+
+Texture2D grassTexture : register(t0);
+Texture2D slopeTexture : register(t1);
+Texture2D rockTexture  : register(t2);
+
+SamplerState texState  : register(s0);
+
+float4 TerrainPS(VS_OUT ps_in) : SV_TARGET
+{
+    ps_in.Normal = normalize(ps_in.Normal);
+
+	float4 grassColor = grassTexture.Sample(texState, ps_in.Tex);
+	float4 slopeColor = slopeTexture.Sample(texState, ps_in.Tex);
+	float4 rockColor  =	 rockTexture.Sample(texState, ps_in.Tex);
+
+	float blendAmount;
+	float4 textureColor;
+	// Determine which texture to use based on normal y. 0.0(flat), 1.0f
+	float  slope = 1.0f - ps_in.Normal.y;
+	if(slope < 0.2)
+	{
+		blendAmount = slope / 0.2f;
+		textureColor = lerp(grassColor, slopeColor, blendAmount);
+	}
+	if((slope < 0.7) && (slope >= 0.2f))
+	{
+		blendAmount = (slope - 0.2f) * (1.0f / (0.7f - 0.2f));
+		textureColor = lerp(slopeColor, rockColor, blendAmount);
+	}
+	if(slope >= 0.7) 
+	{
+		textureColor = rockColor;
+	}
+
+
+   float4 pixelColor = cbLight.ambient;
+
+   float3 lightDir  = -(cbLight.lightDir);
+   float  intensity = saturate( dot(lightDir, ps_in.Normal) );
+   float4 diffuse   = intensity * cbLight.diffuse;
+
+   pixelColor = diffuse;
+   return saturate(pixelColor) * textureColor;
+}

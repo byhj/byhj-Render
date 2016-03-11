@@ -15,9 +15,10 @@ namespace byhj
 
 			fp = fopen(fn, "r");
 			if (!fp) {
-#ifdef WINDOW_PLATFORM
-				MessageBox(NULL, "Can not open the Shader file", "Error", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+#ifdef _UNICODE
+				MessageBox(NULL, L"Can not open the Shader file", L"Error", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
+				MessageBox(NULL, "Can not open the Shader file", "Error", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 				std::cerr << "Can not open the Shader file:" << fn << std::endl;
 
 #endif		

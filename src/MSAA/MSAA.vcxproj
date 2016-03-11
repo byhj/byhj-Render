@@ -110,6 +110,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cube.h" />
+    <ClInclude Include="framebuffer.h" />
+    <ClInclude Include="RenderSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cube.frag" />
+    <None Include="cube.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cube.cpp" />
+    <ClCompile Include="framebuffer.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
