@@ -12,6 +12,12 @@
 #include <FreeImage.h>
 #include <SOIL.h>
 
+#include <FreeImage.h>
+#pragma comment(lib, "FreeImage")
+
+#include <IL/il.h>
+#pragma comment(lib, "DevIL.lib")
+
 #include "DirectXTK/DDSTextureLoader.h"
 #pragma comment(lib, "DirectXTK.lib")
 
@@ -28,6 +34,7 @@ namespace byhj
 	   void   setDir(std::string dir);
 	   void   loadOGLTexture(std::vector<std::string> &texArray);
 	   GLuint   loadOGLTexture(std::string fileName, bool alpha = false);
+	   GLuint   loadOGLDDS(std::string fileName);
 	   void   loadOGLTexture(std::string texName, std::vector<std::string> &faces);
 	   void   loadOGLTexture(std::string fileName, GLenum image_format, GLint internal_format);
 	   void   loadD3DTexture(ID3D11Device *pD3D11Device, std::string fileName);
