@@ -42,7 +42,7 @@ namespace byhj
 		init_fbo();
 		m_cube.init();
 		m_plane.Init();
-
+		m_camera.SetPos( glm::vec3(0.0f, 0.0f, 15.0f) );
 	}
 
 	void OGLRender::v_update()
@@ -79,14 +79,14 @@ namespace byhj
 		auto sh = WindowInfo::getInstance()->getHeight();
 
 		//Create floating point color buffer
-		glGenBuffers(1, &colorBuffer);
+		glGenTextures(1, &colorBuffer);
 		glBindTexture(GL_TEXTURE_2D, colorBuffer);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, sw, sh, 0, GL_RGB, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		GLuint rboDepth;
 		//Create depth buffer(render buffer)
+		GLuint rboDepth;
 		glGenRenderbuffers(1, &rboDepth);
 		glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, sw, sh);
@@ -96,8 +96,9 @@ namespace byhj
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer, 0);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
 
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 			std::cout << "Frame buffer not complete!" << std::endl;
+		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}

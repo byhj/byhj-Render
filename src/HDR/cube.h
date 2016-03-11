@@ -2,7 +2,7 @@
 #define CUBE_H
 
 #include "ogl/oglShader.h"
-#include "ogl/Utility.h"
+#include "ogl/oglUtility.h"
 #include "ogl/oglCamera.h"
 #include <glfw/glfw3.h>
 

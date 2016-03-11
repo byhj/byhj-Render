@@ -2,7 +2,7 @@
 #define Plane_H
 
 #include "ogl/oglShader.h"
-#include "ogl/Utility.h"
+#include "ogl/oglUtility.h"
 
 #include <glfw/glfw3.h>
 

@@ -36,6 +36,7 @@ subroutine(LightModelSub) vec3 Phong(vec3 normal, vec3 fragPos, vec3 lightPos, v
   //Attenuation
   float max_dis = 1.5;
   float dis = length(lightPos - fragPos);
+  //If enable gamma correct, this scene is lighter, so the quad dis is better 
   float att= 1.0 / (u_Gamma ? dis * dis : dis);
 
   diffuse *= att;

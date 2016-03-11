@@ -19,7 +19,7 @@ uniform bool inverse_normals = true;
 
 void main()
 {
-    gl_Position = proj* view * model * vec4(Position, 1.0f);
+    gl_Position = proj * view * model * vec4(Position, 1.0f);
     vs_out.FragPos = vec3(model * vec4(Position, 1.0));   
     vs_out.TexCoord = TexCoord;
     
