@@ -42,9 +42,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="plane.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglDebug.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
@@ -122,9 +119,6 @@
     <ClInclude Include="bloom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="plane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglDebug.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
@@ -200,6 +194,24 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="bloom.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="blur.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="blur.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="light.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="light.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="scene.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="scene.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

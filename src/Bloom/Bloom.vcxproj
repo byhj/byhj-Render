@@ -137,7 +137,6 @@
     <ClCompile Include="bloom.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -165,11 +164,16 @@
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="bloom.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="plane.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bloom.frag" />
     <None Include="bloom.vert" />
+    <None Include="blur.frag" />
+    <None Include="blur.vert" />
+    <None Include="light.frag" />
+    <None Include="light.vert" />
+    <None Include="scene.frag" />
+    <None Include="scene.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

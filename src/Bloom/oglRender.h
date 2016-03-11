@@ -27,12 +27,9 @@ namespace byhj
 		void v_update();
 		void v_render();
 		void v_shutdown();
-		void init_fbo();
 
 	private:
-		GLuint fbo, colorBuffer;
         Bloom m_bloom;
-
 		OGLCamera m_camera;
 	};
 }

@@ -19,7 +19,10 @@ uniform mat4 u_proj;
 void main()
 {
    mat4 mvp = u_proj * u_view * u_model;
+
+   vs_out.fragPos = vec3(u_model * g_position);
    vs_out.normal = mat3( transpose(inverse(u_model)) ) * g_normal;
    vs_out.texcoord = g_texcoord * 5.0f;
+
    gl_Position = mvp * g_position;
 }
