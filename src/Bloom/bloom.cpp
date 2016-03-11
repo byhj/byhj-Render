@@ -21,8 +21,7 @@ namespace byhj {
 		 init_vertexArray();
 		 init_shader();
 		 init_texture();
-
-		init_fbo();
+		 init_fbo();
 	}
 
 	void Bloom::update()
@@ -94,12 +93,11 @@ namespace byhj {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0);
 		auto sceneTexLoc = glGetUniformLocation(m_sceneProgram, "u_sceneTex");
 		glUniform1i(sceneTexLoc, 0);
 		glBindTexture(GL_TEXTURE_2D, m_bloomTexs[0]);
 
-		//glBindTexture(GL_TEXTURE_2D, pingpongColorbuffers[!horizontal]);
 		glActiveTexture(GL_TEXTURE1);
 		auto bloomTexLoc = glGetUniformLocation(m_sceneProgram, "u_bloomTex");
 		glUniform1i(bloomTexLoc, 1);

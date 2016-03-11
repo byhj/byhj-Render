@@ -6,6 +6,7 @@
 #include <glfw/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "ogl/oglCamera.h"
 
 #include "model.h"
 #include "utility.h"
@@ -19,7 +20,7 @@ namespace byhj
 
 		void Init();
 		void Update();
-		void Render();
+		void Render(const OGLCamera &camera);
         void Shutdown();
 
 	private:
@@ -35,20 +36,16 @@ namespace byhj
 		}uniform_loc;
 
 
-		GLuint cubeVAO, planeVAO, cubeVBO, planeVBO;
-		GLuint woodTex;
+		GLuint planeVAO, planeVBO;
+		GLuint planeTex, benchTex;
 		GLuint scene_prog, shadow_prog;
-		GLuint fbo, depth_tex;
-		GLuint m_vao = OGL_ONE;
-		GLuint m_vbo = OGL_ONE;
-		GLuint m_ibo = OGL_ONE;
+		GLuint fbo, depthTex;
 		GLuint m_tex = OGL_ONE;
-		GLuint m_program = OGL_ONE;
 		OGLShader PlaneShader = "Plane Shader";
-		GLfloat m_Aspect = 1.0f;
 		OGLShader m_MeshLoadShader = "Mesh Shader";
-		GLuint tex_loc, tex1_loc;
 		byhj::Model m_Model;
+		GLuint texLocs[2];
+
 		GLuint lightProgram, shadowProgram;
 
 	};

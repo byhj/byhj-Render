@@ -9,13 +9,13 @@ namespace byhj
 {
 	GLfloat planeVertices[] ={
 		// Positions          // Normals         // Texture Coords
-		 25.0f, -5.0f, 25.0f, 0.0f, 1.0f, 0.0f, 25.0f, 0.0f,
-		-25.0f, -5.0f, -25.0f, 0.0f, 1.0f, 0.0f, 0.0f, 25.0f,
-		-25.0f, -5.0f, 25.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
-			
-		 25.0f, -5.0f, 25.0f, 0.0f, 1.0f, 0.0f, 25.0f, 0.0f,
-		 25.0f, -5.0f, -25.0f, 0.0f, 1.0f, 0.0f, 25.0f, 25.0f,
-		-25.0f, -5.0f, -25.0f, 0.0f, 1.0f, 0.0f, 0.0f, 25.0f
+		 25.0f, 0.0f, 25.0f, 0.0f, 1.0f, 0.0f, 25.0f, 0.0f,
+		-25.0f, 0.0f, -25.0f, 0.0f, 1.0f, 0.0f, 0.0f, 25.0f,
+		-25.0f, 0.0f, 25.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+				
+		 25.0f, 0.0f, 25.0f, 0.0f, 1.0f, 0.0f, 25.0f, 0.0f,
+		 25.0f, 0.0f, -25.0f, 0.0f, 1.0f, 0.0f, 25.0f, 25.0f,
+		-25.0f, 0.0f, -25.0f, 0.0f, 1.0f, 0.0f, 0.0f, 25.0f
 	};
 
 	static  const GLuint IndexData[] ={
@@ -32,39 +32,29 @@ namespace byhj
 
 	void MeshLoad::Update()
 	{
-		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	}
+
+	void MeshLoad::Render(const OGLCamera &camera)
+	{
+
+		glm::mat4 model = glm::rotate(glm::mat4(1.0f), 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 view  = camera.GetViewMatrix();
 		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 
 		GLfloat near_plane = 1.0f, far_plane = 7.5f;
 		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
 		glm::vec3 lightPos(-2.0f, 10.0f, -1.0f);
-		glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 5.0f);
+		glm::vec3 camPos = camera.GetPos();
+
 		glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(1.0));
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
+
 
 		glUseProgram(shadowProgram);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &lightSpaceMatrix[0][0]);
-
-		glUseProgram(0);
-
-		glUseProgram(lightProgram);
-
-		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "model"), 1, GL_FALSE, &model[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "view"), 1, GL_FALSE, &view[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "proj"), 1, GL_FALSE, &proj[0][0]);
-		glUniform3fv(glGetUniformLocation(lightProgram, "lightPos"), 1, &lightPos[0]);
-		glUniform3fv(glGetUniformLocation(lightProgram, "viewPos"), 1, &camPos[0]);
-		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "lightSpaceMatrix"), 1, GL_FALSE, &lightSpaceMatrix[0][0]);
-	
-		glUseProgram(0);
-	}
-
-	void MeshLoad::Render()
-	{
-		glUseProgram(shadowProgram);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -81,21 +71,31 @@ namespace byhj
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
 		glUseProgram(lightProgram);
 
-		woodTex = TextureMgr::getInstance()->getOGLTextureByName("wood.png");
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, woodTex);
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "model"), 1, GL_FALSE, &model[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "view"), 1, GL_FALSE, &view[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "proj"), 1, GL_FALSE, &proj[0][0]);
+		glUniform3fv(glGetUniformLocation(lightProgram, "lightPos"), 1, &lightPos[0]);
+		glUniform3fv(glGetUniformLocation(lightProgram, "viewPos"), 1, &camPos[0]);
+		glUniformMatrix4fv(glGetUniformLocation(lightProgram, "lightSpaceMatrix"), 1, GL_FALSE, &lightSpaceMatrix[0][0]);
 
-		glUniform1i(tex_loc, 0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, benchTex);
+		glUniform1i(texLocs[0], 0);
 
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, depth_tex);
+		glBindTexture(GL_TEXTURE_2D, depthTex);
 
-		glUniform1i(tex1_loc, 1);
+		glUniform1i(texLocs[1], 1);
 
 		m_Model.draw(lightProgram);
 		glBindVertexArray(planeVAO);
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, planeTex);
+		glUniform1i(texLocs[0], 0);
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -126,7 +126,7 @@ namespace byhj
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
 		glBindVertexArray(0);
 
-		m_Model.loadModel("armadillo.obj", LoadType::OGL);
+		m_Model.loadModel("bench.obj", LoadType::OGL);
 	}
 
 
@@ -148,17 +148,18 @@ namespace byhj
 		PlaneShader.link();
 		PlaneShader.info();
 		lightProgram = PlaneShader.getProgram();
-		tex_loc = glGetUniformLocation( lightProgram, "diffuseTexture");
-		tex1_loc = glGetUniformLocation(lightProgram, "shadowMap");
-		TextureMgr::getInstance()->loadOGLTexture("wood.png");
+		texLocs[0] = glGetUniformLocation( lightProgram, "diffuseTexture");
+		texLocs[1] = glGetUniformLocation(lightProgram, "shadowMap");
+		planeTex = TextureMgr::getInstance()->loadOGLTexture("toy_box_diffuse.png");
+		benchTex = TextureMgr::getInstance()->loadOGLTexture("wood.png");
 	}
 
 	void MeshLoad::init_fbo()
 	{
 		auto sw = WindowInfo::getInstance()->getWidth();
 		auto sh = WindowInfo::getInstance()->getHeight();
-		glGenTextures(1, &depth_tex);
-		glBindTexture(GL_TEXTURE_2D, depth_tex);
+		glGenTextures(1, &depthTex);
+		glBindTexture(GL_TEXTURE_2D, depthTex);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, sw, sh, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -169,7 +170,7 @@ namespace byhj
 
 		glGenFramebuffers(1, &fbo);
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth_tex, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTex, 0);
 		glDrawBuffer(GL_NONE);
 		glReadBuffer(GL_NONE);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
