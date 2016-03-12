@@ -18,11 +18,14 @@ namespace byhj
 		mat.diffuse.w = blend;
 		mat.emissive.w = blend;
 	}
-	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
+	void D3DModel::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 	{
+		for (int i = 0; i != m_D3DMeshes.size(); ++i) {
+			m_D3DMeshes[i].init(pD3D11Device, pD3D11DeviceContext);
+		}
 	}
 	// Draws the model, and thus all its meshes
-	void D3DModel::draw(ID3D11DeviceContext *pD3D11DeviceContext)
+	void D3DModel::render(ID3D11DeviceContext *pD3D11DeviceContext)
 	{
 
 
@@ -196,7 +199,7 @@ namespace byhj
 			GLboolean skip = false;
 			for (GLuint j = 0; j < m_D3DTextures.size(); j++)
 			{
-				if (m_D3DTextures[j].path == str)
+				if (m_D3DTextures[j].name == str.C_Str())
 				{
 					textures.push_back(m_D3DTextures[j]);
 					skip = true; // A texture with the same filepath has already been loaded, continue to next one. (optimization)
@@ -207,9 +210,9 @@ namespace byhj
 			{
 				//If texture hasn't been loaded already, load it
 				D3DMesh::Texture texture;
-				texture.id = TextureMgr::getInstance()->loadD3DTexture(str);
+				texture.pTextureSRV = nullptr;
 				texture.type = typeName;
-				texture.path = str;
+				texture.name = str.C_Str();
 				textures.push_back(texture);
 				this->m_D3DTextures.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
 			}

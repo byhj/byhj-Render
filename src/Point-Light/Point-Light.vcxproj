@@ -19,13 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="cubemap.psh" />
-    <FxCompile Include="cubemap.vsh" />
-    <FxCompile Include="model.psh" />
-    <FxCompile Include="model.vsh" />
+    <None Include="skymap.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="skymap.vsh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="model.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="model.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\extern\DirectXTK\DDSTextureLoader.h" />
+    <ClInclude Include="..\..\extern\dxerr.h" />
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFont.h" />
@@ -45,7 +54,6 @@
     <ClInclude Include="..\byhj-Render\fontMgr.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
     <ClInclude Include="..\byhj-Render\mgr.h" />
-    <ClInclude Include="..\byhj-Render\model.h" />
     <ClInclude Include="..\byhj-Render\modelMgr.h" />
     <ClInclude Include="..\byhj-Render\object.h" />
     <ClInclude Include="..\byhj-Render\oglMesh.h" />
@@ -65,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\extern\DirectXTK\DDSTextureLoader.cpp" />
+    <ClCompile Include="..\..\extern\dxerr.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
@@ -83,7 +92,6 @@
     <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
     <ClCompile Include="..\byhj-Render\mgr.cpp" />
-    <ClCompile Include="..\byhj-Render\model.cpp" />
     <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
     <ClCompile Include="..\byhj-Render\object.cpp" />
     <ClCompile Include="..\byhj-Render\oglMesh.cpp" />
@@ -111,7 +119,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>

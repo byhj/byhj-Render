@@ -1,5 +1,6 @@
 #include "textureMgr.h"
 #include "DirectXTK/DDSTextureLoader.h"
+#include "DirectXTK/WICTextureLoader.h"
 #include <assert.h>
 
 namespace byhj
@@ -218,7 +219,19 @@ namespace byhj
 
 		std::string texFile = m_dir + filename;
 		std::wstring wTexFile(texFile.begin(), texFile.end());
-	    HRESULT hr = DirectX::CreateDDSTextureFromFile(pD3D11Device, wTexFile.c_str(), NULL, &pTextureSRV);
+		HRESULT hr;
+		if (filename.substr(filename.find('.')) == ".dds") {
+			hr = DirectX::CreateDDSTextureFromFile(pD3D11Device, wTexFile.c_str(), NULL, &pTextureSRV);
+		}
+		else {
+			hr = DirectX::CreateWICTextureFromFile(pD3D11Device, wTexFile.c_str(), NULL, &pTextureSRV);
+		}
+		if (hr == S_OK) {
+			std::cout << "Load the texture file:" << texFile << std::endl;
+		}
+		else {
+			std::cerr << "Fail to load the texture file:" << texFile << std::endl;
+		}
 		assert(hr == S_OK);
 
 		m_d3dTextures.insert(std::make_pair(filename, pTextureSRV));

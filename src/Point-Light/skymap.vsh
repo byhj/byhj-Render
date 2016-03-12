@@ -22,7 +22,7 @@ struct VS_OUT
   float3 Tex: TEXCOORD;
 };
 
-VS_OUT VS(VS_IN vs_in)
+VS_OUT Skymap_VS(VS_IN vs_in)
 {
     VS_OUT vs_out;
 

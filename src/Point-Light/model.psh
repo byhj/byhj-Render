@@ -19,7 +19,7 @@ struct VS_OUT
 Texture2D tex;
 SamplerState texState;
 
-float4 PS(VS_OUT ps_in) : SV_TARGET
+float4 Model_PS(VS_OUT ps_in) : SV_TARGET
 {
    float3 lightPos = float3(0.0f, 0.0f, 10.0f);
    float3 lightDir = float3(0.0f, 0.0f, 10.0f);

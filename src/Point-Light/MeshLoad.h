@@ -5,24 +5,24 @@
 
 #include "d3d/d3dShader.h"
 #include "d3d/D3DUtility.h"
+#include "d3dModel.h"
 
 namespace byhj {
 
 	class MeshLoad {
 	public:
-          void init();
+          void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
 		  void update();
-		  void render();
+		  void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
 		  void shutdown();
 
 	private:
-		void init_buffer();
-		void init_texture();
-		void init_shader();
+		void init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
+		void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
 
 		D3DShader m_meshShader;
-	 
-		ID3D11InputLayout 
+		D3DModel  m_model;
+
 	};
 }
 #endif

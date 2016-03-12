@@ -1,13 +1,14 @@
 #include "d3dMesh.h"
+#include "textureMgr.h"
+
 #include <sstream>
 
 namespace byhj {
 
-	void D3DMesh::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd) 
+	void D3DMesh::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext) 
 	{
 	    init_buffer(pD3D11Device);
 		init_texture(pD3D11Device);
-		init_shader(pD3D11Device, hWnd);
 		init_state(pD3D11Device, pD3D11DeviceContext);
 	}
 
@@ -32,7 +33,7 @@ namespace byhj {
 				ss << specularNr++; // Transfer GLuint to stream
 			number = ss.str();
 
-			pD3D11DeviceContext->PSSetShaderResources(i, 1, &m_Textures[i].id);
+			pD3D11DeviceContext->PSSetShaderResources(i, 1, &m_Textures[i].pTextureSRV);
 			// Now set the sampler to the correct texture unit
 		}
 
@@ -103,5 +104,12 @@ namespace byhj {
 	void D3DMesh::init_state(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 	{
 
+	}
+
+	void D3DMesh::init_texture(ID3D11Device *pD3D11Device)
+	{
+		for (int i = 0; i != m_Textures.size(); ++i) {
+			m_Textures[i].pTextureSRV = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, m_Textures[i].name);
+		}
 	}
 }

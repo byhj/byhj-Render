@@ -7,6 +7,7 @@ namespace byhj
 
 void Skymap::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
 {
+	createSphere(pD3D11Device, 10, 10);
 	init_buffer(pD3D11Device);
 	init_shader(pD3D11Device, hWnd);
 	init_texture(pD3D11Device);
@@ -214,11 +215,12 @@ void Skymap::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 	vInputLayoutDesc.push_back(InputLayout);
 
 	SkymapShader.init(pD3D11Device, vInputLayoutDesc);
-	SkymapShader.attach(D3D_VERTEX_SHADER, L"cubemap.vsh", "VS", "vs_5_0");
-	SkymapShader.attach(D3D_PIXEL_SHADER,  L"cubemap.psh", "PS", "ps_5_0");
+	SkymapShader.attach(D3D_VERTEX_SHADER, L"skymap.vsh", "Skymap_VS", "vs_5_0");
+	SkymapShader.attach(D3D_PIXEL_SHADER,  L"skymap.psh", "Skymap_PS", "ps_5_0");
 	SkymapShader.end();
 
 }
+
 
 void Skymap::init_texture(ID3D11Device *pD3D11Device)
 {

@@ -48,7 +48,8 @@ namespace byhj
 		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		m_matrix.view = m_Camera.getViewMat();
-
+		m_meshload.render(m_pD3D11DeviceContext, m_matrix);
+		m_skymap.render(m_pD3D11DeviceContext, m_matrix);
 
 		drawInfo();
 
@@ -194,6 +195,8 @@ namespace byhj
 	{
 		m_Timer.Reset();
 		m_Font.init(m_pD3D11Device);
+		m_meshload.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
+		m_skymap.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
 	}
 
 	void D3D11Render::drawfps()

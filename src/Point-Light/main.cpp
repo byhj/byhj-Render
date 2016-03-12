@@ -1,9 +1,10 @@
 #include "d3d11Render.h"
 #include "root.h"
 
-// #ifdef _DEBUG
-// #include <vld.h>
-// #endif
+
+#ifdef _WIN32
+#define _XM_NO_INTRINSICS_
+#endif 
 
 int main()
 {

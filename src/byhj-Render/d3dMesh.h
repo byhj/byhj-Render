@@ -66,14 +66,15 @@ public:
 	};
 
 	struct Texture {
-		ID3D11ShaderResourceView *id;
+		ID3D11ShaderResourceView *pTextureSRV;
 		std::string type;
-		aiString path;
+		std::string name;
 	};
 
 public:
 
 	D3DMesh() = default;
+	~D3DMesh() = default;
 	D3DMesh(const std::vector<Vertex> &vertices, const std::vector<UINT> &indices, 
 		    const std::vector<Texture> textures, const Material &mat)
 	{
@@ -82,11 +83,9 @@ public:
 		m_Textures  = textures;
 		m_material = mat;
 	}
-	D3DMesh(const D3DMesh &mesh);
-	~D3DMesh();
 
 	// Initializes all the buffer objects/arrays
-	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
+	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	void update();
 	void render(ID3D11DeviceContext *pD3D11DeviceContext);
     void shutdown();
@@ -95,7 +94,6 @@ private:
 	void init_state(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	void init_buffer(ID3D11Device *pD3D11Device);
 	void init_texture(ID3D11Device *pD3D11Device);
-	void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
 
 
 	struct MaterialBuffer

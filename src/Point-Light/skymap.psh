@@ -8,7 +8,7 @@ struct VS_OUT
 TextureCube Skymap;
 SamplerState texState;
 
-float4 PS(VS_OUT ps_in): SV_TARGET
+float4 Skymap_PS(VS_OUT ps_in): SV_TARGET
 {
    return Skymap.Sample(texState, ps_in.Tex);
 }

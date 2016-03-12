@@ -21,8 +21,8 @@ namespace byhj
 		D3DModel() = default;
 		~D3DModel() = default;
 
-		void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
-		void draw(ID3D11DeviceContext *pD3D11DeviceContext);
+		void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
+		void render(ID3D11DeviceContext *pD3D11DeviceContext);
 		
 		void loadModel(std::string fileName);
 		void processNode(aiNode *node, const aiScene *scene);

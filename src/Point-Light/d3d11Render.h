@@ -8,15 +8,18 @@
 #include <d3d11.h>
 #include <wrl.h>
 #include "Timer.h"
-#include "terrain.h"
+
+#include "MeshLoad.h"
+#include "Skymap.h"
+
 
 namespace byhj
 {
 	class D3D11Render : public D3DApp
 	{
 	public:
-		D3D11Render();
-		~D3D11Render();
+		D3D11Render() = default;
+		~D3D11Render() = default;
 
 		void v_init()     override;
 		void v_update()   override;
@@ -42,7 +45,8 @@ namespace byhj
 		D3DCamera m_Camera;
 
 		Timer m_Timer;
-		Terrain m_terrain;
+		MeshLoad m_meshload;
+		Skymap m_skymap;
 
 		float fps = 0.0f;
 		int m_videoCardMemory;

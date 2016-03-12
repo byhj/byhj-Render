@@ -108,9 +108,6 @@
     <ClCompile Include="..\byhj-Render\mesh.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
     <ClCompile Include="plane.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -210,9 +207,6 @@
       <Filter>Render\mgr</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
       <Filter>Render\model</Filter>
     </ClInclude>
     <ClInclude Include="plane.h">

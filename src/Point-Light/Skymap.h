@@ -34,15 +34,6 @@ private:
 	void init_texture(ID3D11Device *pD3D11Device);	
 	void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
 
-	struct Vertex	//Overloaded Vertex Structure
-	{
-		Vertex(){}
-		Vertex(float x, float y, float z)
-			: pos(x,y,z){}
-
-		XMFLOAT3 pos;
-	};
-
 
 	byhj::MatrixBuffer cbMatrix;
 

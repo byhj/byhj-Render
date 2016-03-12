@@ -21,7 +21,7 @@ struct VS_OUT
 	float3 worldPos : POSITION;
 };
 
-VS_OUT VS( VS_IN vs_in )
+VS_OUT Model_VS( VS_IN vs_in )
 {	
  
    VS_OUT vs_out;

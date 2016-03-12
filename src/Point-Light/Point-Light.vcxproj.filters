@@ -33,20 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="cubemap.psh">
-      <Filter>Resource Files</Filter>
-    </FxCompile>
-    <FxCompile Include="cubemap.vsh">
-      <Filter>Resource Files</Filter>
-    </FxCompile>
-    <FxCompile Include="model.vsh">
-      <Filter>Resource Files</Filter>
-    </FxCompile>
-    <FxCompile Include="model.psh">
-      <Filter>Resource Files</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -137,9 +123,6 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
     <ClInclude Include="Skymap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -157,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\oglModel.h">
       <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\dxerr.h">
+      <Filter>Render\d3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,9 +233,6 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
     <ClCompile Include="Skymap.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -268,5 +251,22 @@
     <ClCompile Include="..\byhj-Render\oglModel.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\extern\dxerr.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="model.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="model.psh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skymap.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skymap.psh">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
