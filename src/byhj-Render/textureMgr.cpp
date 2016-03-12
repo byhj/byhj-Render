@@ -1,5 +1,6 @@
 #include "textureMgr.h"
 #include "DirectXTK/DDSTextureLoader.h"
+#include <assert.h>
 
 namespace byhj
 {
@@ -209,17 +210,20 @@ namespace byhj
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 	}
-	void TextureMgr::loadD3DTexture(ID3D11Device *pD3D11Device, std::string filename)
+	 ID3D11ShaderResourceView * TextureMgr::loadD3DTexture(ID3D11Device *pD3D11Device, std::string filename)
 	{
 	    if (m_d3dTextures.find(filename) != m_d3dTextures.end()) {
-		    return;
+		    return m_d3dTextures[filename];
 		}
 
 		std::string texFile = m_dir + filename;
 		std::wstring wTexFile(texFile.begin(), texFile.end());
-	    DirectX::CreateDDSTextureFromFile(pD3D11Device, wTexFile.c_str(), NULL, &pTextureSRV);
+	    HRESULT hr = DirectX::CreateDDSTextureFromFile(pD3D11Device, wTexFile.c_str(), NULL, &pTextureSRV);
+		assert(hr == S_OK);
 
 		m_d3dTextures.insert(std::make_pair(filename, pTextureSRV));
+		
+		return pTextureSRV;
 	}
 
 	GLuint TextureMgr::getOGLTextureByName(std::string fileName)

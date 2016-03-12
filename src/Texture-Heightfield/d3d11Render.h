@@ -7,11 +7,8 @@
 
 #include <d3d11.h>
 #include <wrl.h>
-
 #include "Timer.h"
-
-#include "cube.h"
-#include "plane.h"
+#include "terrain.h"
 
 namespace byhj
 {
@@ -21,15 +18,15 @@ namespace byhj
 		D3D11Render();
 		~D3D11Render();
 
-		void v_init();
-		void v_update();
-		void v_render();
-		void v_shutdown();
+		void v_init()     override;
+		void v_update()   override;
+		void v_render()   override;
+		void v_shutdown() override;
 
-		void v_OnMouseDown(WPARAM btnState, int x, int y);
-		void v_OnMouseMove(WPARAM btnState, int x, int y);
-		void v_OnMouseUp(WPARAM btnState, int x, int y);
-		void v_OnMouseWheel(WPARAM btnState, int x, int y);
+		void v_onMouseDown(WPARAM btnState, int x, int y)  override;
+		void v_onMouseMove(WPARAM btnState, int x, int y)  override;
+		void v_onMouseUp(WPARAM btnState, int x, int y)    override;
+		void v_onMouseWheel(WPARAM btnState, int x, int y) override;
 
 	private:
 
@@ -40,20 +37,18 @@ namespace byhj
 
 		void drawfps();
 		void drawInfo();
+
 		D3DFont m_Font;
 		D3DCamera m_Camera;
 
 		Timer m_Timer;
-
-		Cube m_cube;
-		Plane m_plane;
+        Terrain m_terrain;
 
 		float fps = 0.0f;
 		int m_videoCardMemory;
 		std::wstring m_videoCardInfo;
-		XMFLOAT4X4 model;
-		XMFLOAT4X4 view;
-		XMFLOAT4X4 proj;
+        D3DMVPMatrix m_matrix;
+
 		IDXGISwapChain         * m_pSwapChain;
 		ID3D11Device           * m_pD3D11Device;
 		ID3D11DeviceContext    * m_pD3D11DeviceContext;

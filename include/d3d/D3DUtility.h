@@ -15,18 +15,12 @@ using namespace Microsoft::WRL;
 namespace byhj
 {
 
-	namespace d3d
-	{
+    struct D3DMVPMatrix {
 
-
-		struct MatrixBuffer
-		{
 			XMFLOAT4X4 model;
 			XMFLOAT4X4 view;
 			XMFLOAT4X4 proj;
-		};
-	}
-
+	};
 }
 
 namespace Colors

@@ -105,6 +105,18 @@
     <ClInclude Include="..\..\include\d3d\d3dCamera.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
+    <ClInclude Include="..\byhj-Render\geometry.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\D3DUtility.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\dxerr.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Terrain.cpp">
@@ -182,13 +194,25 @@
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
+    <ClCompile Include="..\byhj-Render\geometry.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extern\dxerr.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Terrain.psh">
+    <None Include="Terrain.vsh">
       <Filter>Resource Files</Filter>
-    </FxCompile>
-    <FxCompile Include="Terrain.vsh">
+    </None>
+    <None Include="Terrain.psh">
       <Filter>Resource Files</Filter>
-    </FxCompile>
+    </None>
   </ItemGroup>
 </Project>

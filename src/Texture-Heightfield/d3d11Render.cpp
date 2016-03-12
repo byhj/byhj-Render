@@ -13,21 +13,21 @@ namespace byhj
 
 	}
 
-	void D3D11Render::v_OnMouseDown(WPARAM btnState, int x, int y)
+	void D3D11Render::v_onMouseDown(WPARAM btnState, int x, int y)
 	{
 		m_Camera.OnMouseDown(btnState, x, y, getHwnd());
 	}
 
-	void  D3D11Render::v_OnMouseMove(WPARAM btnState, int x, int y)
+	void  D3D11Render::v_onMouseMove(WPARAM btnState, int x, int y)
 	{
 		m_Camera.OnMouseMove(btnState, x, y);
 	}
 
-	void  D3D11Render::v_OnMouseUp(WPARAM btnState, int x, int y)
+	void  D3D11Render::v_onMouseUp(WPARAM btnState, int x, int y)
 	{
 		m_Camera.OnMouseUp(btnState, x, y);
 	}
-	void  D3D11Render::v_OnMouseWheel(WPARAM btnState, int x, int y)
+	void  D3D11Render::v_onMouseWheel(WPARAM btnState, int x, int y)
 	{
 		m_Camera.OnMouseWheel(btnState, x, y, WindowInfo::getInstance()->getAspect());
 	}
@@ -38,8 +38,7 @@ namespace byhj
 		init_camera();
 		init_object();
 
-		m_cube.init(m_pD3D11Device, m_pD3D11DeviceContext);
-		m_plane.init(m_pD3D11Device, m_pD3D11DeviceContext);
+		m_terrain.Init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
 
 	}
 
@@ -56,26 +55,18 @@ namespace byhj
 		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		view = m_Camera.getViewMat();
-		XMMATRIX Model = XMMatrixTranslation(0.0f, 1.0f, 0.0f);
-		XMStoreFloat4x4(&model, XMMatrixTranspose(Model));
-		m_plane.render(m_pD3D11DeviceContext, model, view, proj);
-
-		Model = XMMatrixTranslation(0.0f, 2.0f, 0.0f);
-		XMStoreFloat4x4(&model, XMMatrixTranspose(Model));
-		m_cube.render(m_pD3D11DeviceContext, model, view, proj);
+		m_matrix.view = m_Camera.getViewMat();
+		m_terrain.Render(m_pD3D11DeviceContext, m_matrix);
 
 		drawInfo();
-
-
+											
 		m_pSwapChain->Present(0, 0);
 	}
 
 	void D3D11Render::v_shutdown()
 	{
-		m_plane.shutdown();
-		m_cube.shutdown();
 	}
 
 
@@ -196,16 +187,16 @@ namespace byhj
 
 		//MVP Matrix
 		static auto aspect = WindowInfo::getInstance()->getAspect();
-		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -5.0f, 0.0f);
+		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -10.0f, 0.0f);
 		XMVECTOR camTarget = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 		XMVECTOR camUp     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 		XMMATRIX View      = XMMatrixLookAtLH(camPos, camTarget, camUp);
 		XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, aspect, 1.0f, 1000.0f);
 		XMMATRIX Model     = XMMatrixRotationY(60.0f);
 
-		XMStoreFloat4x4(&model, XMMatrixTranspose(Model));
-		XMStoreFloat4x4(&view, XMMatrixTranspose(View));
-		XMStoreFloat4x4(&proj, XMMatrixTranspose(Proj));
+		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(Model));
+		XMStoreFloat4x4(&m_matrix.view, XMMatrixTranspose(View));
+		XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(Proj));
 
 	}
 

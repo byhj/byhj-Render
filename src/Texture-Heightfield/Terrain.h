@@ -6,8 +6,9 @@
 
 
 #include "d3d/D3DShader.h"
-#include "d3d/Utility.h"
+#include "d3d/d3dUtility.h"
 #include "TextureMgr.h"
+#include "geometry.h"
 
 namespace byhj
 {
@@ -20,7 +21,7 @@ namespace byhj
 		~Terrain() = default;
 
 		void Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
-		void Render(ID3D11DeviceContext *pD3D11DeviceContext, const d3d::MatrixBuffer &matrix);
+		void Render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
 		void Shutdown();
 
 	private:
@@ -30,7 +31,7 @@ namespace byhj
 		void init_texture(ID3D11Device *pD3D11Device);
 
 		void load_heightMap(const char *filename);
-		void calc_normal(d3d::Geometry::MeshData &mesh);
+		void calc_normal(D3DMeshData &mesh);
 
 
 
@@ -50,7 +51,8 @@ namespace byhj
 		};
 		LightBuffer cbLight;
 
-		d3d::MatrixBuffer cbMatrix;
+		D3DMVPMatrix m_matrix;
+
 		D3DShader TerrainShader;
 		std::vector<XMFLOAT3> m_HightmapData;
 

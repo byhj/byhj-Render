@@ -1,7 +1,7 @@
 #include "d3dShader.h"
 
 #include <d3dcompiler.h>
-#include "d3d/Utility.h"
+#include "d3d/d3dUtility.h"
 
 namespace byhj
 {

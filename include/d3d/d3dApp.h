@@ -20,7 +20,7 @@
 #include <vector>
 #include <memory>
 
-#include "d3d/Utility.h"
+#include "d3d/d3dUtility.h"
 #include "app.h"
 #include "d3dRender.h"
 
@@ -51,10 +51,10 @@ public:
 
 
 	// Convenience overrides for handling mouse input.
-	virtual void v_OnMouseDown(WPARAM btnState, int x, int y)  { }
-	virtual void v_OnMouseUp(WPARAM btnState, int x, int y)    { }
-	virtual void v_OnMouseMove(WPARAM btnState, int x, int y)  { }
-	virtual void v_OnMouseWheel(WPARAM btnState, int x, int y) { }
+	virtual void v_onMouseDown(WPARAM btnState, int x, int y)  { }
+	virtual void v_onMouseUp(WPARAM btnState, int x, int y)    { }
+	virtual void v_onMouseMove(WPARAM btnState, int x, int y)  { }
+	virtual void v_onMouseWheel(WPARAM btnState, int x, int y) { }
 
 protected:
 	int   m_ScreenWidth;

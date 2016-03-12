@@ -121,18 +121,18 @@ LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
     case WM_LBUTTONDOWN:
     case WM_MBUTTONDOWN:
     case WM_RBUTTONDOWN:
-    	v_OnMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+    	v_onMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
     	return 0;
     case WM_LBUTTONUP:
     case WM_MBUTTONUP:
     case WM_RBUTTONUP:
-    	v_OnMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+    	v_onMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
     	return 0;
     case WM_MOUSEMOVE:
-    	v_OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+    	v_onMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
     	return 0;
     case WM_MOUSEWHEEL:
-    	v_OnMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam));
+    	v_onMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam));
     	// Any other messages send to the default message handler as our application won't make use of them.
 	default:
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);

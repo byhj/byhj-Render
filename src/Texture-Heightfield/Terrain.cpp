@@ -11,15 +11,14 @@ namespace byhj
 		init_texture(pD3D11Device);
 	}
 
-	void Terrain::Render(ID3D11DeviceContext *pD3D11DeviceContext, const d3d::MatrixBuffer &matrix)
+	void Terrain::Render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix)
 	{
 		//Update the the mvp matrix
-		cbMatrix.model = matrix.model;
-		cbMatrix.view  = matrix.view;
-		cbMatrix.proj  = matrix.proj;
-		pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer, 0, NULL, &cbMatrix, 0, 0);
+		m_matrix.model = matrix.model;
+		m_matrix.view  = matrix.view;
+		m_matrix.proj  = matrix.proj;
+		pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer, 0, NULL, &m_matrix, 0, 0);
 		pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &m_pMVPBuffer);
-
 		pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &m_pLightBuffer);
 
 		// Set vertex buffer stride and offset
@@ -43,9 +42,9 @@ namespace byhj
 	void Terrain::Shutdown()
 	{
 		ReleaseCOM(m_pTerrainVB)
-			ReleaseCOM(m_pTerrainIB)
-			ReleaseCOM(m_pMVPBuffer)
-			ReleaseCOM(m_pInputLayout)
+		ReleaseCOM(m_pTerrainIB)
+		ReleaseCOM(m_pMVPBuffer)
+		ReleaseCOM(m_pInputLayout)
 	}
 
 	void Terrain::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
@@ -55,13 +54,13 @@ namespace byhj
 
 		load_heightMap(dir.c_str());
 
-		d3d::Geometry geom;
-		d3d::Geometry::MeshData TerrainMesh;
-		geom.CreateGrid(160.0, 160.0, m_TerrainWidth, m_TerrainHeight, TerrainMesh);
+		Geometry geom;
+		D3DMeshData TerrainMesh;
+		geom.createGrid(160.0, 160.0, m_TerrainWidth, m_TerrainHeight, TerrainMesh);
 
 		m_VertexCount = TerrainMesh.VertexData.size();
 		for (int i = 0; i != m_VertexCount; ++i)
-			TerrainMesh.VertexData[i].Pos.y = m_HightmapData[i].y / 10.0f;
+			TerrainMesh.VertexData[i].position.y = m_HightmapData[i].y / 10.0f;
 
 		calc_normal(TerrainMesh);
 
@@ -101,7 +100,7 @@ namespace byhj
 		D3D11_BUFFER_DESC mvpDesc;
 		ZeroMemory(&mvpDesc, sizeof(D3D11_BUFFER_DESC));
 		mvpDesc.Usage          = D3D11_USAGE_DEFAULT;
-		mvpDesc.ByteWidth      = sizeof(d3d::MatrixBuffer);
+		mvpDesc.ByteWidth      = sizeof(D3DMVPMatrix);
 		mvpDesc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
 		mvpDesc.CPUAccessFlags = 0;
 		mvpDesc.MiscFlags      = 0;
@@ -172,13 +171,9 @@ namespace byhj
 	
 	void Terrain::init_texture(ID3D11Device *pD3D11Device)
 	{
-		HRESULT hr;
-		hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/grass.dds", NULL, &m_pGrassTexSRV, NULL);
-		DebugHR(hr);
-		hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/slope.dds", NULL, &m_pSlopeTexSRV, NULL);
-		DebugHR(hr);
-		hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/rock.dds", NULL, &m_pRockTexSRV, NULL);
-		DebugHR(hr);
+		m_pGrassTexSRV = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "grass.dds");
+		m_pSlopeTexSRV = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "slope.dds");
+		m_pRockTexSRV  = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device,  "rock.dds");
 
 		// Create a texture sampler state description.
 		D3D11_SAMPLER_DESC samplerDesc;
@@ -195,7 +190,8 @@ namespace byhj
 		samplerDesc.BorderColor[3] = 0;
 		samplerDesc.MinLOD = 0;
 		samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
-
+		
+		HRESULT hr;
 		// Create the texture sampler state.
 		hr = pD3D11Device->CreateSamplerState(&samplerDesc, &m_pTexSamplerState);
 		DebugHR(hr);
@@ -254,16 +250,16 @@ namespace byhj
 		bitmapImage = 0;
 	}
 
-	void Terrain::calc_normal(d3d::Geometry::MeshData &mesh)
+	void Terrain::calc_normal(D3DMeshData &mesh)
 	{
 		for (int i = 0; i != mesh.IndexData.size(); i += 3)
 		{
 			int index1 = mesh.IndexData[i];
 			int index2 = mesh.IndexData[i + 1];
 			int index3 = mesh.IndexData[i + 2];
-			XMFLOAT3 pos1 = mesh.VertexData[index1].Pos;
-			XMFLOAT3 pos2 = mesh.VertexData[index2].Pos;
-			XMFLOAT3 pos3 = mesh.VertexData[index3].Pos;
+			XMFLOAT3 pos1 = mesh.VertexData[index1].position;
+			XMFLOAT3 pos2 = mesh.VertexData[index2].position;
+			XMFLOAT3 pos3 = mesh.VertexData[index3].position;
 
 			XMVECTOR v1 = XMLoadFloat3(&pos1);
 			XMVECTOR v2 = XMLoadFloat3(&pos2);
@@ -274,16 +270,16 @@ namespace byhj
 
 			XMVECTOR n1 = XMVector3Cross(edge1, edge2);
 			XMVECTOR normal = XMVector3Normalize(n1);
-			XMStoreFloat3(&mesh.VertexData[index1].Normal, normal);
-			XMStoreFloat3(&mesh.VertexData[index2].Normal, normal);
-			XMStoreFloat3(&mesh.VertexData[index3].Normal, normal);
+			XMStoreFloat3(&mesh.VertexData[index1].normal, normal);
+			XMStoreFloat3(&mesh.VertexData[index2].normal, normal);
+			XMStoreFloat3(&mesh.VertexData[index3].normal, normal);
 		}
 
 		for (int i = 0; i != mesh.VertexData.size(); ++i)
 		{
-			XMVECTOR n = XMLoadFloat3(&mesh.VertexData[i].Normal);
+			XMVECTOR n = XMLoadFloat3(&mesh.VertexData[i].normal);
 			XMVECTOR normal = XMVector3Normalize(n);
-			XMStoreFloat3(&mesh.VertexData[i].Normal, normal);
+			XMStoreFloat3(&mesh.VertexData[i].normal, normal);
 		}
 
 	}

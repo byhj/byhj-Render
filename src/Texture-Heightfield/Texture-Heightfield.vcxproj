@@ -111,15 +111,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\extern\dxerr.h" />
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFont.h" />
+    <ClInclude Include="..\..\include\d3d\d3dShader.h" />
+    <ClInclude Include="..\..\include\d3d\D3DUtility.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
     <ClInclude Include="..\..\include\ogl\oglFont.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
     <ClInclude Include="..\byhj-Render\font.h" />
     <ClInclude Include="..\byhj-Render\fontMgr.h" />
+    <ClInclude Include="..\byhj-Render\geometry.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
     <ClInclude Include="..\byhj-Render\mesh.h" />
     <ClInclude Include="..\byhj-Render\mgr.h" />
@@ -137,15 +141,19 @@
     <ClInclude Include="Terrain.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\extern\dxerr.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dUtility.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
     <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
     <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\geometry.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
     <ClCompile Include="..\byhj-Render\mesh.cpp" />
     <ClCompile Include="..\byhj-Render\mgr.cpp" />
@@ -164,8 +172,12 @@
     <ClCompile Include="Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Terrain.psh" />
-    <FxCompile Include="Terrain.vsh" />
+    <None Include="Terrain.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="Terrain.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

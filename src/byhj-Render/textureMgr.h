@@ -37,7 +37,7 @@ namespace byhj
 	   GLuint   loadOGLDDS(std::string fileName);
 	   void   loadOGLTexture(std::string texName, std::vector<std::string> &faces);
 	   void   loadOGLTexture(std::string fileName, GLenum image_format, GLint internal_format);
-	   void   loadD3DTexture(ID3D11Device *pD3D11Device, std::string fileName);
+	   ID3D11ShaderResourceView * loadD3DTexture(ID3D11Device *pD3D11Device, std::string fileName);
 
 	   GLuint getOGLTextureByName(std::string fileName) ;
 	   ID3D11ShaderResourceView * getD3DTextureByName(std::string name) ;
