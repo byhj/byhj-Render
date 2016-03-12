@@ -12,12 +12,11 @@ namespace byhj
 		init_texture(pD3D11Device);
 	}
 
-	void Plane::render(ID3D11DeviceContext *pD3D11DeviceContext, const XMFLOAT4X4 &model,
-		               const XMFLOAT4X4 &view, const XMFLOAT4X4 &proj)
+	void Plane::render(ID3D11DeviceContext *pD3D11DeviceContext,  const D3DMVPMatrix &matrix)
 	{
-		cbMatrix.model = model;
-		cbMatrix.view  = view;
-		cbMatrix.proj  = proj;
+		cbMatrix.model = matrix.model;
+		cbMatrix.view  = matrix.view;
+		cbMatrix.proj  = matrix.proj;
 
 		XMVECTOR pos    = XMVectorSet(2.0f, 5.0f, -8.0f, 1.0f);
 		XMVECTOR target = XMVectorZero();

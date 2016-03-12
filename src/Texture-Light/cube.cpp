@@ -12,13 +12,12 @@ void Cube::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceCon
 	init_texture(pD3D11Device);
 }
 
-void Cube::render(ID3D11DeviceContext *pD3D11DeviceContext, const XMFLOAT4X4 &model,
-	const XMFLOAT4X4 &view, const XMFLOAT4X4 &proj)
+void Cube::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix)
 {
    
-	cbMatrix.model = model;
-	cbMatrix.view  = view;
-	cbMatrix.proj  = proj;
+	cbMatrix.model = matrix.model;
+	cbMatrix.view  = matrix.view;
+	cbMatrix.proj  = matrix.proj;
 	XMVECTOR pos    = XMVectorSet(2.0f, 5.0f, -8.0f, 1.0f);
 	XMVECTOR target = XMVectorZero();
 	XMVECTOR up     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -181,7 +180,6 @@ void Cube::init_shader(ID3D11Device *pD3D11Device)
 	pInputLayoutDesc.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 	pInputLayoutDesc.InstanceDataStepRate = 0;
 	vInputLayoutDesc.push_back(pInputLayoutDesc);
-	
 
 	CubeShader.init(pD3D11Device, vInputLayoutDesc);
 	CubeShader.attach(D3D_VERTEX_SHADER, L"light.vsh", "VS", "vs_5_0");

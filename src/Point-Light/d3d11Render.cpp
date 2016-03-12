@@ -4,14 +4,6 @@
 namespace byhj
 {
 
-	D3D11Render::D3D11Render()
-	{
-
-	}
-	D3D11Render::~D3D11Render()
-	{
-
-	}
 
 	void D3D11Render::v_onMouseDown(WPARAM btnState, int x, int y)
 	{
@@ -38,9 +30,6 @@ namespace byhj
 		init_camera();
 		init_object();
 
-		m_cube.init(m_pD3D11Device, m_pD3D11DeviceContext);
-		m_plane.init(m_pD3D11Device, m_pD3D11DeviceContext);
-
 	}
 
 	void D3D11Render::v_update()
@@ -59,8 +48,7 @@ namespace byhj
 		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		m_matrix.view = m_Camera.getViewMat();
-        m_cube.render(m_pD3D11DeviceContext, m_matrix);
-		m_plane.render(m_pD3D11DeviceContext, m_matrix);
+
 
 		drawInfo();
 

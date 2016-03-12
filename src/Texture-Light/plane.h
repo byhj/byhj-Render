@@ -2,6 +2,7 @@
 #define Plane_H
 
 #include "d3d/D3DShader.h"
+#include "d3d/D3DUtility.h"
 
 #include <string>
 #include <DirectXMath.h>
@@ -13,8 +14,7 @@ namespace byhj
 	{
 	public:
 		void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
-		void render(ID3D11DeviceContext *pD3D11DeviceContext, const XMFLOAT4X4 &model,
-			const XMFLOAT4X4 &view, const XMFLOAT4X4 &proj);
+		void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
 		void shutdown();
 
 	private:

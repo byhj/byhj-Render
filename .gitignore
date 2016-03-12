@@ -13,6 +13,9 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.bmp
+*.jpg
+*.mtl
 
 # Windows shortcuts
 *.lnk
@@ -30,7 +33,7 @@ $RECYCLE.BIN/
 *.sbm
 *.jpg
 *.png
-*.DDS
+*.dds
 *.JPG
 # =========================
 # Operating System Files

@@ -1,14 +1,13 @@
 #include "model.h"
 #include "modelMgr.h"
+#include "textureMgr.h"
 
 namespace byhj
 {
 	// Draws the model, and thus all its meshes
 	void Model::draw(GLuint program)
 	{
-
-		for (GLuint i = 0; i < m_OGLMeshes.size(); i++)
-		{
+		for (GLuint i = 0; i < m_OGLMeshes.size(); i++) {
 			m_OGLMeshes[i].draw(program);
 		}
 	}
@@ -17,8 +16,7 @@ namespace byhj
 	{
 		glUseProgram(program);
 
-		for (GLuint i = 0; i < m_OGLMeshes.size(); i++)
-		{
+		for (GLuint i = 0; i < m_OGLMeshes.size(); i++) {
 			m_OGLMeshes[i].drawInstance(program, amount);
 		}
 
@@ -146,17 +144,17 @@ namespace byhj
 		std::swap(oglMesh, OGLMesh(vertices, indices, textures) );
 
 	}
-/*
-	void Model::processMesh(aiMesh *mesh, const aiScene *scene, d3d::Mesh &d3dMesh)
+
+	void Model::processMesh(aiMesh *mesh, const aiScene *scene, D3DMesh &d3dMesh)
 	{
 		// Data to fill
-		std::vector<d3d::Vertex> vertices;
+		std::vector<D3DMesh::Vertex> vertices;
 		std::vector<GLuint> indices;
-		std::vector<d3d::Texture> textures;
+		std::vector<D3DMesh::Texture> textures;
 
 		// Walk through each of the mesh's vertices
 		for (GLuint i = 0; i < mesh->mNumVertices; i++) {
-			d3d::Vertex vertex;
+			D3DMesh::Vertex vertex;
 			XMFLOAT3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
 			// Positions
 			vector.x = mesh->mVertices[i].x;
@@ -205,18 +203,17 @@ namespace byhj
 			// Normal: texture_normalN
 
 			// 1. Diffuse maps
-			std::vector<d3d::Texture> diffuseMaps = this->loadD3DTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+			std::vector<D3DMesh::Texture> diffuseMaps = this->loadD3DTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 			// 2. Specular maps
-			std::vector<d3d::Texture> specularMaps = this->loadD3DTextures(material, aiTextureType_SPECULAR, "texture_specular");
+			std::vector<D3DMesh::Texture> specularMaps = this->loadD3DTextures(material, aiTextureType_SPECULAR, "texture_specular");
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		}
 
 		// Return a mesh object created from the extracted mesh data
-          std::swap(d3dMesh, d3d::Mesh(vertices, indices, textures) );
+          std::swap(d3dMesh, D3DMesh(vertices, indices, textures) );
 
 	}
-*/
 
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 // The required info is returned as a Texture struct.
@@ -256,12 +253,11 @@ namespace byhj
 	}
 
 
-/*
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 // The required info is returned as a Texture struct.
-	std::vector<d3d::Texture> Model::loadD3DTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+	std::vector<D3DMesh::Texture> Model::loadD3DTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
 	{
-		std::vector<d3d::Texture> textures;
+		std::vector<D3DMesh::Texture> textures;
 		for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 		{
 			aiString str;
@@ -280,16 +276,14 @@ namespace byhj
 			}
 			if (!skip)
 			{   // If texture hasn't been loaded already, load it
-			//	TextureMgr::getInstance()->loadD3DTexture(m_dir + str.C_Str());
-			//	d3d::Texture texture;
-			//	texture.id = TextureFromFile(str.C_Str(), m_dir);
-			//	texture.type = typeName;
-			//	texture.path = str;
-			//	textures.push_back(texture);
-			//	this->m_OGLTextures.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
+				// D3DMesh::Texture texture;
+				// texture.id = TextureMgr::getInstance()->loadD3DTexture(str)
+				// texture.type = typeName;
+				// texture.path = str;
+				// textures.push_back(texture);
+				// this->m_OGLTextures.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
 			}
 		}
 		return textures;
 	}
-	*/
 }

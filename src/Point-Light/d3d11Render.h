@@ -8,8 +8,7 @@
 #include <d3d11.h>
 #include <wrl.h>
 #include "Timer.h"
-#include "cube.h"
-#include "Plane.h"
+#include "terrain.h"
 
 namespace byhj
 {
@@ -43,8 +42,7 @@ namespace byhj
 		D3DCamera m_Camera;
 
 		Timer m_Timer;
-		Cube m_cube;
-		Plane m_plane;
+		Terrain m_terrain;
 
 		float fps = 0.0f;
 		int m_videoCardMemory;
