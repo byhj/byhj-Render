@@ -39,14 +39,17 @@
     <ClInclude Include="..\..\include\ogl\win32App.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
     <ClInclude Include="..\byhj-Render\camera.h" />
+    <ClInclude Include="..\byhj-Render\d3dMesh.h" />
+    <ClInclude Include="..\byhj-Render\d3dModel.h" />
     <ClInclude Include="..\byhj-Render\font.h" />
     <ClInclude Include="..\byhj-Render\fontMgr.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
-    <ClInclude Include="..\byhj-Render\mesh.h" />
     <ClInclude Include="..\byhj-Render\mgr.h" />
     <ClInclude Include="..\byhj-Render\model.h" />
     <ClInclude Include="..\byhj-Render\modelMgr.h" />
     <ClInclude Include="..\byhj-Render\object.h" />
+    <ClInclude Include="..\byhj-Render\oglMesh.h" />
+    <ClInclude Include="..\byhj-Render\oglModel.h" />
     <ClInclude Include="..\byhj-Render\render.h" />
     <ClInclude Include="..\byhj-Render\root.h" />
     <ClInclude Include="..\byhj-Render\shader.h" />
@@ -56,6 +59,7 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="MeshLoad.h" />
     <ClInclude Include="Skymap.h" />
     <ClInclude Include="d3d11Render.h" />
   </ItemGroup>
@@ -73,14 +77,17 @@
     <ClCompile Include="..\..\include\ogl\win32App.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
     <ClCompile Include="..\byhj-Render\camera.cpp" />
+    <ClCompile Include="..\byhj-Render\d3dMesh.cpp" />
+    <ClCompile Include="..\byhj-Render\d3dModel.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
     <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
-    <ClCompile Include="..\byhj-Render\mesh.cpp" />
     <ClCompile Include="..\byhj-Render\mgr.cpp" />
     <ClCompile Include="..\byhj-Render\model.cpp" />
     <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
     <ClCompile Include="..\byhj-Render\object.cpp" />
+    <ClCompile Include="..\byhj-Render\oglMesh.cpp" />
+    <ClCompile Include="..\byhj-Render\oglModel.cpp" />
     <ClCompile Include="..\byhj-Render\render.cpp" />
     <ClCompile Include="..\byhj-Render\root.cpp" />
     <ClCompile Include="..\byhj-Render\shader.cpp" />
@@ -89,6 +96,7 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
+    <ClCompile Include="MeshLoad.cpp" />
     <ClCompile Include="Skymap.cpp" />
     <ClCompile Include="d3d11Render.cpp" />
     <ClCompile Include="main.cpp" />

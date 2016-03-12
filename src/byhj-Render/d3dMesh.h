@@ -88,7 +88,7 @@ public:
 	// Initializes all the buffer objects/arrays
 	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
 	void update();
-	void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
+	void render(ID3D11DeviceContext *pD3D11DeviceContext);
     void shutdown();
 
 private:
@@ -97,13 +97,6 @@ private:
 	void init_texture(ID3D11Device *pD3D11Device);
 	void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
 
-	struct MatrixBuffer
-	{
-		XMFLOAT4X4 Model;
-		XMFLOAT4X4 View;
-		XMFLOAT4X4 Porj;
-	};
-	MatrixBuffer cbMatrix;
 
 	struct MaterialBuffer
 	{
@@ -121,15 +114,10 @@ private:
 
 	ID3D11Buffer *m_pIndexBuffer;
 	ID3D11Buffer *m_pVertexBuffer;
-	ID3D11Buffer *m_pMVPBuffer;
 
 	UINT m_VertexCount;
 	UINT m_IndexCount;
 	ID3D11ShaderResourceView *m_pShaderResourceView;
-	ID3D11DepthStencilView   *m_pDepthStencilView;
-	ID3D11Texture2D          *m_pDepthStencilBuffer;
-	ID3D11RasterizerState    *m_pRasterState;
-	ID3D11SamplerState       *m_pTexSamplerState;
 };
 
 }

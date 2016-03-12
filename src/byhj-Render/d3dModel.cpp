@@ -18,24 +18,23 @@ namespace byhj
 		mat.diffuse.w = blend;
 		mat.emissive.w = blend;
 	}
-
+	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
+	{
+	}
 	// Draws the model, and thus all its meshes
 	void D3DModel::draw(ID3D11DeviceContext *pD3D11DeviceContext)
 	{
-		ModelShader.use(pD3D11DeviceContext);
 
-		pD3D11DeviceContext->PSSetSamplers(0, 1, &m_pTexSamplerState);
 
-		for (int i = 0; i < this->meshes.size(); i++)
-		{
+		for (int i = 0; i < this->m_D3DMeshes.size(); i++) {
 			float blendFactor[] ={ 0.4f, 0.4f, 0.4f, 0.3f };
-			if (this->meshes[i].mat.ambient.w < 1.0f)
-				pD3D11DeviceContext->OMSetBlendState(Transparency, blendFactor, 0xffffffff);
+			//if (this->m_D3DMeshes[i].m_material.ambient.w < 1.0f)
+		//		pD3D11DeviceContext->OMSetBlendState(Transparency, blendFactor, 0xffffffff);
 			//"fine-tune" the blending equation
 
-			pD3D11DeviceContext->UpdateSubresource(m_pMatBuffer, 0, NULL, &this->meshes[i].mat, 0, 0);
-			pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &m_pMatBuffer);
-			this->meshes[i].Render(pD3D11DeviceContext, model, view, proj);
+		// 	pD3D11DeviceContext->UpdateSubresource(m_pMatBuffer, 0, NULL, &this->meshes[i].mat, 0, 0);
+		// 	pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &m_pMatBuffer);
+			this->m_D3DMeshes[i].render(pD3D11DeviceContext);
 
 			pD3D11DeviceContext->OMSetBlendState(0, 0, 0xffffffff);
 		}
@@ -205,13 +204,14 @@ namespace byhj
 				}
 			}
 			if (!skip)
-			{   // If texture hasn't been loaded already, load it
-				// D3DMesh::Texture texture;
-				// texture.id = TextureMgr::getInstance()->loadD3DTexture(str)
-				// texture.type = typeName;
-				// texture.path = str;
-				// textures.push_back(texture);
-				// this->m_OGLTextures.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
+			{
+				//If texture hasn't been loaded already, load it
+				D3DMesh::Texture texture;
+				texture.id = TextureMgr::getInstance()->loadD3DTexture(str);
+				texture.type = typeName;
+				texture.path = str;
+				textures.push_back(texture);
+				this->m_D3DTextures.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
 			}
 		}
 		return textures;

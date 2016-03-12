@@ -137,14 +137,26 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
     <ClInclude Include="..\byhj-Render\model.h">
       <Filter>Render\model</Filter>
     </ClInclude>
     <ClInclude Include="Skymap.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\oglMesh.h">
+      <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\d3dMesh.h">
+      <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\d3dModel.h">
+      <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\oglModel.h">
+      <Filter>Render\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -235,14 +247,26 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\mesh.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
     <ClCompile Include="..\byhj-Render\model.cpp">
       <Filter>Render\model</Filter>
     </ClCompile>
     <ClCompile Include="Skymap.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoad.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\oglMesh.cpp">
+      <Filter>Render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\d3dMesh.cpp">
+      <Filter>Render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\d3dModel.cpp">
+      <Filter>Render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\oglModel.cpp">
+      <Filter>Render\model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

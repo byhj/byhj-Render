@@ -29,11 +29,9 @@ namespace byhj
 		void processMesh(aiMesh *mesh, const aiScene *scene, D3DMesh &d3dMesh);
 
 		std::vector<D3DMesh::Texture> loadD3DTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
-		int getMeshCount() const;
-		GLuint getMeshVAO(int index) const;
+
 
 	private:
-		void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
 
 		std::vector<D3DMesh::Texture> m_D3DTextures;
 		std::vector<D3DMesh> m_D3DMeshes;

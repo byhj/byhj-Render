@@ -15,7 +15,7 @@ namespace byhj {
 	{
 	}
 
-	void D3DMesh::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix)
+	void D3DMesh::render(ID3D11DeviceContext *pD3D11DeviceContext)
 	{
 		// Bind appropriate textures
 		int diffuseNr = 1;
@@ -43,16 +43,6 @@ namespace byhj {
 		offset = 0;
 		pD3D11DeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
 		pD3D11DeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-		cbMatrix.Model = matrix.model;
-		cbMatrix.View  = matrix.view;
-		cbMatrix.Porj  = matrix.proj;
-
-		pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer, 0, NULL, &cbMatrix, 0, 0);
-		pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &m_pMVPBuffer);
-
-		pD3D11DeviceContext->RSSetState(m_pRasterState);
-
 		pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		pD3D11DeviceContext->DrawIndexed(m_IndexCount, 0, 0);
@@ -109,28 +99,9 @@ namespace byhj {
 		hr = pD3D11Device->CreateBuffer(&IndexBufferDesc, &IBO, &m_pIndexBuffer);
 		DebugHR(hr);
 
-		///////////////////////////////////////////////////////////////////
-		D3D11_BUFFER_DESC mvpDesc;
-		ZeroMemory(&mvpDesc, sizeof(D3D11_BUFFER_DESC));
-		mvpDesc.Usage          = D3D11_USAGE_DEFAULT;
-		mvpDesc.ByteWidth      = sizeof(MatrixBuffer);
-		mvpDesc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
-		mvpDesc.CPUAccessFlags = 0;
-		mvpDesc.MiscFlags      = 0;
-		hr = pD3D11Device->CreateBuffer(&mvpDesc, NULL, &m_pMVPBuffer);
-		DebugHR(hr);
-
 	}
 	void D3DMesh::init_state(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 	{
-		HRESULT hr;
-		//////////////////////Raterizer State/////////////////////////////
-		D3D11_RASTERIZER_DESC rasterDesc;
-		ZeroMemory(&rasterDesc, sizeof(D3D11_RASTERIZER_DESC));
-		rasterDesc.FillMode = D3D11_FILL_SOLID;
-		rasterDesc.CullMode = D3D11_CULL_NONE;
-		rasterDesc.FrontCounterClockwise = false;
-		hr = pD3D11Device->CreateRasterizerState(&rasterDesc, &m_pRasterState);
-		DebugHR(hr);
+
 	}
 }
