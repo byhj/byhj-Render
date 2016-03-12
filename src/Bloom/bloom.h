@@ -38,7 +38,7 @@ namespace byhj {
 	   GLuint vao, vbo;
 	   GLfloat exposure;
 	   GLuint model_loc, view_loc, proj_loc;
-
+	   GLuint intensity_loc;
 	   GLuint m_bloomProgram, m_blurProgram, m_sceneProgram;
 
 	   GLuint m_blurFbos[2];

@@ -202,12 +202,6 @@
     <None Include="blur.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="light.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="light.frag">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="scene.vert">
       <Filter>Resource Files</Filter>
     </None>

@@ -40,8 +40,6 @@ namespace byhj
 		glEnable(GL_DEPTH_TEST);
 		m_camera.SetPos(glm::vec3(0.0f, 0.0f, 5.0f));
 		m_bloom.init();
-
-
 	}
 
 	void OGLRender::v_update()

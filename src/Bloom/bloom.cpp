@@ -31,14 +31,19 @@ namespace byhj {
 
 	void Bloom::render(const OGLCamera &camera)
 	{
-	
-		glUseProgram(m_bloomProgram); 
+		static float t = 0.0f;
+		t += glfwGetTime() / 1000.0f;
+		float intensity = abs(sin(t)) * 10.0f;
+
 		glBindFramebuffer(GL_FRAMEBUFFER, m_bloomFbo);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glUseProgram(m_bloomProgram); 
 
 		float aspect = WindowInfo::getInstance()->getAspect();
         float time = glfwGetTime();
-		glm::mat4 model =  glm::rotate(glm::mat4(1.0f), time, glm::vec3(1.0f, 1.0f, 1.0f));
+		glm::mat4 model = glm::rotate(glm::mat4(1.0f), 90.0f, glm::vec3(0.0f, 1.0f, 1.0f));
 		glm::mat4 view  = camera.GetViewMatrix();
 		glm::mat4 proj  = glm::perspective(45.0f,aspect, 0.1f, 1000.0f);
 
@@ -46,6 +51,8 @@ namespace byhj {
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &view[0][0]);
 		glUniformMatrix4fv(uniform_loc.proj, 1, GL_FALSE, &proj[0][0]);
 
+		intensity_loc = glGetUniformLocation(m_bloomProgram, "u_intensity");
+		glUniform1f(intensity_loc, intensity);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_diffuseTex);
 		glUniform1i(glGetUniformLocation(m_bloomProgram, "u_diffuseTex"), 0);
@@ -64,12 +71,13 @@ namespace byhj {
 		/////////////////////////////////////////////////////////////////////////////////////
 	
 		glUseProgram(m_blurProgram);
-
 		GLboolean horizontal = true, first_iteration = true;
 		GLuint amount = 10;
 		for (GLuint i = 0; i < amount; i++)
 		{
 			glBindFramebuffer(GL_FRAMEBUFFER, m_blurFbos[horizontal]);
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glUniform1i(glGetUniformLocation(m_bloomProgram, "u_horizontal"), horizontal);
 
 			// bind texture of other framebuffer (or scene if first iteration)
@@ -88,11 +96,12 @@ namespace byhj {
 
 		/////////////////////////////Final//////////////////////////////////
 // 3. Now render floating point color buffer to 2D quad and tonemap HDR colors to default framebuffer's (clamped) color range
-	   	glUseProgram(m_sceneProgram);
-
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		glUseProgram(m_sceneProgram);
+		
 		glActiveTexture(GL_TEXTURE0);
 		auto sceneTexLoc = glGetUniformLocation(m_sceneProgram, "u_sceneTex");
 		glUniform1i(sceneTexLoc, 0);
@@ -104,7 +113,7 @@ namespace byhj {
 		glBindTexture(GL_TEXTURE_2D, m_blurTexs[!horizontal]);
 
 		glUniform1i(glGetUniformLocation(m_sceneProgram, "enableBloom"), 1);
-		glUniform1f(glGetUniformLocation(m_sceneProgram, "exposure"), exposure);
+		glUniform1f(glGetUniformLocation(m_sceneProgram, "exposure"), 0.01f);
 
 		render_plane();
 
@@ -242,7 +251,7 @@ namespace byhj {
 				if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 					std::cout << "Framebuffer not complete!" << std::endl;
 			}
-
-					glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 
+		    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		    		    
 		}
 }

@@ -11,6 +11,7 @@ in VS_OUT  {
 
 uniform sampler2D u_diffuseTex;
 uniform sampler2D u_glowTex;
+uniform float u_intensity;
 
 void main()
 {
@@ -19,7 +20,7 @@ void main()
     vec4 diffuseColor = texture2D(u_diffuseTex, vs_out.texcoord);
 	vec4 glowColor = texture2D(u_glowTex, vs_out.texcoord);
 
-    vec3 result =  diffuseColor.rgb + 2.0f * glowColor.rgb;
+    vec3 result =  diffuseColor.rgb + u_intensity * glowColor.rgb;
 	    // Check whether result is higher than some threshold, if so, output as bloom threshold color
     float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
     if(brightness > 1.0) {

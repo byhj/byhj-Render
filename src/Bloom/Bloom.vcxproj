@@ -170,8 +170,6 @@
     <None Include="bloom.vert" />
     <None Include="blur.frag" />
     <None Include="blur.vert" />
-    <None Include="light.frag" />
-    <None Include="light.vert" />
     <None Include="scene.frag" />
     <None Include="scene.vert" />
   </ItemGroup>
