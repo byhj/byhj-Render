@@ -28,9 +28,6 @@
     <Filter Include="Render\mgr">
       <UniqueIdentifier>{8b8f4b4e-65d1-47d9-ae9b-348b0fa731f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Render\model">
-      <UniqueIdentifier>{07a67e07-fe3e-4e09-b4c7-56a41352aed5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oglRender.cpp">
@@ -99,12 +96,6 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\mesh.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
     <ClCompile Include="FogGui.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -172,12 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
-      <Filter>Render\model</Filter>
     </ClInclude>
     <ClInclude Include="FogGui.h">
       <Filter>Header Files</Filter>

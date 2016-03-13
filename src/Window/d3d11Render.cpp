@@ -190,15 +190,15 @@ namespace byhj
 		static WCHAR frameStr[255];
 		wsprintfW(frameStr, L"FPS: %u", (UINT)fps);
 
-		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 60);
+		m_Font.render(m_pD3D11DeviceContext, frameStr, 20.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 60);
 	}
     void D3D11Render::drawInfo()
     {
     	WCHAR WinInfo[255];
     	swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight() );
 		drawfps();								  
-     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 20.0f);
-     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 60.0f);
+     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 20.0f, 10.0f, 30.0f);
+     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 20.0f, 10.0f, 60.0f);
     }
 
 }

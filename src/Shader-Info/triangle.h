@@ -2,7 +2,7 @@
 #define Triangle_H
 
 #include <GL/glew.h>
-#include "ogl/Shader.h"
+#include "ogl/oglShader.h"
 
 namespace byhj
 {

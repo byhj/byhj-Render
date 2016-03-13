@@ -20,8 +20,8 @@
 #include <vector>
 #include <memory>
 
-#include "d3d/d3dUtility.h"
 #include "app.h"
+#include "d3d/d3dUtility.h"
 #include "d3dRender.h"
 
 

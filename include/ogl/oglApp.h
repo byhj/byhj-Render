@@ -4,6 +4,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "AntTweakBar.h"
+
 #include <iostream>
 #include <string>
 #include <memory>
@@ -13,6 +15,7 @@
 #include "oglFont.h"
 #include "ogl/oglCamera.h"
 #include "windowInfo.h"
+
 #include <memory>
 
 #define USE_ANT

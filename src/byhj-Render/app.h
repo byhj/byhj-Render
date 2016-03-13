@@ -1,8 +1,6 @@
 #ifndef app_H
 #define app_H
 
-#include "render.h"
-#include "gui.h"
 #include <memory>
 
 namespace byhj

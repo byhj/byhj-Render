@@ -15,10 +15,10 @@ out GS_OUT
     vec3 normal;
 } gs_out;
 
-layout (binding = 0) uniform BLOCK
+layout (binding = 0) uniform MatrixUBO
 {
-    mat4 proj_matrix;
-    mat4 mv_matrix[16];
+    mat4 u_proj;
+    mat4 u_mv[16];
 };
 
 void main(void)
@@ -39,8 +39,9 @@ void main(void)
     for (i = 0; i < gl_in.length(); i++)
     {
         gs_out.color = colors[gl_InvocationID];
-        gs_out.normal = mat3(mv_matrix[gl_InvocationID]) * gs_in[i].normal;
-        gl_Position = proj_matrix * mv_matrix[gl_InvocationID] * gl_in[i].gl_Position;
+        gs_out.normal = mat3(u_mv[gl_InvocationID]) * gs_in[i].normal;
+
+        gl_Position = u_pro * u_mv[gl_InvocationID] * gl_in[i].gl_Position;
         gl_Layer = gl_InvocationID;
         EmitVertex();
     }

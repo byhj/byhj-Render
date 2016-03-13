@@ -2,9 +2,10 @@
 #define Clip_H
 
 #include <GL/glew.h>
-#include "ogl/Shader.h"
-#include "ogl/Utility.h"
-#include "ogl/object.h"
+
+#include "ogl/oglShader.h"
+#include "ogl/oglUtility.h"
+#include "ogl/oglModel.h"
 
 namespace byhj
 {
@@ -15,23 +16,28 @@ public:
 	Clip();
 	~Clip();
 
-	void Init();
-	void Render(GLfloat aspect);
-	void Shutdown();
+	void init();
+	void update();
+	void render();
+	void shutdown();
 
 private:
 	void init_buffer();
 	void init_vertexArray();
 	void init_shader();
 
-	ogl::Shader ClipShader{ "Clip Shader" };
-	GLuint program = 0;
-	sb6::Object object;
+	OGLShader m_clipShader{ "Clip Shader" };
+	GLuint    m_program = 0;
 
-	GLint   proj_loc;
-	GLint   mv_loc;
-	GLint   clip_plane_loc;
-	GLint   clip_sphere_loc;
+	struct UnfiormLoc {
+	    GLuint model;
+		GLuint view;
+		GLuint proj;
+		GLuint clipPlane;
+		GLuint clipSphere;
+	}m_uniformLoc;
+
+	OGLModel m_model;
 };
 
 }

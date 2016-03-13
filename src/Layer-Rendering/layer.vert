@@ -1,7 +1,7 @@
 #version 420 core
 
-layout (location = 0) in vec4 position;
-layout (location = 1) in vec3 normal;
+layout (location = 0) in vec4 g_position;
+layout (location = 1) in vec3 g_normal;
 
 out VS_OUT
 {
@@ -11,6 +11,7 @@ out VS_OUT
 
 void main(void)
 {
-    gl_Position = position;
     vs_out.normal = normal;
+    gl_Position = position;
+
 }

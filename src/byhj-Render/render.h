@@ -1,9 +1,6 @@
 #ifndef Render_H
 #define Render_H
 
-#include <windows.h>
-#include <glm/glm.hpp>
-
 namespace byhj
 {
 	class Render

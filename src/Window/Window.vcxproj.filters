@@ -28,9 +28,6 @@
     <Filter Include="Render\mgr">
       <UniqueIdentifier>{c4ce325b-e925-4beb-9500-7f377cf7547f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Render\model">
-      <UniqueIdentifier>{d763c120-61a7-4af5-81e5-0edc9d36f251}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,12 +98,6 @@
     </ClCompile>
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\mesh.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
       <Filter>Render\d3d</Filter>
@@ -193,12 +184,6 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
-      <Filter>Render\model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dApp.h">
       <Filter>Render\d3d</Filter>

@@ -1,6 +1,8 @@
-#include "Cube.h"
+#include "Scene.h"
+
 #include <glfw/glfw3.h>
 #include "ogl/oglDebug.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -8,27 +10,25 @@
 namespace byhj
 {
 
-Cube::Cube()
+Scene::Scene()
 {
 
 }
 
-Cube::~Cube()
+Scene::~Scene()
 {
 
 }
 
-void Cube::Init(int sw, int sh)
+void Scene::init()
 {
-	width  = sw;
-	height = sh;
 	init_buffer();
 	init_vertexArray();
 	init_shader();
 	init_fbo();
 }
 
-void Cube::Render(GLfloat aspect)
+void Scene::render()
 {
 
 	static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
@@ -81,7 +81,7 @@ void Cube::Render(GLfloat aspect)
 
 	glUseProgram(program_layer);
 
-	object.render();
+
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glDrawBuffer(GL_BACK);
@@ -98,17 +98,16 @@ void Cube::Render(GLfloat aspect)
 }
 
 
-void Cube::Shutdown()
+void Scene::shutdown()
 {
 	glDeleteVertexArrays(1, &vao);
 }
 
-void Cube::init_buffer()
+void Scene::init_buffer()
 {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	object.load("../../../media/objects/torus.sbm");
 
 	glGenBuffers(1, &transform_ubo);
 	glBindBuffer(GL_UNIFORM_BUFFER, transform_ubo);
@@ -118,29 +117,29 @@ void Cube::init_buffer()
 
 }
 
-void Cube::init_vertexArray()
+void Scene::init_vertexArray()
 {
 
 }
 
-void Cube::init_shader()
+void Scene::init_shader()
 {
 	ShowShader.init();
 	ShowShader.attach(GL_VERTEX_SHADER, "show.vert");
 	ShowShader.attach(GL_FRAGMENT_SHADER, "show.frag");
 	ShowShader.link();
-	program_show = ShowShader.GetProgram();
+	program_show = ShowShader.getProgram();
 
 	LayerShader.init();
 	LayerShader.attach(GL_VERTEX_SHADER, "layer.vert");
 	LayerShader.attach(GL_GEOMETRY_SHADER, "layer.geom");
 	LayerShader.attach(GL_FRAGMENT_SHADER, "layer.frag");
 	LayerShader.link();
-	program_layer = LayerShader.GetProgram();
+	program_layer = LayerShader.getProgram();
 
 }
 
-void Cube::init_fbo()
+void Scene::init_fbo()
 {
 
 	glGenTextures(1, &array_texture);

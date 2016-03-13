@@ -17,7 +17,7 @@ namespace byhj
 	}
 
 	void D3DFont::render(ID3D11DeviceContext *pD3D11DeviceContext, const WCHAR *pText,
-		                 float fontSize /* = 10.0f */, float posX /* = 10.0f */, float posY /* = 10.0f */)
+		                 float fontSize /* = 22.0f */, float posX /* = 10.0f */, float posY /* = 10.0f */)
 	{
 		m_pFontWrapper->DrawString(
 			pD3D11DeviceContext,
@@ -25,7 +25,7 @@ namespace byhj
 			fontSize,// Font size
 			posX,// X position
 			posY,// Y position
-			0xffffffff,// Text color, 0xAaBbGgRr
+			0xff0099ff,// Text color, 0xAaBbGgRr
 			FW1_RESTORESTATE// Flags (for example FW1_RESTORESTATE to keep context states unchanged)
 			);
 	}
