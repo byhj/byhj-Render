@@ -114,11 +114,12 @@
     <None Include="subroutine.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="oglRender.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

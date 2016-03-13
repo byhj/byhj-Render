@@ -15,35 +15,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="layer.frag">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="layer.geom">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="layer.vert">
-      <Filter>Header Files</Filter>
-    </None>
     <None Include="show.frag">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="show.vert">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="layer.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="layer.geom">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="layer.frag">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RenderSystem.cpp">
+    <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="cube.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RenderSystem.h">
+    <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cube.h">
+    <ClInclude Include="scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,39 +21,42 @@
     <ClInclude Include="plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderSystem.h">
+    <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cube.vert">
-      <Filter>Header Files</Filter>
+    <None Include="plane.vert">
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="plane.frag">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="plane.vert">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="color.frag">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="color.vert">
-      <Filter>Header Files</Filter>
+    <None Include="cube.vert">
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="cube.frag">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="color.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="color.vert">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="plane.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="cube.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oglRender.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

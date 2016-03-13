@@ -57,6 +57,7 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\byhj-Render(x86).props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -117,12 +118,13 @@
     <None Include="show.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cube.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="oglRender.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cube.h" />
-    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="scene.h" />
+    <ClInclude Include="oglRender.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

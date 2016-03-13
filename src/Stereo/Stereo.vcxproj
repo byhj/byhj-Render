@@ -111,11 +111,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cube.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="oglRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cube.h" />
-    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="oglRender.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="stereo.frag" />

@@ -15,18 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cube.cpp">
+    <ClCompile Include="oglRender.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="cube.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderSystem.h">
+    <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

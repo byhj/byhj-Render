@@ -111,8 +111,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="cube.h" />
+    <ClInclude Include="oglRender.h" />
     <ClInclude Include="plane.h" />
-    <ClInclude Include="RenderSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="color.frag" />
@@ -124,8 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cube.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="plane.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
