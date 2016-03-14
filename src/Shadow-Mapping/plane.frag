@@ -27,7 +27,7 @@ void main()
     vec3 lightColor = vec3(0.3f);
 
     // Ambient
-    vec3 ambient = 0.5f * color;
+    vec3 ambient = 0.3f * color;
 
     // Diffuse
     vec3 lightDir = normalize(lightPos - fs_in.FragPos);
@@ -44,7 +44,7 @@ void main()
 
     // Calculate shadow
     float shadow =  ShadowCalculation(fs_in.FragPosLightSpace) ;                      
-    vec3 lighting = ( ambient + (1.0 - shadow) * (diffuse + specular) ) * color;    
+    vec3 lighting = ( (1.0 - shadow) * (ambient + diffuse + specular) ) * color;    
     
     FragColor = vec4(lighting, 1.0f);
 }

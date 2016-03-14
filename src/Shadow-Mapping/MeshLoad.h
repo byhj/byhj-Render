@@ -6,9 +6,10 @@
 #include <glfw/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "ogl/oglCamera.h"
 
-#include "model.h"
+#include "ogl/oglCamera.h"
+#include "ogl/oglModel.h"
+
 #include "utility.h"
 #include "ogl/oglShader.h"
 
@@ -43,7 +44,7 @@ namespace byhj
 		GLuint m_tex = OGL_ONE;
 		OGLShader PlaneShader = "Plane Shader";
 		OGLShader m_MeshLoadShader = "Mesh Shader";
-		byhj::Model m_Model;
+		OGLModel m_Model;
 		GLuint texLocs[2];
 
 		GLuint lightProgram, shadowProgram;

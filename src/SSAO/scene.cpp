@@ -93,10 +93,11 @@ namespace byhj
 	void Scene::render(const OGLCamera &camera)
 	{		
 		// Lights
-		glm::vec3 lightPos = glm::vec3(2.0, 4.0, -2.0);
+		glm::vec3 lightPos = glm::vec3(1.0, 1.0, 3.0);
 		glm::vec3 lightColor = glm::vec3(0.2, 0.2, 0.7);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 proj = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
+		glm::mat4 model = glm::mat4(1.0f);
 
 		//////////////////////////////////////////////////////////////////////////////////
 		// 1. Geometry Pass: render scene's geometry/normal/color data into gbuffer
@@ -105,34 +106,25 @@ namespace byhj
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glUniformMatrix4fv(glGetUniformLocation(model_prog, "g_proj"), 1, GL_FALSE, &proj[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(model_prog, "g_view"), 1, GL_FALSE, &view[0][0]);
-
-		// Floor cube
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(20.0f, 1.0f, 20.0f));
-		glUniformMatrix4fv(glGetUniformLocation(model_prog, "g_model"), 1, GL_FALSE, &model[0][0]);
-		RenderCube();
+		glUniformMatrix4fv(glGetUniformLocation(model_prog, "u_model"), 1, GL_FALSE, &model[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(model_prog, "u_proj"), 1, GL_FALSE, &proj[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(model_prog, "u_view"), 1, GL_FALSE, &view[0][0]);
 
 		// draw model on the floor
-		model = glm::mat4();
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 5.0));
-		model = glm::rotate(model, -90.0f, glm::vec3(1.0, 0.0, 0.0));
-		model = glm::scale(model, glm::vec3(0.5f));
-		glUniformMatrix4fv(glGetUniformLocation(model_prog, "g_model"), 1, GL_FALSE,  &model[0][0]);
+
 	    m_model.draw(model_prog);
 	
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
 
+		
 		/////////////////////////////2. Create SSAO texture//////////////////////////////////////
 		glUseProgram(ssao_prog);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, m_ssaoFbo);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glUniformMatrix4fv(glGetUniformLocation(ssao_prog, "g_proj"), 1, GL_FALSE, &proj[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(ssao_prog, "u_proj"), 1, GL_FALSE, &proj[0][0]);
 		glUniform1i(glGetUniformLocation(ssao_prog, "u_posDepthTex"), 0);
 		glUniform1i(glGetUniformLocation(ssao_prog, "u_normalTex"), 1);
 		glUniform1i(glGetUniformLocation(ssao_prog, "u_noiseTex"), 2);
@@ -175,14 +167,13 @@ namespace byhj
 		// 3. Blur SSAO texture to remove noise
 		glUseProgram(blur_prog);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_ssaoBlurFbo);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_ssaoColorTex);
 		RenderQuad();
 
 		glUseProgram(0);
-		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,6 +209,9 @@ namespace byhj
 		glUniform1f(glGetUniformLocation(light_prog, "light.Quadratic"), quadratic);
 		glUniform1i(glGetUniformLocation(light_prog, "draw_mode"), draw_mode);
 		RenderQuad();
+
+		glUseProgram(0);
+	
 
 	}
 
@@ -272,12 +266,12 @@ namespace byhj
 		modelShader.info();
 		model_prog =  modelShader.getProgram();
 
-		lightShader.init();
-		lightShader.attach(GL_VERTEX_SHADER,   "light.vert");
-		lightShader.attach(GL_FRAGMENT_SHADER, "light.frag");
-		lightShader.link();
-		lightShader.info();
-		light_prog =  lightShader.getProgram();
+		ssaoShader.init();
+		ssaoShader.attach(GL_VERTEX_SHADER, "ssao.vert");
+		ssaoShader.attach(GL_FRAGMENT_SHADER, "ssao.frag");
+		ssaoShader.link();
+		ssaoShader.info();
+		ssao_prog =  ssaoShader.getProgram();
 
 		blurShader.init();
 		blurShader.attach(GL_VERTEX_SHADER,   "blur.vert");
@@ -286,12 +280,12 @@ namespace byhj
 		blurShader.info();
 		blur_prog =  blurShader.getProgram();
 
-		ssaoShader.init();
-		ssaoShader.attach(GL_VERTEX_SHADER,   "ssao.vert");
-		ssaoShader.attach(GL_FRAGMENT_SHADER, "ssao.frag");
-		ssaoShader.link();
-		ssaoShader.info();
-		ssao_prog =  ssaoShader.getProgram();
+		lightShader.init();
+		lightShader.attach(GL_VERTEX_SHADER, "light.vert");
+		lightShader.attach(GL_FRAGMENT_SHADER, "light.frag");
+		lightShader.link();
+		lightShader.info();
+		light_prog =  lightShader.getProgram();
 
 	}
 

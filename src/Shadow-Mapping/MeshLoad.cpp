@@ -42,12 +42,12 @@ namespace byhj
 		glm::mat4 view  = camera.GetViewMatrix();
 		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 
-		GLfloat near_plane = 1.0f, far_plane = 7.5f;
+		GLfloat near_plane = 0.1f, far_plane = 100.0f;
 		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-		glm::vec3 lightPos(-2.0f, 5.0f, 5.0f);
+		glm::vec3 lightPos(0.0f, 5.0f, 3.0f);
 		glm::vec3 camPos = camera.GetPos();
 
-		glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(1.0));
+		glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0f, 1.0, 0.0f));
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
 
@@ -126,7 +126,7 @@ namespace byhj
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
 		glBindVertexArray(0);
 
-		m_Model.loadModel("bench.obj", LoadType::OGL);
+		m_Model.loadModel("bench.obj");
 	}
 
 

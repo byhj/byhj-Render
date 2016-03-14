@@ -99,6 +99,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglModel.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglMesh.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MeshLoad.h">
@@ -166,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglMesh.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglModel.h">
+      <Filter>Render\ogl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
