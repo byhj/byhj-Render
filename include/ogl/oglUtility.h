@@ -11,10 +11,7 @@
 namespace byhj
 {
 
-namespace ogl
-{
-
-	struct Matrix
+	struct OGLMVPMatrix
 	{
 	   glm::mat4 model;
 	   glm::mat4 view;
@@ -23,8 +20,6 @@ namespace ogl
 
 
 	const GLuint VALUE = 0xffffffff;
-
-}
 
 }
 

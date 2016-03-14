@@ -38,6 +38,7 @@ namespace byhj
 		init_camera();
 		init_object();
 
+	
 		m_terrain.Init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
 
 	}

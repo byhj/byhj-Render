@@ -28,9 +28,6 @@
     <Filter Include="Render\mgr">
       <UniqueIdentifier>{ea51a094-f91b-44d2-a44e-0105f05ad27c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Render\model">
-      <UniqueIdentifier>{b67cf722-0a8b-4a26-94ba-b51460b4e701}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Terrain.h">
@@ -92,12 +89,6 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
-      <Filter>Render\model</Filter>
     </ClInclude>
     <ClInclude Include="d3d11Render.h">
       <Filter>Header Files</Filter>
@@ -181,12 +172,6 @@
     </ClCompile>
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\mesh.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
     </ClCompile>
     <ClCompile Include="d3d11Render.cpp">
       <Filter>Header Files</Filter>

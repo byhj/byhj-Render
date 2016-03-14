@@ -1,12 +1,15 @@
 #version 330 core
 
-out vec4 FragColor;
-in vec2 TexCoords;
+layout (location = 0) out vec4 g_fragColor;
 
-uniform sampler2D gPositionDepth;
-uniform sampler2D gNormal;
-uniform sampler2D gAlbedo;
-uniform sampler2D ssao;
+in VS_OUT {
+ vec2 texcoord;
+}vs_out;
+
+uniform sampler2D g_posDepthTex;
+uniform sampler2D g_normalTex;
+uniform sampler2D g_colorTex;
+uniform sampler2D g_ssaoTex;
 
 struct Light {
     vec3 Position;
@@ -20,10 +23,10 @@ uniform Light light;
 void main()
 {             
     // Retrieve data from g-buffer
-    vec3 FragPos = texture(gPositionDepth, TexCoords).rgb;
-    vec3 Normal = texture(gNormal, TexCoords).rgb;
-    vec3 Diffuse = texture(gAlbedo, TexCoords).rgb;
-    float AmbientOcclusion = texture(ssao, TexCoords).r;
+    vec3 FragPos = texture(g_posDepthTex, vs_out.texcoord).rgb;
+    vec3 Normal  = texture(g_normalTex,   vs_out.texcoord).rgb;
+    vec3 Diffuse = texture(g_colorTex,    vs_out.texcoord).rgb;
+    float AmbientOcclusion = texture(g_ssaoTex, vs_out.texcoord).r;
     
     // Then calculate lighting as usual
     vec3 ambient = vec3(0.3 * AmbientOcclusion); // <-- this is where we use ambient occlusion
@@ -46,5 +49,5 @@ void main()
     specular *= attenuation;
     lighting += diffuse + specular;
 
-    FragColor = vec4(lighting, 1.0);
+    g_fragColor = vec4(lighting, 1.0);
 }

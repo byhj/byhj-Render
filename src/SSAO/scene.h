@@ -1,11 +1,11 @@
 #ifndef Scene_H
 #define Scene_H
 
-#include "ogl/Shader.h"
-#include "ogl/Utility.h"
-#include "ogl/model.h"
-#include "ogl/camera.h"
-#include "ogl/model.h"
+#include "ogl/oglShader.h"
+#include "ogl/oglUtility.h"
+#include "ogl/oglModel.h"
+#include "ogl/oglCamera.h"
+
 
 namespace byhj
 {
@@ -17,32 +17,34 @@ namespace byhj
 		~Scene(){}
 
 	public:
-		void Init();
-		void Render(const ogl::MvpMatrix &matrix, const ogl::Camera &camera);
-		void Shutdown();
-		void ChangeShadow();
-		void init_fbo(int sw, int sh);
+		void init();
+		void render( const OGLCamera &camera);
+		void shutdown();
+		void changeShadow();
+
 
 	private:
 		void init_buffer();
 		void init_vertexArray();
 		void init_shader();
 		void init_texture();
+		void init_fbo();
 
 		void RenderQuad();
 		void RenderCube();
 
 		GLuint cubeVAO, planeVAO, cubeVBO, planeVBO;
+		GLuint    model_prog, light_prog, blur_prog, ssao_prog;
+		OGLShader modelShader, lightShader, blurShader, ssaoShader;
+	    OGLModel   m_model;
 
-		GLuint model_prog, light_prog, blur_prog, ssao_prog;
-		ogl::Shader modelShader, lightShader, blurShader, ssaoShader;
+		GLuint m_gbufferFbo;
+        GLuint m_posDepthTex, m_normalTex, m_colorTex;
+		GLuint m_depthRbo;
 
-		ogl::Model  cyborg;
-		GLuint gBuffer;
-        GLuint gPositionDepth, gNormal, gAlbedo;
-		GLuint noiseTexture;
-		GLuint ssaoFBO, ssaoBlurFBO;
-		GLuint ssaoColorBuffer, ssaoColorBufferBlur;
+		GLuint m_noiseTex;
+		GLuint m_ssaoFbo, m_ssaoBlurFbo;
+		GLuint m_ssaoColorTex, m_ssaoColorBlurTex;
 	};
 
 
