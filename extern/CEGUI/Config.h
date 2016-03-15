@@ -91,7 +91,7 @@ setting CMake options and regenerating, rather than editing directly.
 //////////////////////////////////////////////////////////////////////////
 // The following says which TinyXML api version has been found
 //////////////////////////////////////////////////////////////////////////
-/* #undef CEGUI_TINYXML_HAS_2_6_API */
+#define CEGUI_TINYXML_HAS_2_6_API 1
 
 //////////////////////////////////////////////////////////////////////////
 // The following controls the version of Lua that is going to be used.
@@ -111,10 +111,10 @@ setting CMake options and regenerating, rather than editing directly.
 // (Will be all zeroes if Ogre was not found)
 //////////////////////////////////////////////////////////////////////////
 #ifndef CEGUI_OGRE_VERSION_MAJOR
-#   define CEGUI_OGRE_VERSION_MAJOR 0
+#   define CEGUI_OGRE_VERSION_MAJOR 1
 #endif
 #ifndef CEGUI_OGRE_VERSION_MINOR
-#   define CEGUI_OGRE_VERSION_MINOR 0
+#   define CEGUI_OGRE_VERSION_MINOR 9
 #endif
 #ifndef CEGUI_OGRE_VERSION_PATCH
 #   define CEGUI_OGRE_VERSION_PATCH 0
@@ -175,6 +175,12 @@ setting CMake options and regenerating, rather than editing directly.
 // Uncomment this to use an external fribidi library.
 /* #undef CEGUI_USE_FRIBIDI */
 
+// Controls whether to use GLEW as an OpenGL loading library.
+#define CEGUI_USE_GLEW
+
+// Controls whether to use Epoxy as an OpenGL loading library.
+/* #undef CEGUI_USE_EPOXY */
+
 //////////////////////////////////////////////////////////////////////////
 // The following controls whether the MinizipResourceProvider will be
 // built into the CEGUIBase library.  You can uncomment the following line
@@ -183,13 +189,13 @@ setting CMake options and regenerating, rather than editing directly.
 // The MinizipResourceProvider provides the ability to load resource files
 // from locations within .zip files.
 //////////////////////////////////////////////////////////////////////////
-/* #undef CEGUI_HAS_MINIZIP_RESOURCE_PROVIDER */
+#define CEGUI_HAS_MINIZIP_RESOURCE_PROVIDER
 
 // Define the default place where cegui will look for loadable modules
 // this can be changed at runtime via the CEGUI_MODULE_DIR environment var.
 #if defined(_WIN32) || defined(__WIN32__)
-#   define CEGUI_MODULE_DIR "F:/cegui-0.8.4/build/bin/"
-#else
+#   define CEGUI_MODULE_DIR "E:/cegui-0.8.5/build/bin/"
+#elif !defined(__ANDROID__)
 #   define CEGUI_MODULE_DIR "C:/Program Files (x86)/cegui/lib/cegui-0.8/"
 #endif
 

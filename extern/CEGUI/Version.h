@@ -38,7 +38,7 @@ This file contains CEGUI version defines
 //////////////////////////////////////////////////////////////////////////
 #define CEGUI_VERSION_MAJOR 0
 #define CEGUI_VERSION_MINOR 8
-#define CEGUI_VERSION_PATCH 4
+#define CEGUI_VERSION_PATCH 5
 
 // this is used to check consistency between runtime binary and headers
 // used for compiling.  You should not generally use this in client code
