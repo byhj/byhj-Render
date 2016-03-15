@@ -1,0 +1,27 @@
+
+cbuffer LightBuffer
+{
+  float4 lightPos;
+};
+
+struct VS_OUT
+{
+  float4 Pos    : POSITION;
+  float3 Normal : NORMAL;
+  float2 Tex    : TEXCOORD0;
+  float4 WorldPos: TEXCOORD1;
+};
+
+Texture2D tex  :register(t0);
+SamplerState samLinear :register(s0);
+
+float4 PS(VS_OUT vs_out) : SV_TARGET
+{
+   float4 texColor = tex.Sample(samLinear, vs_out.Tex);
+
+   float4 lightDir = lightPos ;//- vs_out.WorldPos;
+   float  intensity = max( dot(lightDir.xyz, vs_out.Normal), 0.0f);
+   float4 diffuse = intensity  * float4(1.0f, 1.0f, 1.0f, 1.0f);
+
+   return texColor * diffuse;
+}
