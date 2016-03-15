@@ -22,6 +22,7 @@ namespace byhj
 
 	void Cube::render(ID3D11DeviceContext *pD3D11DeviceContext, D3DMVPMatrix matrix)
 	{
+		m_EffectHelper.render(pD3D11DeviceContext);
 
 		// Set vertex buffer stride and offset
 		unsigned int stride;
@@ -31,7 +32,6 @@ namespace byhj
 		pD3D11DeviceContext->IASetVertexBuffers(0, 1, &m_pCubeVB, &stride, &offset);
 		pD3D11DeviceContext->IASetIndexBuffer(m_pCubeIB, DXGI_FORMAT_R32_UINT, 0);
 		pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		m_EffectHelper.render(pD3D11DeviceContext);
 
 		cbMatrix.model = matrix.model;
 		cbMatrix.view  = matrix.view;
@@ -89,14 +89,14 @@ namespace byhj
 		HRESULT hr;
 		D3DMeshData box;
 		Geometry geoGen;
-		geoGen.createCube(1.0f, 1.0f, 1.0f, box);
+		geoGen.createCube(0.1f, 0.1f, 0.1f, box);
 
 		m_IndexCount  = box.IndexData.size();
 		m_VertexCount = box.VertexData.size();
 
 		D3D11_BUFFER_DESC cubeVBDesc;
 		cubeVBDesc.Usage               = D3D11_USAGE_IMMUTABLE;
-		cubeVBDesc.ByteWidth           = sizeof( Vertex )* m_VertexCount;
+		cubeVBDesc.ByteWidth           = sizeof( D3DVertex )* m_VertexCount;
 		cubeVBDesc.BindFlags           = D3D11_BIND_VERTEX_BUFFER;
 		cubeVBDesc.CPUAccessFlags      = 0;
 		cubeVBDesc.MiscFlags           = 0;

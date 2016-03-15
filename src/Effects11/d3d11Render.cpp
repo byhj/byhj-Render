@@ -58,6 +58,7 @@ namespace byhj
 		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		m_matrix.view = m_Camera.getViewMat();
+		m_matrix.proj = m_Camera.getProjMat();
         m_cube.render(m_pD3D11DeviceContext, m_matrix);
 
 		drawInfo();
@@ -187,12 +188,12 @@ namespace byhj
 
 		//MVP Matrix
 		static auto aspect = WindowInfo::getInstance()->getAspect();
-		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -10.0f, 0.0f);
+		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -100.0f, 0.0f);
 		XMVECTOR camTarget = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 		XMVECTOR camUp     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 		XMMATRIX View      = XMMatrixLookAtLH(camPos, camTarget, camUp);
 		XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, aspect, 0.1f, 1000.0f);
-		XMMATRIX Model     = XMMatrixRotationY(60.0f);
+		XMMATRIX Model     = XMMatrixIdentity();
 
 		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(Model));
 		XMStoreFloat4x4(&m_matrix.view, XMMatrixTranspose(View));

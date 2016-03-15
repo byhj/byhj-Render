@@ -21,18 +21,6 @@ struct VS_OUT
 	float2 Texcoord : TEXCOORD0;
 };
 
-cbuffer LightBuffer : register(b0)
-{
-	DirectionalLight g_DirLights[3];
-	float4         g_EyePos;
-};
-
-
-cbuffer MaterialBuffer	: register(b1)
-{	
-    Material g_Mat;
-};
-
 Texture2D g_DiffuseMap;
 
 SamplerState samAnisotropic
@@ -52,7 +40,7 @@ VS_OUT VS( VS_IN vs_in)
    vs_out.Pos = mul(vs_in.Pos,  g_World);
    vs_out.Pos = mul(vs_out.Pos, g_View);
    vs_out.Pos = mul(vs_out.Pos, g_Proj);
-
+    vs_out.Pos = vs_in.Pos;
    vs_out.Texcoord = vs_in.Texcoord;
    vs_out.Normal   = mul(vs_in.Normal, (float3x3)g_World );
 
@@ -90,7 +78,7 @@ float4 PS( VS_OUT ps_in) : SV_Target
 	return lightColor;
 	*/
 	float4 texColor	 = g_DiffuseMap.Sample(samAnisotropic, ps_in.Texcoord );
-	return texColor;
+	return float4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 technique11 LightTech1

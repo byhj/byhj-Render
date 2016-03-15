@@ -5,7 +5,7 @@ namespace byhj
 {
 
 D3DCamera::D3DCamera()
-	   :m_Theta(1.5f * XM_PI), m_Phi(0.25f * XM_PI), m_Radius(15.0f), m_aspect(1.5f)
+	   :m_Theta(1.5f * XM_PI), m_Phi(0.25f * XM_PI), m_Radius(30.0f), m_aspect(1.5f)
 {
 	m_LastMousePos.x = 0;
 	m_LastMousePos.y = 0;
