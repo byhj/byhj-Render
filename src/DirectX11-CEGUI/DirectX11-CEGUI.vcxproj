@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{282B2F85-6626-44B0-926B-7937A59AFBE0}</ProjectGuid>
-    <RootNamespace>CEGUI</RootNamespace>
+    <ProjectGuid>{6A729D9F-E436-4D06-909A-5E82D1926043}</ProjectGuid>
+    <RootNamespace>DirectX11CEGUI</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -76,9 +76,6 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;glu32.lib;opengl32.lib;winmm.lib;DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -114,7 +111,60 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglContext.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
+    <ClCompile Include="..\..\include\ogl\win32App.cpp" />
+    <ClCompile Include="..\byhj-Render\app.cpp" />
+    <ClCompile Include="..\byhj-Render\camera.cpp" />
+    <ClCompile Include="..\byhj-Render\font.cpp" />
+    <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\gui.cpp" />
+    <ClCompile Include="..\byhj-Render\mgr.cpp" />
+    <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\object.cpp" />
+    <ClCompile Include="..\byhj-Render\render.cpp" />
+    <ClCompile Include="..\byhj-Render\root.cpp" />
+    <ClCompile Include="..\byhj-Render\shader.cpp" />
+    <ClCompile Include="..\byhj-Render\shaderMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\soundMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\textureMgr.cpp" />
+    <ClCompile Include="..\byhj-Render\timer.cpp" />
+    <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
+    <ClCompile Include="d3d11Render.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\d3d\d3dApp.h" />
+    <ClInclude Include="..\..\include\d3d\d3dFont.h" />
+    <ClInclude Include="..\..\include\d3d\d3dx12.h" />
+    <ClInclude Include="..\..\include\ogl\oglApp.h" />
+    <ClInclude Include="..\..\include\ogl\oglCamera.h" />
+    <ClInclude Include="..\..\include\ogl\oglContext.h" />
+    <ClInclude Include="..\..\include\ogl\oglFont.h" />
+    <ClInclude Include="..\..\include\ogl\oglShader.h" />
+    <ClInclude Include="..\..\include\ogl\win32App.h" />
+    <ClInclude Include="..\byhj-Render\app.h" />
+    <ClInclude Include="..\byhj-Render\camera.h" />
+    <ClInclude Include="..\byhj-Render\font.h" />
+    <ClInclude Include="..\byhj-Render\fontMgr.h" />
+    <ClInclude Include="..\byhj-Render\gui.h" />
+    <ClInclude Include="..\byhj-Render\mgr.h" />
+    <ClInclude Include="..\byhj-Render\modelMgr.h" />
+    <ClInclude Include="..\byhj-Render\object.h" />
+    <ClInclude Include="..\byhj-Render\render.h" />
+    <ClInclude Include="..\byhj-Render\root.h" />
+    <ClInclude Include="..\byhj-Render\shader.h" />
+    <ClInclude Include="..\byhj-Render\shaderMgr.h" />
+    <ClInclude Include="..\byhj-Render\soundMgr.h" />
+    <ClInclude Include="..\byhj-Render\textureMgr.h" />
+    <ClInclude Include="..\byhj-Render\timer.h" />
+    <ClInclude Include="..\byhj-Render\windowInfo.h" />
+    <ClInclude Include="d3d11Render.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
