@@ -261,6 +261,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX9-Cube", "src\Direct
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX11-XAudio-BasicSound", "src\DirectX11-XAudio-BasicSound\DirectX11-XAudio-BasicSound.vcxproj", "{67359747-7BF7-4E41-982D-D99B7B0B7098}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX11-Tessellation", "src\DirectX11-Tessellation\DirectX11-Tessellation.vcxproj", "{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1101,6 +1103,14 @@ Global
 		{67359747-7BF7-4E41-982D-D99B7B0B7098}.Release|x64.Build.0 = Release|x64
 		{67359747-7BF7-4E41-982D-D99B7B0B7098}.Release|x86.ActiveCfg = Release|Win32
 		{67359747-7BF7-4E41-982D-D99B7B0B7098}.Release|x86.Build.0 = Release|Win32
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Debug|x64.ActiveCfg = Debug|x64
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Debug|x64.Build.0 = Debug|x64
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Debug|x86.ActiveCfg = Debug|Win32
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Debug|x86.Build.0 = Debug|Win32
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Release|x64.ActiveCfg = Release|x64
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Release|x64.Build.0 = Release|x64
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Release|x86.ActiveCfg = Release|Win32
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1232,5 +1242,6 @@ Global
 		{15270AEF-E0F4-4D16-A6A6-F874FF119E5D} = {96E2CA7C-F979-4EDD-9818-753F269DDFAF}
 		{5D6719A0-6A53-443B-B353-ACFCA4155ED0} = {BF1C2584-306D-4FC9-85D6-83273B025F7B}
 		{67359747-7BF7-4E41-982D-D99B7B0B7098} = {434181D4-3AED-4009-BAA5-5B87CF954320}
+		{CE00E3C7-E9AE-472E-9D31-BA0AB79B3EAB} = {434181D4-3AED-4009-BAA5-5B87CF954320}
 	EndGlobalSection
 EndGlobal

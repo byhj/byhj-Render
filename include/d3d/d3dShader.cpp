@@ -73,7 +73,7 @@ void D3DShader::attach(ShaderType shaderType, WCHAR* szFileName, LPCSTR szEntryP
 	} else if (shaderType == D3D_HULL_SHADER) {
 		result = pD3D11Device->CreateHullShader(pShaderBlob->GetBufferPointer(), pShaderBlob->GetBufferSize(), NULL, &pHS_Shader);
 	
-	} else if (shaderType == D3D_GEOMETRY_SHADER) {
+	} else if (shaderType == D3D_DOMAIN_SHADER) {
 	
 		result = pD3D11Device->CreateDomainShader(pShaderBlob->GetBufferPointer(), pShaderBlob->GetBufferSize(), NULL, &pDS_Shader);
 	} 

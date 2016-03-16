@@ -1,0 +1,49 @@
+struct VS_OUT
+{
+    float4 Pos    : POSITION;
+    float4 Color  : TEXCOORD;
+};
+
+struct HS_OUT
+{
+    float4 Pos    : POSITION;
+    float4 Color  : TEXCOORD;
+};
+
+struct HS_CONST_OUT
+{
+    float edges[3] : SV_TessFactor;
+    float inside : SV_InsideTessFactor;
+};
+
+HS_CONST_OUT HS_CONST(InputPatch<VS_OUT, 3> patch, uint patchId : SV_PrimitiveID)
+{    
+    HS_CONST_OUT hsc_out;
+
+	// Set the tessellation factors for the three edges of the triangle.
+    hsc_out.edges[0] = 8;
+    hsc_out.edges[1] = 8;
+    hsc_out.edges[2] = 8;
+
+	// Set the tessellation factor for tessallating inside the triangle.
+    hsc_out.inside = 8;
+
+    return hsc_out;
+}
+
+[domain("tri")]
+[partitioning("integer")]
+[outputtopology("triangle_cw")]
+[outputcontrolpoints(3)]
+[patchconstantfunc("HS_CONST")]
+
+HS_OUT HS(InputPatch<VS_OUT, 3> patch, uint pointId : SV_OutputControlPointID, uint patchId : SV_PrimitiveID)
+{
+    HS_OUT hs_out;
+
+	// Set the position for this control point as the output position.
+    hs_out.Pos   = patch[pointId].Pos;
+    hs_out.Color = patch[pointId].Color;
+
+    return hs_out;
+}

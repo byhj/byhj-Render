@@ -1,0 +1,44 @@
+
+ cbuffer MatrixObject : register(b0)
+{
+	float4x4 model;
+	float4x4 view;
+	float4x4 proj;
+};
+ struct HS_CONST_OUT
+{
+    float edges[3] : SV_TessFactor;
+    float inside : SV_InsideTessFactor;
+};
+
+struct HS_OUT
+{
+    float4 Pos    : POSITION;
+    float4 Color  : TEXCOORD;
+};
+
+struct DS_OUT
+{
+    float4 Pos    : SV_POSITION;
+    float4 Color  : TEXCOORD;
+};
+
+[domain("tri")]
+
+DS_OUT DS(HS_CONST_OUT dcs_in, float3 uvwCoord : SV_DomainLocation, const OutputPatch<HS_OUT, 3> patch)
+{
+ 	// Determine the position of the new vertex.
+	float3 vertexPosition = uvwCoord.x * patch[0].Pos 
+	                      + uvwCoord.y * patch[1].Pos 
+	                      + uvwCoord.z * patch[2].Pos;
+     
+	 DS_OUT ds_out;
+     ds_out.Pos = mul(float4(vertexPosition, 1.0f), model);
+     ds_out.Pos = mul(ds_out.Pos, view);
+     ds_out.Pos = mul(ds_out.Pos, proj);
+
+	// Send the input color into the pixel shader.
+	 ds_out.Color = patch[0].Color;
+
+    return ds_out;
+}
