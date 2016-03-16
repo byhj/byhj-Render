@@ -49,8 +49,8 @@ void Model::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix 
 	cbMatrix.model = matrix.model;
 	cbMatrix.view  = matrix.view;
 	cbMatrix.proj  = matrix.proj;
-	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer, 0, NULL, &cbMatrix, 0, 0);
-	pD3D11DeviceContext->VSSetConstantBuffers(0, 1, &m_pMVPBuffer);
+	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &cbMatrix, 0, 0);
+	pD3D11DeviceContext->VSSetConstantBuffers(0, 1, m_pMVPBuffer.GetAddressOf());
 	pD3D11DeviceContext->PSSetSamplers(0, 1, &m_pSamplerLinear);
 
 	for (UINT subIndex = 0; subIndex<m_SdkMesh.GetNumSubsets(0); ++subIndex)
@@ -76,13 +76,6 @@ void Model::shutdown()
 {
 	m_SdkMesh.Destroy();
 	CubeShader.end();
-	
-	ReleaseCOM(m_pInputLayout)
-	ReleaseCOM(m_pVS)
-	ReleaseCOM(m_pPS)
-	ReleaseCOM(m_pMVPBuffer)
-	ReleaseCOM(m_pLightBuffer)
-	ReleaseCOM(m_pSamplerLinear)
 
 }
 
@@ -111,10 +104,10 @@ void Model::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11D
 
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 
-	pD3D11DeviceContext->Map(m_pLightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	pD3D11DeviceContext->Map(m_pLightBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	auto pLightData = reinterpret_cast<LightBuffer*>(mappedResource.pData);
 	pLightData->lightPos = XMFLOAT4(-0.577f, 0.577f, -0.577f, 0.f);
-	pD3D11DeviceContext->Unmap(m_pLightBuffer, 0);
+	pD3D11DeviceContext->Unmap(m_pLightBuffer.Get(), 0);
 
 	int lightSlot = 0;
 	pD3D11DeviceContext->PSSetConstantBuffers(lightSlot, 1, &m_pLightBuffer);

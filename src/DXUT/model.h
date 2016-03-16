@@ -36,12 +36,9 @@ private:
 		XMFLOAT4 lightPos;
 	};
 
-	ID3D11InputLayout         *m_pInputLayout       = nullptr;
-	ID3D11VertexShader        *m_pVS                = nullptr;
-	ID3D11PixelShader         *m_pPS                = nullptr;
-	ID3D11Buffer              *m_pMVPBuffer         = nullptr;
-	ID3D11Buffer              *m_pLightBuffer       = nullptr;
-	ID3D11SamplerState        *m_pSamplerLinear     = nullptr;
+	ComPtr<ID3D11Buffer      >  m_pMVPBuffer         = nullptr;
+	ComPtr<ID3D11Buffer      >  m_pLightBuffer       = nullptr;
+	ComPtr<ID3D11SamplerState>  m_pSamplerLinear     = nullptr;
 
 	CDXUTSDKMesh   m_SdkMesh;
 	D3DMVPMatrix cbMatrix;

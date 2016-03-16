@@ -43,11 +43,11 @@ private:
 	static void CALLBACK OnFrameMove(double fTime, float fElapsedTime, void* pUserContext);
 	static void CALLBACK OnKeyboard(UINT nChar, bool bKeyDown, bool bAltDown, void* pUserContext);
 	static void CALLBACK OnMouse(bool bLeftButtonDown, bool bRightButtonDown, bool bMiddleButtonDown,
-		bool bSideButton1Down, bool bSideButton2Down, int nMouseWheelDelta,
-		int xPos, int yPos, void* pUserContext);
+                        	     bool bSideButton1Down, bool bSideButton2Down, int nMouseWheelDelta,
+		                          int xPos, int yPos, void* pUserContext);
 
 	static LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam,
-		bool* pbNoFurtherProcessing, void* pUserContext);
+		                            bool* pbNoFurtherProcessing, void* pUserContext);
 
 	static bool CALLBACK ModifyDeviceSettings(DXUTDeviceSettings* pDeviceSettings, void* pUserContext);
 	static bool CALLBACK OnDeviceRemoved(void* pUserContext);
