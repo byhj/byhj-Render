@@ -28,9 +28,6 @@
     <Filter Include="Render\mgr">
       <UniqueIdentifier>{110f4b1b-5356-48ad-bf08-bebfd0efd66c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Render\model">
-      <UniqueIdentifier>{9b6ec26b-1189-451f-b4a3-29c95edaa7cc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oglRender.cpp">
@@ -95,12 +92,6 @@
     </ClCompile>
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\mesh.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
@@ -169,12 +160,6 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
-      <Filter>Render\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
