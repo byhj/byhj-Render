@@ -1,23 +1,15 @@
-﻿
+#include "slideCollision.h"
 
 
-#include "collision.h"
-
-
-/************************************New Stuff****************************************************/
-// This is the function we will call when we want to find if an ellipsoid will collide with
-// the world (polygon soup) while traveling along it's velocity vector, and also impliment
-// gravity by doing the collision detection and response algorithm with the gravity's
-// velocity vector. It's kind of like the collision detection and response package
 XMVECTOR CollisionSlide(CollisionPacket& cP,
-						std::vector<XMFLOAT3>& vertPos,
-						std::vector<DWORD>& indices)
+	std::vector<XMFLOAT3>& vertPos,
+	std::vector<DWORD>& indices)
 {
 	// Transform velocity vector to the ellipsoid space (e_ denotes ellipsoid space)
-	cP.e_Velocity = cP.w_Velocity/cP.ellipsoidSpace;
+	cP.e_Velocity = cP.w_Velocity / cP.ellipsoidSpace;
 
 	// Transform position vector to the ellipsoid space
-	cP.e_Position = cP.w_Position/cP.ellipsoidSpace;
+	cP.e_Position = cP.w_Position / cP.ellipsoidSpace;
 
 	// Now we check for a collision with our world, this function will
 	// call itself 5 times at most, or until the velocity vector is
@@ -52,8 +44,8 @@ XMVECTOR CollisionSlide(CollisionPacket& cP,
 
 // This function impliments the collision detection and collision response
 XMVECTOR CollideWithWorld(CollisionPacket& cP,
-						  std::vector<XMFLOAT3>& vertPos,
-						  std::vector<DWORD>& indices)
+	std::vector<XMFLOAT3>& vertPos,
+	std::vector<DWORD>& indices)
 {
 	// These are based off the unitsPerMeter from above
 	float unitScale = unitsPerMeter / 100.0f;
@@ -72,29 +64,29 @@ XMVECTOR CollideWithWorld(CollisionPacket& cP,
 		return cP.e_Position;
 
 	// Normalize velocity vector
-	cP.e_normalizedVelocity = XMVector3Normalize(cP.e_Velocity);	
+	cP.e_normalizedVelocity = XMVector3Normalize(cP.e_Velocity);
 
 	// Initialize collision packet stuff
 	cP.foundCollision = false;
 	cP.nearestDistance = 0.0f;
 
 	// Loop through each triangle in mesh and check for a collision
-	for(int triCounter = 0; triCounter < indices.size() / 3; triCounter++)
+	for (int triCounter = 0; triCounter < indices.size() / 3; triCounter++)
 	{
 		// Get triangle
 		XMVECTOR p0, p1, p2, tempVec;
-		p0 = XMLoadFloat3(&vertPos[indices[3*triCounter]]);
-		p1 = XMLoadFloat3(&vertPos[indices[3*triCounter+1]]);
-		p2 = XMLoadFloat3(&vertPos[indices[3*triCounter+2]]);
+		p0 = XMLoadFloat3(&vertPos[indices[3 * triCounter]]);
+		p1 = XMLoadFloat3(&vertPos[indices[3 * triCounter + 1]]);
+		p2 = XMLoadFloat3(&vertPos[indices[3 * triCounter + 2]]);
 
 		// Put triangle into ellipsoid space
-		p0 = p0/cP.ellipsoidSpace;
-		p1 = p1/cP.ellipsoidSpace;
-		p2 = p2/cP.ellipsoidSpace;
+		p0 = p0 / cP.ellipsoidSpace;
+		p1 = p1 / cP.ellipsoidSpace;
+		p2 = p2 / cP.ellipsoidSpace;
 
 		// Calculate the normal for this triangle
 		XMVECTOR triNormal;
-		triNormal = XMVector3Normalize(XMVector3Cross((p1 - p0),(p2 - p0)));
+		triNormal = XMVector3Normalize(XMVector3Cross((p1 - p0), (p2 - p0)));
 
 		// Now we check to see if the sphere is colliding with the current triangle
 		SphereCollidingWithTriangle(cP, p0, p1, p2, triNormal);
@@ -229,8 +221,8 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 	// We will not triangle facing away from the velocity vector to speed this up
 	// since we assume that we will never run into the back face of triangles
 	float facing = XMVectorGetX(XMVector3Dot(triNormal, cP.e_normalizedVelocity));
-	if(facing <= 0)
-	{ 
+	if (facing <= 0)
+	{
 		// Create these because cP.e_Velocity and cP.e_Position add slightly to the difficulty
 		// of reading the equations
 		XMVECTOR velocity = cP.e_Velocity;
@@ -288,15 +280,15 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 
 		/////////////////////////////////////Sphere Plane Collision Test////////////////////////////////////////////
 		// Check to see if the velocity vector is parallel with the plane
-		if (planeNormalDotVelocity == 0.0f) 
+		if (planeNormalDotVelocity == 0.0f)
 		{
-			if (fabs(signedDistFromPositionToTriPlane) >= 1.0f) 
+			if (fabs(signedDistFromPositionToTriPlane) >= 1.0f)
 			{
 				// sphere not in plane, and velocity is
 				// parallel to plane, no collision possible
 				return false;
 			}
-			else 
+			else
 			{
 				// sphere is in the plane, so we will now only test for a collision
 				// with the triangle's vertices and edges
@@ -305,7 +297,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 				sphereInPlane = true;
 			}
 		}
-		else 
+		else
 		{
 			// We know the velocity vector at some point intersects with the plane, we just
 			// need to find how far down the velocity vector the sphere will "touch" or rest
@@ -326,12 +318,12 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			// from the center of the sphere is "1", so all we have to do to find when the sphere touches
 			// the plane is subtract and subtract 1 from the signed distance to get when both sides of the
 			// sphere touch the plane (t0, and t1)
-			t0 = ( 1.0f - signedDistFromPositionToTriPlane) / planeNormalDotVelocity;
+			t0 = (1.0f - signedDistFromPositionToTriPlane) / planeNormalDotVelocity;
 			t1 = (-1.0f - signedDistFromPositionToTriPlane) / planeNormalDotVelocity;
 
 			// We will make sure that t0 is smaller than t1, which means that t0 is when the sphere FIRST
 			// touches the planes surface
-			if(t0 > t1)
+			if (t0 > t1)
 			{
 				float temp = t0;
 				t0 = t1;
@@ -340,7 +332,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 
 			// If the swept sphere touches the plane outside of the 0 to 1 "timeframe", we know that
 			// the sphere is not going to intersect with the plane (and of course triangle) this frame
-			if (t0 > 1.0f || t1 < 0.0f) 
+			if (t0 > 1.0f || t1 < 0.0f)
 			{
 				return false;
 			}
@@ -359,7 +351,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 		float t = 1.0;					// Time 
 
 		// If the sphere is not IN the triangles plane, we continue the sphere to inside of triangle test
-		if (!sphereInPlane) 
+		if (!sphereInPlane)
 		{
 			// We get the point on the triangles plane where the sphere "touches" the plane
 			// using the equation: planeIntersectionPoint = (Position - Normal) + t0 * Velocity
@@ -368,7 +360,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			XMVECTOR planeIntersectionPoint = (position + t0 * velocity - triNormal);
 
 			// Now we call the function that checks if a point on a triangle's plane is inside the triangle
-			if (checkPointInTriangle(planeIntersectionPoint,p0,p1,p2))
+			if (checkPointInTriangle(planeIntersectionPoint, p0, p1, p2))
 			{
 				// If the point on the plane IS inside the triangle, we know that the sphere is colliding
 				// with the triangle now, so we set collidingWithTri to true so we don't do all the extra
@@ -385,7 +377,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 		// If the sphere is not colliding with the triangles INSIDE, we check to see if it will collide with one of
 		// the vertices of the triangle using the sweep test we did above, but this time check for each vertex instead
 		// of the triangles plane
-		if (collidingWithTri == false) 
+		if (collidingWithTri == false)
 		{
 			// We will be working with the quadratic function "At^2 + Bt + C = 0" to find when (t) the "swept sphere"s center
 			// is 1 unit (spheres radius) away from the vertex position. Remember the swept spheres position is actually a line defined
@@ -410,10 +402,10 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			float newT;
 
 			// P0 - Collision test with sphere and p0
-			b = 2.0f * ( XMVectorGetX( XMVector3Dot( velocity, position - p0 )));
+			b = 2.0f * (XMVectorGetX(XMVector3Dot(velocity, position - p0)));
 			c = XMVectorGetX(XMVector3Length((p0 - position)));
 			c = (c*c) - 1.0f;
-			if (getLowestRoot(a,b,c, t, &newT)) {	// Check if the equation can be solved
+			if (getLowestRoot(a, b, c, t, &newT)) {	// Check if the equation can be solved
 				// If the equation was solved, we can set a couple things. First we set t (distance
 				// down velocity vector the sphere first collides with vertex) to the temporary newT,
 				// Then we set collidingWithTri to be true so we know there was for sure a collision
@@ -428,7 +420,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			b = 2.0*(XMVectorGetX(XMVector3Dot(velocity, position - p1)));
 			c = XMVectorGetX(XMVector3Length((p1 - position)));
 			c = (c*c) - 1.0;
-			if (getLowestRoot(a,b,c, t, &newT)) {
+			if (getLowestRoot(a, b, c, t, &newT)) {
 				t = newT;
 				collidingWithTri = true;
 				collisionPoint = p1;
@@ -438,7 +430,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			b = 2.0*(XMVectorGetX(XMVector3Dot(velocity, position - p2)));
 			c = XMVectorGetX(XMVector3Length((p2 - position)));
 			c = (c*c) - 1.0;
-			if (getLowestRoot(a,b,c, t, &newT)) {
+			if (getLowestRoot(a, b, c, t, &newT)) {
 				t = newT;
 				collidingWithTri = true;
 				collisionPoint = p2;
@@ -470,7 +462,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			c = edgeLengthSquared * (1.0f - spherePositionToVertexLengthSquared) + (edgeDotSpherePositionToVertex * edgeDotSpherePositionToVertex);
 
 			// We start by finding if the swept sphere collides with the edges "infinite line"
-			if (getLowestRoot(a,b,c, t, &newT)) {
+			if (getLowestRoot(a, b, c, t, &newT)) {
 				// Now we check to see if the collision happened between the two vertices that make up this edge
 				// We can calculate where on the line the collision happens by doing this:
 				// f = (edge . velocity)newT - (edge . spherePositionToVertex) / edgeLength^2
@@ -499,7 +491,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			b = edgeLengthSquared * (2.0f * XMVectorGetX(XMVector3Dot(velocity, spherePositionToVertex))) - (2.0f * edgeDotVelocity * edgeDotSpherePositionToVertex);
 			c = edgeLengthSquared * (1.0f - spherePositionToVertexLengthSquared) + (edgeDotSpherePositionToVertex * edgeDotSpherePositionToVertex);
 
-			if (getLowestRoot(a,b,c, t, &newT)) {
+			if (getLowestRoot(a, b, c, t, &newT)) {
 				float f = (edgeDotVelocity * newT - edgeDotSpherePositionToVertex) / edgeLengthSquared;
 				if (f >= 0.0f && f <= 1.0f) {
 					t = newT;
@@ -522,7 +514,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 			b = edgeLengthSquared * (2.0f * XMVectorGetX(XMVector3Dot(velocity, spherePositionToVertex))) - (2.0f * edgeDotVelocity * edgeDotSpherePositionToVertex);
 			c = edgeLengthSquared * (1.0f - spherePositionToVertexLengthSquared) + (edgeDotSpherePositionToVertex * edgeDotSpherePositionToVertex);
 
-			if (getLowestRoot(a,b,c, t, &newT)) {
+			if (getLowestRoot(a, b, c, t, &newT)) {
 				float f = (edgeDotVelocity * newT - edgeDotSpherePositionToVertex) / edgeLengthSquared;
 				if (f >= 0.0f && f <= 1.0f) {
 					t = newT;
@@ -533,7 +525,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 		}
 
 		// If we have found a collision, we will set the results of the collision here
-		if (collidingWithTri == true) 
+		if (collidingWithTri == true)
 		{
 			// We find the distance to the collision using the time variable (t) times the length of the velocity vector
 			float distToCollision = t * XMVectorGetX(XMVector3Length(velocity));
@@ -549,7 +541,7 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 				// Make sure this is set to true if we've made it this far
 				cP.foundCollision = true;
 				return true;
-			}			
+			}
 		}
 	}
 	return false;
@@ -558,19 +550,19 @@ bool SphereCollidingWithTriangle(CollisionPacket& cP, XMVECTOR &p0, XMVECTOR &p1
 // These are the "helper" functions
 // This function is found in my lesson on picking in direct3d 11
 // This function finds if a point (in the triangle plane) is INSIDE the triangle
-bool checkPointInTriangle(const XMVECTOR& point, const XMVECTOR& triV1,const XMVECTOR& triV2, const XMVECTOR& triV3)
+bool checkPointInTriangle(const XMVECTOR& point, const XMVECTOR& triV1, const XMVECTOR& triV2, const XMVECTOR& triV3)
 {
 	XMVECTOR cp1 = XMVector3Cross((triV3 - triV2), (point - triV2));
 	XMVECTOR cp2 = XMVector3Cross((triV3 - triV2), (triV1 - triV2));
-	if(XMVectorGetX(XMVector3Dot(cp1, cp2)) >= 0)
+	if (XMVectorGetX(XMVector3Dot(cp1, cp2)) >= 0)
 	{
 		cp1 = XMVector3Cross((triV3 - triV1), (point - triV1));
 		cp2 = XMVector3Cross((triV3 - triV1), (triV2 - triV1));
-		if(XMVectorGetX(XMVector3Dot(cp1, cp2)) >= 0)
+		if (XMVectorGetX(XMVector3Dot(cp1, cp2)) >= 0)
 		{
 			cp1 = XMVector3Cross((triV2 - triV1), (point - triV1));
 			cp2 = XMVector3Cross((triV2 - triV1), (triV3 - triV1));
-			if(XMVectorGetX(XMVector3Dot(cp1, cp2)) >= 0)
+			if (XMVectorGetX(XMVector3Dot(cp1, cp2)) >= 0)
 			{
 				return true;
 			}
@@ -580,17 +572,17 @@ bool checkPointInTriangle(const XMVECTOR& point, const XMVECTOR& triV1,const XMV
 }
 
 // This function solves the quadratic eqation "At^2 + Bt + C = 0" and is found in Kasper Fauerby's paper on collision detection and response
-bool getLowestRoot(float a, float b, float c, float maxR, float* root) 
+bool getLowestRoot(float a, float b, float c, float maxR, float* root)
 {
 	// Check if a solution exists
 	float determinant = b*b - 4.0f*a*c;
 	// If determinant is negative it means no solutions.
 	if (determinant < 0.0f) return false;
 	// calculate the two roots: (if determinant == 0 then
-	// x1==x2 but let��s disregard that slight optimization)
+	// x1==x2 but lets disregard that slight optimization)
 	float sqrtD = sqrt(determinant);
-	float r1 = (-b - sqrtD) / (2*a);
-	float r2 = (-b + sqrtD) / (2*a);
+	float r1 = (-b - sqrtD) / (2 * a);
+	float r2 = (-b + sqrtD) / (2 * a);
 	// Sort so x1 <= x2
 	if (r1 > r2) {
 		float temp = r2;
