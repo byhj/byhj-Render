@@ -197,7 +197,7 @@ namespace byhj
 		XMVECTOR camUp     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 		XMMATRIX View      = XMMatrixLookAtLH(camPos, camTarget, camUp);
 		XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, aspect, 1.0f, 1000.0f);
-		XMMATRIX Model     = XMMatrixRotationY(60.0f);
+		XMMATRIX Model     = XMMatrixRotationY(180.0f);
 
 		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(Model));
 		XMStoreFloat4x4(&m_matrix.view, XMMatrixTranspose(View));
@@ -246,7 +246,7 @@ namespace byhj
 
 		int mousex = mousePos.x;
 		int mousey = mousePos.y;
-		m_picking.PickRayVector(mousex, mousey, m_matrix.view, m_matrix.proj);
+		m_picking.PickRayVector(mousex, mousey, m_Camera.getPos(), m_matrix.view, m_matrix.proj);
 		auto dis = m_picking.Pick(XMLoadFloat4x4(&m_matrix.model));
 		if (dis < FLT_MAX)  {
 		   pick = true;

@@ -1,5 +1,5 @@
-#ifndef D3DD3DCamera_H
-#define D3DD3DCamera_H
+#ifndef D3DCamera_H
+#define D3DCamera_H
 
 #include <d3d11.h>
 #include <vector>

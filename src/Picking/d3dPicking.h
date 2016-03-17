@@ -29,7 +29,7 @@ public:
 		m_IndexData = vIndex;
 	}
 
-	void PickRayVector(float mouseX, float mouseY, XMFLOAT4X4 camView, XMFLOAT4X4 camProj);
+	void PickRayVector(float mouseX, float mouseY, XMFLOAT3 camPos,XMFLOAT4X4 camView, XMFLOAT4X4 camProj);
 
 	float Pick(const XMMATRIX& worldSpace);
 

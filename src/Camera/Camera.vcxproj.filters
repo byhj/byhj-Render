@@ -24,9 +24,6 @@
     <Filter Include="Render\mgr">
       <UniqueIdentifier>{4fe6aae4-6214-429a-abc7-9e2f045d07d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Render\model">
-      <UniqueIdentifier>{0329fb7a-0046-474b-bbc1-c651eb1e9c6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{fb29330a-e000-4fc8-9ffe-edcf22415bd2}</UniqueIdentifier>
     </Filter>
@@ -93,12 +90,6 @@
     </ClCompile>
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\mesh.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\camera.cpp">
       <Filter>Render\render</Filter>
@@ -170,12 +161,6 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
-      <Filter>Render\model</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\camera.h">
       <Filter>Render\render</Filter>

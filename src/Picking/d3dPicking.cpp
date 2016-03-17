@@ -2,10 +2,10 @@
 
 
 
-void D3DPicking::PickRayVector(float mouseX, float mouseY, XMFLOAT4X4 camView, XMFLOAT4X4 camProj)
+void D3DPicking::PickRayVector(float mouseX, float mouseY, XMFLOAT3 camPos, XMFLOAT4X4 camView, XMFLOAT4X4 camProj)
 {
 	XMVECTOR pickRayInViewSpaceDir = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-	XMVECTOR pickRayInViewSpacePos = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	XMVECTOR pickRayInViewSpacePos = XMVectorSet(camPos.x, camPos.y, camPos.z, 0.0f);
 
 	float PRVecX, PRVecY, PRVecZ;
 
