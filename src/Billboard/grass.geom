@@ -23,26 +23,27 @@ void main(void)
 	vec3 up = vec3(0.0f, 1.0f, 0.0f);
 	vec3 right = cross(viewPos, up);
 	
+	//pos is the bottom middle Polygon
 	mat4 vp = proj * view;
 	pos -= (right * 0.5f);
+	pos.y += 1.0f;
 	gl_Position = vp * vec4(pos, 1.0f);
 	gs_out.texcoord = vec2(0.0f, 0.0f);
 	EmitVertex();
 
-	pos.y += 1.0f;
+	pos.y -= 1.0f;
 	gl_Position = vp * vec4(pos, 1.0f);
 	gs_out.texcoord = vec2(0.0f, 1.0f);
 	EmitVertex();
 
-	pos.y -= 1.0f;
 	pos += right;
 	gl_Position = vp * vec4(pos, 1.0f);
-	gs_out.texcoord = vec2(1.0f, 0.0f);
+	gs_out.texcoord = vec2(1.0f, 1.0f);
 	EmitVertex();
 
 	pos.y += 1.0f;
 	gl_Position = vp * vec4(pos, 1.0f);
-	gs_out.texcoord = vec2(1.0f, 1.0f);
+	gs_out.texcoord = vec2(1.0f, 0.0f);
 	EmitVertex();
 
 	EndPrimitive();

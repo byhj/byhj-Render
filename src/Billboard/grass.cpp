@@ -8,6 +8,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "textureMgr.h"
+#include <ctime>
+
 namespace byhj
 {
 #pragma region VertexData
@@ -31,6 +33,8 @@ namespace byhj
 
 	void Grass::Render(glm::vec3 camPos, const OGLMVPMatrix &matrix)
 	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		glUseProgram(program);
 		glBindVertexArray(vao);
 
@@ -48,7 +52,7 @@ namespace byhj
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 
-		glDrawArrays(GL_POINTS, 0, 4);
+		glDrawArrays(GL_POINTS, 0, 1000);
 		
 
 		glBindVertexArray(0);
@@ -80,16 +84,27 @@ namespace byhj
 
 	void Grass::init_buffer()
 	{
+		// Seed the random generator.
+		srand((int)std::time(NULL));
+
+		// Set random positions and random colors for each piece of foliage.
+		for (int i=0; i < 1000; i++)
+		{
+			glm::vec3 pos;
+			pos.x = ((float)rand() / (float)(RAND_MAX)) *9.0f - 4.5f;
+			pos.y = -0.5f;								 
+				pos.z = ((float)rand() / (float)(RAND_MAX)) *9.0f - 4.5f;
+
+			//red = ((float)rand() / (float)(RAND_MAX)) * 1.0f;
+			//green = ((float)rand() / (float)(RAND_MAX)) * 1.0f;
+			vecPos.push_back(pos);
+		}
+
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);    //load the vertex data
-		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexData), VertexData, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) *vecPos.size(), &vecPos[0], GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		vecPos.push_back(glm::vec3(-1.5f,  0.0f, -0.48f));
-		vecPos.push_back(glm::vec3( 1.5f,  0.0f,  0.51f));
-		vecPos.push_back(glm::vec3( 0.0f,  0.0f,  0.7f));
-		vecPos.push_back(glm::vec3(-0.3f,  0.0f, -2.3f));
-		vecPos.push_back(glm::vec3( 0.5f,  0.0f, -0.6f));
 	}
 
 	void Grass::init_vertexArray()

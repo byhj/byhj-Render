@@ -52,7 +52,7 @@ namespace byhj
     void OGLRender::v_render()
 	{
 		glEnable(GL_DEPTH_TEST);
-
+		glEnable(GL_BLEND);
 		static const GLfloat black[] ={ 0.2f, 0.3f, 0.4f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, black);
 		static const GLfloat one[] ={ 1.0f };

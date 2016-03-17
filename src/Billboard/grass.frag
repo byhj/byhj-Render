@@ -11,12 +11,11 @@ uniform sampler2D texture1;
 void main()
 {             
     vec2 tc = gs_out.texcoord;
-	tc.y = 1.0f - tc.y;
     vec4 texColor = texture(texture1, tc);
 
-	//alpha < 0.1 discard
-    if(texColor.a < 0.1)
-        discard;
+    if(texColor.r == 0.0f && texColor.g == 0.0f && texColor.b == 0.0f) {
+	   discard;
+	}
 
     color = texColor;
 }
