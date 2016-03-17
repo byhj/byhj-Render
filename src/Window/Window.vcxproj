@@ -113,7 +113,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFont.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dMesh.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dModel.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dUtility.cpp" />
     <ClCompile Include="..\..\include\ogl\oglContext.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglMesh.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
     <ClCompile Include="..\..\include\ogl\win32App.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
     <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
@@ -144,8 +149,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dFont.h" />
+    <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
+    <ClInclude Include="..\..\include\d3d\d3dModel.h" />
+    <ClInclude Include="..\..\include\d3d\d3dUtility.h" />
     <ClInclude Include="..\..\include\d3d\d3dx12.h" />
     <ClInclude Include="..\..\include\ogl\oglContext.h" />
+    <ClInclude Include="..\..\include\ogl\oglMesh.h" />
+    <ClInclude Include="..\..\include\ogl\oglModel.h" />
     <ClInclude Include="..\..\include\ogl\win32App.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
     <ClInclude Include="..\..\include\ogl\oglCamera.h" />

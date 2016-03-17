@@ -6,8 +6,6 @@
 #include <glfw/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
-#include "model.h"
 #include "LightGUI.h"
 #include "ogl/oglShader.h"
 
@@ -36,7 +34,6 @@ namespace byhj
 		GLfloat m_Aspect = 1.0f;
 		OGLShader m_MeshLoadShader = "Mesh Shader";
 		GLuint m_Program;
-		byhj::Model m_Model;
 		LightGui m_LightGui;
 
 	};

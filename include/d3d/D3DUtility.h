@@ -12,6 +12,8 @@
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
+#pragma  comment(lib, "dxerr")
+
 namespace byhj
 {
 

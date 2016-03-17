@@ -1,4 +1,5 @@
 #include "MeshLoad.h"
+#include "modelMgr.h"
 
 namespace byhj
 {
@@ -40,8 +41,9 @@ namespace byhj
 	{
 		glUseProgram(m_Program);
 
+		ModelMgr::getInstance()->render(m_Program);
+
 		m_LightGui.v_render();
-		m_Model.draw(m_Program);
 
 		glUseProgram(0);
 	}
@@ -52,7 +54,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		m_Model.loadModel("armadillo.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("armadillo.obj");
 	}
 
 
