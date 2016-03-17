@@ -1,0 +1,24 @@
+
+struct VS_OUT
+{
+	float4 Pos      : SV_POSITION;
+	float2 TexCoord : TEXCOORD;
+	float3 Normal   : NORMAL;
+};
+
+Texture2D tex     :register(t0) ;
+SamplerState texState :register(s0);
+
+float4 PS(VS_OUT ps_in) : SV_TARGET
+{
+	ps_in.Normal = normalize(ps_in.Normal);
+
+    float4 texColor = tex.Sample(texState, ps_in.TexCoord );
+
+	float4 diffuse = saturate(dot(float3(0.0f, 1.0f, -1.0f), ps_in.Normal) * float4(0.7f, 0.7f, 0.7f, 1.0f) );
+	float4 ambient = float4(0.2f, 0.2f, 0.2f, 1.0f);
+
+	return  texColor * (ambient + diffuse);
+}
+
+
