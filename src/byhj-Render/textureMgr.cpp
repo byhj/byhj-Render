@@ -153,7 +153,7 @@ namespace byhj
 				ilGetData());			// The actual image data itself
 		}
 		else
-			std::cout << "Fail to load the texture!" << std::endl;
+			std::cout << "Fail to load the texture!" << texFile << std::endl;
 
 		ilDeleteImages(1, &imageID); // Because we have already copied image data into texture data we can release memory used by image.
 		

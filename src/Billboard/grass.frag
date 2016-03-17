@@ -2,9 +2,10 @@
 
 in GS_OUT {
   vec2 texcoord;
+  vec3 color;
 }gs_out;
 
-out vec4 color;
+out vec4 g_fragColor;
 
 uniform sampler2D texture1;
 
@@ -17,5 +18,5 @@ void main()
 	   discard;
 	}
 
-    color = texColor;
+    g_fragColor = texColor * vec4(gs_out.color, 1.0f);
 }

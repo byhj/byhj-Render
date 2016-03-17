@@ -101,7 +101,7 @@ namespace byhj
 
 	void Plane::init_texture()
 	{
-		texture = TextureMgr::getInstance()->loadOGLTexture("metal.png");
+		texture = TextureMgr::getInstance()->loadOGLDDS("rock015.dds");
 	}
 
 

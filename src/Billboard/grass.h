@@ -20,17 +20,23 @@ namespace byhj
 		void Render(glm::vec3 camPos, const  OGLMVPMatrix &matrix);
 		void Shutdown();
 
+		struct Vertex {
+			glm::vec3 position;
+			glm::vec3 color;
+		};
 	private:
 		void init_shader();
 		void init_buffer();
 		void init_vertexArray();
 		void init_texture();
-
+		float m_WindRotation = 0;
+		int m_WindDirection = 1;
 		GLuint vao, vbo, program;
 		GLuint texture, tex_loc;
 		GLuint model_loc, view_loc, proj_loc;
 		OGLShader GrassShader;			
-		std::vector<glm::vec3> vecPos;
+		std::vector<Vertex> m_VertexData;
+		std::vector<glm::mat4> m_rotateMat;
 	};
 
 }

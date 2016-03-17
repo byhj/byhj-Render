@@ -14,15 +14,6 @@ namespace byhj
 {
 #pragma region VertexData
 
-	const static GLfloat VertexData[] = 
-	{
-	  -1.5f,  -0.5f, -0.48f,
-	   1.5f,  -0.5f,  0.51f,
-	   0.0f,  -0.5f,  0.7f ,
-	  -0.3f,  -0.5f, -2.3f,
-	   0.5f,  -0.5f, -0.6f
-	};
-
 	void Grass::Init()
 	{
 		init_shader();
@@ -33,6 +24,7 @@ namespace byhj
 
 	void Grass::Render(glm::vec3 camPos, const OGLMVPMatrix &matrix)
 	{
+
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glUseProgram(program);
@@ -90,19 +82,24 @@ namespace byhj
 		// Set random positions and random colors for each piece of foliage.
 		for (int i=0; i < 1000; i++)
 		{
-			glm::vec3 pos;
-			pos.x = ((float)rand() / (float)(RAND_MAX)) *9.0f - 4.5f;
-			pos.y = -0.5f;								 
-				pos.z = ((float)rand() / (float)(RAND_MAX)) *9.0f - 4.5f;
+			Vertex vertex;
+			vertex.position.x = ((float)rand() / (float)(RAND_MAX)) *9.0f - 4.5f;
+			vertex.position.y = -0.5f;								 
+			vertex.position.z = ((float)rand() / (float)(RAND_MAX)) *9.0f - 4.5f;
 
-			//red = ((float)rand() / (float)(RAND_MAX)) * 1.0f;
-			//green = ((float)rand() / (float)(RAND_MAX)) * 1.0f;
-			vecPos.push_back(pos);
+			float red = ((float)rand() / (float)(RAND_MAX)) * 1.0f;
+			float green = ((float)rand() / (float)(RAND_MAX)) * 1.0f;
+			vertex.color.r = red + 1.0f;
+			vertex.color.g = green + 0.5f;
+			vertex.color.b = 0.0f;
+
+			m_VertexData.push_back(vertex);
+
 		}
 
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);    //load the vertex data
-		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) *vecPos.size(), &vecPos[0], GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) *m_VertexData.size(), &m_VertexData[0], GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	}
@@ -114,8 +111,9 @@ namespace byhj
 
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(sizeof(glm::vec3)));
 		glBindVertexArray(0);
 	}
 
