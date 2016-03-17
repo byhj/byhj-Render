@@ -137,7 +137,7 @@ namespace byhj {
 
 	void Bloom::init_buffer()
 	{
-		m_model.loadModel("UFO/UFO.obj", LoadType::OGL);
+		m_model.loadModel("UFO/UFO.obj");
 
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);    //load the vertex data

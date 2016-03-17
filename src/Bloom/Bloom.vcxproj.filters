@@ -102,14 +102,14 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\mesh.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\model.cpp">
-      <Filter>Render\model</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\ogl\TextureManager.cpp">
       <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglModel.cpp">
+      <Filter>Render\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglMesh.cpp">
+      <Filter>Render\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,14 +179,14 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\mesh.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\model.h">
-      <Filter>Render\model</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\TextureManager.h">
       <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglModel.h">
+      <Filter>Render\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglMesh.h">
+      <Filter>Render\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

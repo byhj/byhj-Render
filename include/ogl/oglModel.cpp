@@ -5,7 +5,7 @@
 namespace byhj
 {
 	// Draws the model, and thus all its meshes
-	void OGLModel::draw(GLuint program)
+	void OGLModel::render(GLuint program)
 	{
 		for (GLuint i = 0; i < m_OGLMeshes.size(); i++) {
 			m_OGLMeshes[i].draw(program);

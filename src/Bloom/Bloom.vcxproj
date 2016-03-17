@@ -115,6 +115,8 @@
     <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
     <ClCompile Include="..\..\include\ogl\oglDebug.cpp" />
     <ClCompile Include="..\..\include\ogl\oglFont.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglMesh.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
     <ClCompile Include="..\..\include\ogl\TextureManager.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
@@ -122,9 +124,7 @@
     <ClCompile Include="..\byhj-Render\font.cpp" />
     <ClCompile Include="..\byhj-Render\fontMgr.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
-    <ClCompile Include="..\byhj-Render\mesh.cpp" />
     <ClCompile Include="..\byhj-Render\mgr.cpp" />
-    <ClCompile Include="..\byhj-Render\model.cpp" />
     <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
     <ClCompile Include="..\byhj-Render\object.cpp" />
     <ClCompile Include="..\byhj-Render\render.cpp" />
@@ -143,6 +143,8 @@
     <ClInclude Include="..\..\include\ogl\oglCamera.h" />
     <ClInclude Include="..\..\include\ogl\oglDebug.h" />
     <ClInclude Include="..\..\include\ogl\oglFont.h" />
+    <ClInclude Include="..\..\include\ogl\oglMesh.h" />
+    <ClInclude Include="..\..\include\ogl\oglModel.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="..\..\include\ogl\TextureManager.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
@@ -150,9 +152,7 @@
     <ClInclude Include="..\byhj-Render\font.h" />
     <ClInclude Include="..\byhj-Render\fontMgr.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
-    <ClInclude Include="..\byhj-Render\mesh.h" />
     <ClInclude Include="..\byhj-Render\mgr.h" />
-    <ClInclude Include="..\byhj-Render\model.h" />
     <ClInclude Include="..\byhj-Render\modelMgr.h" />
     <ClInclude Include="..\byhj-Render\object.h" />
     <ClInclude Include="..\byhj-Render\render.h" />

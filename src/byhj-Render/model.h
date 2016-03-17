@@ -1,18 +1,9 @@
 #ifndef Model_H
 #define Model_H
 
-#include "oglMesh.h"
-#include "d3dMesh.h"
+#include "ogl/oglModel.h"
+#include "d3d/d3dModel.h"
 
-#include <vector>
-#include <SOIL.h>
-#include <algorithm>
-
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
-#include "textureMgr.h"
 
 namespace byhj
 {

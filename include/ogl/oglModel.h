@@ -20,7 +20,7 @@ namespace byhj
 		OGLModel() = default;
 		~OGLModel() = default;
 
-		void draw(GLuint program);
+		void render(GLuint program);
 		void drawInstance(GLuint program, GLuint amount);
 
 		void loadModel(std::string fileName);
