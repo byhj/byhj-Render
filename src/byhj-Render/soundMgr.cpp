@@ -8,7 +8,7 @@ namespace byhj
 		pSoundEngine = irrklang::createIrrKlangDevice();
 
 		if (pSoundEngine == nullptr) {
-		   std::cerr << "Can not init the sound engine" << std::endl;
+		   std::cerr << "Can not init the sound engine!" << std::endl;
 		}
 
 	}
@@ -25,16 +25,32 @@ namespace byhj
 		return pInstance;
 	}
 
-	void SoundMgr::loadSound(std::string soundFile)
+	void SoundMgr::load(std::string soundFile)
 	{
+		m_SoundFiles.insert(soundFile);
 	}
 
-	void SoundMgr::playSound(std::string soundFile)
+	void SoundMgr::play(std::string soundFile)
 	{
-		std::cout << "Play sound: " << soundFile << std::endl;
+		if (m_SoundFiles.find(soundFile) == m_SoundFiles.end()) {
+		     std::cerr << "You have not load the sound file" << soundFile << std::endl;
+			 return;
+		}
 
-		//Loop the music
-		pSoundEngine->play2D((m_dir + soundFile).c_str(), true);
+		auto sound = m_dir + soundFile;
+		std::cout << "Play sound: " << sound << std::endl;
+		pSoundEngine->play2D(sound.c_str(), true);
+	}
+
+	//Play all sound whose has load
+	void SoundMgr::play()
+	{
+		for (auto iter = m_SoundFiles.begin(); iter != m_SoundFiles.end(); ++iter) {
+			//Loop the music
+			auto sound = m_dir + *iter;
+			std::cout << "Play sound: " << sound << std::endl;
+			pSoundEngine->play2D(sound.c_str(), true);
+		}
 	}
 
 	void SoundMgr::shutdown()

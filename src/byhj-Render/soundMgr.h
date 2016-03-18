@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <iostream>
+#include <unordered_set>
 
 #include "irrKlang/irrKlang.h"
 #pragma comment(lib, "irrKlang.lib")
@@ -19,13 +20,14 @@ namespace byhj
 	   
 	  static std::shared_ptr<SoundMgr> getInstance();
 
-	  void loadSound(std::string soundName);
-      void playSound(std::string soundNmae);
+	  void load(std::string soundName);
+      void play(std::string soundNmae);
+	  void play();
 	  void shutdown();
 
 	private:
 		irrklang::ISoundEngine *pSoundEngine = nullptr;
-	  
+	    std::unordered_set<std::string> m_SoundFiles; 
 	};
 }
 

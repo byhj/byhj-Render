@@ -49,10 +49,12 @@ namespace byhj
     {
     
 		////////////////////////Create buffer desc////////////////////////////
+		RECT   rect;
+		GetClientRect(getHwnd(), &rect);
 		DXGI_MODE_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(DXGI_MODE_DESC));
-		bufferDesc.Width                   = m_ScreenWidth;
-		bufferDesc.Height                  = m_ScreenHeight;
+		bufferDesc.Width                   = rect.right - rect.left;
+		bufferDesc.Height                  = rect.bottom - rect.top;
 		bufferDesc.RefreshRate.Numerator   = 60;
 		bufferDesc.RefreshRate.Denominator = 1;
 		bufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;

@@ -13,6 +13,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <map>
 
+#pragma  comment(lib, "freetype26d")
+
 namespace byhj {
 
 	// Holds all state information relevant to a character as loaded using FreeType

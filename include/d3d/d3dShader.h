@@ -12,6 +12,7 @@ using namespace Microsoft::WRL;
 
 #include "shader.h"
 
+#pragma  comment(lib, "d3dcompiler")
 
 namespace byhj
 {

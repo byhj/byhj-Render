@@ -1,22 +1,19 @@
- #include "oglRender.h"
-#include <memory>
-#include <assert.h>
+#include "oglRender.h"
 
 namespace byhj
 {
-
 	OGLRender::OGLRender()
 	{
+
 	}
 
 	OGLRender::~OGLRender()
 	{
 
 	}
-	
-
+    
 	void OGLRender::v_init()
-	{
+	{	
 
 	}
 
@@ -26,9 +23,11 @@ namespace byhj
 	}
 
     void OGLRender::v_render()
-    {
+	{
 		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, &black[0]);
+		glClearBufferfv(GL_COLOR, 0, black);
+		static const GLfloat one[] ={ 1.0f };
+		glClearBufferfv(GL_DEPTH, 0, one);
 
 
     }
@@ -36,4 +35,5 @@ namespace byhj
 	{
 
 	}
+
 }

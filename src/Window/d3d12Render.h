@@ -1,5 +1,5 @@
-#ifndef d3dRender_H
-#define d3dRender_H
+#ifndef D3D12Render_H
+#define D3D12Render_H
 
 #include "d3d/d3dApp.h"
 #include <d3d12.h>

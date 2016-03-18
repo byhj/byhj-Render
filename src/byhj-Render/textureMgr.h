@@ -9,8 +9,9 @@
 #include <GL/glew.h>
 #include <d3d11.h>
 #include <memory>
-#include <FreeImage.h>
+
 #include <SOIL.h>
+#pragma comment(lib, "SOIL")
 
 #include <FreeImage.h>
 #pragma comment(lib, "FreeImage")

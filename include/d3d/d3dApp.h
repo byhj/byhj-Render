@@ -28,6 +28,10 @@
 #include <DirectXMath.h>
 #include <wrl.h>
 
+#pragma comment(lib, "d3d11")
+#pragma comment(lib, "dxgi")
+#pragma comment(lib, "dxerr")
+
 using namespace DirectX;
 using namespace Microsoft::WRL;
 

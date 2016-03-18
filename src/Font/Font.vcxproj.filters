@@ -197,15 +197,4 @@
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="font.vsh">
-      <Filter>Resource Files</Filter>
-    </FxCompile>
-    <FxCompile Include="font.gsh">
-      <Filter>Resource Files</Filter>
-    </FxCompile>
-    <FxCompile Include="font.psh">
-      <Filter>Resource Files</Filter>
-    </FxCompile>
-  </ItemGroup>
 </Project>

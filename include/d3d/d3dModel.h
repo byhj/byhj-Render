@@ -13,6 +13,8 @@
 
 #include "textureMgr.h"
 
+#pragma comment(lib, "assimp")
+
 namespace byhj
 {
 

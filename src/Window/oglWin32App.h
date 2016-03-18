@@ -1,5 +1,5 @@
-#ifndef OGLRender_H
-#define OGLRender_H
+#ifndef OGLWin32Render_H
+#define OGLWin32Render_H
 
 #include "ogl/win32App.h"
 #include "ogl/oglContext.h"
