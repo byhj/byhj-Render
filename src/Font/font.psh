@@ -1,0 +1,6 @@
+
+///////// PIXEL SHADER
+float4 main(float2 uv : TEXCOORD0) : SV_Target0
+{
+	return float4(Decal.Sample(Bilinear, uv).rrr, 1.f);
+}

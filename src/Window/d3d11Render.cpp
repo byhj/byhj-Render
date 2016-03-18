@@ -48,10 +48,12 @@ namespace byhj
     {
     
 		////////////////////////Create buffer desc////////////////////////////
+		RECT   rect;
+		GetClientRect(getHwnd(), &rect);
 		DXGI_MODE_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(DXGI_MODE_DESC));
-		bufferDesc.Width                   = WindowInfo::getInstance()->getWidth();
-		bufferDesc.Height                  = WindowInfo::getInstance()->getHeight();
+		bufferDesc.Width                   = rect.right - rect.left;
+		bufferDesc.Height                  = rect.bottom - rect.top;
 		bufferDesc.RefreshRate.Numerator   = 60;
 		bufferDesc.RefreshRate.Denominator = 1;
 		bufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -190,15 +192,15 @@ namespace byhj
 		static WCHAR frameStr[255];
 		wsprintfW(frameStr, L"FPS: %u", (UINT)fps);
 
-		m_Font.render(m_pD3D11DeviceContext, frameStr, 20.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 60);
+		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 100);
 	}
     void D3D11Render::drawInfo()
     {
     	WCHAR WinInfo[255];
     	swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight() );
 		drawfps();								  
-     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 20.0f, 10.0f, 30.0f);
-     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 20.0f, 10.0f, 60.0f);
+     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 10.0f);
+     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 40.0f);
     }
 
 }
