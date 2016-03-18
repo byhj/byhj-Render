@@ -59,7 +59,6 @@ struct ID3D11ShaderResourceView;//D3DXEffect11 in dependences
 struct D3DXMATRIX;
 
 #include <d3d11.h>
-#include <d3dx10.h>
 
 
 struct IDevice11//little structure that keeps both device, in order to reduce copy & paste around module

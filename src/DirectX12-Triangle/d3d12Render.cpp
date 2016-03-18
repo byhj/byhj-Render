@@ -4,12 +4,12 @@ namespace byhj {
 
 	void D3D12Render::v_init()
 	{
-		m_viewport.Width = static_cast<float>(m_ScreenWidth);
-		m_viewport.Height = static_cast<float>(m_ScreenHeight);
+		m_viewport.Width = getClientWidth();
+		m_viewport.Height = getClientHeight();
 		m_viewport.MaxDepth = 1.0f;
 
-		m_scissorRect.right = static_cast<LONG>(m_ScreenWidth);
-		m_scissorRect.bottom = static_cast<LONG>(m_ScreenHeight);
+		m_scissorRect.right = static_cast<LONG>(getClientWidth());
+		m_scissorRect.bottom = static_cast<LONG>(getClientHeight());
 
 		loadPipeline();
 		loadAssets();
@@ -85,8 +85,8 @@ namespace byhj {
 		//Describe and Create the swap chain
 		DXGI_SWAP_CHAIN_DESC swapChainDesc ={};
 		swapChainDesc.BufferCount       = FrameCount;
-		swapChainDesc.BufferDesc.Width  = m_ScreenWidth;
-		swapChainDesc.BufferDesc.Height = m_ScreenHeight;
+		swapChainDesc.BufferDesc.Width  = getClientWidth();
+		swapChainDesc.BufferDesc.Height = getClientHeight();
 		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		swapChainDesc.BufferUsage       = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		swapChainDesc.SwapEffect        = DXGI_SWAP_EFFECT_FLIP_DISCARD;
