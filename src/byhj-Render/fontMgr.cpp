@@ -17,4 +17,18 @@ namespace byhj
 
 		return pInstance;
 	}
+
+	void FontMgr::init()
+	{
+	}
+
+	void FontMgr::render()
+	{
+	}
+
+	void FontMgr::shutdown()
+	{
+	}
+
+
 }

@@ -193,7 +193,7 @@ namespace byhj
 
 	void D3D11Render::init_object()
 	{
-		m_Timer.Reset();
+		m_Timer.reset();
 		m_Font.init(m_pD3D11Device);
 		m_meshload.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
 		m_skymap.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
@@ -204,15 +204,15 @@ namespace byhj
 		static bool flag = true;
 		if (flag)
 		{
-			m_Timer.Start();
+			m_Timer.start();
 			flag = false;
 		}
 
-		m_Timer.Count();
+		m_Timer.count();
 		static int frameCnt = 0;
 		static float timeElapsed = 0.0f;
 		frameCnt++;
-		if (m_Timer.GetTotalTime() - timeElapsed >= 1.0f)
+		if (m_Timer.getTotalTime() - timeElapsed >= 1.0f)
 		{
 			fps = frameCnt;
 			frameCnt = 0;

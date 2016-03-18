@@ -1,5 +1,5 @@
-#ifndef APP_H
-#define APP_H
+#ifndef _D3DAPP_H
+#define _D3DAPP_H
 
 //use window sdk, not the mfc sdk parts;
 #define WIN32_LEAN_AND_MEAN
@@ -7,9 +7,6 @@
 
 #include <WindowsX.h>
 #include <windows.h>
-#include <dxgi.h>
-#include <d3d11.h>
-#include <d3dcommon.h>
 
 #include <string>
 #include <ctime>
@@ -22,15 +19,7 @@
 
 #include "app.h"
 #include "d3d/d3dUtility.h"
-#include "d3dRender.h"
 
-
-#include <DirectXMath.h>
-#include <wrl.h>
-
-#pragma comment(lib, "d3d11")
-#pragma comment(lib, "dxgi")
-#pragma comment(lib, "dxerr")
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -44,12 +33,13 @@ public:
 	D3DApp()  ;
 	~D3DApp() ;
 
-	void v_run() override;
-	virtual void v_init()     {}
-	virtual void v_update()   {}
-	virtual void v_render()   {}
-	virtual void v_shutdown() {}
-	virtual void v_setOGL() {}
+	void v_run()   ;
+	virtual void v_init()     = 0;
+	virtual void v_update()   = 0;
+	virtual void v_render()   = 0;
+	virtual void v_shutdown() = 0;
+
+	virtual void v_setOGL() {};
 
 	LRESULT CALLBACK MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -59,26 +49,25 @@ public:
 	virtual void v_onMouseUp(WPARAM btnState, int x, int y)    { }
 	virtual void v_onMouseMove(WPARAM btnState, int x, int y)  { }
 	virtual void v_onMouseWheel(WPARAM btnState, int x, int y) { }
+		
+		
+	int getClientWidth() const;
+	int getClientHeight() const;
 
 protected:
-	int   m_ScreenWidth;
-	int   m_ScreenHeight;
-	float m_ScreenFar;
-	float m_ScreenNear;
-	int   m_PosX;
-	int   m_PosY;
 
 	LPCTSTR m_AppName      = L"DirectX:";
 	LPCTSTR m_WndClassName = L"Window";
 
-	//void      GetVideoCardInfo(char &, int &);
-	HINSTANCE getAppInst() const { return m_hInstance; }
-	HWND      getHwnd()    const { return m_hWnd; }
+	HINSTANCE getAppInst() const;
+	HWND      getHwnd()    const;
 
 
 private:
 
 	bool init_window();
+	int m_clientWidth;
+	int m_clientHeight;
 
 	HINSTANCE  m_hInstance;
 	HWND       m_hWnd;

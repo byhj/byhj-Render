@@ -38,7 +38,7 @@ public:
 	int getPosX() const;
 	int getPosY() const;
 	float getAspect() const;
-	std::string getTitle() const;
+	std::string getTitle() const; 
 
 private:
     std::string title;

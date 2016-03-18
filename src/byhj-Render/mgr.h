@@ -10,7 +10,7 @@ namespace byhj
   {
   public:
 	  Mgr();
-	  virtual ~Mgr();
+	  virtual ~Mgr() = 0;
 
 	  void setDir(std::string dir);
 	  std::string getDir() const;

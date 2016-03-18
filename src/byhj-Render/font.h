@@ -1,5 +1,5 @@
-#ifndef Font_H
-#define Font_H
+#ifndef _Font_H_
+#define _Font_H_
 
 #include <iostream>
 

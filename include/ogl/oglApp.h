@@ -12,7 +12,7 @@
 
 #include "app.h"
 #include "oglRender.h"
-#include "oglFont.h"
+#include "oglFTFont.h"
 #include "ogl/oglCamera.h"
 #include "windowInfo.h"
 
@@ -23,7 +23,7 @@
 #pragma comment(lib, "opengl32")
 
 #define USE_ANT
-//#define USE_FONT
+#define USE_FONT
 
 namespace byhj 
 {
@@ -46,7 +46,7 @@ class OGLApp : public App
 		virtual void v_shutdown(){}
 protected:
 
-	OGLFont   m_pFont;
+	OGLFTFont   m_pFont;
 //	OGLCamera m_camera;
 	int sw ;
 	int sh ;
@@ -64,6 +64,12 @@ protected:
 	static void glfw_scroll(GLFWwindow* window, double xoffset, double yoffset);
 	static void glfw_mouseButton(GLFWwindow *window, int x, int y, int z);
 	static void glfw_char(GLFWwindow *window, unsigned int x);
+	static void glfw_resize(GLFWwindow* window, int width, int height);
+
+	void resizeCallback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+	}
 
 	 void countFps();
 	 float GetAspect() const;

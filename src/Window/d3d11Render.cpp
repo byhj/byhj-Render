@@ -93,8 +93,8 @@ namespace byhj
 		///////////////////////////Creaete Depth/Stencil Buffer/////////////////////////////////
 		D3D11_TEXTURE2D_DESC depthStencilDesc;
 
-		depthStencilDesc.Width              = WindowInfo::getInstance()->getWidth();
-		depthStencilDesc.Height             = WindowInfo::getInstance()->getHeight();
+		depthStencilDesc.Width              =  rect.right - rect.left;
+		depthStencilDesc.Height             =  rect.bottom - rect.top;
 		depthStencilDesc.MipLevels          = 1;
 		depthStencilDesc.ArraySize          = 1;
 		depthStencilDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -157,15 +157,15 @@ namespace byhj
     	vp.TopLeftY = 0;
     	vp.MinDepth = 0.0f;
     	vp.MaxDepth = 1.0f;
-		vp.Width    = static_cast<FLOAT>(WindowInfo::getInstance()->getWidth() );
-		vp.Height   = static_cast<FLOAT>(WindowInfo::getInstance()->getHeight() );
+		vp.Width    = static_cast<FLOAT>(getClientWidth());
+		vp.Height   = static_cast<FLOAT>(getClientHeight());
     	m_pD3D11DeviceContext->RSSetViewports(1, &vp);
     
     }
     
     void D3D11Render::init_object()
     {
-    	m_Timer.Reset();
+    	m_Timer.reset();
     	m_Font.init(m_pD3D11Device);
     }
     
@@ -174,15 +174,15 @@ namespace byhj
 		static bool flag = true;
 		if (flag)
 		{
-			m_Timer.Start();
+			m_Timer.start();
 			flag = false;
 		}
 
-		m_Timer.Count();
+		m_Timer.count();
 		static int frameCnt = 0;
 		static float timeElapsed = 0.0f;
 		frameCnt++;
-		if (m_Timer.GetTotalTime() - timeElapsed >= 1.0f)
+		if (m_Timer.getTotalTime() - timeElapsed >= 1.0f)
 		{
 			fps = frameCnt;
 			frameCnt = 0;
@@ -192,15 +192,15 @@ namespace byhj
 		static WCHAR frameStr[255];
 		wsprintfW(frameStr, L"FPS: %u", (UINT)fps);
 
-		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 100);
+		m_Font.render(m_pD3D11DeviceContext, frameStr, 20.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 100);
 	}
     void D3D11Render::drawInfo()
     {
     	WCHAR WinInfo[255];
     	swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight() );
 		drawfps();								  
-     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 10.0f);
-     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 40.0f);
+     	m_Font.render(m_pD3D11DeviceContext, WinInfo, 20.0f, 10.0f, 10.0f);
+     	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 20.0f, 10.0f, 40.0f);
     }
 
 }

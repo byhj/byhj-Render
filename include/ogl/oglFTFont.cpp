@@ -1,32 +1,35 @@
-#include "oglFont.h"
+#include "OGLFTFont.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
-	OGLFont::OGLFont()
+	OGLFTFont ::OGLFTFont ()
 	{
 
 	}
-	OGLFont::~OGLFont()
+	OGLFTFont ::~OGLFTFont ()
 	{
 
 	}
 
-	void OGLFont::init(GLfloat sw, GLfloat sh, std::string fontFile /* = "arial.ttf" */)
+	void OGLFTFont ::init(std::string fontFile /* = "arial.ttf" */)
 	{
-		m_sw = sw;
-		m_sh = sh;
+		m_sw = WindowInfo::getInstance()->getWidth();
+		m_sh = WindowInfo::getInstance()->getHeight();
 		m_FontFile = fontFile;
+
 		init_buffer();
 		init_shader();
 		init_vertexArray();
 	}
 
-	void OGLFont::render(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+	void OGLFTFont::render(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 	{
 		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 		// Activate corresponding render state	
 		glUseProgram(m_program);
 		glUniform3f(glGetUniformLocation(m_program, "textColor"), color.x, color.y, color.z);
@@ -71,21 +74,18 @@ namespace byhj
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glDisable(GL_BLEND);
 		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
 	}
 
-	void OGLFont::update()
-	{
 
-	}
-
-	void OGLFont::shutdown()
+	void OGLFTFont ::shutdown()
 	{
 		glDeleteVertexArrays(1, &m_vao);
 		glDeleteBuffers(1, &m_vbo);
 		glDeleteProgram(m_program);
 	}
 
-	void OGLFont::init_buffer()
+	void OGLFTFont ::init_buffer()
 	{
 		// FreeType
 		FT_Library ft;
@@ -157,7 +157,7 @@ namespace byhj
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-	void OGLFont::init_vertexArray()
+	void OGLFTFont ::init_vertexArray()
 	{
 		// Configure VAO/VBO for texture quads
 		glGenVertexArrays(1, &m_vao);
@@ -171,7 +171,7 @@ namespace byhj
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-	void OGLFont::init_shader()
+	void OGLFTFont ::init_shader()
 	{
 		auto dir = ShaderMgr::getInstance()->getDir();
 		

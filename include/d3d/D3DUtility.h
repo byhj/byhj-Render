@@ -6,11 +6,19 @@
 
 #include <dxerr.h>
 #include <DirectXMath.h>
+#include <DirectXColors.h>
+#include <DirectXCollision.h>
+#include <dxgi.h>
+#include <d3d11.h>
+#include <d3dcommon.h>
 #include <wrl.h>
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
+#pragma  comment(lib, "dxerr")
+#pragma  comment(lib, "d3d11")
+#pragma  comment(lib, "dxgi")
 #pragma  comment(lib, "dxerr")
 
 namespace byhj

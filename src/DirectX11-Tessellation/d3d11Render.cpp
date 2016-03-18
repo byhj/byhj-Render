@@ -156,7 +156,7 @@ namespace byhj
     
     void D3D11Render::init_object()
     {
-    	m_Timer.Reset();
+    	m_Timer.reset();
 		m_triangle.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
     }
     

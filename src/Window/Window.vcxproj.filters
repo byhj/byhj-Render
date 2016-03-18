@@ -45,9 +45,6 @@
     <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglFont.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
@@ -81,9 +78,6 @@
     <ClCompile Include="..\byhj-Render\windowInfo.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="..\byhj-Render\fontMgr.cpp">
-      <Filter>Render\mgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\byhj-Render\mgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
@@ -100,9 +94,6 @@
       <Filter>Render\mgr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dFont.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="d3d11Render.cpp">
@@ -135,6 +126,21 @@
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
+    <ClCompile Include="..\byhj-Render\resourceMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dCamera.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\utility.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3d12Render.h">
@@ -147,9 +153,6 @@
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglCamera.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglFont.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglShader.h">
@@ -185,9 +188,6 @@
     <ClInclude Include="..\byhj-Render\windowInfo.h">
       <Filter>Render\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\byhj-Render\fontMgr.h">
-      <Filter>Render\mgr</Filter>
-    </ClInclude>
     <ClInclude Include="..\byhj-Render\mgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
@@ -207,9 +207,6 @@
       <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dx12.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dFont.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="d3d11Render.h">
@@ -242,5 +239,28 @@
     <ClInclude Include="..\..\include\d3d\d3dShader.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
+    <ClInclude Include="..\byhj-Render\resourceMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dFWFont.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\utility.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglFTFont.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\ogl\font.frag">
+      <Filter>Render\ogl</Filter>
+    </None>
+    <None Include="..\..\include\ogl\font.vert">
+      <Filter>Render\ogl</Filter>
+    </None>
   </ItemGroup>
 </Project>

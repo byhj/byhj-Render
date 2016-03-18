@@ -19,7 +19,7 @@ Timer::Timer(): m_SecondsPerCount(0.0),
 
 // Returns the total time elapsed since Reset() was called, NOT counting any
 // time when the clock is stopped.
-float Timer::GetTotalTime() const
+float Timer::getTotalTime() const
 {
 	// If we are stopped, do not count the time that has passed since we stopped.
 	// Moreover, if we previously already had a pause, the distance 
@@ -51,12 +51,12 @@ float Timer::GetTotalTime() const
 	}
 }
 
-float Timer::GetDeltaTime() const
+float Timer::getDeltaTime() const
 {
 	return (float)m_DeltaTime;
 }
 
-void Timer::Reset()
+void Timer::reset()
 {
 	__int64 currTime;
 	QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
@@ -67,7 +67,7 @@ void Timer::Reset()
 	m_Stopped  = false;
 }
 
-void Timer::Start()
+void Timer::start()
 {
 	__int64 startTime;
 	QueryPerformanceCounter((LARGE_INTEGER*)&startTime);
@@ -89,7 +89,7 @@ void Timer::Start()
 	}
 }
 
-void Timer::Stop()
+void Timer::stop()
 {
 	if( !m_Stopped )
 	{
@@ -101,7 +101,7 @@ void Timer::Stop()
 	}
 }
 
-void Timer::Count()
+void Timer::count()
 {
 	if( m_Stopped )
 	{

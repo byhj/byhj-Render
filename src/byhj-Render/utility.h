@@ -33,16 +33,11 @@ namespace byhj
 const GLuint OGL_ZERO = 0x00000000;
 const GLuint OGL_ONE  = 0xffffffff;
 
-struct OGL_MVP {
-	glm::mat4 model;
-	glm::mat4 view;
-	glm::mat4 proj;
-};
-
-struct D3D_MVP {
-	XMFLOAT4X4 model;
-	XMFLOAT4X4 view;
-	XMFLOAT4X4 proj;
+enum  FontType {
+	OGL_FT_FONT,
+	D3D_FW_FONT,  // FW1FontWrapper
+	D3D_SP_FONT,  // SpriteFont
+	D3D_FT_FONT  // Freetype
 };
 
 bool test(bool, std::string, int, char*);

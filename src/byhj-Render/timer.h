@@ -11,13 +11,13 @@ class Timer
 public:
 	Timer();
 
-	float GetTotalTime() const;    //In seconds
-	float GetDeltaTime() const; //In seconds
+	float getTotalTime() const;    //In seconds
+	float getDeltaTime() const; //In seconds
 
-	void Reset();      //Call before message loop;
-	void Start();      //Call when unpaused;
-	void Stop();       //Call when paused;
-	void Count();      //Call every frame;
+	void reset();      //Call before message loop;
+	void start();      //Call when unpaused;
+	void stop();       //Call when paused;
+	void count();      //Call every frame;
 
 private:
 	double m_SecondsPerCount;

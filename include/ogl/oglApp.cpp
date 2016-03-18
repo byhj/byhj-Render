@@ -74,7 +74,7 @@ void OGLApp::v_run()
 #ifdef _DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
-
+	//glfwGetPrimaryMonitor(), 
 	pWindow = glfwCreateWindow(sw, sh, WindowInfo::getInstance()->getTitle().c_str(), nullptr, nullptr);
 	glfwSetWindowPos(pWindow, WindowInfo::getInstance()->getPosX() - 100, WindowInfo::getInstance()->getPosY() - 100);
 	glfwMakeContextCurrent(pWindow);
@@ -86,6 +86,8 @@ void OGLApp::v_run()
 	glfwSetMouseButtonCallback(pWindow, glfw_mouseButton); // - Directly redirect GLFW mouse button events to AntTweakBar
 	glfwSetCharCallback(pWindow, glfw_char);                      // - Directly redirect GLFW char events to AntTweakBar
 #endif
+	glfwSetWindowSizeCallback(pWindow, glfw_resize);
+
 	//glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 	// GLFW Options
 	//	glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -131,11 +133,11 @@ void OGLApp::v_run()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-	// Create a GLFWwindow object that we can use for GLFW's functions
+
 
 	glViewport(0, 0, sw, sh);
 #ifdef USE_FONT
-	m_pFont.init(sw, sh);
+	m_pFont.init();
 #endif
 	v_init();
 	while (!glfwWindowShouldClose(pWindow))
@@ -152,6 +154,10 @@ void OGLApp::v_run()
 
 		v_update();
 		v_render();
+		// Create a GLFWwindow object that we can use for GLFW's functions
+		int width, height;
+		glfwGetFramebufferSize(pWindow, &width, &height);
+		std::cout << width << std::endl;
 #ifdef USE_FONT
 		 m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 30);
 		 m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 60);

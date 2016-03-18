@@ -1,9 +1,6 @@
 #ifndef __GUI_H_
 #define __GUI_H_
 
-#include "AntTweakBar.h"
-#include <d3d11.h>
-
 namespace byhj
 {
 	class Gui
@@ -12,10 +9,10 @@ namespace byhj
 		Gui() = default;
 		virtual ~Gui() = default;
 
-		virtual void v_init(int sw, int sh);
-		virtual void v_update();
-		virtual void v_render();
-		virtual void v_shutdown();
+		virtual void v_init()     = 0;
+		virtual void v_update()   = 0;
+		virtual void v_render()   = 0;
+		virtual void v_shutdown() = 0;
 
 	private:
 

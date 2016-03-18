@@ -25,7 +25,6 @@ namespace byhj
 	void Root::EndScene()
 	{
 		Root::m_pApp->v_shutdown();
-		m_pApp = nullptr;
 	}
 
 

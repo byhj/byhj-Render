@@ -48,12 +48,12 @@ void D3DApp::v_run()
 bool D3DApp::init_window()
 {
 	//Set the window in the middle of screen
-	m_ScreenWidth = WindowInfo::getInstance()->getWidth();
-	m_ScreenHeight = WindowInfo::getInstance()->getHeight();
-	m_PosX = WindowInfo::getInstance()->getPosX() - 150;
-	m_PosY = WindowInfo::getInstance()->getPosY() - 100;
-	m_ScreenNear = 0.1f;
-	m_ScreenFar  = 1000.0f;
+	float ScreenWidth = WindowInfo::getInstance()->getWidth();
+	float ScreenHeight = WindowInfo::getInstance()->getHeight();
+	float PosX = WindowInfo::getInstance()->getPosX() - 150;
+	float PosY = WindowInfo::getInstance()->getPosY() - 100;
+	float ScreenNear = 0.1f;
+	float ScreenFar  = 1000.0f;
 
 	D3DAppHandle = this;
 	m_hInstance = GetModuleHandle(NULL);
@@ -85,9 +85,9 @@ bool D3DApp::init_window()
 		m_WndClassName,
 		m_AppName,
 		WS_OVERLAPPEDWINDOW,	
-		m_PosX, m_PosY,
-		m_ScreenWidth,	
-		m_ScreenHeight,	
+		PosX, PosY,
+		ScreenWidth,	
+		ScreenHeight,	
 		NULL,
 		NULL,
 		m_hInstance,	
@@ -102,11 +102,35 @@ bool D3DApp::init_window()
 
 	v_setOGL();
 
+	RECT   rect;
+	GetClientRect(m_hWnd, &rect);
+	m_clientWidth  = rect.right - rect.left;
+	m_clientHeight  = rect.bottom - rect.top;
+
 	ShowWindow(m_hWnd, SW_SHOW);
 	SetForegroundWindow(m_hWnd);
 	SetFocus(m_hWnd);
 
 	return true;
+}
+
+int D3DApp::getClientWidth() const 
+{
+	return m_clientWidth;
+
+}
+int D3DApp::getClientHeight() const
+{
+	return m_clientHeight;
+}
+HINSTANCE D3DApp::getAppInst() const 
+{ 
+	return m_hInstance; 
+}
+
+HWND      D3DApp::getHwnd()  const 
+{
+	return m_hWnd;
 }
 
 LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

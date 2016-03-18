@@ -5,7 +5,7 @@
 #include "shaderMgr.h"
 #include "textureMgr.h"
 #include "soundMgr.h"
-#include "fontMgr.h"
+
 
 #include <memory>
 
@@ -20,7 +20,7 @@ namespace byhj
 		static std::shared_ptr<ResourceMgr> getInsance();
 
 		std::shared_ptr<ShaderMgr>  getShaderMgr();
-		std::shared_ptr<FontMgr>    getFontMgr();
+		//std::shared_ptr<FontMgr>    getFontMgr();
 		std::shared_ptr<ModelMgr>   getModelMgr();
 		std::shared_ptr<SoundMgr>   getSoundMgr();
 		std::shared_ptr<TextureMgr> getTextureMgr();

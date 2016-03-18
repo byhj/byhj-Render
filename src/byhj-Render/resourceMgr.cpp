@@ -36,11 +36,11 @@ namespace byhj
 	}
 
 
-	std::shared_ptr<FontMgr> getFontMgr()
-	{
-		return FontMgr::getInstance();
-	}
-
+	// std::shared_ptr<FontMgr> getFontMgr()
+	// {
+	// 	return FontMgr::getInstance();
+	// }
+   // 
 
 	std::shared_ptr<SoundMgr> getSoundMgr()
 	{
