@@ -20,7 +20,6 @@ void D3DApp::v_run()
 {
 	bool ret = init_window();
 	v_init();
-
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
 	while (ret)
@@ -128,66 +127,31 @@ HINSTANCE D3DApp::getAppInst() const
 	return m_hInstance; 
 }
 
-HWND      D3DApp::getHwnd()  const 
+HWND  D3DApp::getHwnd()  const 
 {
 	return m_hWnd;
 }
 
 LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+#ifdef USE_CEGUI
+	D3DCEGUI::getInstance()->setCallback(uMsg, wParam, lParam);
+#endif
 	switch (uMsg)
 	{
-	case WM_CHAR: {
-#ifdef USE_CEGUI
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectChar((CEGUI::utf32)wParam);
-#endif
-		break;
-	}
-	case WM_KEYDOWN:
-		{
+	case WM_CHAR:  break;
+	case WM_KEYDOWN: {
 			if(wParam == VK_ESCAPE)
 				PostMessage(m_hWnd, WM_DESTROY, 0, 0);
 			return 0;
-		}
-    case WM_LBUTTONDOWN: 
-#ifdef USE_CEGUI
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
-#endif
-			break;
-    case WM_RBUTTONDOWN: {
-#ifdef USE_CEGUI
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
-#endif
-    	    v_onMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-    	break;
 	}
-    case WM_LBUTTONUP:
-#ifdef USE_CEGUI
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
-#endif
-					break;
-	case WM_RBUTTONUP: {
-    	v_onMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-#ifdef USE_CEGUI
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
-#endif
-		break;
-	}
-    case WM_MOUSEMOVE: {
-    	v_onMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-#ifdef USE_CEGUI
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectMousePosition((float)(LOWORD(lParam)), (float)(HIWORD(lParam)));
- #endif  	
-		break;
-	}
-    case WM_MOUSEWHEEL: {
-    	v_onMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam));
-    	// Any other messages send to the default message handler as our application won't make use of them.
-#ifdef USE_CEGUI		
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseWheelChange(static_cast<float>((short)HIWORD(wParam)) / static_cast<float>(120));
-#endif  
-		break;
-	}
+    case WM_LBUTTONDOWN:  break;
+    case WM_RBUTTONDOWN: v_onMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)); break;
+    case WM_LBUTTONUP:    break;
+	case WM_RBUTTONUP: v_onMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));    break;
+    case WM_MOUSEMOVE: v_onMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));  break;
+    case WM_MOUSEWHEEL: v_onMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam)); break;
+
 	default:
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	} 

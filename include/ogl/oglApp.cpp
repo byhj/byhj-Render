@@ -56,7 +56,10 @@ OGLApp * OGLApp::app = nullptr;
 	{
 		TwEventCharGLFW(x, GLFW_PRESS);
 	}
-
+	void OGLApp::glfw_resize(GLFWwindow* window, int width, int height)
+	{
+		app->resizeCallback(window, width, height);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////
 
 void OGLApp::v_run()
@@ -87,6 +90,7 @@ void OGLApp::v_run()
 	glfwSetCharCallback(pWindow, glfw_char);                      // - Directly redirect GLFW char events to AntTweakBar
 #endif
 	glfwSetWindowSizeCallback(pWindow, glfw_resize);
+
 
 	//glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 	// GLFW Options
@@ -133,11 +137,12 @@ void OGLApp::v_run()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-
-
-	glViewport(0, 0, sw, sh);
 #ifdef USE_FONT
 	m_pFont.init();
+#endif
+#ifdef USE_CEGUI
+	OGLCEGUI::getInstance()->init();
+	OGLCEGUI::getInstance()->setupCallbacks(pWindow);
 #endif
 	v_init();
 	while (!glfwWindowShouldClose(pWindow))
@@ -154,15 +159,16 @@ void OGLApp::v_run()
 
 		v_update();
 		v_render();
-		// Create a GLFWwindow object that we can use for GLFW's functions
-		int width, height;
-		glfwGetFramebufferSize(pWindow, &width, &height);
-		std::cout << width << std::endl;
+
 #ifdef USE_FONT
-		 m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 30);
-		 m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 60);
-		 m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 90);
+		 m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 40);
+		 m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 70);
+		 m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 100);
 		 m_pFont.render("FPS: " + std::to_string(m_fps), 10, 30);
+#endif
+
+#ifdef USE_CEGUI
+		 OGLCEGUI::getInstance()->render();
 #endif
 		glfwSwapBuffers(pWindow);
 	}

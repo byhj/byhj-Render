@@ -141,6 +141,12 @@
     <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglCEGUI.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dCEGUI.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3d12Render.h">
@@ -254,13 +260,11 @@
     <ClInclude Include="..\..\include\ogl\oglFTFont.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\include\ogl\font.frag">
+    <ClInclude Include="..\..\include\ogl\oglCEGUI.h">
       <Filter>Render\ogl</Filter>
-    </None>
-    <None Include="..\..\include\ogl\font.vert">
-      <Filter>Render\ogl</Filter>
-    </None>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dCEGUI.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,7 +20,9 @@
 #pragma  comment(lib, "CEGUIBase-0_d.lib")
 #pragma  comment(lib, "CEGUIOpenGLRenderer-0_d.lib")
 #pragma  comment(lib, "CEGUICoreWindowRendererSet_d.lib")
-
+#pragma  comment(lib, "opengl32")
+#pragma  comment(lib, "glew32")
+#pragma  comment(lib, "glfw3")
 
 using namespace CEGUI;
 

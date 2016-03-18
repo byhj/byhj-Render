@@ -15,7 +15,7 @@ int main()
 	auto oglApp = std::make_shared<byhj::OGLRender>();
 	auto oglWin32App = std::make_shared<byhj::OGLWIN32Render>();
 
-	byhj::Root::getInstance()->setRender(oglApp);
+	byhj::Root::getInstance()->setRender(d3dApp);
 	byhj::Root::getInstance()->BeginScene();
 	byhj::Root::getInstance()->EndScene();
 

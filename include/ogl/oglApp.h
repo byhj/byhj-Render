@@ -25,6 +25,10 @@
 #define USE_ANT
 #define USE_FONT
 
+#ifdef USE_CEGUI
+#include "ogl/oglCEGUI.h"
+#endif
+
 namespace byhj 
 {
 
@@ -79,7 +83,6 @@ protected:
 		std::string m_GLSLVersion;
 		GLuint m_fps = 0;
 		GLFWwindow *pWindow;
-	
 	};  //class
 
 }

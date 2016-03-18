@@ -9,6 +9,7 @@
 #include <wrl.h>
 
 #include "Timer.h"
+#include "d3d/d3dCEGUI.h"
 
 namespace byhj
 {

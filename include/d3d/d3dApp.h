@@ -19,7 +19,11 @@
 
 #include "app.h"
 #include "d3d/d3dUtility.h"
+#define USE_CEGUI
 
+#ifdef USE_CEGUI
+#include "d3d/d3dCEGUI.h"
+#endif
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
