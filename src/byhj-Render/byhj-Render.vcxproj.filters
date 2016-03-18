@@ -1,255 +1,231 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="source">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Render">
+      <UniqueIdentifier>{5dc79a1f-b15e-4ece-a126-df7fc0dd15ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render">
-      <UniqueIdentifier>{0e9a830d-7d95-43c2-b2ff-11ecbf1af75b}</UniqueIdentifier>
+    <Filter Include="Render\ogl">
+      <UniqueIdentifier>{e4c89bb2-4003-4533-ae28-c04786c7e118}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render\sky">
-      <UniqueIdentifier>{84291d98-ebc1-44aa-aaeb-d1837a72930d}</UniqueIdentifier>
+    <Filter Include="Render\d3d">
+      <UniqueIdentifier>{85284dfd-3d0c-4d94-8a56-f68710162fbb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render\shader">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Render\render">
+      <UniqueIdentifier>{db87662d-0ad9-4bc0-809c-54f6c79d0c0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render\ogl">
-      <UniqueIdentifier>{f89919cf-851b-4ad7-acd8-59f0bfb06146}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\model">
-      <UniqueIdentifier>{15ce8e67-0584-4af0-8a11-36419ee1ff6a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\mgr">
-      <UniqueIdentifier>{fd6904ea-1519-4050-bbbc-b2f6cdc5edaf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\d3d">
-      <UniqueIdentifier>{b786a5b9-10c3-4bbe-8b97-bebc2c241645}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\camera">
-      <UniqueIdentifier>{e1299956-5a0a-4d24-b49a-565b6ce1bd14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\gui">
-      <UniqueIdentifier>{72f8406b-0806-4fca-8130-9b1d15257d4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\include">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Render\mgr">
+      <UniqueIdentifier>{bcf464a1-3c2c-4147-a293-133ea8ce00d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\ogl\oglApp.h">
-      <Filter>render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dApp.h">
-      <Filter>render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="soundMgr.h">
-      <Filter>render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="textureMgr.h">
-      <Filter>render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="shaderMgr.h">
-      <Filter>render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="resourceMgr.h">
-      <Filter>render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="modelMgr.h">
-      <Filter>render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="mgr.h">
-      <Filter>render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglShader.h">
-      <Filter>render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dShader.h">
-      <Filter>render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="timer.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dFont.h">
-      <Filter>render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglFont.h">
-      <Filter>render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="bitmap.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="terrain.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\dxutHelper.h">
-      <Filter>render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\effectHelper.h">
-      <Filter>render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dCamera.h">
-      <Filter>render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dBitmap.h">
-      <Filter>render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="fontMgr.h">
-      <Filter>render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="font.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="app.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="render.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="root.h">
-      <Filter>render\include</Filter>
-    </ClInclude>
-    <ClInclude Include="gui.h">
-      <Filter>render\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="sky.h">
-      <Filter>render\sky</Filter>
-    </ClInclude>
-    <ClInclude Include="skyBox.h">
-      <Filter>render\sky</Filter>
-    </ClInclude>
-    <ClInclude Include="skyPlane.h">
-      <Filter>render\sky</Filter>
-    </ClInclude>
-    <ClInclude Include="skyDome.h">
-      <Filter>render\sky</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>render\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="shader.h">
-      <Filter>render\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="model.h">
-      <Filter>render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="mesh.h">
-      <Filter>render\model</Filter>
-    </ClInclude>
-    <ClInclude Include="geometry.h">
-      <Filter>render\model</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="..\..\include\ogl\oglMesh.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglModel.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
-      <Filter>render\ogl</Filter>
+      <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
-      <Filter>render\d3d</Filter>
+    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
+      <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>render\include</Filter>
-    </ClCompile>
-    <ClCompile Include="textureMgr.cpp">
-      <Filter>render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="shaderMgr.cpp">
-      <Filter>render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="soundMgr.cpp">
-      <Filter>render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="resourceMgr.cpp">
-      <Filter>render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="modelMgr.cpp">
-      <Filter>render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="mgr.cpp">
-      <Filter>render\mgr</Filter>
+    <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
+      <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
-      <Filter>render\ogl</Filter>
+      <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
-      <Filter>render\d3d</Filter>
+    <ClCompile Include="..\..\include\ogl\win32App.cpp">
+      <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="timer.cpp">
-      <Filter>render\include</Filter>
+    <ClCompile Include="..\..\include\ogl\oglCEGUI.cpp">
+      <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dFont.cpp">
-      <Filter>render\d3d</Filter>
+    <ClCompile Include="..\..\include\ogl\oglContext.cpp">
+      <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglFont.cpp">
-      <Filter>render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="bitmap.cpp">
-      <Filter>render\include</Filter>
-    </ClCompile>
-    <ClCompile Include="terrain.cpp">
-      <Filter>render\include</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\effectHelper.cpp">
-      <Filter>render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\dxutHelper.cpp">
-      <Filter>render\d3d</Filter>
+    <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
+      <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp">
-      <Filter>render\d3d</Filter>
+      <Filter>Render\d3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dBitmap.cpp">
-      <Filter>render\d3d</Filter>
+    <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp">
+      <Filter>Render\d3d</Filter>
     </ClCompile>
-    <ClCompile Include="fontMgr.cpp">
-      <Filter>render\mgr</Filter>
+    <ClCompile Include="..\..\include\d3d\d3dMesh.cpp">
+      <Filter>Render\d3d</Filter>
     </ClCompile>
-    <ClCompile Include="font.cpp">
-      <Filter>render\include</Filter>
+    <ClCompile Include="..\..\include\d3d\d3dModel.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dCEGUI.cpp">
+      <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="app.cpp">
-      <Filter>render\include</Filter>
-    </ClCompile>
-    <ClCompile Include="render.cpp">
-      <Filter>render\include</Filter>
-    </ClCompile>
-    <ClCompile Include="root.cpp">
-      <Filter>render\include</Filter>
-    </ClCompile>
-    <ClCompile Include="gui.cpp">
-      <Filter>render\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="skyBox.cpp">
-      <Filter>render\sky</Filter>
-    </ClCompile>
-    <ClCompile Include="sky.cpp">
-      <Filter>render\sky</Filter>
-    </ClCompile>
-    <ClCompile Include="skyDemo.cpp">
-      <Filter>render\sky</Filter>
-    </ClCompile>
-    <ClCompile Include="skyPlane.cpp">
-      <Filter>render\sky</Filter>
+      <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>render\camera</Filter>
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="render.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="root.cpp">
+      <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="shader.cpp">
-      <Filter>render\shader</Filter>
+      <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="model.cpp">
-      <Filter>render\model</Filter>
+    <ClCompile Include="timer.cpp">
+      <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="mesh.cpp">
-      <Filter>render\model</Filter>
+    <ClCompile Include="utility.cpp">
+      <Filter>Render\render</Filter>
     </ClCompile>
-    <ClCompile Include="geometry.cpp">
-      <Filter>render\model</Filter>
+    <ClCompile Include="windowInfo.cpp">
+      <Filter>Render\render</Filter>
     </ClCompile>
+    <ClCompile Include="mgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="modelMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="resourceMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="shaderMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="soundMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="textureMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\ogl\oglMesh.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglModel.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglApp.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglCamera.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglFTFont.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglShader.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\win32App.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglCEGUI.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglContext.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dApp.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dFWFont.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dMesh.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dModel.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dUtility.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dx12.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dCEGUI.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="app.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="gui.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="render.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="root.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="windowInfo.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="mgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="modelMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="soundMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="textureMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

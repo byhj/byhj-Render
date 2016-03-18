@@ -2,6 +2,8 @@
 #include <memory>
 
 #pragma comment(lib, "vulkan-1.lib")
+#pragma comment(lib, "assimp")
+#pragma comment(lib, "glew32")
 
 static std::shared_ptr<Triangle> pTriangle = std::make_shared<Triangle>();
 
