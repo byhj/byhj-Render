@@ -1,4 +1,6 @@
 #include "scene.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace byhj {
 	Scene::Scene()
@@ -28,6 +30,13 @@ namespace byhj {
 		glUseProgram(m_program);
 		glBindVertexArray(m_vao);
 
+		glm::mat4 model = glm::mat4(1.0f);
+		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
+		glm::mat4 mvp = proj * view * model;
+
+		glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, &mvp[0][0]);
+
 		glDrawElements(GL_TRIANGLES, m_mesh.IndexData.size(), GL_UNSIGNED_INT, 0);
 
 		glUseProgram(0);
@@ -46,12 +55,12 @@ namespace byhj {
 
 		glGenBuffers(1, &m_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(m_mesh.VertexData.size() * sizeof(OGLVertex)), &m_mesh.VertexData[0], GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, m_mesh.VertexData.size() * sizeof(OGLVertex), &m_mesh.VertexData[0], GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		glGenBuffers(1, &m_ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_mesh.IndexData.size() * sizeof(GLuint) ), &m_mesh.IndexData[0], GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_mesh.IndexData.size() * sizeof(GLuint), &m_mesh.IndexData[0], GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
@@ -82,6 +91,7 @@ namespace byhj {
 		m_SceneShader.link();
 		m_SceneShader.info();
 		m_program = m_SceneShader.getProgram();
+		mvp_loc = glGetUniformLocation(m_program, "u_mvp");
 
 	}
 }

@@ -11,7 +11,7 @@ namespace byhj
 
 		m_Aspect = static_cast<GLfloat>(sw) / sh;
 
-		m_LightGui.v_init(sw, sh);
+		m_LightGui.v_init();
 
 		init_buffer();
 		init_shader();

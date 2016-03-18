@@ -35,7 +35,9 @@ namespace byhj
 
 		drawInfo();
 
+#ifdef USE_CEGUI
 		D3DCEGUI::getInstance()->render();
+#endif
 
 		m_pSwapChain->Present(0, 0);
 	}
@@ -169,7 +171,9 @@ namespace byhj
     {
     	m_Timer.reset();
     	m_Font.init(m_pD3D11Device);
+#ifdef USE_CEGUI 
 		D3DCEGUI::getInstance()->init(m_pD3D11Device, m_pD3D11DeviceContext);
+#endif
     }
     
 	void D3D11Render::drawfps()

@@ -9,10 +9,12 @@ out VS_OUT {
    vec2 texcoord;
 }vs_out;
 
+uniform mat4 u_mvp;
+
 void main(void)
 {
    vs_out.normal = normalize(g_Normal);
    vs_out.texcoord = g_Texcoord;
 
-   gl_Position = vec4(g_Position, 1.0f);
+   gl_Position = u_mvp * vec4(g_Position, 1.0f);
 }

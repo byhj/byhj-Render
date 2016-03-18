@@ -25,9 +25,6 @@ namespace byhj
 
 	void OGLFTFont::render(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 	{
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		// Activate corresponding render state	
@@ -73,8 +70,6 @@ namespace byhj
 		glBindVertexArray(0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glDisable(GL_BLEND);
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
 	}
 
 

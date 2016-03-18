@@ -1,4 +1,5 @@
 #include "MeshLoad.h"
+#include "modelMgr.h"
 
 namespace byhj
 {
@@ -10,8 +11,8 @@ namespace byhj
 
 		m_Aspect = static_cast<GLfloat>(sw) / sh;
 
-		m_LightGui.v_init(sw, sh);
-		m_RotationGui.v_init(sw, sh);
+		m_LightGui.v_init();
+		m_RotationGui.v_init();
 
 		init_buffer();
 		init_shader();
@@ -43,7 +44,7 @@ namespace byhj
 	{
 		glUseProgram(m_Program);
 
-		m_Model.draw(m_Program);
+		ModelMgr::getInstance()->render(m_Program);
 
 		glDisable(GL_DEPTH_TEST);
 
@@ -62,7 +63,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		m_Model.loadModel("armadillo.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("armadillo.obj");
 	}
 
 

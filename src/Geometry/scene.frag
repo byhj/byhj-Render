@@ -9,6 +9,5 @@ in VS_OUT {
 
 void main()
 {
-//abs(vs_out.normal.z) 
-   g_FragColor = vec4(1.0f);
+   g_FragColor = vec4(abs(vs_out.normal.z) );
 }

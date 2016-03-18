@@ -9,7 +9,10 @@
 #include <wrl.h>
 
 #include "Timer.h"
+
+#ifndef USE_CEGUI
 #include "d3d/d3dCEGUI.h"
+#endif
 
 namespace byhj
 {

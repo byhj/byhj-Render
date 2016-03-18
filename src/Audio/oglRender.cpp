@@ -15,8 +15,8 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		SoundMgr::getInstance()->loadSound("test.mp3");
-		SoundMgr::getInstance()->playSound("test.mp3");
+		SoundMgr::getInstance()->load("test.mp3");
+		SoundMgr::getInstance()->play("test.mp3");
 	}
 
 	void OGLRender::v_update()

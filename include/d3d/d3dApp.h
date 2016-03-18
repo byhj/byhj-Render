@@ -19,7 +19,6 @@
 
 #include "app.h"
 #include "d3d/d3dUtility.h"
-#define USE_CEGUI
 
 #ifdef USE_CEGUI
 #include "d3d/d3dCEGUI.h"

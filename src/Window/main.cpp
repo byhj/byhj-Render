@@ -10,9 +10,9 @@
 
 int main()
 {
-	auto d3dApp   = std::make_shared<byhj::D3D11Render>();
-	auto d3d12App = std::make_shared<byhj::D3D12Render>();
-	auto oglApp = std::make_shared<byhj::OGLRender>();
+	auto d3dApp      = std::make_shared<byhj::D3D11Render>();
+	auto d3d12App    = std::make_shared<byhj::D3D12Render>();
+	auto oglApp      = std::make_shared<byhj::OGLRender>();
 	auto oglWin32App = std::make_shared<byhj::OGLWIN32Render>();
 
 	byhj::Root::getInstance()->setRender(d3dApp);

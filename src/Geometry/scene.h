@@ -20,6 +20,8 @@ namespace byhj {
 		void init_buffer();
 		void init_shader();
 		void init_vertexArray();
+		
+		GLuint mvp_loc;
 		OGLMeshData m_mesh;
 		GLuint m_program;
 		GLuint m_vao, m_vbo, m_ibo;

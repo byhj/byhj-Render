@@ -16,7 +16,7 @@ namespace byhj
 	{
 	public:
 	  SoundMgr();
-	  ~SoundMgr();
+	  ~SoundMgr() = default;
 	   
 	  static std::shared_ptr<SoundMgr> getInstance();
 

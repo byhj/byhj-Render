@@ -13,10 +13,6 @@ namespace byhj
 
 	}
 
-	SoundMgr::~SoundMgr()
-	{
-
-	}
 
 	std::shared_ptr<SoundMgr> SoundMgr::getInstance()
 	{
@@ -40,6 +36,7 @@ namespace byhj
 		auto sound = m_dir + soundFile;
 		std::cout << "Play sound: " << sound << std::endl;
 		pSoundEngine->play2D(sound.c_str(), true);
+
 	}
 
 	//Play all sound whose has load
@@ -55,6 +52,6 @@ namespace byhj
 
 	void SoundMgr::shutdown()
 	{
-		pSoundEngine->drop();
+		//pSoundEngine->drop();
 	}
 }

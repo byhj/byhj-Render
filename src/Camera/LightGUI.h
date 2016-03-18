@@ -5,19 +5,22 @@
 #include <glm/glm.hpp>
 
 #include "gui.h"
+#include "AntTweakBar.h"
+
+#pragma comment(lib, "AntTweakBar")
 
 namespace byhj
-{	
+{
 	// This example displays one of the following shapes
 	typedef enum { LIGHT_PHONG = 0, LIGHT_BLINNE } LightModel;
 
-	class LightGui: public Gui
+	class LightGui : public Gui
 	{
 	public:
 		LightGui() = default;
 		~LightGui() = default;
 
-		void v_init(int sw, int sh) override;
+		void v_init() override;
 		void v_render() override;
 		void v_update() override;
 		void v_shutdown() override;
@@ -27,7 +30,7 @@ namespace byhj
 		glm::vec3 getLight(int index);
 
 	private:
-		
+
 		glm::vec3 m_LightColors[4] =
 		{
 			glm::vec3(0.5f, 0.0f, 0.0f),
