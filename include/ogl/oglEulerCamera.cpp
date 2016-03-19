@@ -1,11 +1,53 @@
-#include "oglCamera.h"
+#include "OGLEulerCamera.h"
 
 namespace byhj
 {
+	std::shared_ptr<OGLEulerCamera> OGLEulerCamera::m_pInstance = std::make_shared<OGLEulerCamera>();
+
+	std::shared_ptr<OGLEulerCamera> OGLEulerCamera::getInstance() {
+
+		return m_pInstance;
+	}
+	// Constructor with vectors
+	OGLEulerCamera::OGLEulerCamera(glm::vec3 position , glm::vec3 up , GLfloat yaw , GLfloat pitch )
+		: Front(glm::vec3(0.0f, 0.0f, -1.0f)),
+		MovementSpeed(SPEED),
+		MouseSensitivity(SENSITIVTY),
+		Zoom(ZOOM)
+	{
+		this->Position = position;
+		this->WorldUp = up;
+		this->Yaw = yaw;
+		this->Pitch = pitch;
+		this->ctr = true;
+		this->updateCameraVectors();
+
+		firstMouse = true;
+		deltaTime = 0.0f;
+
+		for (int i = 0; i != 1024; ++i)
+			keys[i] = false;
+	}
+
+	// Constructor with scalar values
+	OGLEulerCamera::OGLEulerCamera(GLfloat posX, GLfloat posY, GLfloat posZ,
+		GLfloat upX, GLfloat upY,
+		GLfloat upZ, GLfloat yaw, GLfloat pitch)
+		: Front(glm::vec3(0.0f, 0.0f, -1.0f)),
+		MovementSpeed(SPEED),
+		MouseSensitivity(SENSITIVTY),
+		Zoom(ZOOM)
+	{
+		this->Position = glm::vec3(posX, posY, posZ);
+		this->WorldUp = glm::vec3(upX, upY, upZ);
+		this->Yaw = yaw;
+		this->Pitch = pitch;
+		this->updateCameraVectors();
+	}
 
 	// Processes input received from any keyboard-like input system. 
 	//Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-	void OGLCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
+	void OGLEulerCamera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
 	{
 		GLfloat velocity = this->MovementSpeed * deltaTime * 3.0f;
 		if (direction == FORWARD)
@@ -19,7 +61,7 @@ namespace byhj
 	}
 
 	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
-	void OGLCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
+	void OGLEulerCamera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
 	{
 		xoffset *= this->MouseSensitivity;
 		yoffset *= this->MouseSensitivity;
@@ -42,7 +84,7 @@ namespace byhj
 	}
 
 	// Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
-	void OGLCamera::ProcessMouseScroll(GLfloat yoffset)
+	void OGLEulerCamera::ProcessMouseScroll(GLfloat yoffset)
 	{
 		this->Zoom -= yoffset;
 		if (this->Zoom <= 1.0f)
@@ -52,7 +94,7 @@ namespace byhj
 	}
 
 
-	void OGLCamera::updateCameraVectors()
+	void OGLEulerCamera::updateCameraVectors()
 	{
 		glm::vec3 front;
 		front.x = cos(glm::radians(this->Yaw)) * cos(glm::radians(this->Pitch));
@@ -66,7 +108,7 @@ namespace byhj
 
 
 	// Moves/alters the camera positions based on user input
-	void OGLCamera::movement(GLFWwindow *Triangle)
+	void OGLEulerCamera::movement(GLFWwindow *Triangle)
 	{
 		if (keys[GLFW_KEY_ESCAPE] )
 			glfwSetWindowShouldClose(Triangle, GL_TRUE);
@@ -88,7 +130,7 @@ namespace byhj
 	}
 
 	// Is called whenever a key is pressed/released via GLFW
-	void OGLCamera::key_callback(GLFWwindow* Triangle, int key, int scancode, int action, int mode)
+	void OGLEulerCamera::key_callback(GLFWwindow* Triangle, int key, int scancode, int action, int mode)
 	{
 		if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(Triangle, GL_TRUE);
@@ -99,7 +141,7 @@ namespace byhj
 			keys[key] = false;	
 	}
 
-	void OGLCamera::mouse_callback(GLFWwindow* Triangle, double xpos, double ypos)
+	void OGLEulerCamera::mouse_callback(GLFWwindow* Triangle, double xpos, double ypos)
 	{
 		if(firstMouse)
 		{
@@ -117,36 +159,36 @@ namespace byhj
 	}	
 
 
-	void OGLCamera::scroll_callback(GLFWwindow* Triangle, double xoffset, double yoffset)
+	void OGLEulerCamera::scroll_callback(GLFWwindow* Triangle, double xoffset, double yoffset)
 	{
 		ProcessMouseScroll(yoffset);
 	}
 
 	// Returns the view matrix calculated using Eular Angles and the LookAt Matrix
-	glm::mat4 OGLCamera::GetViewMatrix() const
+	glm::mat4 OGLEulerCamera::getViewMat() const
 	{
 		return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
 	}
-	float OGLCamera::GetZoom() const
+	float OGLEulerCamera::getZoom() const
 	{
 		return Zoom;
 	}
 
-	void OGLCamera::update(GLfloat dt)
+	void OGLEulerCamera::update(GLfloat dt)
 	{
 		deltaTime = dt;
 	}
 
-	void OGLCamera::SetPos(const glm::vec3 &pos)
+	void OGLEulerCamera::setPos(const glm::vec3 &pos)
 	{
 		Position = pos;
 	}
 
-	glm::vec3 OGLCamera::GetPos() const
+	glm::vec3 OGLEulerCamera::getPos() const
 	{
 		return Position;
 	}
-	glm::vec3 OGLCamera::GetFront() const 
+	glm::vec3 OGLEulerCamera::getFront() const 
 	{
 		return Front;
 	}

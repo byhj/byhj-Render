@@ -14,6 +14,23 @@ namespace byhj
 
 OGLApp * OGLApp::app = nullptr;
 
+
+void OGLApp::v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
+	OGLEulerCamera::getInstance()->key_callback(window, key, scancode, action, mode);
+}
+
+void OGLApp::v_movement(GLFWwindow *window) {
+	OGLEulerCamera::getInstance()->movement(window);
+}
+void OGLApp::v_mouseCallback(GLFWwindow* window, double xpos, double ypos)
+{
+	OGLEulerCamera::getInstance()->mouse_callback(window, xpos, ypos);
+}
+
+void OGLApp::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+	OGLEulerCamera::getInstance()->scroll_callback(window, xoffset, yoffset);
+}
 	////////////////////////////////////////////////////////////////////////////////////////
 
 	void OGLApp::glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode)

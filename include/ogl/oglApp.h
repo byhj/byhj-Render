@@ -13,7 +13,6 @@
 #include "app.h"
 #include "oglRender.h"
 #include "oglFTFont.h"
-#include "ogl/oglCamera.h"
 #include "windowInfo.h"
 
 #include <memory>
@@ -28,6 +27,8 @@
 #ifdef USE_CEGUI
 #include "ogl/oglCEGUI.h"
 #endif
+
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj 
 {
@@ -57,10 +58,10 @@ protected:
 	static  OGLApp* app;
 
 
-	virtual void v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {}
-	virtual void v_movement(GLFWwindow *window) {}
-	virtual void v_mouseCallback(GLFWwindow* window, double xpos, double ypos) {}
-	virtual void v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {}
+	virtual void v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
+	virtual void v_movement(GLFWwindow *window);
+	virtual void v_mouseCallback(GLFWwindow* window, double xpos, double ypos);
+	virtual void v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
 
 	static void glfw_key(GLFWwindow * window, int key, int scancode, int action, int mode);

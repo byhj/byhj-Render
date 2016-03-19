@@ -1,4 +1,6 @@
 #include "d3d11Render.h"
+#include "oglRender.h"
+
 #include "root.h"
 
 // #ifdef _DEBUG
@@ -7,7 +9,7 @@
 
 int main()
 {
-	auto app = std::make_shared<byhj::D3D11Render>();
+	auto app = std::make_shared<byhj::OGLRender>();
 
 	byhj::Root::getInstance()->setRender(app);
 	byhj::Root::getInstance()->BeginScene();
