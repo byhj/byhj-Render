@@ -20,8 +20,15 @@
 #include "app.h"
 #include "d3d/d3dUtility.h"
 
+#define USE_CAMERA
+
 #ifdef USE_CEGUI
 #include "d3d/d3dCEGUI.h"
+#endif
+
+#ifdef USE_CAMERA
+#include "d3d/d3dSphereCamera.h"
+#include "d3d/d3dEulerCamera.h"
 #endif
 
 using namespace DirectX;
@@ -45,14 +52,6 @@ public:
 	virtual void v_setOGL() {};
 
 	LRESULT CALLBACK MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
-
-	// Convenience overrides for handling mouse input.
-	virtual void v_onMouseDown(WPARAM btnState, int x, int y)  { }
-	virtual void v_onMouseUp(WPARAM btnState, int x, int y)    { }
-	virtual void v_onMouseMove(WPARAM btnState, int x, int y)  { }
-	virtual void v_onMouseWheel(WPARAM btnState, int x, int y) { }
-		
 		
 	int getClientWidth() const;
 	int getClientHeight() const;

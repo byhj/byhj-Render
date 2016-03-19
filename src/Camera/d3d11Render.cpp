@@ -13,39 +13,18 @@ namespace byhj
 
 	}
 
-	void D3D11Render::v_onMouseDown(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseDown(btnState, x, y, getHwnd());
-	}
-
-	void  D3D11Render::v_onMouseMove(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseMove(btnState, x, y);
-	}
-
-	void  D3D11Render::v_onMouseUp(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseUp(btnState, x, y);
-	}
-	void  D3D11Render::v_onMouseWheel(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseWheel(btnState, x, y, WindowInfo::getInstance()->getAspect());
-	}
-
 	void D3D11Render::v_init()
 	{
 		init_device();
 		init_camera();
 		init_object();
 
-		m_cube.init(m_pD3D11Device, m_pD3D11DeviceContext);
-		m_plane.init(m_pD3D11Device, m_pD3D11DeviceContext);
 
 	}
 
 	void D3D11Render::v_update()
 	{
-		m_Camera.update();
+		D3DEulerCamera::getInstance()->detectInput(m_Timer.getDeltaTime(), getHwnd());
 	}
 
 	void D3D11Render::v_render()
@@ -58,14 +37,9 @@ namespace byhj
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		m_matrix.view = m_Camera.getViewMat();
-		XMMATRIX transMat = XMMatrixTranslation(0.0f, 1.0f, 0.0f);
-		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(transMat));
+		//m_matrix.view = D3DSphereCamera::getInstance()->getViewMat();
+		m_matrix.view = D3DEulerCamera::getInstance()->getViewMat();
         m_cube.render(m_pD3D11DeviceContext, m_matrix);
-
-		transMat = XMMatrixIdentity();
-		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(transMat));
-		m_plane.render(m_pD3D11DeviceContext, m_matrix);
 
 		drawInfo();
 
@@ -211,6 +185,7 @@ namespace byhj
 	{
 		m_Timer.reset();
 		m_Font.init(m_pD3D11Device);
+		m_cube.init(m_pD3D11Device, m_pD3D11DeviceContext);
 	}
 
 	void D3D11Render::drawfps()

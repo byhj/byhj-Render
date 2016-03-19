@@ -20,6 +20,12 @@ void D3DApp::v_run()
 {
 	bool ret = init_window();
 	v_init();
+
+#ifdef USE_CAMERA
+	D3DSphereCamera::getInstance()->init(m_hWnd);
+	D3DEulerCamera::getInstance()->init(m_hInstance, m_hWnd);
+#endif
+
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));
 	while (ret)
@@ -137,6 +143,9 @@ LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 #ifdef USE_CEGUI
 	D3DCEGUI::getInstance()->setCallback(uMsg, wParam, lParam);
 #endif
+#ifdef USE_CAMERA
+	D3DSphereCamera::getInstance()->update(uMsg, wParam, lParam);
+#endif
 	switch (uMsg)
 	{
 	case WM_CHAR:  break;
@@ -146,12 +155,7 @@ LRESULT CALLBACK D3DApp::MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPA
 			return 0;
 	}
     case WM_LBUTTONDOWN:  break;
-    case WM_RBUTTONDOWN: v_onMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)); break;
     case WM_LBUTTONUP:    break;
-	case WM_RBUTTONUP: v_onMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));    break;
-    case WM_MOUSEMOVE: v_onMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));  break;
-    case WM_MOUSEWHEEL: v_onMouseWheel(wParam, GET_WHEEL_DELTA_WPARAM(wParam), GET_Y_LPARAM(lParam)); break;
-
 	default:
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	} 

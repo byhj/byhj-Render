@@ -2,7 +2,7 @@
 #define D3D11Render_H
 
 #include "d3d/d3dApp.h"
-#include "d3d/d3dFont.h"
+#include "d3d/d3dFWFont.h"
 
 
 #include <d3d11.h>
@@ -33,7 +33,7 @@ namespace byhj
 
 		void drawfps();
 		void drawInfo();
-		D3DFont m_Font;
+		D3DFWFont m_Font;
 		Timer m_Timer;
 		d3d::Sound m_sound;
 		float fps = 0.0f;

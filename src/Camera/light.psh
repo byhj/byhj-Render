@@ -1,0 +1,27 @@
+
+struct VS_OUTPUT 
+{
+    float4 Pos : SV_POSITION;
+   	float2 Tex : TEXCOORD0;
+	float3 Normal: NORMAL;
+};
+
+Texture2D tex     : register(t0);
+
+SamplerState texSample : register(s0);
+
+float4 PS(VS_OUTPUT ps_in) : SV_TARGET
+{
+	// Set brightness of the light.
+  float brightness = 1.5f;
+  float3 lightDir  = float3(2.0f, 5.0f, -2.0f);
+  float lightIntensity = saturate(dot(ps_in.Normal, lightDir));
+  float4 diffuse = float4(0.8f, 0.8f, 0.8f, 1.0f);
+  float4 ambient = float4(0.55f, 0.55f, 0.55f, 1.0f);
+  diffuse *= (brightness * lightIntensity);
+  
+  float4 texColor = tex.Sample(texSample, ps_in.Tex);
+
+  texColor	= ambient * texColor;
+  return  texColor;
+}

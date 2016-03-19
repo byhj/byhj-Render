@@ -3,7 +3,7 @@
 
 #include "d3d/d3dApp.h"
 #include "d3d/d3dUtility.h"
-#include "d3d/d3dFont.h"
+#include "d3d/d3dFWFont.h"
 #include "d3d/d3dCamera.h"
 
 #include "Timer.h"
@@ -46,7 +46,7 @@ private:
 
 	byhj::Cube m_Cube;
 	byhj::Fade m_Fade;
-	D3DFont m_Font;
+	D3DFWFont m_Font;
 	Timer m_Timer;
 	D3DCamera m_Camera;
 

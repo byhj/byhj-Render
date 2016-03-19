@@ -90,7 +90,7 @@ namespace byhj
 		init_vertexArray();
 		init_texture();
 
-		m_fogGui.v_init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		m_fogGui.v_init();
 	}
 
 	void Cube::init_buffer()
