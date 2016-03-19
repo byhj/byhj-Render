@@ -13,6 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{2aadc0c9-5352-4f02-be14-e62942551252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\ogl">
+      <UniqueIdentifier>{e676101d-0fc0-4a8f-bbe6-5151809cd163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\d3d">
+      <UniqueIdentifier>{813ee296-49da-434b-abd4-f3d12343df27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\render">
+      <UniqueIdentifier>{48f74b69-2bbd-4f5a-adca-c7ea74c9e3cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\mgr">
+      <UniqueIdentifier>{55ce4b84-1137-4718-9ec3-3b03e60f1262}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oglRender.cpp">
@@ -24,6 +39,99 @@
     <ClCompile Include="cube.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglMesh.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglModel.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglShader.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dMesh.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dModel.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\app.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\camera.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\font.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\geometry.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\gui.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\object.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\render.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\root.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\shader.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\timer.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\utility.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\windowInfo.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\mgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\modelMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\shaderMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\soundMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\textureMgr.cpp">
+      <Filter>Render\mgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cube.h">
@@ -31,6 +139,99 @@
     </ClInclude>
     <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglApp.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglFTFont.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglMesh.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglModel.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglShader.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dApp.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dFWFont.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dMesh.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dModel.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dUtility.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\app.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\camera.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\font.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\geometry.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\gui.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\object.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\render.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\root.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\shader.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\timer.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\utility.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\windowInfo.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\mgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\modelMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\shaderMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\soundMgr.h">
+      <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\textureMgr.h">
+      <Filter>Render\mgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

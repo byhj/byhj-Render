@@ -63,7 +63,7 @@ namespace byhj
 		init_texture();
 	}
 
-	void Cube::render( const OGLCamera &camera)
+	void Cube::render()
 	{
 		glUseProgram(program);
 		glBindVertexArray(vao);
@@ -71,8 +71,8 @@ namespace byhj
 		glm::mat4 model = glm::mat4();
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0));
 		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 35.0f));
-		glm::mat4 view  = camera.GetViewMatrix();
-		glm::mat4 proj  = glm::perspective(glm::radians(camera.GetZoom()), 1.5f, 0.1f, 1000.0f);
+		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
+		glm::mat4 proj  = glm::perspective(glm::radians(OGLEulerCamera::getInstance()->getZoom()), 1.5f, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(model_loc, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(view_loc, 1, GL_FALSE, &view[0][0]);
@@ -100,7 +100,7 @@ namespace byhj
 			glUniform3fv(glGetUniformLocation(program, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &lightPositions[i][0]);
 			glUniform3fv(glGetUniformLocation(program, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &lightColors[i][0]);
 		}
-		auto camPos = camera.GetPos();
+		auto camPos = OGLEulerCamera::getInstance()->getPos();
 		glUniform3fv(glGetUniformLocation(program, "viewPos"), 1, &camPos[0]);
 
 

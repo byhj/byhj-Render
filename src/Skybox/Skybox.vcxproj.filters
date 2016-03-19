@@ -14,19 +14,19 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{ca030ec0-4ecb-4f0f-ab2e-8c52734a67e7}</UniqueIdentifier>
+      <UniqueIdentifier>{d3565154-b0b5-4781-8643-0800f1f2dffb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{bd846b57-9c7c-4785-94bb-5e01778f7d41}</UniqueIdentifier>
+      <UniqueIdentifier>{5bce04e3-df97-4d38-b413-c2f38b2b49d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{3b0d5553-dfb0-4f12-b5f0-54186724b10d}</UniqueIdentifier>
+      <UniqueIdentifier>{ea49a722-44d4-4f76-a731-0b20762614db}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{db6bf30f-908a-4eea-b4e5-ee820b8002ee}</UniqueIdentifier>
+      <UniqueIdentifier>{b58e8385-2ea4-4ac4-8935-b500e75a6d4a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{371c294f-f9fe-4ffc-937b-99e0f8b2e329}</UniqueIdentifier>
+      <UniqueIdentifier>{5d1e9486-3775-405f-bda3-f3aaecc08982}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,7 +39,7 @@
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglCamera.h">
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglFTFont.h">
@@ -57,7 +57,7 @@
     <ClInclude Include="..\..\include\d3d\d3dApp.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dCamera.h">
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dFWFont.h">
@@ -72,6 +72,9 @@
     <ClInclude Include="..\..\include\d3d\d3dShader.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dUtility.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
@@ -82,6 +85,9 @@
       <Filter>Render\render</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\font.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\byhj-Render\geometry.h">
       <Filter>Render\render</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\gui.h">
@@ -137,7 +143,7 @@
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
@@ -155,7 +161,7 @@
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dCamera.cpp">
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp">
@@ -170,6 +176,9 @@
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
@@ -180,6 +189,9 @@
       <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\font.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\geometry.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\gui.cpp">

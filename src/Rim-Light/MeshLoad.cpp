@@ -1,4 +1,5 @@
 #include "MeshLoad.h"
+#include "modelMgr.h"
 
 namespace byhj
 {
@@ -10,7 +11,6 @@ namespace byhj
 
 		m_Aspect = static_cast<GLfloat>(sw) / sh;
 
-
 		init_buffer();
 		init_shader();
 	}
@@ -20,7 +20,8 @@ namespace byhj
 
 		glUseProgram(m_Program);
 
-		GLfloat time = glfwGetTime();
+
+	    GLfloat time = glfwGetTime();
 
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), time, glm::vec3(0.0f, 1.0f, 0.0f) ); 
 		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.2f, 3.5f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) );
@@ -37,7 +38,7 @@ namespace byhj
 	{
 		glUseProgram(m_Program);
 
-		m_Model.draw(m_Program);
+		ModelMgr::getInstance()->render(m_Program);
 
 		glUseProgram(0);
 	}
@@ -48,7 +49,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		m_Model.loadModel("armadillo.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("armadillo.obj");
 	}
 
 

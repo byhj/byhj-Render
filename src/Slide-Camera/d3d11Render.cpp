@@ -21,7 +21,7 @@ namespace byhj
 
 	void D3D11Render::v_update()
 	{
-		m_camera.DetectInput(m_Timer.GetDeltaTime(), getHwnd());
+		m_camera.DetectInput(m_Timer.getDeltaTime(), getHwnd());
 		m_camera.UpdateSlideCamera(collidableGeometryPositions, collidableGeometryIndices);
 	}
 
@@ -59,8 +59,8 @@ namespace byhj
 		////////////////////////Create buffer desc////////////////////////////
 		DXGI_MODE_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(DXGI_MODE_DESC));
-		bufferDesc.Width                   = WindowInfo::getInstance()->getWidth();
-		bufferDesc.Height                  = WindowInfo::getInstance()->getHeight();
+		bufferDesc.Width                   = getClientWidth();
+		bufferDesc.Height                  = getClientHeight();
 		bufferDesc.RefreshRate.Numerator   = 60;
 		bufferDesc.RefreshRate.Denominator = 1;
 		bufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -100,8 +100,8 @@ namespace byhj
 		///////////////////////////Creaete Depth/Stencil Buffer/////////////////////////////////
 		D3D11_TEXTURE2D_DESC depthStencilDesc;
 
-		depthStencilDesc.Width              = WindowInfo::getInstance()->getWidth();
-		depthStencilDesc.Height             = WindowInfo::getInstance()->getHeight();
+		depthStencilDesc.Width              = getClientWidth();
+		depthStencilDesc.Height             = getClientHeight();
 		depthStencilDesc.MipLevels          = 1;
 		depthStencilDesc.ArraySize          = 1;
 		depthStencilDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;

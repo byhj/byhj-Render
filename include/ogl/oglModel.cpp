@@ -12,7 +12,7 @@ namespace byhj
 		}
 	}
 
-	void OGLModel::drawInstance(GLuint program, GLuint amount)
+	void OGLModel::renderInstance(GLuint program, GLuint amount)
 	{
 		glUseProgram(program);
 

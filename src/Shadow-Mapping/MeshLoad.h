@@ -6,9 +6,8 @@
 #include <glfw/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
-#include "ogl/oglCamera.h"
-#include "ogl/oglModel.h"
+#include "modelMgr.h"
+#include "ogl/oglEulerCamera.h"
 
 #include "utility.h"
 #include "ogl/oglShader.h"
@@ -21,7 +20,7 @@ namespace byhj
 
 		void Init();
 		void Update();
-		void Render(const OGLCamera &camera);
+		void Render();
         void Shutdown();
 
 	private:
@@ -44,7 +43,6 @@ namespace byhj
 		GLuint m_tex = OGL_ONE;
 		OGLShader PlaneShader = "Plane Shader";
 		OGLShader m_MeshLoadShader = "Mesh Shader";
-		OGLModel m_Model;
 		GLuint texLocs[2];
 
 		GLuint lightProgram, shadowProgram;

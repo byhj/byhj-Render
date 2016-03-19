@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "model.h"
+#include "modelMgr.h"
 #include "LightGUI.h"
 #include "RotationGui.h"
 #include "ogl/oglShader.h"
@@ -49,7 +49,6 @@ namespace byhj
 		GLuint m_DeferredProgram;
 		GLuint m_LightProgram;
 		GLfloat sw, sh, aspect;
-		byhj::Model m_Model;
 		LightGui m_LightGui;
 		RotationGui m_RotationGui;
 

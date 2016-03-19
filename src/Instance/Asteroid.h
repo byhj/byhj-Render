@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "model.h"
+#include "modelMgr.h"
 #include "LightGUI.h"
 #include "RotationGui.h"
 #include "ogl/oglShader.h"
@@ -39,7 +39,6 @@ namespace byhj
 		GLfloat m_Aspect = 1.0f;
 		OGLShader m_AsteroidShader = "Asteroid Shader";
 		GLuint m_Program;
-		byhj::Model m_Model;
 		LightGui m_LightGui;
 		RotationGui m_RotationGui;
 

@@ -48,7 +48,7 @@ namespace byhj
 		glBindVertexArray(m_vao);
 	
 
-		m_Model.drawInstance(m_Program, ASTEROID_AMOUNT);
+		ModelMgr::getInstance()->renderInstance(m_Program, ASTEROID_AMOUNT);
 
 		glDisable(GL_DEPTH_TEST);
 
@@ -67,7 +67,7 @@ namespace byhj
 
 	void Asteroid::init_buffer()
 	{
-		m_Model.loadModel("rock/rock.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("rock/rock.obj");
 
 		glm::mat4* modelMatrices = new glm::mat4[ASTEROID_AMOUNT];
 		srand(glfwGetTime()); // initialize random seed	

@@ -10,7 +10,7 @@ namespace byhj
 
 		m_Aspect = static_cast<GLfloat>(sw) / sh;
 
-		m_RotationGui.v_init(sw, sh);
+		m_RotationGui.v_init();
 
 		init_buffer();
 		init_shader();
@@ -44,7 +44,7 @@ namespace byhj
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, TextureMgr::getInstance()->getOGLTextureByName("sea"));
 
-		m_Model.draw(m_program);
+		ModelMgr::getInstance()->render(m_program);
 
 		glDisable(GL_DEPTH_TEST);
 
@@ -62,7 +62,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		m_Model.loadModel("nanosuit/nanosuit.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("nanosuit/nanosuit.obj");
 	}
 
 

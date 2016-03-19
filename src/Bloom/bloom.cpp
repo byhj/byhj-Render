@@ -29,7 +29,7 @@ namespace byhj {
 
 	}
 
-	void Bloom::render(const OGLCamera &camera)
+	void Bloom::render()
 	{
 		static float t = 0.0f;
 		t += glfwGetTime() / 1000.0f;
@@ -44,7 +44,7 @@ namespace byhj {
 		float aspect = WindowInfo::getInstance()->getAspect();
         float time = glfwGetTime();
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), 90.0f, glm::vec3(0.0f, 1.0f, 1.0f));
-		glm::mat4 view  = camera.GetViewMatrix();
+		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f,aspect, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
@@ -61,7 +61,7 @@ namespace byhj {
 		glBindTexture(GL_TEXTURE_2D, m_glowTex);
 		glUniform1i(glGetUniformLocation(m_bloomProgram, "u_glowTex"), 1);
 
-		m_model.draw(m_bloomProgram);
+	     ModelMgr::getInstance()->render(m_bloomProgram);
 
 		glUseProgram(0);
 
@@ -137,7 +137,7 @@ namespace byhj {
 
 	void Bloom::init_buffer()
 	{
-		m_model.loadModel("UFO/UFO.obj");
+	    ModelMgr::getInstance()->loadOGLModel("UFO/UFO.obj");
 
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);    //load the vertex data

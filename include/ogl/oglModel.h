@@ -21,7 +21,7 @@ namespace byhj
 		~OGLModel() = default;
 
 		void render(GLuint program);
-		void drawInstance(GLuint program, GLuint amount);
+		void renderInstance(GLuint program, GLuint amount);
 
 		void loadModel(std::string fileName);
 		void processNode(aiNode *node, const aiScene *scene);

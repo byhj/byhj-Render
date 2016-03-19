@@ -3,9 +3,8 @@
 
 #include "ogl/oglShader.h"
 #include "ogl/oglUtility.h"
-#include "ogl/oglCamera.h"
 #include <glfw/glfw3.h>
-
+#include "ogl/oglEulerCamera.h"
 namespace byhj
 {
 
@@ -18,7 +17,7 @@ namespace byhj
 	public:
 		void init();
 		void update();
-		void render(const OGLCamera &camera);
+		void render();
 		void shutdown();
 
 	private:

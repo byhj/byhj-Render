@@ -1,8 +1,8 @@
 #ifndef Fur_H
 #define Fur_H
 
-#include <ogl/oglShader.h>
-#include <Model.h>
+#include "ogl/oglShader.h"
+#include "modelMgr.h"
 
 namespace byhj
 {
@@ -28,7 +28,6 @@ namespace byhj
 
 		GLuint m_program;
 		OGLShader m_FurShader = "Fur Shader";
-		Model m_ModelLoader;
 	};
 }
 #endif

@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "model.h"
+#include "modelMgr.h"
 #include "RotationGui.h"
 #include "ogl/oglShader.h"
 
@@ -38,7 +38,6 @@ namespace byhj
 		GLfloat m_Aspect = 1.0f;
 		OGLShader m_MeshLoadShader = "Model Shader";
 		GLuint m_program;
-		byhj::Model m_Model;
 		RotationGui m_RotationGui;
 
 	};

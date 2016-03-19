@@ -28,7 +28,7 @@ namespace byhj
 	{
 		glUseProgram(m_program);
 
-		m_ModelLoader.draw(m_program);
+		ModelMgr::getInstance()->render(m_program);
 
 		glUseProgram(0);
 
@@ -41,7 +41,7 @@ namespace byhj
 
 	void Fur::init_buffer()
 	{
-		m_ModelLoader.loadModel("bunny2.obj", OGL);
+		ModelMgr::getInstance()->loadOGLModel("bunny2.obj");
 	}
 
 	void Fur::init_shader()

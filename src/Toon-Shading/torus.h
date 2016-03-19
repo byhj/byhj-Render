@@ -2,7 +2,7 @@
 #define Torus_H
 
 #include "ogl/oglShader.h"
-#include "model.h"
+#include "modelMgr.h"
 
 namespace byhj {
 
@@ -16,7 +16,6 @@ namespace byhj {
 	private:
 		OGLShader m_TorusShader = "Torus Shader";
 		GLuint m_program;
-		Model m_TorusModel;
 		struct UniformLoc
 		{
 			GLuint model;

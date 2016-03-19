@@ -100,7 +100,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		m_Model.loadModel("armadillo.obj", LoadType::OGL);
+		ModelMgr::loadModel("armadillo.obj", LoadType::OGL);
 		sw = WindowInfo::getInstance()->getWidth();
 		sh = WindowInfo::getInstance()->getHeight();
 		aspect = WindowInfo::getInstance()->getAspect();

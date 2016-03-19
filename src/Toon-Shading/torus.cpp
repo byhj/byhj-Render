@@ -6,7 +6,7 @@ namespace byhj {
 
 	void Torus::init()
 	{
-		m_TorusModel.loadModel("polygon/torus.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("polygon/torus.obj");
 		m_TorusShader.init();
 		m_TorusShader.attach(GL_VERTEX_SHADER, "toon.vert");
 		m_TorusShader.attach(GL_FRAGMENT_SHADER, "toon.frag");
@@ -41,7 +41,7 @@ namespace byhj {
 	{
 		glUseProgram(m_program);
 
-		m_TorusModel.draw(m_program);
+		ModelMgr::getInstance()->render(m_program); 
 
 		glUseProgram(0);
 	}

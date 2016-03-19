@@ -2,8 +2,8 @@
 #define Bloom_H
 
 #include "ogl/oglShader.h"
-#include "ogl/oglModel.h"
-#include "ogl/oglCamera.h"
+#include "modelMgr.h"
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj {
 
@@ -12,7 +12,7 @@ namespace byhj {
    public:
 	   void init();
 	   void update();
-	   void render(const OGLCamera &camera);
+	   void render();
 	   void shutdown();
 
    private:
@@ -30,7 +30,6 @@ namespace byhj {
 		   GLuint view;
 		   GLuint proj;
 	   }uniform_loc;
-	   OGLModel m_model;
 	   
 	   GLuint m_diffuseTex;
 	   GLuint m_glowTex;

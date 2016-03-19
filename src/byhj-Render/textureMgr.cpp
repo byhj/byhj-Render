@@ -151,10 +151,10 @@ namespace byhj
 				ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
 				GL_UNSIGNED_BYTE,		// Image data type
 				ilGetData());			// The actual image data itself
+		} else {
+			std::cout << "Fail to load the texture:" << texFile << std::endl;
+			return -1;
 		}
-		else
-			std::cout << "Fail to load the texture!" << texFile << std::endl;
-
 		ilDeleteImages(1, &imageID); // Because we have already copied image data into texture data we can release memory used by image.
 		
 		std::cout << "Load the texture:" << texFile << std::endl;

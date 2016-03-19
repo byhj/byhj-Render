@@ -75,6 +75,11 @@ namespace byhj
 		}
 		m_OGLModels[modelName].render(program);
 	}
-	
+	void ModelMgr::renderInstance(GLuint program, GLuint amount)
+	{
+		for (auto iter = m_OGLModels.begin(); iter != m_OGLModels.end(); ++iter) {
+			iter->second.renderInstance(program, amount);
+		}
+	}
 
 }

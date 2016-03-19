@@ -35,17 +35,17 @@ namespace byhj
 
 	}
 
-	void MeshLoad::Render(const OGLCamera &camera)
+	void MeshLoad::Render()
 	{
 
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 view  = camera.GetViewMatrix();
+		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 
 		GLfloat near_plane = 0.1f, far_plane = 100.0f;
 		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
 		glm::vec3 lightPos(0.0f, 5.0f, 3.0f);
-		glm::vec3 camPos = camera.GetPos();
+		glm::vec3 camPos = OGLEulerCamera::getInstance()->getPos();
 
 		glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0f, 1.0, 0.0f));
 		glm::mat4 lightSpaceMatrix = lightProjection * lightView;
@@ -59,7 +59,7 @@ namespace byhj
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-		m_Model.draw(shadowProgram);
+		ModelMgr::getInstance()->render(shadowProgram);
 		glBindVertexArray(planeVAO);
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -90,7 +90,7 @@ namespace byhj
 
 		glUniform1i(texLocs[1], 1);
 
-		m_Model.draw(lightProgram);
+		ModelMgr::getInstance()->render(lightProgram);
 		glBindVertexArray(planeVAO);
 
 		glActiveTexture(GL_TEXTURE0);
@@ -126,7 +126,7 @@ namespace byhj
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
 		glBindVertexArray(0);
 
-		m_Model.loadModel("bench.obj");
+		ModelMgr::getInstance()->loadOGLModel("bench.obj");
 	}
 
 
