@@ -17,7 +17,7 @@ namespace byhj
 	public:
 		void init();
 		void update();
-		void render(const const ogl::Matrix &matrix);
+		void render(const OGLMVPMatrix &matrix);
 		void shutdown();
 
 	private:

@@ -1,3 +1,4 @@
+
 #include "cube.h"
 
 #include <glm/glm.hpp>
@@ -68,7 +69,7 @@ namespace byhj
 
 	}
 
-	void Cube::render(const ogl::Matrix &matrix)
+	void Cube::render(const OGLMVPMatrix &matrix)
 	{
 		glUseProgram(program);
 		glBindVertexArray(vao);

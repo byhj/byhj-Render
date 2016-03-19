@@ -3,7 +3,6 @@
 
 #include "ogl/oglApp.h"
 #include "TessTriangle.h"
-#include "windowInfo.h"
 
 #include <memory>
 #include <gl/glew.h>

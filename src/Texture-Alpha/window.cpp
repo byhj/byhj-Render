@@ -1,7 +1,6 @@
 
 
 #include "Window.h"
-#include "ogl/loadTexture.h"
 #include "textureMgr.h"
 
 #include <glm/glm.hpp>
@@ -34,7 +33,7 @@ namespace byhj
 		init_texture();
 	}
 
-	void Window::render(const ogl::Matrix &matrix, const glm::vec3 &camPos)
+	void Window::render(const OGLMVPMatrix &matrix, const glm::vec3 &camPos)
 	{
 		glUseProgram(program);
 		glBindVertexArray(vao);

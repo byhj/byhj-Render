@@ -19,7 +19,7 @@ namespace byhj
 		TessTriangle()	 = default;
 		~TessTriangle()	 = default;
 
-		void init(int sw, int sh);
+		void init();
 		void render();
 		void update();
 		void shutdown();
@@ -45,7 +45,6 @@ namespace byhj
 
 		GLuint vao, vbo, ibo;
 		GLuint program;
-		GLuint sw, sh;
 		TessGui m_TessGUI;
 };
 

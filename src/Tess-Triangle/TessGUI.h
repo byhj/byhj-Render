@@ -5,7 +5,9 @@
 #include <gl/glew.h>
 
 #include "Gui.h"
+#include "AntTweakBar.h"
 
+#pragma  comment(lib, "AntTweakBar")
 
 namespace byhj
 {
@@ -16,7 +18,7 @@ namespace byhj
 		TessGui()  = default;
 		~TessGui() = default;
 
-		void v_init(int sw, int sh)  override;
+		void v_init()  override;
 		void v_render() override;
 		void v_update() override;
 		void v_shutdown() override;

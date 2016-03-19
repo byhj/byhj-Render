@@ -1,7 +1,6 @@
 
 
 #include "Plane.h"
-#include "ogl/loadTexture.h"
 #include "textureMgr.h"
 
 #include <glm/glm.hpp>
@@ -33,7 +32,7 @@ namespace byhj
 		init_texture();
 	}
 
-	void Plane::render(const ogl::Matrix &matrix)
+	void Plane::render(const OGLMVPMatrix &matrix)
 	{
 		glUseProgram(program);
 		glBindVertexArray(vao);

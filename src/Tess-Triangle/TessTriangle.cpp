@@ -1,4 +1,5 @@
 #include "TessTriangle.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
@@ -45,15 +46,11 @@ namespace byhj
 
 
 
-	void TessTriangle::init(int sw, int sh)
+	void TessTriangle::init()
 	{
-		this->sw = sw;
-		this->sh = sh;
-		m_TessGUI.v_init(sw, sh);
 
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
 
+		m_TessGUI.v_init();
 		init_buffer();
 		init_vertexArray();
 		init_shader();
@@ -79,7 +76,7 @@ namespace byhj
 		float elapsedTime  = glfwGetTime() / 5.0f;
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), elapsedTime, glm::vec3(1.0f, 0.0f, 0.0f));
 		glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 proj = glm::perspective(45.0f, static_cast<float>(sw) / sh, 0.1f, 1000.0f);
+		glm::mat4 proj = glm::perspective(45.0f, WindowInfo::getInstance()->getAspect(), 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &view[0][0]);
@@ -91,7 +88,8 @@ namespace byhj
 	void TessTriangle::render()
 	{
 
-
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
 
 		auto wireFrame  = m_TessGUI.getWireFrame();
 		glPolygonMode(GL_FRONT_AND_BACK, wireFrame ? GL_LINE : GL_FILL);

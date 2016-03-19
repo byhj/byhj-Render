@@ -14,12 +14,12 @@ namespace byhj
     
 	void OGLRender::v_init()
 	{	
-		//m_triangle.init();
+		m_triangle.init();
 	}
 
 	void OGLRender::v_update()
 	{
-		//m_triangle.update();
+		m_triangle.update();
 	}
 
     void OGLRender::v_render()
@@ -29,11 +29,11 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		//m_triangle.render();
+		m_triangle.render();
     }
 	void OGLRender::v_shutdown()
 	{
-		//m_triangle.shutdown();
+		m_triangle.shutdown();
 	}
 
 }

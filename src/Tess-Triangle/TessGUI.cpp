@@ -1,10 +1,14 @@
 #include "TessGui.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
-	void TessGui::v_init(int sw, int sh)
+	void TessGui::v_init()
 	{
 		TwInit(TW_OPENGL_CORE, 0);
+		auto sw = WindowInfo::getInstance()->getWidth();
+		auto sh = WindowInfo::getInstance()->getHeight();
+
 		TwWindowSize(sw, sh);
 
 		TwBar *pBar = TwNewBar("TessGui");

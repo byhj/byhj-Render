@@ -16,7 +16,7 @@ namespace byhj
 
 	public:
 		void init();
-		void render(const ogl::Matrix &matrix, const glm::vec3 &camPos);
+		void render(const OGLMVPMatrix &matrix, const glm::vec3 &camPos);
 		void shutdown();
 
 	private:
