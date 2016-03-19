@@ -50,8 +50,8 @@ namespace byhj
 		////////////////////////Create buffer desc////////////////////////////
 		DXGI_MODE_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(DXGI_MODE_DESC));
-		bufferDesc.Width                   = m_ScreenWidth;
-		bufferDesc.Height                  = m_ScreenHeight;
+		bufferDesc.Width                   = getClientWidth();
+		bufferDesc.Height                  = getClientHeight();
 		bufferDesc.RefreshRate.Numerator   = 60;
 		bufferDesc.RefreshRate.Denominator = 1;
 		bufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -91,8 +91,8 @@ namespace byhj
 		//Describe our Depth/Stencil Buffer
 		D3D11_TEXTURE2D_DESC depthStencilDesc;
 
-		depthStencilDesc.Width              = m_ScreenWidth;
-		depthStencilDesc.Height             = m_ScreenHeight;
+		depthStencilDesc.Width              = getClientWidth();
+		depthStencilDesc.Height             = getClientWidth();
 		depthStencilDesc.MipLevels          = 1;
 		depthStencilDesc.ArraySize          = 1;
 		depthStencilDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -136,8 +136,8 @@ namespace byhj
     	ZeroMemory(&vp, sizeof(D3D11_VIEWPORT));
     	vp.TopLeftX = 0;
     	vp.TopLeftY = 0;
-		vp.Width    = static_cast<FLOAT>(WindowInfo::getInstance()->getWidth() );
-		vp.Height   = static_cast<FLOAT>(WindowInfo::getInstance()->getHeight() );
+		vp.Width    = static_cast<FLOAT>(getClientWidth() );
+		vp.Height   = static_cast<FLOAT>(getClientHeight() );
     	m_pD3D11DeviceContext->RSSetViewports(1, &vp);
 
 		//MVP Matrix

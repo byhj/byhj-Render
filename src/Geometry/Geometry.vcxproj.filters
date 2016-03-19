@@ -14,19 +14,19 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{2d306182-13d4-41fa-b75a-2b31116bf331}</UniqueIdentifier>
+      <UniqueIdentifier>{b1ad78ff-1cb9-4c46-83e0-daefcacc0b3a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{06b0b2b3-7021-4072-895e-d5588400a1a7}</UniqueIdentifier>
+      <UniqueIdentifier>{3bfdabe7-234f-4f60-8e68-049282631a42}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{310c484b-22be-4c91-8b54-60da40563345}</UniqueIdentifier>
+      <UniqueIdentifier>{0ddcc955-eaa1-4694-bb61-c67afefd48a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{8c0173a0-df32-478e-84b9-bd0cd962ec94}</UniqueIdentifier>
+      <UniqueIdentifier>{1bb5accb-2e87-4a78-8fad-d50c47a29560}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{2a286b50-ccb3-4b6d-8b0b-f119c06fde31}</UniqueIdentifier>
+      <UniqueIdentifier>{f1f60b89-29fa-4f45-ab55-0ecb333dc778}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,23 +39,26 @@
     <ClCompile Include="scene.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglApp.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglMesh.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglModel.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglApp.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
       <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp">
+      <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
       <Filter>Render\d3d</Filter>
@@ -73,6 +76,9 @@
       <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
@@ -137,23 +143,26 @@
     <ClInclude Include="scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglApp.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglFTFont.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglMesh.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglModel.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglApp.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglCamera.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglFTFont.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglShader.h">
       <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h">
+      <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dApp.h">
       <Filter>Render\d3d</Filter>
@@ -171,6 +180,9 @@
       <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dUtility.h">

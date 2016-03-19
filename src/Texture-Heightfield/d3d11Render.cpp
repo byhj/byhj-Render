@@ -13,25 +13,6 @@ namespace byhj
 
 	}
 
-	void D3D11Render::v_onMouseDown(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseDown(btnState, x, y, getHwnd());
-	}
-
-	void  D3D11Render::v_onMouseMove(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseMove(btnState, x, y);
-	}
-
-	void  D3D11Render::v_onMouseUp(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseUp(btnState, x, y);
-	}
-	void  D3D11Render::v_onMouseWheel(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseWheel(btnState, x, y, WindowInfo::getInstance()->getAspect());
-	}
-
 	void D3D11Render::v_init()
 	{
 		init_device();
@@ -40,12 +21,11 @@ namespace byhj
 
 	
 		m_terrain.Init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
-
+		D3DSphereCamera::getInstance()->setRadius(80.0f);
 	}
 
 	void D3D11Render::v_update()
 	{
-		m_Camera.update();
 	}
 
 	void D3D11Render::v_render()
@@ -58,7 +38,7 @@ namespace byhj
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		m_matrix.view = m_Camera.getViewMat();
+		m_matrix.view = D3DSphereCamera::getInstance()->getViewMat();
 		m_terrain.Render(m_pD3D11DeviceContext, m_matrix);
 
 		drawInfo();
@@ -77,8 +57,8 @@ namespace byhj
 		////////////////////////Create buffer desc////////////////////////////
 		DXGI_MODE_DESC bufferDesc;
 		ZeroMemory(&bufferDesc, sizeof(DXGI_MODE_DESC));
-		bufferDesc.Width                   = WindowInfo::getInstance()->getWidth();
-		bufferDesc.Height                  = WindowInfo::getInstance()->getHeight();
+		bufferDesc.Width                   = getClientWidth();
+		bufferDesc.Height                  = getClientHeight();
 		bufferDesc.RefreshRate.Numerator   = 60;
 		bufferDesc.RefreshRate.Denominator = 1;
 		bufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -118,8 +98,8 @@ namespace byhj
 		///////////////////////////Creaete Depth/Stencil Buffer/////////////////////////////////
 		D3D11_TEXTURE2D_DESC depthStencilDesc;
 
-		depthStencilDesc.Width              = WindowInfo::getInstance()->getWidth();
-		depthStencilDesc.Height             = WindowInfo::getInstance()->getHeight();
+		depthStencilDesc.Width              = getClientWidth();
+		depthStencilDesc.Height             = getClientHeight();
 		depthStencilDesc.MipLevels          = 1;
 		depthStencilDesc.ArraySize          = 1;
 		depthStencilDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -182,8 +162,8 @@ namespace byhj
 		vp.TopLeftY = 0;
 		vp.MinDepth = 0.0f;
 		vp.MaxDepth = 1.0f;
-		vp.Width    = static_cast<FLOAT>(WindowInfo::getInstance()->getWidth());
-		vp.Height   = static_cast<FLOAT>(WindowInfo::getInstance()->getHeight());
+		vp.Width    = static_cast<FLOAT>(getClientWidth());
+		vp.Height   = static_cast<FLOAT>(getClientHeight());
 		m_pD3D11DeviceContext->RSSetViewports(1, &vp);
 
 		//MVP Matrix
@@ -230,12 +210,12 @@ namespace byhj
 		static WCHAR frameStr[255];
 		wsprintfW(frameStr, L"FPS: %u", (UINT)fps);
 
-		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 60);
+		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, getClientHeight() - 60);
 	}
 	void D3D11Render::drawInfo()
 	{
 		WCHAR WinInfo[255];
-		swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		swprintf(WinInfo, L"Window Size: %d x %d", getClientWidth(), getClientHeight());
 		drawfps();
 		m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 20.0f);
 		m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 60.0f);

@@ -94,8 +94,8 @@ namespace byhj
 		////////////////////////////Create The depth buffer///////////////////////////////////////////////
 		D3D11_TEXTURE2D_DESC depthBufferDesc;
 		ZeroMemory(&depthBufferDesc, sizeof(depthBufferDesc));
-		depthBufferDesc.Width              = m_ScreenWidth;
-		depthBufferDesc.Height             = m_ScreenHeight;
+		depthBufferDesc.Width              = getClientWidth();
+		depthBufferDesc.Height             = getClientHeight();
 		depthBufferDesc.MipLevels          = 1;
 		depthBufferDesc.ArraySize          = 1;
 		depthBufferDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -223,8 +223,8 @@ namespace byhj
     	vp.TopLeftY = 0;
     	vp.MinDepth = 0.0f;
     	vp.MaxDepth = 1.0f;
-		vp.Width    = static_cast<FLOAT>(WindowInfo::getInstance()->getWidth() );
-		vp.Height   = static_cast<FLOAT>(WindowInfo::getInstance()->getHeight() );
+		vp.Width    = static_cast<FLOAT>(getClientWidth() );
+		vp.Height   = static_cast<FLOAT>(getClientHeight() );
     	m_pD3D11DeviceContext->RSSetViewports(1, &vp);
     
     }

@@ -81,8 +81,8 @@ void RenderSystem::init_device()
 	////////////////////////Create buffer desc////////////////////////////
 	DXGI_MODE_DESC bufferDesc;
 	ZeroMemory(&bufferDesc, sizeof(DXGI_MODE_DESC));
-	bufferDesc.Width                   = m_ScreenWidth;
-	bufferDesc.Height                  = m_ScreenHeight;
+	bufferDesc.Width                   = getClientWidth();
+	bufferDesc.Height                  = getClientWidth();
 	bufferDesc.RefreshRate.Numerator   = 60;
 	bufferDesc.RefreshRate.Denominator = 1;
 	bufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -121,8 +121,8 @@ void RenderSystem::init_device()
 	//////////////////////////// Initialize the description of the stencil state.///////////////////////////////////////////////
 	D3D11_TEXTURE2D_DESC depthBufferDesc;
 	ZeroMemory(&depthBufferDesc, sizeof(depthBufferDesc));
-	depthBufferDesc.Width = m_ScreenWidth;
-	depthBufferDesc.Height = m_ScreenHeight;
+	depthBufferDesc.Width = getClientWidth();
+	depthBufferDesc.Height = getClientWidth();
 	depthBufferDesc.MipLevels = 1;
 	depthBufferDesc.ArraySize = 1;
 	depthBufferDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -327,8 +327,8 @@ void RenderSystem::init_fbo()
 	D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
 
 	ZeroMemory(&textureDesc, sizeof(textureDesc));
-	textureDesc.Width = m_ScreenWidth;
-	textureDesc.Height = m_ScreenHeight;
+	textureDesc.Width = getClientWidth();
+	textureDesc.Height = getClientWidth();
 	textureDesc.MipLevels = 1;
 	textureDesc.ArraySize = 1;
 	textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;

@@ -3,7 +3,7 @@
 
 #include "d3d/d3dApp.h"
 #include "d3d/d3dFWFont.h"
-#include "d3d/d3dCamera.h"
+#include "d3d/d3dSphereCamera.h"
 
 #include <d3d11.h>
 #include <wrl.h>
@@ -23,11 +23,6 @@ namespace byhj
 		void v_render()   override;
 		void v_shutdown() override;
 
-		void v_onMouseDown(WPARAM btnState, int x, int y)  override;
-		void v_onMouseMove(WPARAM btnState, int x, int y)  override;
-		void v_onMouseUp(WPARAM btnState, int x, int y)    override;
-		void v_onMouseWheel(WPARAM btnState, int x, int y) override;
-
 	private:
 
 		void init_device();
@@ -39,7 +34,6 @@ namespace byhj
 		void drawInfo();
 
 		D3DFWFont m_Font;
-		D3DCamera m_Camera;
 
 		Timer m_Timer;
         Terrain m_terrain;

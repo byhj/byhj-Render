@@ -45,6 +45,10 @@ namespace byhj
 		updateMat();
 	}
 
+	void D3DSphereCamera::setRadius(float radius)
+	{
+		m_Radius = radius;
+	}
 	void D3DSphereCamera::updateMat()
 	{
 		// Convert Spherical to Cartesian coordinates.

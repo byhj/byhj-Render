@@ -14,19 +14,19 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{032a395d-506f-43cc-ac4b-b326e3e51c0d}</UniqueIdentifier>
+      <UniqueIdentifier>{81c8014f-6ca9-40cf-b3e5-52c08d102a44}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{92e0b5f6-34ba-45bc-aeb1-28239fb344be}</UniqueIdentifier>
+      <UniqueIdentifier>{cb809ccd-0a6a-4773-8971-9f815398f81c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{7f363306-a14f-40ad-b239-f130ef1d7acc}</UniqueIdentifier>
+      <UniqueIdentifier>{daceeada-1c29-4888-9b2c-20c22d2676e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{b5688f58-8dfb-4ea3-a9e4-340355a362bc}</UniqueIdentifier>
+      <UniqueIdentifier>{3532387c-13a6-4418-aee9-04502c408c2f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{21f09848-b459-4412-8330-569222e682e3}</UniqueIdentifier>
+      <UniqueIdentifier>{e692a9ef-704d-4c0e-a126-32a94f49cf7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

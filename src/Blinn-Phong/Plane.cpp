@@ -39,7 +39,7 @@ namespace byhj
 	void Plane::init()
 	{
 
-		m_LightGUI.v_init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		m_LightGUI.v_init();
 
 		init_buffer();
 		init_vertexArray();

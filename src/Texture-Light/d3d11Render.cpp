@@ -13,25 +13,6 @@ namespace byhj
 
 	}
 
-	void D3D11Render::v_onMouseDown(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseDown(btnState, x, y, getHwnd());
-	}
-
-	void  D3D11Render::v_onMouseMove(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseMove(btnState, x, y);
-	}
-
-	void  D3D11Render::v_onMouseUp(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseUp(btnState, x, y);
-	}
-	void  D3D11Render::v_onMouseWheel(WPARAM btnState, int x, int y)
-	{
-		m_Camera.OnMouseWheel(btnState, x, y, WindowInfo::getInstance()->getAspect());
-	}
-
 	void D3D11Render::v_init()
 	{
 		init_device();
@@ -45,7 +26,6 @@ namespace byhj
 
 	void D3D11Render::v_update()
 	{
-		m_Camera.update();
 	}
 
 	void D3D11Render::v_render()
@@ -58,7 +38,7 @@ namespace byhj
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		m_matrix.view = m_Camera.getViewMat();
+		m_matrix.view = D3DSphereCamera::getInstance()->getViewMat();
 		XMMATRIX transMat = XMMatrixTranslation(0.0f, 1.0f, 0.0f);
 		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(transMat));
         m_cube.render(m_pD3D11DeviceContext, m_matrix);
@@ -236,15 +216,15 @@ namespace byhj
 		static WCHAR frameStr[255];
 		wsprintfW(frameStr, L"FPS: %u", (UINT)fps);
 
-		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, WindowInfo::getInstance()->getHeight() - 60);
+		m_Font.render(m_pD3D11DeviceContext, frameStr, 22.0f, 10.0f, getClientHeight()- 50);
 	}
 	void D3D11Render::drawInfo()
 	{
 		WCHAR WinInfo[255];
-		swprintf(WinInfo, L"Window Size: %d x %d", WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		swprintf(WinInfo, L"Window Size: %d x %d", getClientWidth(), getClientHeight());
 		drawfps();
-		m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 20.0f);
-		m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 60.0f);
+		m_Font.render(m_pD3D11DeviceContext, WinInfo, 22.0f, 10.0f, 10.0f);
+		m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 22.0f, 10.0f, 50.0f);
 	}
 
 }

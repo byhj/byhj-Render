@@ -18,7 +18,7 @@ public:
 	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
 	void shutdown();
-
+ 
 private:
 	void init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	void init_shader(ID3D11Device *pD3D11Device);

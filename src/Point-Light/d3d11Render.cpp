@@ -172,8 +172,8 @@ namespace byhj
 		vp.TopLeftY = 0;
 		vp.MinDepth = 0.0f;
 		vp.MaxDepth = 1.0f;
-		vp.Width    = static_cast<FLOAT>(WindowInfo::getInstance()->getWidth());
-		vp.Height   = static_cast<FLOAT>(WindowInfo::getInstance()->getHeight());
+		vp.Width    = static_cast<FLOAT>(getClientWidth());
+		vp.Height   = static_cast<FLOAT>(getClientHeight());
 		m_pD3D11DeviceContext->RSSetViewports(1, &vp);
 
 		//MVP Matrix

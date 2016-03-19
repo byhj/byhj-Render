@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -57,6 +57,7 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\byhj-Render(x86).props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -112,13 +113,15 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFWFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
     <ClInclude Include="..\..\include\d3d\d3dModel.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dUtility.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
-    <ClInclude Include="..\..\include\ogl\oglCamera.h" />
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h" />
     <ClInclude Include="..\..\include\ogl\oglFTFont.h" />
     <ClInclude Include="..\..\include\ogl\oglMesh.h" />
     <ClInclude Include="..\..\include\ogl\oglModel.h" />
@@ -146,13 +149,15 @@
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dMesh.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dModel.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp" />
     <ClCompile Include="..\..\include\ogl\oglFTFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglMesh.cpp" />
     <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
@@ -179,8 +184,12 @@
     <ClCompile Include="triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="triangle.psh" />
-    <FxCompile Include="triangle.vsh" />
+    <None Include="triangle.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="triangle.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

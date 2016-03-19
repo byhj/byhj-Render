@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "ogl/oglShader.h"
 #include "FogGui.h"
+
 namespace byhj
 {
 	class Cube

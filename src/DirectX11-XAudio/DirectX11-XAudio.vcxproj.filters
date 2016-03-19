@@ -14,19 +14,19 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{e9a4f4a6-5d97-44b4-9009-872c61d1b4e4}</UniqueIdentifier>
+      <UniqueIdentifier>{4a924d3d-bcc5-4ef9-960c-853461f073c6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{c4358a04-de55-4523-9506-144bc88ad6a2}</UniqueIdentifier>
+      <UniqueIdentifier>{6a2d87a2-24a5-441b-abd3-b0716a61ef52}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{298b7b22-1223-4fcd-afe4-39d03db0494c}</UniqueIdentifier>
+      <UniqueIdentifier>{4f062c2d-ead6-44d7-ab83-44e39392bbd0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{85dfd122-64f6-4242-a88e-f1c8d31e7100}</UniqueIdentifier>
+      <UniqueIdentifier>{0516abb7-9fe5-4e64-82f1-ce01109d2d51}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{a8ceb8e7-6bbe-40d3-97ba-d0fe802f11b5}</UniqueIdentifier>
+      <UniqueIdentifier>{5c05140f-cca0-4e98-82cc-4eb3e2d8dd2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +42,7 @@
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglCamera.h">
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglFTFont.h">
@@ -56,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglShader.h">
       <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h">
+      <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dApp.h">
       <Filter>Render\d3d</Filter>
@@ -73,6 +76,9 @@
       <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dUtility.h">
@@ -134,16 +140,13 @@
     <ClCompile Include="d3d11Render.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
@@ -157,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
       <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp">
+      <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
       <Filter>Render\d3d</Filter>
@@ -174,6 +180,9 @@
       <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
@@ -227,13 +236,16 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="triangle.psh">
-      <Filter>Header Files</Filter>
-    </FxCompile>
-    <FxCompile Include="triangle.vsh">
-      <Filter>Header Files</Filter>
-    </FxCompile>
+    <None Include="triangle.psh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="triangle.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

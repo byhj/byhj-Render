@@ -14,19 +14,19 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Render">
-      <UniqueIdentifier>{2a836ae0-b237-45f4-90e0-4542222561ee}</UniqueIdentifier>
+      <UniqueIdentifier>{d4948422-6fd9-4197-a5c6-15683a0f7db4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\ogl">
-      <UniqueIdentifier>{79fde33d-a1a3-4aca-9bf0-b92d635d7695}</UniqueIdentifier>
+      <UniqueIdentifier>{3f9cb3b8-b8c6-4b25-b3e6-33ec9e216470}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\d3d">
-      <UniqueIdentifier>{f4bc6294-333b-4ca4-bd2f-72b365741560}</UniqueIdentifier>
+      <UniqueIdentifier>{a60e868d-08ff-4124-bfba-d367aa46005e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\render">
-      <UniqueIdentifier>{ee336672-36e3-4ad5-a10a-419d5fd055ec}</UniqueIdentifier>
+      <UniqueIdentifier>{d7a5122d-25fa-4791-ad9c-e1d8daba7401}</UniqueIdentifier>
     </Filter>
     <Filter Include="Render\mgr">
-      <UniqueIdentifier>{c4ce325b-e925-4beb-9500-7f377cf7547f}</UniqueIdentifier>
+      <UniqueIdentifier>{aaa8b0bc-9756-4ccc-bf5a-457599c2a1c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,14 +39,56 @@
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="d3d11Render.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="oglWin32App.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp">
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglMesh.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglModel.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
       <Filter>Render\ogl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dCamera.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dMesh.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dModel.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
+      <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\byhj-Render\app.cpp">
       <Filter>Render\render</Filter>
@@ -75,6 +117,9 @@
     <ClCompile Include="..\byhj-Render\timer.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
+    <ClCompile Include="..\byhj-Render\utility.cpp">
+      <Filter>Render\render</Filter>
+    </ClCompile>
     <ClCompile Include="..\byhj-Render\windowInfo.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
@@ -93,60 +138,6 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="d3d11Render.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="oglWin32App.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dModel.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dMesh.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglModel.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglMesh.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dShader.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\resourceMgr.cpp">
-      <Filter>Render\mgr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dCamera.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\byhj-Render\utility.cpp">
-      <Filter>Render\render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglFTFont.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dCEGUI.cpp">
-      <Filter>Render\d3d</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\win32App.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglCEGUI.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\ogl\oglContext.cpp">
-      <Filter>Render\ogl</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3d12Render.h">
@@ -155,14 +146,59 @@
     <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="d3d11Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="oglWin32App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dSPFont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglCamera.h">
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglFTFont.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglMesh.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglModel.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglShader.h">
       <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dApp.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dFWFont.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dMesh.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dModel.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dShader.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h">
+      <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dUtility.h">
+      <Filter>Render\d3d</Filter>
     </ClInclude>
     <ClInclude Include="..\byhj-Render\app.h">
       <Filter>Render\render</Filter>
@@ -191,6 +227,9 @@
     <ClInclude Include="..\byhj-Render\timer.h">
       <Filter>Render\render</Filter>
     </ClInclude>
+    <ClInclude Include="..\byhj-Render\utility.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
     <ClInclude Include="..\byhj-Render\windowInfo.h">
       <Filter>Render\render</Filter>
     </ClInclude>
@@ -208,66 +247,6 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dApp.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dx12.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="d3d11Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="oglWin32App.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dMesh.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dModel.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglMesh.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglModel.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dUtility.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dShader.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\resourceMgr.h">
-      <Filter>Render\mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dFWFont.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dCamera.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\byhj-Render\utility.h">
-      <Filter>Render\render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglFTFont.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dSPFont.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dCEGUI.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\win32App.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglCEGUI.h">
-      <Filter>Render\ogl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\ogl\oglContext.h">
-      <Filter>Render\ogl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

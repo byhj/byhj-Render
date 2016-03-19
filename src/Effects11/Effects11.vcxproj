@@ -121,13 +121,15 @@
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dMesh.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dModel.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp" />
     <ClCompile Include="..\..\include\ogl\oglFTFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglMesh.cpp" />
     <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
@@ -135,6 +137,7 @@
     <ClCompile Include="..\byhj-Render\app.cpp" />
     <ClCompile Include="..\byhj-Render\camera.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
+    <ClCompile Include="..\byhj-Render\geometry.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
     <ClCompile Include="..\byhj-Render\mgr.cpp" />
     <ClCompile Include="..\byhj-Render\modelMgr.cpp" />
@@ -157,13 +160,15 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFWFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
     <ClInclude Include="..\..\include\d3d\d3dModel.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dUtility.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
-    <ClInclude Include="..\..\include\ogl\oglCamera.h" />
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h" />
     <ClInclude Include="..\..\include\ogl\oglFTFont.h" />
     <ClInclude Include="..\..\include\ogl\oglMesh.h" />
     <ClInclude Include="..\..\include\ogl\oglModel.h" />
@@ -171,6 +176,7 @@
     <ClInclude Include="..\byhj-Render\app.h" />
     <ClInclude Include="..\byhj-Render\camera.h" />
     <ClInclude Include="..\byhj-Render\font.h" />
+    <ClInclude Include="..\byhj-Render\geometry.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
     <ClInclude Include="..\byhj-Render\mgr.h" />
     <ClInclude Include="..\byhj-Render\modelMgr.h" />
