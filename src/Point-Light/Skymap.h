@@ -45,11 +45,8 @@ private:
 	ComPtr<ID3D11Buffer> m_pIndexBuffer;
 	ComPtr<ID3D11Buffer> m_pVertexBuffer;
 	ComPtr<ID3D11Buffer> m_pMVPBuffer;
-
-	ComPtr<ID3D11ShaderResourceView> m_pSkymapTexSRV;
-	ComPtr<ID3D11DepthStencilState > m_pDSLessEqual;
-	ComPtr<ID3D11RasterizerState   > m_pRSCullNone;
 	ComPtr<ID3D11SamplerState>       m_pTexSamplerState;
+	ComPtr<ID3D11ShaderResourceView> m_pSkymapTexSRV;
 
 	D3DShader SkymapShader;
 };

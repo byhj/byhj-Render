@@ -32,21 +32,15 @@ void Skymap::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix
 	cbMatrix.Model = mvpMatrix.model;
 	cbMatrix.View  = mvpMatrix.view;
 	cbMatrix.Proj  = mvpMatrix.proj;
-
 	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &cbMatrix, 0, 0 );
 	pD3D11DeviceContext->VSSetConstantBuffers( 0, 1, m_pMVPBuffer.GetAddressOf());
+
 	pD3D11DeviceContext->PSSetShaderResources( 0, 1, m_pSkymapTexSRV.GetAddressOf());
 	pD3D11DeviceContext->PSSetSamplers( 0, 1, m_pTexSamplerState.GetAddressOf());
 
 	SkymapShader.use(pD3D11DeviceContext);
-
-	pD3D11DeviceContext->OMSetDepthStencilState(m_pDSLessEqual.Get(), 0);
-
-	pD3D11DeviceContext->RSSetState(m_pRSCullNone.Get());
 	pD3D11DeviceContext->DrawIndexed(NumSphereFaces * 3, 0, 0 );
-	pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	pD3D11DeviceContext->OMSetDepthStencilState(NULL, 0);
 }
 
 
@@ -243,32 +237,12 @@ void Skymap::init_texture(ID3D11Device *pD3D11Device)
 	sampDesc.MaxLOD         = D3D11_FLOAT32_MAX;
 	//Create the Sample State
 	hr = pD3D11Device->CreateSamplerState( &sampDesc, &m_pTexSamplerState );
-
-
 }
 
 
 void Skymap::init_buffer(ID3D11Device *pD3D11Device)
 {
 	HRESULT hr;
-	////////////////////////////////////////////////////////////////////////
-	D3D11_RASTERIZER_DESC rasterDesc;
-	ZeroMemory(&rasterDesc, sizeof(D3D11_RASTERIZER_DESC));
-	rasterDesc.FillMode = D3D11_FILL_SOLID;
-	rasterDesc.CullMode = D3D11_CULL_NONE;
-	rasterDesc.FrontCounterClockwise = false;
-	hr = pD3D11Device->CreateRasterizerState(&rasterDesc, &m_pRSCullNone);
-	//DebugHR(hr);
-
-	//////////////////////////////////////////////////////////////////////
-	D3D11_DEPTH_STENCIL_DESC dssDesc;
-	ZeroMemory(&dssDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
-	dssDesc.DepthEnable    = true;
-	dssDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	dssDesc.DepthFunc      = D3D11_COMPARISON_LESS_EQUAL;
-	hr = pD3D11Device->CreateDepthStencilState(&dssDesc, &m_pDSLessEqual);
-	//DebugHR(hr);
-
 	///////////////////////////////////////////////////////////////////
 	D3D11_BUFFER_DESC mvpDesc;
 	ZeroMemory(&mvpDesc, sizeof(D3D11_BUFFER_DESC));

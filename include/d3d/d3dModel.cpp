@@ -20,6 +20,7 @@ namespace byhj
 	}
 	void D3DModel::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 	{
+		
 		for (int i = 0; i != m_D3DMeshes.size(); ++i) {
 			m_D3DMeshes[i].init(pD3D11Device, pD3D11DeviceContext);
 		}
@@ -30,16 +31,14 @@ namespace byhj
 
 
 		for (int i = 0; i < this->m_D3DMeshes.size(); i++) {
-			float blendFactor[] ={ 0.4f, 0.4f, 0.4f, 0.3f };
+
 			//if (this->m_D3DMeshes[i].m_material.ambient.w < 1.0f)
 		//		pD3D11DeviceContext->OMSetBlendState(Transparency, blendFactor, 0xffffffff);
 			//"fine-tune" the blending equation
+		   //
 
-		// 	pD3D11DeviceContext->UpdateSubresource(m_pMatBuffer, 0, NULL, &this->meshes[i].mat, 0, 0);
-		// 	pD3D11DeviceContext->PSSetConstantBuffers(0, 1, &m_pMatBuffer);
 			this->m_D3DMeshes[i].render(pD3D11DeviceContext);
 
-			pD3D11DeviceContext->OMSetBlendState(0, 0, 0xffffffff);
 		}
 	}
 
@@ -88,6 +87,7 @@ namespace byhj
 		std::vector<D3DMesh::Vertex> vertices;
 		std::vector<GLuint> indices;
 		std::vector<D3DMesh::Texture> textures;
+		D3DMesh::Material mat;
 
 		// Walk through each of the mesh's vertices
 		for (GLuint i = 0; i < mesh->mNumVertices; i++) {
@@ -190,32 +190,14 @@ namespace byhj
 	std::vector<D3DMesh::Texture> D3DModel::loadD3DTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
 	{
 		std::vector<D3DMesh::Texture> textures;
-		for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
-		{
+		for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
 			aiString str;
 			mat->GetTexture(type, i, &str);
-
-			// Check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
-			GLboolean skip = false;
-			for (GLuint j = 0; j < m_D3DTextures.size(); j++)
-			{
-				if (m_D3DTextures[j].name == str.C_Str())
-				{
-					textures.push_back(m_D3DTextures[j]);
-					skip = true; // A texture with the same filepath has already been loaded, continue to next one. (optimization)
-					break;
-				}
-			}
-			if (!skip)
-			{
-				//If texture hasn't been loaded already, load it
-				D3DMesh::Texture texture;
-				texture.pTextureSRV = nullptr;
-				texture.type = typeName;
-				texture.name = str.C_Str();
-				textures.push_back(texture);
-				this->m_D3DTextures.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
-			}
+			D3DMesh::Texture texture;
+			texture.pTextureSRV = nullptr;//TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, str.C_Str());
+			texture.type = typeName;
+			texture.name = str.C_Str();
+			textures.push_back(texture);
 		}
 		return textures;
 	}

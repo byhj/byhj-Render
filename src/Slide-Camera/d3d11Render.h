@@ -37,7 +37,7 @@ namespace byhj
 		Plane m_plane;
 		SlideCamera m_camera;
 		std::vector<XMFLOAT3> collidableGeometryPositions;
-			std::vector<DWORD> collidableGeometryIndices;
+		std::vector<DWORD> collidableGeometryIndices;
 		D3DMVPMatrix m_matrix;
 
 		float fps = 0.0f;

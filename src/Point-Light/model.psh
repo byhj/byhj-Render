@@ -5,7 +5,7 @@ cbuffer Material
   float4 diffuse;
   float4 specular;
   float4 emissive;
-  float  shininess;
+ // float  shininess;
 };
 
 struct VS_OUT
@@ -21,6 +21,7 @@ SamplerState texState;
 
 float4 Model_PS(VS_OUT ps_in) : SV_TARGET
 {
+
    float3 lightPos = float3(0.0f, 0.0f, 10.0f);
    float3 lightDir = float3(0.0f, 0.0f, 10.0f);
    float range = 100.0f;
@@ -47,4 +48,5 @@ float4 Model_PS(VS_OUT ps_in) : SV_TARGET
       return texColor * saturate(ambient + dif);
    else
       return saturate(ambient + dif);
+
 }

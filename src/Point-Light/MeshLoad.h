@@ -5,7 +5,8 @@
 
 #include "d3d/d3dShader.h"
 #include "d3d/D3DUtility.h"
-#include "d3dModel.h"
+#include "modelMgr.h"
+#include "Common.h"
 
 namespace byhj {
 
@@ -19,9 +20,10 @@ namespace byhj {
 	private:
 		void init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 		void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
-
+		
+	    ComPtr<ID3D11Buffer> m_pMVPBuffer;
+	    byhj::MatrixBuffer cbMatrix;
 		D3DShader m_meshShader;
-		D3DModel  m_model;
 
 	};
 }

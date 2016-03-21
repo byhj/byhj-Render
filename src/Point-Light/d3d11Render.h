@@ -3,7 +3,7 @@
 
 #include "d3d/d3dApp.h"
 #include "d3d/d3dFWFont.h"
-#include "d3d/d3dCamera.h"
+#include "d3d/d3dEulerCamera.h"
 
 #include <d3d11.h>
 #include <wrl.h>
@@ -11,7 +11,7 @@
 
 #include "MeshLoad.h"
 #include "Skymap.h"
-
+#include "d3d/d3dEulerCamera.h"
 
 namespace byhj
 {
@@ -26,11 +26,6 @@ namespace byhj
 		void v_render()   override;
 		void v_shutdown() override;
 
-		void v_onMouseDown(WPARAM btnState, int x, int y)  override;
-		void v_onMouseMove(WPARAM btnState, int x, int y)  override;
-		void v_onMouseUp(WPARAM btnState, int x, int y)    override;
-		void v_onMouseWheel(WPARAM btnState, int x, int y) override;
-
 	private:
 
 		void init_device();
@@ -42,7 +37,6 @@ namespace byhj
 		void drawInfo();
 
 		D3DFWFont m_Font;
-		D3DCamera m_Camera;
 
 		Timer m_Timer;
 		MeshLoad m_meshload;
@@ -53,13 +47,15 @@ namespace byhj
 		std::wstring m_videoCardInfo;
 		D3DMVPMatrix m_matrix;
 
-		IDXGISwapChain         * m_pSwapChain;
-		ID3D11Device           * m_pD3D11Device;
-		ID3D11DeviceContext    * m_pD3D11DeviceContext;
-		ID3D11RenderTargetView * m_pRenderTargetView;
-		ID3D11DepthStencilView * m_pDepthStencilView;
-		ID3D11Texture2D        * m_pDepthStencilBuffer;
-		ID3D11RasterizerState  * m_pRasterState;
+		IDXGISwapChain          * m_pSwapChain;
+		ID3D11Device            * m_pD3D11Device;
+		ID3D11DeviceContext     * m_pD3D11DeviceContext;
+		ID3D11RenderTargetView  * m_pRenderTargetView;
+		ID3D11DepthStencilView  * m_pDepthStencilView;
+		ID3D11Texture2D         * m_pDepthStencilBuffer;
+		ID3D11RasterizerState   * m_pRasterState;
+		ID3D11DepthStencilState *m_pDSLessEqual;
+		ID3D11RasterizerState   *m_pRSCullNone;
 
 	};
 }

@@ -102,7 +102,7 @@ private:
 		XMFLOAT4 diffuse;
 		XMFLOAT4 specular;
 		XMFLOAT4 emissive;
-		float   shininess;
+		//float   shininess;
 	};
 
 	std::vector<Vertex> m_VertexData;
@@ -112,6 +112,7 @@ private:
 
 	ID3D11Buffer *m_pIndexBuffer;
 	ID3D11Buffer *m_pVertexBuffer;
+	ID3D11Buffer *m_pMaterialBuffer;
 
 	UINT m_VertexCount;
 	UINT m_IndexCount;

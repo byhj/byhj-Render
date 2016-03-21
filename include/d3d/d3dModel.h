@@ -34,11 +34,8 @@ namespace byhj
 
 
 	private:
-
-		std::vector<D3DMesh::Texture> m_D3DTextures;
 		std::vector<D3DMesh> m_D3DMeshes;
 		std::string m_dir;
-		D3DMesh::Material mat;
 	};
 }
 #endif
