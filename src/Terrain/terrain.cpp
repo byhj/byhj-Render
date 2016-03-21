@@ -41,13 +41,18 @@ void Terrain::render()
 	float r = sinf(t * 5.37f) * 15.0f + 16.0f;
 	float h = cosf(t * 4.79f) * 2.0f + 5.2f;
 	auto aspect = WindowInfo::getInstance()->getAspect();
-	glm::mat4 mv_matrix  = glm::lookAt( glm::vec3(sinf(t) * r, h, cosf(t) * r), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 proj_matrix = glm::perspective(60.0f, aspect, 0.1f, 1000.0f);
+	glm::mat4 mv_matrix  = OGLEulerCamera::getInstance()->getViewMat();
+	glm::mat4 proj_matrix = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 
 	glUniformMatrix4fv(uniforms.mv_matrix, 1, GL_FALSE, glm::value_ptr(mv_matrix));
 	glUniformMatrix4fv(uniforms.proj_matrix, 1, GL_FALSE, glm::value_ptr(proj_matrix));
 	glUniformMatrix4fv(uniforms.mvp_matrix, 1, GL_FALSE, glm::value_ptr(proj_matrix * mv_matrix));
 	
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, tex_displacement);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, tex_color);
+
 	glUniform1f(uniforms.dmap_depth, enable_displacement ? dmap_depth : 0.0f);
 	glUniform1i(uniforms.enable_fog, enable_fog ? 1 : 0);
 	if (wireframe)
@@ -59,6 +64,7 @@ void Terrain::render()
 
 
 	glUseProgram(0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 }
 
@@ -88,6 +94,7 @@ void Terrain::init_shader()
 	dispmapShader.attach(GL_TESS_EVALUATION_SHADER, "dispmap.tes");
 	dispmapShader.attach(GL_FRAGMENT_SHADER, "dispmap.frag");
 	dispmapShader.link();
+	dispmapShader.info();
 	program = dispmapShader.getProgram();
 
 	uniforms.mv_matrix = glGetUniformLocation(program, "mv_matrix");
@@ -97,14 +104,8 @@ void Terrain::init_shader()
 	uniforms.enable_fog = glGetUniformLocation(program, "enable_fog");
 	dmap_depth = 6.0f;
 
-
-	glActiveTexture(GL_TEXTURE0);
-	tex_displacement = loadKtx("../../../media/textures/terragen1.ktx");
-	glActiveTexture(GL_TEXTURE1);
-	tex_color = loadKtx("../../../media/textures/terragen_color.ktx");
-
-	uniforms.mv_matrix = glGetUniformLocation(program, "mv_matrix");
-	uniforms.proj_matrix = glGetUniformLocation(program, "proj_matrix");
+	tex_displacement = loadKtx("../../media/textures/terragen1.ktx");
+	tex_color = loadKtx("../../media/textures/terragen_color.ktx");
 }
 
 }
