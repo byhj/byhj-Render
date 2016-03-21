@@ -2,21 +2,21 @@
 #define Triangle_H
 
 #include <GL/glew.h>
-#include "ogl/Shader.h"
-#include "ogl/Utility.h"
+#include "ogl/oglShader.h"
+#include "ogl/oglUtility.h"
 
 namespace byhj
 {
 
-class Terrian
+class Terrain
 {
 public:
-	Terrian();
-	~Terrian();
+	Terrain();
+	~Terrain();
 
-	void Init();
-	void Render(GLfloat aspect);
-	void Shutdown();
+	void init();
+	void render();
+	void shutdown();
 
 private:
 	void init_buffer();
@@ -27,13 +27,14 @@ private:
 	GLuint          vao;
 	GLuint          tex_displacement;
 	GLuint          tex_color;
+
 	float           dmap_depth = 0.0f;
 	bool            enable_displacement = true;
 	bool            wireframe = true;
 	bool            enable_fog = true;
 	bool            paused;
 
-	ogl::Shader dispmapShader;
+	OGLShader dispmapShader;
 	struct
 	{
 		GLint       mvp_matrix;
