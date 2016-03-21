@@ -44,9 +44,9 @@ float4 Model_PS(VS_OUT ps_in) : SV_TARGET
 	//Calculate falloff from center to edge of pointlight cone
    dif *= pow(max(dot(-lightToPos, lightDir), 0.0f), cone);
    
-   if (texColor.r > 0.0f)
-      return texColor * saturate(ambient + dif);
-   else
-      return saturate(ambient + dif);
+  if (texColor.r > 0.0f)
+     return texColor * saturate(ambient + dif);
+  else
+     return saturate(ambient + dif);
 
 }

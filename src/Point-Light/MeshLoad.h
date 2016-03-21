@@ -22,6 +22,7 @@ namespace byhj {
 		void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
 		
 	    ComPtr<ID3D11Buffer> m_pMVPBuffer;
+			ComPtr<ID3D11SamplerState>       m_pTexSamplerState;
 	    byhj::MatrixBuffer cbMatrix;
 		D3DShader m_meshShader;
 

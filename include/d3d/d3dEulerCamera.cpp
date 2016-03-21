@@ -1,4 +1,5 @@
 #include "D3DEulerCamera.h"
+#include "iostream"
 
 #define SHADER_DEBUG
 

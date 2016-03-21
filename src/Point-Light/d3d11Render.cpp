@@ -28,7 +28,8 @@ namespace byhj
 		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		
 		m_matrix.view = D3DEulerCamera::getInstance()->getViewMat();
-		m_pD3D11DeviceContext->RSSetState(m_pRasterState);
+	m_pD3D11DeviceContext->RSSetState(m_pRSCullNone);
+		m_pD3D11DeviceContext->OMSetDepthStencilState(m_pDSLessEqual, 0);
 
 		m_meshload.render(m_pD3D11DeviceContext, m_matrix);
 
@@ -39,13 +40,13 @@ namespace byhj
 		m_matrix.view._42 = 0.0f;
 		m_matrix.view._43 = 0.0f;
 
-	//	m_pD3D11DeviceContext->OMSetDepthStencilState(m_pDSLessEqual, 0);
-	//	m_pD3D11DeviceContext->RSSetState(m_pRSCullNone);
+		m_pD3D11DeviceContext->OMSetDepthStencilState(m_pDSLessEqual, 0);
+	
 
-		//m_skymap.render(m_pD3D11DeviceContext, m_matrix);
+		m_skymap.render(m_pD3D11DeviceContext, m_matrix);
 
 
-//		drawInfo();
+		drawInfo();
 
 		m_pSwapChain->Present(0, 0);
 	}

@@ -21,6 +21,7 @@ namespace byhj {
 		 cbMatrix.Proj  = matrix.proj;
 		 pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &cbMatrix, 0, 0);
 		 pD3D11DeviceContext->VSSetConstantBuffers(0, 1, m_pMVPBuffer.GetAddressOf());
+	     pD3D11DeviceContext->PSSetSamplers( 0, 1, m_pTexSamplerState.GetAddressOf());
 
 	    ModelMgr::getInstance()->render(pD3D11DeviceContext);
 
@@ -48,7 +49,7 @@ namespace byhj {
 		InputLayout.SemanticIndex        = 0;
 		InputLayout.Format               = DXGI_FORMAT_R32G32B32_FLOAT;
 		InputLayout.InputSlot            = 0;
-		InputLayout.AlignedByteOffset    = 0;
+		InputLayout.AlignedByteOffset    = D3D11_APPEND_ALIGNED_ELEMENT;
 		InputLayout.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
 		InputLayout.InstanceDataStepRate = 0;
 		vInputLayoutDesc.push_back(InputLayout);
@@ -57,7 +58,7 @@ namespace byhj {
 		InputLayout.SemanticIndex        = 0;
 		InputLayout.Format               = DXGI_FORMAT_R32G32B32_FLOAT;
 		InputLayout.InputSlot            = 0;
-		InputLayout.AlignedByteOffset    = 12;
+		InputLayout.AlignedByteOffset    = D3D11_APPEND_ALIGNED_ELEMENT;
 		InputLayout.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
 		InputLayout.InstanceDataStepRate = 0;
 		vInputLayoutDesc.push_back(InputLayout);
@@ -65,7 +66,7 @@ namespace byhj {
 		InputLayout.SemanticName         = "TEXCOORD";
 		InputLayout.SemanticIndex        = 0;
 		InputLayout.Format               = DXGI_FORMAT_R32G32_FLOAT;
-		InputLayout.InputSlot            = 24;
+		InputLayout.InputSlot            = 0;
 		InputLayout.AlignedByteOffset    = D3D11_APPEND_ALIGNED_ELEMENT;
 		InputLayout.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
 		InputLayout.InstanceDataStepRate = 0;
@@ -86,6 +87,18 @@ namespace byhj {
 		mvpDesc.CPUAccessFlags = 0;
 		mvpDesc.MiscFlags      = 0;
 		hr = pD3D11Device->CreateBuffer(&mvpDesc, NULL, &m_pMVPBuffer);
+
+		D3D11_SAMPLER_DESC sampDesc;
+		ZeroMemory(&sampDesc, sizeof(sampDesc));
+		sampDesc.Filter         = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+		sampDesc.AddressU       = D3D11_TEXTURE_ADDRESS_WRAP;
+		sampDesc.AddressV       = D3D11_TEXTURE_ADDRESS_WRAP;
+		sampDesc.AddressW       = D3D11_TEXTURE_ADDRESS_WRAP;
+		sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+		sampDesc.MinLOD         = 0;
+		sampDesc.MaxLOD         = D3D11_FLOAT32_MAX;
+		//Create the Sample State
+		hr = pD3D11Device->CreateSamplerState(&sampDesc, &m_pTexSamplerState);
 		
 	}
 }
