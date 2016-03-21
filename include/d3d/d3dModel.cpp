@@ -25,8 +25,8 @@ namespace byhj
 		D3D11_RENDER_TARGET_BLEND_DESC rtbd;
 		ZeroMemory(&rtbd, sizeof(rtbd));
 		rtbd.BlendEnable			 = true;
-		rtbd.SrcBlend				 = D3D11_BLEND_SRC_COLOR;
-		rtbd.DestBlend				 = D3D11_BLEND_BLEND_FACTOR;
+		rtbd.SrcBlend				 = D3D11_BLEND_SRC_ALPHA;
+		rtbd.DestBlend				 = D3D11_BLEND_INV_SRC_ALPHA;
 		rtbd.BlendOp				 = D3D11_BLEND_OP_ADD;
 		rtbd.SrcBlendAlpha			 = D3D11_BLEND_ONE;
 		rtbd.DestBlendAlpha			 = D3D11_BLEND_ZERO;
@@ -37,8 +37,11 @@ namespace byhj
 		pD3D11Device->CreateBlendState(&blendDesc, &Transparency);
 
 
-		for (int i = 0; i != m_D3DMeshes.size(); ++i) {
-			m_D3DMeshes[i].init(pD3D11Device, pD3D11DeviceContext);
+		for (int i = 0; i != m_D3DTransparentMeshes.size(); ++i) {
+			m_D3DTransparentMeshes[i].init(pD3D11Device, pD3D11DeviceContext);
+		}
+		for (int i = 0; i != m_D3DOpaqueMeshes.size(); ++i) {
+			m_D3DOpaqueMeshes[i].init(pD3D11Device, pD3D11DeviceContext);
 		}
 	}
 	// Draws the model, and thus all its meshes
@@ -46,16 +49,15 @@ namespace byhj
 	{
 
 
-		for (int i = 0; i < this->m_D3DMeshes.size(); i++) {
-
-		   if (m_D3DMeshes[i].isBlend()) {
-			   float blendFactor[] ={ 0.4f, 0.4f, 0.4f, 0.1f };
-			   pD3D11DeviceContext->OMSetBlendState(Transparency, blendFactor, 0xffffffff);
-		   }
-			this->m_D3DMeshes[i].render(pD3D11DeviceContext);
-
+		for (int i = 0; i < this->m_D3DOpaqueMeshes.size(); i++) {
 			pD3D11DeviceContext->OMSetBlendState(0, 0, 0xffffffff);
+			   this->m_D3DOpaqueMeshes[i].render(pD3D11DeviceContext);
+		}
 
+		for (int i = 0; i < this->m_D3DTransparentMeshes.size(); i++) {
+			float blendFactor[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
+			pD3D11DeviceContext->OMSetBlendState(Transparency, blendFactor, 0xffffffff);
+			this->m_D3DTransparentMeshes[i].render(pD3D11DeviceContext);
 		}
 	}
 
@@ -88,8 +90,12 @@ namespace byhj
 
 			D3DMesh meshData;
 			processMesh(pMesh, pScene, meshData);
-			m_D3DMeshes.push_back(meshData);
-		
+			if (meshData.isBlend()) {
+				m_D3DTransparentMeshes.push_back(meshData);
+			}
+			else {
+				m_D3DOpaqueMeshes.push_back(meshData);
+			}
 		}
 
 		for (GLuint i = 0; i < pNode->mNumChildren; ++i) {
