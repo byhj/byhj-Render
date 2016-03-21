@@ -36,6 +36,7 @@ namespace byhj
 	private:
 		std::vector<D3DMesh> m_D3DMeshes;
 		std::string m_dir;
+		ID3D11BlendState *    Transparency;
 	};
 }
 #endif

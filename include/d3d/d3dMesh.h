@@ -89,7 +89,13 @@ public:
 	void update();
 	void render(ID3D11DeviceContext *pD3D11DeviceContext);
     void shutdown();
-
+	bool isBlend() {
+	   if (m_material.ambient.w < 1.0f) {
+	      return true;
+	   }else {
+		   return false;
+	   }
+	}
 private:
 	void init_state(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	void init_buffer(ID3D11Device *pD3D11Device);

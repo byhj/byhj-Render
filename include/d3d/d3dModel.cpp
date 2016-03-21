@@ -20,7 +20,23 @@ namespace byhj
 	}
 	void D3DModel::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 	{
-		
+		D3D11_BLEND_DESC blendDesc;
+		ZeroMemory(&blendDesc, sizeof(blendDesc));
+		D3D11_RENDER_TARGET_BLEND_DESC rtbd;
+		ZeroMemory(&rtbd, sizeof(rtbd));
+		rtbd.BlendEnable			 = true;
+		rtbd.SrcBlend				 = D3D11_BLEND_SRC_COLOR;
+		rtbd.DestBlend				 = D3D11_BLEND_BLEND_FACTOR;
+		rtbd.BlendOp				 = D3D11_BLEND_OP_ADD;
+		rtbd.SrcBlendAlpha			 = D3D11_BLEND_ONE;
+		rtbd.DestBlendAlpha			 = D3D11_BLEND_ZERO;
+		rtbd.BlendOpAlpha			 = D3D11_BLEND_OP_ADD;
+		rtbd.RenderTargetWriteMask	 = D3D10_COLOR_WRITE_ENABLE_ALL;
+		blendDesc.AlphaToCoverageEnable = false;
+		blendDesc.RenderTarget[0] = rtbd;
+		pD3D11Device->CreateBlendState(&blendDesc, &Transparency);
+
+
 		for (int i = 0; i != m_D3DMeshes.size(); ++i) {
 			m_D3DMeshes[i].init(pD3D11Device, pD3D11DeviceContext);
 		}
@@ -32,12 +48,13 @@ namespace byhj
 
 		for (int i = 0; i < this->m_D3DMeshes.size(); i++) {
 
-			//if (this->m_D3DMeshes[i].m_material.ambient.w < 1.0f)
-		//		pD3D11DeviceContext->OMSetBlendState(Transparency, blendFactor, 0xffffffff);
-			//"fine-tune" the blending equation
-		   //
-
+		   if (m_D3DMeshes[i].isBlend()) {
+			   float blendFactor[] ={ 0.4f, 0.4f, 0.4f, 0.1f };
+			   pD3D11DeviceContext->OMSetBlendState(Transparency, blendFactor, 0xffffffff);
+		   }
 			this->m_D3DMeshes[i].render(pD3D11DeviceContext);
+
+			pD3D11DeviceContext->OMSetBlendState(0, 0, 0xffffffff);
 
 		}
 	}
