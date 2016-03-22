@@ -14,6 +14,7 @@ void main()
 {
    mat4 mvp = g_proj * g_view * g_model;
    vs_out.color = vec4(g_Position + vec3(0.5f), 1.0f);
+   vec4 test  = mvp * vec4(g_Position, 1.0f);
 
    //your must use matrix x vector order
    gl_Position  = mvp * vec4(g_Position, 1.0f);

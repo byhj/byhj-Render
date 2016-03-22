@@ -8,16 +8,16 @@ namespace byhj
  static const GLfloat VertexData[] =
  {
 	 //Front
-	 -0.5f, -0.5f,  0.5f,
-	 0.5f, -0.5f,  0.5f, 
-	 0.5f,  0.5f,  0.5f, 
-	 -0.5f,  0.5f,  0.5f,
+	 -5.0f, -5.0f,  5.0f,
+	  5.0f, -5.0f,  5.0f, 
+	  5.0f,  5.0f,  5.0f, 
+	 -5.0f,  5.0f,  5.0f,
 
 	 //Back		   
-	 -0.5f, -0.5f, -0.5f,
-	 0.5f, -0.5f, -0.5f, 
-	 0.5f,  0.5f, -0.5f, 
-	 -0.5f,  0.5f, -0.5f,
+	 -5.0f, -5.0f, -5.0f,
+	 5.0f, -5.0f, -5.0f, 
+	 5.0f,  5.0f, -5.0f, 
+	 -5.0f,  5.0f, -5.0f,
  };
  static const GLsizei VertexSize = sizeof(VertexData);
  
