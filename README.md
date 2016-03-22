@@ -53,5 +53,10 @@ Welcome to the this render by byhj. I write it by using OpenGL3+ andDirectX11. I
 
 # Sample
 
+## Billboard
+<img src="http://7xs5mn.com1.z0.glb.clouddn.com/Billboard.png" height="150px" align="right">
+
+<br><br>
+
 
 ---
