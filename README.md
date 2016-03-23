@@ -85,12 +85,11 @@ base part(DirectX12 & Vulkan).
 ---
 ## Normal Mapping (OpenGL3+)
   Use normal texture to make the normal mapping effect.
-<img width = "400" src= "">  
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ogl-normal-map.png">  
 
 ---
 ## Skybox (OpenGL3+ & DirectX11)
 Use normal texture to make the normal mapping effect.
-<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ogl-normal-map.png">  
 
 ---
 ## Fog (OpenGL3+)
