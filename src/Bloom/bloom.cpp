@@ -33,7 +33,7 @@ namespace byhj {
 	{
 		static float t = 0.0f;
 		t += glfwGetTime() / 1000.0f;
-		float intensity = abs(sin(t)) * 10.0f;
+		float intensity = abs(sin(t)) * 2.5f + 0.1f;
 
 		glBindFramebuffer(GL_FRAMEBUFFER, m_bloomFbo);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include "ogl/oglShader.h"
 #include "ogl/oglUtility.h"
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
@@ -30,7 +31,7 @@ private:
 
 	float           dmap_depth = 0.0f;
 	bool            enable_displacement = true;
-	bool            wireframe = true;
+	bool            wireframe = false;
 	bool            enable_fog = true;
 	bool            paused;
 
