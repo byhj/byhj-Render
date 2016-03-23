@@ -19,6 +19,8 @@ void main(void)
 {  
    float fogFactor = (fogEnd - camPos.z) / (fogEnd - fogStart);
    vec4 texColor = texture2D(box_tex, vs_out.texcoord); 
+
+   //blend the object color with fog color make the fog effect
    g_FragColor = fogFactor * texColor + (1.0f - fogFactor) * fogColor;
 
 }
