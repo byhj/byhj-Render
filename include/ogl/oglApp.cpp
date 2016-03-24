@@ -75,6 +75,8 @@ void OGLApp::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset
 	}
 	void OGLApp::glfw_resize(GLFWwindow* window, int width, int height)
 	{
+		WindowInfo::getInstance()->setWidth(width);
+		WindowInfo::getInstance()->setHeight(height);
 		app->resizeCallback(window, width, height);
 	}
 	////////////////////////////////////////////////////////////////////////////////////////

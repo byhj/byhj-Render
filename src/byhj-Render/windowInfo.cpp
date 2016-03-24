@@ -16,6 +16,14 @@ namespace byhj
 		return Height;
 	}
 
+	void WindowInfo::setWidth(int sw)
+	{
+	   Width = sw;
+	}
+	void WindowInfo::setHeight(int sh) 
+	{
+		Height = sh;
+	}
 	int WindowInfo::getPosX() const {
 		return posX;
 	}

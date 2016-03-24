@@ -134,7 +134,7 @@ namespace byhj
 	}
 	void Cube::update()
 	{
-
+		m_fogGui.v_update();
 	}
 
 	void Cube::render()
@@ -150,10 +150,19 @@ namespace byhj
 			                          glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 
-		glUniformMatrix4fv(u_model, 1, GL_FALSE, &model[0][0]);
-		glUniformMatrix4fv(u_view, 1, GL_FALSE, &view[0][0]);
-		glUniformMatrix4fv(u_proj, 1, GL_FALSE, &proj[0][0]);
-		glUniform1i(u_boxTex, 0);
+		glUniformMatrix4fv(uniformLoc.model, 1, GL_FALSE, &model[0][0]);
+		glUniformMatrix4fv(uniformLoc.view, 1, GL_FALSE, &view[0][0]);
+		glUniformMatrix4fv(uniformLoc.proj, 1, GL_FALSE, &proj[0][0]);
+		glUniform1i(uniformLoc.boxTex, 0);
+
+		//////////////////////////////Set up the gui vars to uniform //////////////////////////////
+		glUniform1f(uniformLoc.fogStart, m_fogGui.getFogStart());
+		glUniform1f(uniformLoc.fogEnd, m_fogGui.getFogEnd());
+		glUniform1f(uniformLoc.fogDensity, m_fogGui.getFogDensity());
+		glUniform4fv(uniformLoc.fogColor, 1, m_fogGui.getFogColor());
+
+		glUniform1i(uniformLoc.fogModel, m_fogGui.getFogModel());
+		glUniform1i(uniformLoc.baseModel, m_fogGui.getBaseModel());
 
 		//Bind the texture for shader
 		GLuint texId = TextureMgr::getInstance()->getOGLTextureByName("crate.bmp");
@@ -166,6 +175,7 @@ namespace byhj
 		glBindVertexArray(0);
 		glUseProgram(0);
 
+		//draw the gui
 		m_fogGui.v_render();
 	}
 
@@ -187,11 +197,16 @@ namespace byhj
 	  m_CubeShader.info();
 	  m_program = m_CubeShader.getProgram();
 
-	  //get uniform location 
-	  u_model = glGetUniformLocation(m_program, "u_model");
-	  u_view  = glGetUniformLocation(m_program, "u_view");
-	  u_proj  = glGetUniformLocation(m_program, "u_proj");
-	  u_boxTex = glGetUniformLocation(m_program, "box_tex");
+      uniformLoc.model = glGetUniformLocation(m_program, "u_model");
+	  uniformLoc.view  = glGetUniformLocation(m_program, "u_view");
+	  uniformLoc.proj  = glGetUniformLocation(m_program, "u_proj");
+	  uniformLoc.fogStart = glGetUniformLocation(m_program, "u_fogStart");
+	  uniformLoc.fogEnd = glGetUniformLocation(m_program, "u_fogEnd");
+	  uniformLoc.fogDensity = glGetUniformLocation(m_program, "u_fogDensity");
+	  uniformLoc.fogModel = glGetUniformLocation(m_program, "u_fogModel");
+	  uniformLoc.baseModel = glGetUniformLocation(m_program, "u_baseModel");
+	  uniformLoc.boxTex  = glGetUniformLocation(m_program, "u_boxTex");
+
 	}
 
 }

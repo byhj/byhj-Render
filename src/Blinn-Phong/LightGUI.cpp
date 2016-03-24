@@ -13,7 +13,7 @@ namespace byhj
 		TwWindowSize(sw, sh);
 
 		TwBar *pBar = TwNewBar("LightBar");
-		TwDefine(" LightBar label='LightBar' position='1300 16' alpha=0 help='Use this bar to edit the tess.' ");
+		TwDefine(" LightBar label='LightBar' position='sw 16' alpha=0 help='Use this bar to edit the tess.' ");
 
 		TwAddVarRW(pBar, "Gamma", TW_TYPE_BOOL32, &m_Gamma, "");
 

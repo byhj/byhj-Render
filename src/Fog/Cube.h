@@ -34,10 +34,19 @@ namespace byhj
 	    GLuint m_ibo;
 	    GLuint m_vbo;
 
-		GLuint u_model;
-		GLuint u_view;
-		GLuint u_proj;
-		GLuint u_boxTex;
+		struct UniformLocation {
+		  GLuint model;
+		  GLuint view;
+		  GLuint proj;
+		  GLuint boxTex;
+
+		  GLuint fogStart;
+		  GLuint fogEnd;
+		  GLuint fogColor;
+		  GLuint fogModel;
+		  GLuint fogDensity;
+		  GLuint baseModel;
+		}uniformLoc;
 
 	    std::vector<GLfloat> m_VertexData;
 	    std::vector<GLuint>  m_IndexData;

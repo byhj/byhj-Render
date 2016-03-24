@@ -35,6 +35,8 @@ public:
 	
 	int getWidth() const;
 	int getHeight() const;
+	void setWidth(int sw);
+	void setHeight(int sh);
 	int getPosX() const;
 	int getPosY() const;
 	float getAspect() const;

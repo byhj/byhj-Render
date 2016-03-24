@@ -18,7 +18,7 @@ namespace byhj {
 
 	void OGLRender::v_update()
 	{
-
+		m_cube.update();
 	}
 	void OGLRender::v_render()
 	{
