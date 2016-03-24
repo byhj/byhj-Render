@@ -18,10 +18,10 @@ namespace byhj
 	{
 	public:
 
-		void Init(int sw, int sh);
-		void Update(const glm::mat4 &camMat);
-		void Render();
-        void Shutdown();
+		void init();
+		void update();
+		void render();
+        void shutdown();
 
 	private:
 		void init_buffer();

@@ -84,10 +84,10 @@ void main()
   for (int i = 0; i < LIGHTNUMS; ++i)
       light += lightModelUniform(vs_out.Normal, vs_out.FragPos, u_LightPos[i], u_LightColor[i]);
   
-  vec4 pixelColor = texColor * vec4(light, 1.0f);
+  vec4 pixelColor = texColor * vec4(light + vec3(0.2f, 0.2f, 0.2f), 1.0f);
 
    if(u_Gamma)
         pixelColor = pow(pixelColor, vec4(1.0/2.2) );
 
-  g_FragColor = pixelColor;
+  g_FragColor = pixelColor ;
 }

@@ -1,10 +1,14 @@
 #include "RotationGui.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
 
-	void RotationGui::v_init(int sw, int sh)
+	void RotationGui::v_init()
 	{
+		auto sw = WindowInfo::getInstance()->getWidth();
+		auto sh = WindowInfo::getInstance()->getHeight();
+
 		TwInit(TW_OPENGL_CORE, NULL);
 		TwWindowSize(sw, sh);
 		TwBar *pBar = TwNewBar("RotationBar");
@@ -13,6 +17,9 @@ namespace byhj
 
 	}
 
+	void RotationGui::v_update()
+	{
+	}
 	void RotationGui::v_render()
 	{
 		TwDraw();

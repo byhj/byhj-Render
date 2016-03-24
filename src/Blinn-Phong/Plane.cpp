@@ -82,8 +82,6 @@ namespace byhj
 
 	void Plane::render()
 	{
-
-
 		glUseProgram(program);
 		glBindVertexArray(vao);
 

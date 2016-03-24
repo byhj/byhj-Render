@@ -27,9 +27,6 @@ namespace byhj
 
 	void OGLRender::v_render()
 	{
-		glEnable(GL_DEPTH_TEST);
-
-
 		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, black);
 		static const GLfloat one[] ={ 1.0f };

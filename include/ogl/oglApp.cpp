@@ -162,6 +162,8 @@ void OGLApp::v_run()
 	OGLCEGUI::getInstance()->setupCallbacks(pWindow);
 #endif
 	v_init();
+
+
 	while (!glfwWindowShouldClose(pWindow))
 	{
 		glfwPollEvents();
@@ -178,12 +180,12 @@ void OGLApp::v_run()
 		v_render();
 
 #ifdef USE_FONT
-		 glDisable(GL_DEPTH_TEST);
-		 m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 40);
-		 m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 70);
-		 m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 100);
-		 m_pFont.render("FPS: " + std::to_string(m_fps), 10, 30);
-		 glEnable(GL_DEPTH_TEST);
+		glDisable(GL_DEPTH_TEST);
+		m_pFont.render("Graphics card: " + m_GLRenderer, 10, sh - 40);
+		m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 70);
+		m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 100);
+		m_pFont.render("FPS: " + std::to_string(m_fps), 10, 30);
+		glEnable(GL_DEPTH_TEST);
 #endif
 
 #ifdef USE_CEGUI

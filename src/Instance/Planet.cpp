@@ -1,21 +1,21 @@
 #include "Planet.h"
+#include "ogl/oglEulerCamera.h"
+#include "modelMgr.h"
 
 namespace byhj
 {
 
-	void Planet::Init(int sw, int sh)
+	void Planet::init()
 	{
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 
-		m_Aspect = static_cast<GLfloat>(sw) / sh;
-
 		init_buffer();
 		init_shader();
 	}
 
-	void Planet::Update(const glm::mat4 &camMat)
+	void Planet::update()
 	{
 
 		glUseProgram(m_Program);
@@ -25,7 +25,7 @@ namespace byhj
 
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -2.0f, -20.0f)) 
 			            * glm::rotate(glm::mat4(1.0f), time / 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 view  = camMat;
+		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
@@ -35,23 +35,23 @@ namespace byhj
 		glUseProgram(0);
 	}
 
-	void Planet::Render()
+	void Planet::render()
 	{
 		glUseProgram(m_Program);
 		glBindVertexArray(m_vao);
 
-		m_Model.draw(m_Program);
+		ModelMgr::getInstance()->render(m_Program);
 
 		glUseProgram(0);
 	}
 
-	void Planet::Shutdown()
+	void Planet::shutdown()
 	{
 	}
 
 	void Planet::init_buffer()
 	{
-		m_Model.loadModel("planet/planet.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("planet/planet.obj");
 	}
 
 

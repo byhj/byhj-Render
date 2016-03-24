@@ -20,6 +20,9 @@ namespace byhj
 
 	  static std::shared_ptr<ModelMgr> getInstance();
 
+	  int  getMeshCount(std::string modelName);
+	  GLuint getMeshVAO(std::string modelName, int index);
+
 	  void loadOGLModel(std::string modelName);
 	  void loadD3DModel(std::string modelName, ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	 

@@ -14,30 +14,10 @@ namespace byhj
 
 	}
 	
-	void OGLRender::v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
-	{
-		m_camera.key_callback(window, key, scancode, action, mode);
-	}
-
-	void OGLRender::v_movement(GLFWwindow *window)
-	{
-		m_camera.movement(window);
-	}
-
-	void OGLRender::v_mouseCallback(GLFWwindow* window, double xpos, double ypos)
-	{
-		m_camera.mouse_callback(window, xpos, ypos);
-	}
-
-	void OGLRender::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
-	{
-		m_camera.scroll_callback(window, xoffset, yoffset);
-	}
-
 	void OGLRender::v_init()
 	{
-		m_Asteroid.Init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
-		m_Planet.Init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		m_Asteroid.init();
+		m_Planet.init();
 	}
 
 	void OGLRender::v_update()
@@ -47,11 +27,8 @@ namespace byhj
 		GLfloat deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		m_camera.update(deltaTime);
-		auto camMat = m_camera.GetViewMatrix();
-
-		m_Asteroid.Update(camMat);
-		m_Planet.Update(camMat);
+		m_Asteroid.update();
+		m_Planet.update();
 	}
 
     void OGLRender::v_render()
@@ -61,8 +38,8 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		m_Asteroid.Render();
-		m_Planet.Render();
+		m_Asteroid.render();
+		m_Planet.render();
 
     }
 	void OGLRender::v_shutdown()

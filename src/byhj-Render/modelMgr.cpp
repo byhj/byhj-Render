@@ -20,6 +20,25 @@ namespace byhj
 			return pInstance;
 		}
 	}
+	int  ModelMgr::getMeshCount(std::string modelName) 
+	{
+		if (m_OGLModels.find(modelName) == m_OGLModels.end() ) {
+		   std::cerr << "The file of " << modelName << " is not load" << std::endl; 
+		   return 0;
+		}
+		int meshCnt = m_OGLModels[modelName].getMeshCount();
+		return meshCnt;
+
+	}
+	GLuint  ModelMgr::getMeshVAO(std::string modelName, int index)
+	{
+		if (m_OGLModels.find(modelName) == m_OGLModels.end()) {
+			std::cerr << "The file of " << modelName << " is not load" << std::endl;
+			return 0;
+		}
+		GLuint meshVAO = m_OGLModels[modelName].getMeshVAO(index);
+		return meshVAO;
+	}
 
 	void ModelMgr::loadOGLModel(std::string modelName) {
 

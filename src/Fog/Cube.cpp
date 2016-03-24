@@ -142,12 +142,13 @@ namespace byhj
 		glBindVertexArray(m_vao);
 		glUseProgram(m_program);
 
+		auto aspect =  WindowInfo::getInstance()->getAspect();
 		//Update model view proj matrix
 		auto time = glfwGetTime();
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f),
 			                          glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
+		glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(u_model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(u_view, 1, GL_FALSE, &view[0][0]);

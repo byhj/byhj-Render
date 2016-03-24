@@ -1,11 +1,14 @@
 #include "LightGui.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
 
 
-	void LightGui::v_init(int sw, int sh)
+	void LightGui::v_init()
 	{
+		auto sw = WindowInfo::getInstance()->getWidth();
+		auto sh = WindowInfo::getInstance()->getHeight();
 		TwInit(TW_OPENGL_CORE, 0);
 		TwWindowSize(sw, sh);
 

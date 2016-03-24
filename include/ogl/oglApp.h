@@ -22,7 +22,7 @@
 #pragma comment(lib, "opengl32")
 
 #define USE_ANT
-#define USE_FONT
+//#define USE_FONT
 
 #ifdef USE_CEGUI
 #include "ogl/oglCEGUI.h"

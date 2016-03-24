@@ -1,25 +1,24 @@
 #include "Asteroid.h"
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
 	static const int ASTEROID_AMOUNT = 1000;
 
-	void Asteroid::Init(int sw, int sh)
+	void Asteroid::init()
 	{
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 
-		m_Aspect = static_cast<GLfloat>(sw) / sh;
-
-		m_LightGui.v_init(sw, sh);
-		m_RotationGui.v_init(sw, sh);
+		m_LightGui.v_init();
+		m_RotationGui.v_init();
 
 		init_buffer();
 		init_shader();
 	}
 
-	void Asteroid::Update(const glm::mat4 &camMat)
+	void Asteroid::update()
 	{
 
 		glUseProgram(m_Program);
@@ -31,7 +30,7 @@ namespace byhj
 
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -30.0f)) * m_RotationGui.getRotationMat()
 			* glm::rotate(glm::mat4(1.0f), time / 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 view  = camMat;
+		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
@@ -42,7 +41,7 @@ namespace byhj
 		glUseProgram(0);
 	}
 
-	void Asteroid::Render()
+	void Asteroid::render()
 	{
 		glUseProgram(m_Program);
 		glBindVertexArray(m_vao);
@@ -61,7 +60,7 @@ namespace byhj
 		glUseProgram(0);
 	}
 
-	void Asteroid::Shutdown()
+	void Asteroid::shutdown()
 	{
 	}
 
@@ -99,9 +98,9 @@ namespace byhj
 			modelMatrices[i] = model;
 		}
 
-		for (GLuint i = 0; i < m_Model.getMeshCount(); i++)
+		for (GLuint i = 0; i < ModelMgr::getInstance()->getMeshCount("rock/rock.obj") ; i++)
 		{
-			m_vao = m_Model.getMeshVAO(i);
+			m_vao = ModelMgr::getInstance()->getMeshVAO("rock/rock.obj", i);
 
 			GLuint buffer;
 			glBindVertexArray(m_vao);

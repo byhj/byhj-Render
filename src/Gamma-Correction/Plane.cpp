@@ -39,7 +39,7 @@ namespace byhj
 	void Plane::init()
 	{
 
-		m_LightGUI.v_init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
+		m_LightGUI.v_init();
 
 		init_buffer();
 		init_vertexArray();
@@ -84,17 +84,18 @@ namespace byhj
 	{
 
 
-		glUseProgram(program);
-		glBindVertexArray(vao);
+		//glUseProgram(program);
+		//glBindVertexArray(vao);
+		//
+		//auto lightIndex = m_LightGUI.getLightModel();
+		//glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &uniform_loc.lightSub[lightIndex]);
+		//
+		//glDrawArrays(GL_TRIANGLES, 0, 6);	
+		//
+		//glBindVertexArray(0);
+		//glUseProgram(0);
 
-		auto lightIndex = m_LightGUI.getLightModel();
-		glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &uniform_loc.lightSub[lightIndex]);
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);	
-
-		glBindVertexArray(0);
-		glUseProgram(0);
-
+		glEnable(GL_CULL_FACE);
 		m_LightGUI.v_render();
 	}
 
