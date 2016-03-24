@@ -19,6 +19,10 @@ namespace byhj
 		TwEnumVal FogType[3] ={ { FOG_LINEAR, "Linear" }, { FOG_EXP, "exp"}, { FOG_EXP2, "exp2" }, };
 		TwType fogType = TwDefineEnum("FogType", FogType, 3);
 		TwAddVarRW(pBar, "FogModel", fogType, &m_fogModel, " keyIncr='<' keyDecr='>' help='Change Light Model.' ");
+		
+		TwEnumVal BaseType[2] ={ { BASE_PLANE, "plane" },{ BASE_RANGE, "range" } };
+		TwType baseType = TwDefineEnum("BaseType", BaseType, 2);
+		TwAddVarRW(pBar, "BaseModel", baseType, &m_baseModel, " keyIncr='<' keyDecr='>' help='Change Base Model.' ");
 
 	}
 

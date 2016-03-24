@@ -3,7 +3,7 @@
 
 namespace byhj
 {
-	static const int ASTEROID_AMOUNT = 1000;
+	static const int ASTEROID_AMOUNT = 100;
 
 	void Asteroid::init()
 	{

@@ -13,11 +13,11 @@ in VS_OUT {
 
 
 uniform sampler2D box_tex;
-uniform float u_fogStart = -1.0f;
-uniform float u_fogEnd = 1.0f;
-uniform vec4  u_fogColor = vec4(0.5f, 0.5f, 0.5f, 0.5f);
+uniform float  u_fogStart = -1.0f;
+uniform float  u_fogEnd = 1.0f;
+uniform vec4   u_fogColor = vec4(0.5f, 0.5f, 0.5f, 0.5f);
 uniform float  u_fogDensity = 1.0f;
-uniform vec3  u_camPos = vec3(0.0f, 0.0f, 3.0f);
+uniform vec3   u_camPos = vec3(0.0f, 0.0f, 3.0f);
 
 uniform int   u_fogMode = 0; //0:linear, 1:exponential, 2:exponential square
 uniform int   u_baseMode = 0; //0:plane based, 1:range based

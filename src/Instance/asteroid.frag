@@ -15,7 +15,7 @@ uniform vec3 u_ViewPos  = vec3(0.0f, 0.0f, 3.0f);
  
 void main(void)
 {
-   vs_out.Normal = normalize(vs_out.Normal);
+   normalize(vs_out.Normal);
    vec3 diffuseColor = texture2D(texture_diffuse, vs_out.TexCoord).rgb;
 
    //diffuse

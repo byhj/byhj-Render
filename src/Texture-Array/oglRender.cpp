@@ -28,10 +28,6 @@ namespace byhj {
 		static const GLfloat one[] ={1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		//We enable the blend func, so the texture black area can blend with backgroud
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 		m_plane.render();
 	}
 

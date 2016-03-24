@@ -36,7 +36,7 @@ namespace byhj
 		}uniform_loc;
 
 		GLuint m_vao;
-		GLfloat m_Aspect = 1.0f;
+		GLfloat m_Aspect = 1.5f;
 		OGLShader m_AsteroidShader = "Asteroid Shader";
 		GLuint m_Program;
 		LightGui m_LightGui;

@@ -31,7 +31,7 @@ namespace byhj
 		}uniform_loc;
 
 		GLuint m_vao;
-		GLfloat m_Aspect = 1.0f;
+		GLfloat m_Aspect = 1.5f;
 		OGLShader m_PlanetShader = "Planet Shader";
 		GLuint m_Program;
 	};

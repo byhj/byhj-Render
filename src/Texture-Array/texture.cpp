@@ -24,9 +24,13 @@ void Texture::init()
 
 void Texture::render()
 {
+
+	//We enable the blend func, so the texture black area can blend with backgroud
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glUseProgram(program);
 	glBindVertexArray(vao);
-
 
 	glUniform1i(tex_loc, 0);
 	glActiveTexture(GL_TEXTURE0);

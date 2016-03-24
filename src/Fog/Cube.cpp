@@ -160,7 +160,7 @@ namespace byhj
 		glUniform1f(uniformLoc.fogEnd, m_fogGui.getFogEnd());
 		glUniform1f(uniformLoc.fogDensity, m_fogGui.getFogDensity());
 		glUniform4fv(uniformLoc.fogColor, 1, m_fogGui.getFogColor());
-
+		//std::cout << m_fogGui.getFogModel() << std::endl;
 		glUniform1i(uniformLoc.fogModel, m_fogGui.getFogModel());
 		glUniform1i(uniformLoc.baseModel, m_fogGui.getBaseModel());
 
@@ -203,8 +203,8 @@ namespace byhj
 	  uniformLoc.fogStart = glGetUniformLocation(m_program, "u_fogStart");
 	  uniformLoc.fogEnd = glGetUniformLocation(m_program, "u_fogEnd");
 	  uniformLoc.fogDensity = glGetUniformLocation(m_program, "u_fogDensity");
-	  uniformLoc.fogModel = glGetUniformLocation(m_program, "u_fogModel");
-	  uniformLoc.baseModel = glGetUniformLocation(m_program, "u_baseModel");
+	  uniformLoc.fogModel = glGetUniformLocation(m_program, "u_fogMode");
+	  uniformLoc.baseModel = glGetUniformLocation(m_program, "u_baseMode");
 	  uniformLoc.boxTex  = glGetUniformLocation(m_program, "u_boxTex");
 
 	}
