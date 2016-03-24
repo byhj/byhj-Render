@@ -28,6 +28,7 @@ namespace byhj {
 		static const GLfloat one[] ={1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
+		glDisable(GL_DEPTH_TEST);
 		m_plane.render();
 	}
 

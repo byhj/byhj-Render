@@ -93,30 +93,55 @@ Use normal texture to make the normal mapping effect.
 
 ---
 ## Fog (OpenGL3+)
-
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/fog.png">
 ---
 ## Environment Mapping (OpenGL3+)
 
 ---
 ## Bezier (OpenGL3+)
-
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ber.png">
 ---
 ## GUI
+---
+
+## Skybox
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/skybox.png>
 
 ---
 ## Rim-Light (OpenGL3+)
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/rim.png">
 
 ---
+
+## Sprites
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/sprite.png">
 ## SSAO (OpenGL3+)
 
 ---
+
+## Texture-Array
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/tessarray.png">
+
+---
+
+## Texture-Light
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/textLight.png">
+
+---
+
+## Toon Mapping
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/toon.png">
+
+---
+
 ## Shadow Mapping (OpenGL3+)
 
 ---
 ## Sprites (OpenGL3+)
 
 ---
-## Tessellation (OpenGL3+)
+## Tessellation-Triangle (OpenGL3+)
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/tess.png">
 
 ---
 ## Fur (OpenGL3+)
