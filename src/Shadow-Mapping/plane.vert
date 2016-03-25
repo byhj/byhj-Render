@@ -20,7 +20,7 @@ uniform mat4 lightSpaceMatrix;
 void main()
 {
 
-    vs_out.FragPos = vec3(model * vec4(position, 1.0));
+    vs_out.FragPos = vec3(model  * vec4(position, 1.0));
     vs_out.Normal = transpose(inverse(mat3(model))) * normal;
     vs_out.TexCoords = texCoords;
     vs_out.FragPosLightSpace = lightSpaceMatrix * vec4(vs_out.FragPos, 1.0);

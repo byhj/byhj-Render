@@ -23,21 +23,12 @@ namespace byhj
 		void v_render() override;
 		void v_update() override;
 		void v_shutdown() override;
-
-		bool getGamma();
-		LightModel getLightModel();
-		glm::vec3 getLight(int index);
+        glm::vec3 getLightDir();
 
 	private:
-		
-		glm::vec3 m_LightColors[4] =
-		{
-			glm::vec3(0.5f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 0.5f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 0.5f),
-			glm::vec3(0.5f, 0.5f, 0.0f)
-		};
+	
 
+		glm::vec3 m_lightDir = glm::vec3(0.5, -3.0, -1.0);
 		GLboolean  m_Gamma = false;
 		LightModel m_LightModel = LIGHT_PHONG;
 	};

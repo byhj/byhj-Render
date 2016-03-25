@@ -28,6 +28,7 @@ namespace byhj
 		init_buffer();
 		init_shader();
 		init_fbo();
+		m_lightGui.v_init();
 	}
 
 	void MeshLoad::Update()
@@ -37,14 +38,14 @@ namespace byhj
 
 	void MeshLoad::Render()
 	{
-
+		auto aspect = WindowInfo::getInstance()->getAspect();
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), 180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
-		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
+		glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 
 		GLfloat near_plane = 0.1f, far_plane = 100.0f;
 		glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-		glm::vec3 lightPos(0.0f, 5.0f, 3.0f);
+		glm::vec3 lightPos  = -m_lightGui.getLightDir();
 		glm::vec3 camPos = OGLEulerCamera::getInstance()->getPos();
 
 		glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0f, 1.0, 0.0f));
@@ -60,16 +61,17 @@ namespace byhj
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 		ModelMgr::getInstance()->render(shadowProgram);
-		glBindVertexArray(planeVAO);
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		
-		glBindVertexArray(0);
+		//glBindVertexArray(planeVAO);
+		//
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		//
+		//glBindVertexArray(0);
 		glUseProgram(0);
 		
 		/////////////////////////////////////////////////////////////////////////////
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClearColor(0.2f, 0.3f, 0.5f, 1.0f);
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(lightProgram);
@@ -102,6 +104,7 @@ namespace byhj
 		glBindVertexArray(0);
 
 		glUseProgram(0);
+		m_lightGui.v_render();
 	}
 
 	void MeshLoad::Shutdown()
@@ -150,7 +153,7 @@ namespace byhj
 		lightProgram = PlaneShader.getProgram();
 		texLocs[0] = glGetUniformLocation( lightProgram, "diffuseTexture");
 		texLocs[1] = glGetUniformLocation(lightProgram, "shadowMap");
-		planeTex = TextureMgr::getInstance()->loadOGLTexture("wood.png");
+		planeTex = TextureMgr::getInstance()->loadOGLDDS("grass.dds");
 		benchTex = TextureMgr::getInstance()->loadOGLTexture("wood.png");
 	}
 

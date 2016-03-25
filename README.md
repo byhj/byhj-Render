@@ -83,11 +83,7 @@ base part(DirectX12 & Vulkan).
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/Terrain-height.png">
 
 ---
-## Normal Mapping (OpenGL3+)
-　　Use normal texture to make the normal mapping effect.
-<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ogl-normal-map.png">
 
----
 ## Skybox (OpenGL3+ & DirectX11)
 Use normal texture to make the normal mapping effect.
 
@@ -101,11 +97,13 @@ Use normal texture to make the normal mapping effect.
 ## Bezier (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ber.png">
 ---
-## GUI
----
+
+## Normal Mapping (OpenGL3+)
+　　Use normal texture to make the normal mapping effect.
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ogl-normal-map.png">
 
 ## Skybox
-<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/skybox.png>
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/skybox.png">
 
 ---
 ## Rim-Light (OpenGL3+)
@@ -135,7 +133,7 @@ Use normal texture to make the normal mapping effect.
 ---
 
 ## Shadow Mapping (OpenGL3+)
-
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/shadow-mapping.png">
 ---
 ## Sprites (OpenGL3+)
 
@@ -145,6 +143,10 @@ Use normal texture to make the normal mapping effect.
 
 ---
 ## Fur (OpenGL3+)
+---
+
+## GUI
+
 
 ---
 ## Instance Draw (OpenGL3+)

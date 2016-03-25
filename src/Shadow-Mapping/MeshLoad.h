@@ -11,6 +11,7 @@
 
 #include "utility.h"
 #include "ogl/oglShader.h"
+#include "LightGUI.h"
 
 namespace byhj
 {
@@ -46,7 +47,7 @@ namespace byhj
 		GLuint texLocs[2];
 
 		GLuint lightProgram, shadowProgram;
-
+		LightGui m_lightGui;
 	};
 }
 #endif
