@@ -17,6 +17,7 @@ $RECYCLE.BIN/
 *.jpg
 *.mtl
 *.ttf
+*.tga
 
 # Windows shortcuts
 *.lnk
