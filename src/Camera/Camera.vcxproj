@@ -130,6 +130,7 @@
     <ClCompile Include="..\..\include\ogl\oglMesh.cpp" />
     <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglSphereCamera.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
     <ClCompile Include="..\byhj-Render\camera.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="..\..\include\ogl\oglMesh.h" />
     <ClInclude Include="..\..\include\ogl\oglModel.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
+    <ClInclude Include="..\..\include\ogl\oglSphereCamera.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
     <ClInclude Include="..\byhj-Render\camera.h" />
     <ClInclude Include="..\byhj-Render\font.h" />

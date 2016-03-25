@@ -23,12 +23,17 @@
 
 #define USE_ANT
 #define USE_FONT
+#define USE_CAMERA
 
 #ifdef USE_CEGUI
 #include "ogl/oglCEGUI.h"
 #endif
 
+
+#ifdef USE_CAMERA
 #include "ogl/oglEulerCamera.h"
+#include "ogl/oglSphereCamera.h"
+#endif
 
 namespace byhj 
 {

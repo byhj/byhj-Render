@@ -157,6 +157,9 @@
     <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp">
       <Filter>Render\ogl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglSphereCamera.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="oglRender.h">
@@ -268,6 +271,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglEulerCamera.h">
+      <Filter>Render\ogl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglSphereCamera.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
   </ItemGroup>

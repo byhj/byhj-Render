@@ -5,6 +5,7 @@
 #include "MeshLoad.h"
 #include "windowInfo.h"
 #include "ogl/oglEulerCamera.h"
+#include "ogl/oglSphereCamera.h"
 
 #include <memory>
 #include <gl/glew.h>

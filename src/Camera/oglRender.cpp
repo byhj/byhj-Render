@@ -26,9 +26,10 @@ namespace byhj
 		GLfloat deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		OGLEulerCamera::getInstance()->update(deltaTime);
-
-		m_MeshLoad.Update(OGLEulerCamera::getInstance()->getViewMat());
+		//OGLEulerCamera::getInstance()->update(deltaTime);
+		OGLSphereCamera::getInstance()->update();
+		glm::mat4 view = OGLSphereCamera::getInstance()->getViewMat();
+		m_MeshLoad.Update(view);
 	}
 
     void OGLRender::v_render()

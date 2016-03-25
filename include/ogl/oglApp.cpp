@@ -23,12 +23,16 @@ void OGLApp::v_keyCallback(GLFWwindow* window, int key, int scancode, int action
 void OGLApp::v_movement(GLFWwindow *window) {
 	OGLEulerCamera::getInstance()->movement(window);
 }
+
 void OGLApp::v_mouseCallback(GLFWwindow* window, double xpos, double ypos)
 {
+	OGLSphereCamera::getInstance()->mouse_callback(window, xpos, ypos);
 	OGLEulerCamera::getInstance()->mouse_callback(window, xpos, ypos);
 }
 
 void OGLApp::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+
+	OGLSphereCamera::getInstance()->scroll_callback(window, xoffset, yoffset);
 	OGLEulerCamera::getInstance()->scroll_callback(window, xoffset, yoffset);
 }
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -67,6 +71,7 @@ void OGLApp::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset
 	////////////////////////////////////////////////////////////////////////////////////////
 	void OGLApp::glfw_mouseButton(GLFWwindow *window, int x, int y, int z)
 	{
+		OGLSphereCamera::getInstance()->mouseButton_callback(window, x, y, z);
 		TwEventMouseButtonGLFW(x, y);
 	}
 	void OGLApp::glfw_char(GLFWwindow *window, unsigned int x)
