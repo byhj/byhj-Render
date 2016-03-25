@@ -32,7 +32,7 @@
 
 #ifdef USE_CAMERA
 #include "ogl/oglEulerCamera.h"
-#include "ogl/oglSphereCamera.h"
+//#include "ogl/oglSphereCamera.h"
 #endif
 
 namespace byhj 

@@ -165,8 +165,12 @@ namespace byhj
 		return textureID;
 	}
 
-	void  TextureMgr::loadOGLTexture(std::vector<std::string> &texArray)
+	GLuint TextureMgr::loadOGLTexture(std::vector<std::string> &texArray)
 	{
+		if (m_oglTextures.find(texArray[0]) != m_oglTextures.end()) {
+		  return m_oglTextures[texArray[0]];
+		}
+
 		GLuint texId;
 		glCreateTextures(GL_TEXTURE_2D_ARRAY, 1, &texId);
 		glTextureStorage3D(texId, 1, GL_RGBA32F, 512, 512, texArray.size());
@@ -183,9 +187,13 @@ namespace byhj
 
 		m_oglTextures.insert(std::make_pair(texArray[0], texId));
 
+		return texId;
 	}
-	void TextureMgr::loadOGLTexture(std::string texName, std::vector<std::string> &faces)
+	GLuint TextureMgr::loadOGLTexture(std::string texName, std::vector<std::string> &faces)
 	{
+		if (m_oglTextures.find(texName) != m_oglTextures.end()) {
+			return m_oglTextures[texName];
+		}
 		int width = 0, height = 0;
 
 		GLuint tex = SOIL_load_OGL_cubemap(
@@ -210,6 +218,7 @@ namespace byhj
 
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
+		return tex;
 	}
 	 ID3D11ShaderResourceView * TextureMgr::loadD3DTexture(ID3D11Device *pD3D11Device, std::string filename)
 	{
