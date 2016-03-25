@@ -99,9 +99,9 @@ Use normal texture to make the normal mapping effect.
 ---
 
 ## Normal Mapping (OpenGL3+)
-　　Use normal texture to make the normal mapping effect.
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ogl-normal-map.png">
 
+---
 ## Skybox
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/skybox.png">
 
