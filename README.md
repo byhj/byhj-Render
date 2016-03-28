@@ -1,6 +1,6 @@
 # byhj-Render
 
-　　　Welcome，this is a render by byhj. I write it by using OpenGL3+ and DirectX11. I classify this project by the book of real-time rending chapter.
+　　　Welcome，this is a render by byhj. I write it by using OpenGL3+ and DirectX11. I classify this project by the book of real-time rending.
 
 ---
 
@@ -17,6 +17,10 @@ base part(DirectX12 & Vulkan).
 ## Utility:
    The utility show the render some part how it work. It include camera, gui, font, audio, mesh, texture, window.
 
+For the OpenGL:
+
+For the DirectX:
+　　The D3DX is not include since Windows8+, so the d3dx support part is use old dx sdk.
 ---
 
 # Requirements
@@ -147,13 +151,15 @@ Use normal texture to make the normal mapping effect.
 
 ## GUI
 
-
 ---
 ## Instance Draw (OpenGL3+)
+
 ---
 ## Water
+
 ---
 ## Screen-Fades (DirectX11)
+
 ---
 ## MSAA
 ---
