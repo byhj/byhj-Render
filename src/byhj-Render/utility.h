@@ -5,6 +5,7 @@
 #include <gl/glew.h>
 #include <glm/glm.hpp>
 #include <DirectXMath.h>
+#include <iostream>
 
 using namespace DirectX;
 
@@ -40,14 +41,17 @@ enum  FontType {
 	D3D_FT_FONT  // Freetype
 };
 
-bool test(bool, std::string, int, char*);
+bool test(bool expression, std::string desc, int line, char* file, bool ignore);
 
 #ifdef _DEBUG
-#define CHECK_OGL_UNIFORM(exp , description) \
-        if (test( (int)exp, description, __LINE__, __FILE__) \
-    {_asm{int 3} }
+#define CHECK_OGL_UNIFORM(expression, description) \
+     { static bool ignoreAlways = false; \
+        if (!ignoreAlways) \
+          if (test( (int)expression, description, __LINE__, __FILE__, &ignoreAlways)) \
+             {_asm{int 3} } \
+	 }
 #else
-#define CHECK_OGL_UNIFORM(exp, description)
+#define CHECK_OGL_UNIFORM(expression, description)
 #endif
 
 

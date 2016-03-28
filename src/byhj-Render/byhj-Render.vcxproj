@@ -21,16 +21,16 @@
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
-    <ClCompile Include="..\..\include\d3d\d3dCEGUI.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dMesh.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dModel.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglCamera.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglCEGUI.cpp" />
     <ClCompile Include="..\..\include\ogl\oglContext.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp" />
     <ClCompile Include="..\..\include\ogl\oglFTFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglMesh.cpp" />
     <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
@@ -44,7 +44,6 @@
     <ClCompile Include="modelMgr.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="render.cpp" />
-    <ClCompile Include="resourceMgr.cpp" />
     <ClCompile Include="root.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shaderMgr.cpp" />
@@ -57,17 +56,16 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
-    <ClInclude Include="..\..\include\d3d\d3dCEGUI.h" />
+    <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFWFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
     <ClInclude Include="..\..\include\d3d\d3dModel.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />
+    <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dUtility.h" />
-    <ClInclude Include="..\..\include\d3d\d3dx12.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
-    <ClInclude Include="..\..\include\ogl\oglCamera.h" />
-    <ClInclude Include="..\..\include\ogl\oglCEGUI.h" />
     <ClInclude Include="..\..\include\ogl\oglContext.h" />
+    <ClInclude Include="..\..\include\ogl\oglEulerCamera.h" />
     <ClInclude Include="..\..\include\ogl\oglFTFont.h" />
     <ClInclude Include="..\..\include\ogl\oglMesh.h" />
     <ClInclude Include="..\..\include\ogl\oglModel.h" />
@@ -81,7 +79,6 @@
     <ClInclude Include="modelMgr.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="render.h" />
-    <ClInclude Include="resourceMgr.h" />
     <ClInclude Include="root.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="shaderMgr.h" />

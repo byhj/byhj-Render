@@ -28,7 +28,7 @@ namespace byhj
 	{
 	public:
 		TextureMgr();
-	   ~TextureMgr();
+	   virtual ~TextureMgr();
 
 	   static std::shared_ptr<TextureMgr>  getInstance();
 

@@ -4,6 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "ogl/oglDebug.h"
+#include "utility.h"
 
 namespace byhj
 {
@@ -137,6 +138,9 @@ namespace byhj
 		model_loc = glGetUniformLocation(program, "model");
 		view_loc  = glGetUniformLocation(program, "view");
 		proj_loc  = glGetUniformLocation(program, "proj");
+		assert(model_loc == -1);
+
+		//CHECK_OGL_UNIFORM( (model_loc != -1),  "Error model is not -1");
 	}
 
 	void Cube::init_buffer()
