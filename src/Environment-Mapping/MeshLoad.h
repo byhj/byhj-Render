@@ -1,5 +1,6 @@
 #ifndef MeshLoad_H
 #define MeshLoad_H
+#include<cassert>
 
 #include "ogl/oglShader.h"
 #include <gl/glew.h>
@@ -34,4 +35,4 @@ namespace byhj {
 
 }
 
-#endif
+#endif                                   

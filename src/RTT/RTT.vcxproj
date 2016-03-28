@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8D5ACADB-9ABF-498A-9304-E787C38D7C88}</ProjectGuid>
-    <RootNamespace>Window</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{6A79DED2-1335-4285-9052-18B3B506C085}</ProjectGuid>
+    <RootNamespace>RTT</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -121,13 +121,12 @@
     <ClCompile Include="..\..\include\d3d\d3dSphereCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp" />
     <ClCompile Include="..\..\include\ogl\oglApp.cpp" />
-    <ClCompile Include="..\..\include\ogl\oglContext.cpp" />
     <ClCompile Include="..\..\include\ogl\oglEulerCamera.cpp" />
     <ClCompile Include="..\..\include\ogl\oglFTFont.cpp" />
     <ClCompile Include="..\..\include\ogl\oglMesh.cpp" />
     <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
-    <ClCompile Include="..\..\include\ogl\win32App.cpp" />
+    <ClCompile Include="..\..\include\ogl\oglUtility.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
     <ClCompile Include="..\byhj-Render\camera.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
@@ -144,11 +143,12 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="d3d12Render.cpp" />
     <ClCompile Include="d3d11Render.cpp" />
+    <ClCompile Include="d3dRTT.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="oglWin32App.cpp" />
+    <ClCompile Include="oglRTT.cpp" />
+    <ClCompile Include="plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -158,17 +158,15 @@
     <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
     <ClInclude Include="..\..\include\d3d\d3dModel.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />
-    <ClInclude Include="..\..\include\d3d\d3dSPFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dUtility.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
-    <ClInclude Include="..\..\include\ogl\oglContext.h" />
     <ClInclude Include="..\..\include\ogl\oglEulerCamera.h" />
     <ClInclude Include="..\..\include\ogl\oglFTFont.h" />
     <ClInclude Include="..\..\include\ogl\oglMesh.h" />
     <ClInclude Include="..\..\include\ogl\oglModel.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
-    <ClInclude Include="..\..\include\ogl\win32App.h" />
+    <ClInclude Include="..\..\include\ogl\oglUtility.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
     <ClInclude Include="..\byhj-Render\camera.h" />
     <ClInclude Include="..\byhj-Render\font.h" />
@@ -185,10 +183,21 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="d3d12Render.h" />
     <ClInclude Include="d3d11Render.h" />
+    <ClInclude Include="d3dRTT.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="oglWin32App.h" />
+    <ClInclude Include="oglRTT.h" />
+    <ClInclude Include="plane.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rtt.frag" />
+    <None Include="rtt.vert" />
+    <None Include="plane.frag" />
+    <None Include="plane.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="rtt.psh" />
+    <FxCompile Include="rtt.vsh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

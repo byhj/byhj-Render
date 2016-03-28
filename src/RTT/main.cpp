@@ -1,9 +1,9 @@
 #include "oglRender.h"
 #include "root.h"
 
-#ifdef _DEBUG
-#include <vld.h>
-#endif
+// #ifdef _DEBUG
+// #include <vld.h>
+// #endif
 
 int main()
 {

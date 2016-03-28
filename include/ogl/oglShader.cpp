@@ -88,7 +88,7 @@ void OGLShader::attach(int type, const char* filename)
 	if (!compileSuccess) 
 	{
 		glGetShaderInfoLog(handle, sizeof(compilerSpew), 0, compilerSpew);
-		printf("OGLShader%s\n%s\ncompileSuccess=%d\n",filename, compilerSpew, compileSuccess);
+		printf("OGLShader: %s\n%s\ncompileSuccess=%d\n",filename, compilerSpew, compileSuccess);
 
 		while(1);;
 	}

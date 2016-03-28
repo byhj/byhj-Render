@@ -19,13 +19,11 @@ namespace byhj
 	};
 
 
-	const GLuint VALUE = 0xffffffff;
-
+	const GLuint OGLVALUE = 0xffffffff;
 }
 
-#define BUFFER_OFFSET(offset) ((GLvoid*)(NULL + offset))
 #define ARRAY_ELEMENTS(a) ( sizeof(a)/sizeof(a[0]) )
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
-
+#define GL_BUFFER_OFFSET(offset)  (GLvoid*)(NULL + offset) 
 
 #endif
