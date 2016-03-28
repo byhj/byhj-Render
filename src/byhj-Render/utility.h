@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <DirectXMath.h>
 #include <iostream>
+#include <random>
 
 using namespace DirectX;
 
@@ -25,6 +26,14 @@ namespace byhj
 		*((unsigned int *)&res) = (tmp >> 9) | 0x3F800000;
 
 		return (res - 1.0f);
+	}
+
+	float ramdom()
+	{
+		static std::default_random_engine generator;
+	    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
+		double number = distribution(generator);
+    
 	}
 
 #define ARRAY_SIZE(arr) sizeof(arr) / sizeof(arr[0])
