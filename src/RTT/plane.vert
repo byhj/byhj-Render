@@ -11,6 +11,6 @@ out VS_OUT {
 
 void main()
 {
-   vs_out.texcoord = g_texcoord;
+   vs_out.texcoord = g_texcoord * 5.0f;
    gl_Position = u_mvp * vec4(g_position, 1.0f);
 }

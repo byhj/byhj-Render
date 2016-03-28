@@ -3,10 +3,12 @@
 namespace byhj {
 
 
-bool test(bool expression, std::string desc, int line, char* file)
+bool checkOGLUniform(bool expression, std::string desc, int line, char* file, bool ignore)
 {
-	std::cout << desc << " On " << line << " " << file << std::endl;
-	return expression;
+	if (expression != true) {
+		std::cout << desc << " On " << line << " " << file << std::endl;
+	}
+	return true;
 }
 
 }

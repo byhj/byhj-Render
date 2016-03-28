@@ -20,6 +20,7 @@ namespace byhj {
 		glUseProgram(m_program);
 		glBindVertexArray(m_vao);
 
+		glUniform1i(tex_loc, 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, rttTex);
 
@@ -37,14 +38,13 @@ namespace byhj {
 		GLfloat w = size.x;
 		GLfloat h = size.y;
 		// Update VBO for each character
-		GLfloat VertexData[6][4] ={
-			{ pos.x,     pos.y + h,   0.0, 0.0 },
-			{ pos.x,     pos.y,       0.0, 1.0 },
-			{ pos.x + w, pos.y,       1.0, 1.0 },
-
-			{ pos.x,     pos.y + h,   0.0, 0.0 },
-			{ pos.x + w, pos.y,       1.0, 1.0 },
-			{ pos.x + w, pos.y + h,   1.0, 0.0 }
+		GLfloat VertexData[6][5] ={
+			{ pos.x,     pos.y + h,  0.0f,  0.0, 0.0 },
+			{ pos.x,     pos.y,      0.0f,  0.0, 1.0 },
+			{ pos.x + w, pos.y,      0.0f,  1.0, 1.0 },
+			{ pos.x,     pos.y + h,  0.0f,  0.0, 0.0 },
+			{ pos.x + w, pos.y,      0.0f,  1.0, 1.0 },
+			{ pos.x + w, pos.y + h,  0.0f,  1.0, 0.0 }
 		};
 		for (int i = 0; i != m_IndexCount; ++i) {
 		    m_IndexData.push_back(i);
@@ -88,6 +88,6 @@ namespace byhj {
 		m_rttShader.link();
 		m_rttShader.info();
 		m_program = m_rttShader.getProgram();
-
+		tex_loc = glGetUniformLocation(m_program, "u_tex");
 	}
 }

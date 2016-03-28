@@ -28,6 +28,7 @@ namespace byhj {
 		GLuint m_vbo = OGLVALUE;
 		GLuint m_ibo = OGLVALUE;
 		GLuint m_program = OGLVALUE;
+		GLuint tex_loc;
 		OGLShader m_rttShader = "OGLRTT Shader";
 		std::vector<GLuint> m_IndexData;
 		std::vector<GLfloat> m_VertexData;

@@ -34,11 +34,42 @@ namespace byhj
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 		drawInfo();
+		//////////////////////////////////////////////////////////////////
+		float bgColor[] ={ 0.5f, 0.5f, 0.5f, 1.0f };
+		m_pD3D11DeviceContext->OMSetRenderTargets(1, &pRttRenderTargetView, m_pDepthStencilView.Get());
+		m_pD3D11DeviceContext->ClearRenderTargetView(pRttRenderTargetView, bgColor);
+		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-#ifdef USE_CEGUI
-		D3DCEGUI::getInstance()->render();
-#endif
+		XMMATRIX objectModel = XMMatrixTranslation(0.0f, -1.0f, 0.0f);
+		XMStoreFloat4x4(&m_Matrix.Model, XMMatrixTranspose(objectModel));
+		ObjModel.Render(m_pD3D11DeviceContext.Get(), m_Matrix.Model, m_Matrix.View, m_Matrix.Proj);
+		m_pD3D11DeviceContext->OMSetBlendState(0, 0, 0xffffffff);
 
+		m_pD3D11DeviceContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
+		////////////////////////////////////////////////////////
+
+		BeginScene();
+
+		ObjModel.Render(m_pD3D11DeviceContext.Get(), m_Matrix.Model, m_Matrix.View, m_Matrix.Proj);
+
+		XMMATRIX sphereWorld = XMMatrixIdentity();
+		m_Matrix.View._14 = 0.0f;
+		m_Matrix.View._24 = 0.0f;
+		m_Matrix.View._34 = 0.0f;
+		m_Matrix.View._41 = 0.0f;
+		m_Matrix.View._42 = 0.0f;
+		m_Matrix.View._43 = 0.0f;
+		XMStoreFloat4x4(&m_Matrix.Model, XMMatrixTranspose(sphereWorld));
+
+		m_Skymap.Render(m_pD3D11DeviceContext.Get(), m_Matrix);
+
+		///////////////////////////////////////////////////////
+
+		// Create an orthographic projection matrix for 2D rendering. 
+		XMMATRIX tProj = XMMatrixOrthographicLH(2.0f, 2.0f, 0.1f, 1000.0f);
+		XMFLOAT4X4 ortho;
+		XMStoreFloat4x4(&ortho, XMMatrixTranspose(tProj));
+		d3dRtt.Render(m_pD3D11DeviceContext.Get(), pRttShaderResourceView, m_Matrix.Model, m_Matrix.View, ortho);
 		m_pSwapChain->Present(0, 0);
 	}
 
@@ -171,9 +202,8 @@ namespace byhj
     {
     	m_Timer.reset();
     	m_Font.init(m_pD3D11Device);
-#ifdef USE_CEGUI 
-		D3DCEGUI::getInstance()->init(m_pD3D11Device, m_pD3D11DeviceContext);
-#endif
+		m_d3dRTT.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
+		m_d3dRTT.init_window(getClientWidth(), getClientHeight(), 0, 0, 300, 300);
     }
     
 	void D3D11Render::drawfps()
@@ -209,5 +239,42 @@ namespace byhj
      	m_Font.render(m_pD3D11DeviceContext, WinInfo, 20.0f, 10.0f, 10.0f);
      	m_Font.render(m_pD3D11DeviceContext, m_videoCardInfo.c_str(), 20.0f, 10.0f, 40.0f);
     }
+	void D3D11Render::init_fbo()
+	{
 
+		D3D11_TEXTURE2D_DESC textureDesc;
+		HRESULT result;
+		D3D11_RENDER_TARGET_VIEW_DESC renderTargetViewDesc;
+		D3D11_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc;
+
+		ZeroMemory(&textureDesc, sizeof(textureDesc));
+		textureDesc.Width = getClientWidth();
+		textureDesc.Height = getClientHeight();
+		textureDesc.MipLevels  = 1;
+		textureDesc.ArraySize = 1;
+		textureDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		textureDesc.SampleDesc.Count = 1;
+		textureDesc.Usage = D3D11_USAGE_DEFAULT;
+		textureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+		textureDesc.CPUAccessFlags = 0;
+		textureDesc.MiscFlags = 0;
+
+		//Create the render target texture
+		result = m_pD3D11Device->CreateTexture2D(&textureDesc, NULL, &m_pRttRenderTargetTexture);
+
+
+		//Setup the description of the render target view
+		renderTargetViewDesc.Format = textureDesc.Format;
+		renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+		renderTargetViewDesc.Texture2D.MipSlice = 0;
+
+		result = m_pD3D11Device->CreateRenderTargetView(m_pRttRenderTargetTexture.Get(), &renderTargetViewDesc, m_pRttRenderTargetView.GetAddressOf());
+
+		shaderResourceViewDesc.Format = textureDesc.Format;
+		shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
+		shaderResourceViewDesc.Texture2D.MipLevels = 1;
+		result = m_pD3D11Device->CreateShaderResourceView(m_pRttRenderTargetTexture.Get(), &shaderResourceViewDesc, m_pRttShaderResourceView.GetAddressOf());
+
+	}
 }

@@ -12,14 +12,14 @@ namespace byhj
 		D3DRTT() = default;
 		~D3DRTT() = default;
 
-		void init();
+		void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
 		void render(ID3D11DeviceContext *pD3D11DeviceContext, ID3D11ShaderResourceView *pTexture, const D3DMVPMatrix &matrix);
 		void update();
 		void shutdown();
 
-		void init_window(float posX, float posY, float width, float height, float aspect);
-		bool init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
-		bool init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
+		void init_window(int sw, int sh, int posX, int posY, int width, int height);
+		void init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
+		void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
 
 	private:
 		struct  Vertex
@@ -39,11 +39,15 @@ namespace byhj
 		int m_VertexCount;
 		int m_IndexCount;
 
-		float m_posX  ;
-		float m_posY  ;
-		float m_width ;
-		float m_height;
-		float m_aspect;
+
+		int m_posX;
+		int m_posY;
+		int m_width;
+		int m_height;
+		int m_sw;
+		int m_sh;
+
+		D3DMVPMatrix m_matrix;
 		D3DShader m_D3DRTTShader;
 	};
 

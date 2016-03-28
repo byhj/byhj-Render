@@ -271,13 +271,11 @@
     <None Include="rtt.frag">
       <Filter>Resource Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="rtt.vsh">
+    <None Include="rtt.vsh">
       <Filter>Resource Files</Filter>
-    </FxCompile>
-    <FxCompile Include="rtt.psh">
+    </None>
+    <None Include="rtt.psh">
       <Filter>Resource Files</Filter>
-    </FxCompile>
+    </None>
   </ItemGroup>
 </Project>

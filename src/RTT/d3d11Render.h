@@ -7,12 +7,8 @@
 
 #include <d3d11.h>
 #include <wrl.h>
-
 #include "Timer.h"
-
-#ifndef USE_CEGUI
-#include "d3d/d3dCEGUI.h"
-#endif
+#include "d3dRTT.h"
 
 namespace byhj
 {
@@ -32,11 +28,13 @@ namespace byhj
 		void init_device();
 		void init_camera();
 		void init_object();
-
+		void init_fbo();
 
 		void drawfps();
 		void drawInfo();
 		D3DFWFont m_Font;
+		D3DRTT m_d3dRTT;
+
 		Timer m_Timer;
 
 		float fps = 0.0f;
@@ -50,7 +48,9 @@ namespace byhj
 		ID3D11DepthStencilView * m_pDepthStencilView;
 		ID3D11Texture2D        * m_pDepthStencilBuffer;
 		ID3D11RasterizerState  * m_pRasterState;
-
+		ComPtr<ID3D11Texture2D          > m_pRttRenderTargetTexture;
+		ComPtr<ID3D11RenderTargetView   > m_pRttRenderTargetView;
+		ComPtr<ID3D11ShaderResourceView > m_pRttShaderResourceView;
 	};
 }
 #endif

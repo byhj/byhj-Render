@@ -3,23 +3,29 @@
 namespace byhj
 {
 
-void D3DRTT::init_window(float posX, float posY, float width, float height, float aspect)
+	void D3DRTT::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
+	{
+		init_buffer(pD3D11Device, pD3D11DeviceContext);
+		init_shader(pD3D11Device, hWnd);
+	}
+
+void D3DRTT::init_window(int sw, int sh, int posX, int posY, int width, int height)
 {
 	m_posX  = posX;
 	m_posY  = posY;
-	m_width = width; 
+	m_width = width;
 	m_height = height;
-	m_aspect = aspect;
+	m_sw = sw;
+	m_sh = sh;
 }
 
-void D3DRTT::render(ID3D11DeviceContext *pD3D11DeviceContext, ID3D11ShaderResourceView *pTexture, const XMFLOAT4X4  &Model,
-	const XMFLOAT4X4 &View, const XMFLOAT4X4  &Proj)
+void D3DRTT::render(ID3D11DeviceContext *pD3D11DeviceContext, ID3D11ShaderResourceView *pTexture, const D3DMVPMatrix &matrix)
 {
 
-	cbMatrix.model  = Model;
-	cbMatrix.view   = View;
-	cbMatrix.proj   = Proj;
-	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer, 0, NULL, &cbMatrix, 0, 0 );
+	m_matrix.model  =  matrix.model;
+	m_matrix.view   =  matrix.view;
+	m_matrix.proj   =  matrix.proj;
+	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer, 0, NULL, &m_matrix, 0, 0 );
 	pD3D11DeviceContext->VSSetConstantBuffers( 0, 1, &m_pMVPBuffer);
 
 	unsigned int stride;
@@ -33,12 +39,12 @@ void D3DRTT::render(ID3D11DeviceContext *pD3D11DeviceContext, ID3D11ShaderResour
 	pD3D11DeviceContext->PSSetShaderResources(0, 1, &pTexture);  
 	pD3D11DeviceContext->PSSetSamplers( 0, 1, &m_pTexSamplerState );
 
-	D3DD3DRTTShader.use(pD3D11DeviceContext);
+	m_D3DRTTShader.use(pD3D11DeviceContext);
 	pD3D11DeviceContext->DrawIndexed(m_IndexCount, 0, 0);
 
 }
 
-bool D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
+void D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 {
 	HRESULT hr;
 
@@ -48,16 +54,7 @@ bool D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	m_IndexCount = 6;
 
 	VertexData = new Vertex[m_VertexCount];
-	if (!VertexData)
-	{
-		return false;
-	}
-
 	IndexData = new unsigned long[m_IndexCount];
-	if (!IndexData)
-	{
-		return false;
-	}
 
 	memset(VertexData, 0, sizeof(Vertex) * m_VertexCount);
 
@@ -66,25 +63,37 @@ bool D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 		IndexData[i] = i;
 	}
 
+	// Calculate the screen coordinates of the left side of the bitmap.
+	float left = (float)((m_sw / 2) * -1) + (float)m_posX;
+
+	// Calculate the screen coordinates of the right side of the bitmap.
+	float  right = left + (float)m_width;
+
+	// Calculate the screen coordinates of the top of the bitmap.
+	float  top = (float)(m_sh / 2) - (float)m_posY;
+
+	// Calculate the screen coordinates of the bottom of the bitmap.
+	float  bottom = top - (float)m_height;
+
 	// First triangle.
-	VertexData[0].Pos = XMFLOAT3(m_posX, m_posY, 0.0f);  // Top left.
+	VertexData[0].Pos = XMFLOAT3(left, top, 0.0f);  // Top left.
 	VertexData[0].Tex = XMFLOAT2(0.0f, 0.0f);
 
-	VertexData[1].Pos = XMFLOAT3(m_posX+m_width, m_posY, 0.0f);
-	VertexData[1].Tex = XMFLOAT2(1.0f, 0.0f);
+	VertexData[1].Pos = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
+	VertexData[1].Tex = XMFLOAT2(1.0f, 1.0f);
 
-	VertexData[2].Pos = XMFLOAT3(m_posX+m_width, m_posY-m_height, 0.0f);   //Bottom right
-	VertexData[2].Tex = XMFLOAT2(1.0f, 1.0f);
+	VertexData[2].Pos = XMFLOAT3(left, bottom, 0.0f);  // Bottom left.
+	VertexData[2].Tex = XMFLOAT2(0.0f, 1.0f);
 
-		// Second triangle.	XMFLOAT
-	VertexData[3].Pos = XMFLOAT3(m_posX+m_width, m_posY-m_height, 0.0f);
-	VertexData[3].Tex = XMFLOAT2(1.0f, 1.0f);
+	// Second triangle.
+	VertexData[3].Pos = XMFLOAT3(left, top, 0.0f);  // Bottom left.
+	VertexData[3].Tex = XMFLOAT2(0.0f, 0.0f);
 
-	VertexData[4].Pos = XMFLOAT3(m_posX, m_posY-m_height, 0.0f);
-	VertexData[4].Tex = XMFLOAT2(0.0f, 1.0f);
+	VertexData[4].Pos = XMFLOAT3(right, top, 0.0f); // Top right.
+	VertexData[4].Tex = XMFLOAT2(1.0f, 0.0f);
 
-	VertexData[5].Pos = XMFLOAT3(m_posX, m_posY, 0.0f);
-	VertexData[5].Tex = XMFLOAT2(0.0f, 0.0f);
+	VertexData[5].Pos = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
+	VertexData[5].Tex = XMFLOAT2(1.0f, 1.0f);
 
 
 	///////////////////////////Index Buffer ////////////////////////////////
@@ -133,7 +142,7 @@ bool D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	D3D11_BUFFER_DESC mvpBufferDesc;	
 	ZeroMemory(&mvpBufferDesc, sizeof(D3D11_BUFFER_DESC));
 	mvpBufferDesc.Usage          = D3D11_USAGE_DEFAULT;
-	mvpBufferDesc.ByteWidth      = sizeof(MatrixBuffer);
+	mvpBufferDesc.ByteWidth      = sizeof(D3DMVPMatrix);
 	mvpBufferDesc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
 	mvpBufferDesc.CPUAccessFlags = 0;
 	mvpBufferDesc.MiscFlags      = 0;
@@ -160,11 +169,10 @@ bool D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	hr = pD3D11Device->CreateSamplerState(&samplerDesc, &m_pTexSamplerState);
 	DebugHR(hr);
 
-	return true;
 }
 
 
-bool D3DRTT::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
+void D3DRTT::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 {
 	HRESULT result;
 	std::vector<D3D11_INPUT_ELEMENT_DESC> vInputLayoutDesc;
@@ -187,12 +195,11 @@ bool D3DRTT::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 	pInputLayoutDesc.InstanceDataStepRate = 0;
 	vInputLayoutDesc.push_back(pInputLayoutDesc);
 
-	m_D3DRTTShader.init(pD3D11Device, hWnd);
-	m_D3DRTTShader.attach(D3D_VERTEX_SHADER, L"D3DRTT.vsh", "main);
-	m_D3DRTTShader.attach(D3D_PIXEL_SHADER,  L"D3DRTT.psh");
+	m_D3DRTTShader.init(pD3D11Device, vInputLayoutDesc);
+	m_D3DRTTShader.attach(D3D_VERTEX_SHADER, L"D3DRTT.vsh", "RTT_VS", "vs_5_0");
+	m_D3DRTTShader.attach(D3D_PIXEL_SHADER,  L"D3DRTT.psh", "RTT_PS", "ps_5_0");
 	m_D3DRTTShader.end();
 
-	return true;
 }
 
 }

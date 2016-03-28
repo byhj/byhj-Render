@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "textureMgr.h"
+#include "utility.h"
 
 namespace byhj
 {
@@ -25,7 +26,7 @@ void Plane::render(const glm::mat4 &mvp)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glUniform1i(tex_loc, 0);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 	glBindVertexArray(0);
 	glUseProgram(0);
@@ -41,23 +42,27 @@ void Plane::shutdown()
 void Plane::init_shader()
 {
 	PlaneShader.init();
-	PlaneShader.attach(GL_VERTEX_SHADER,   "plane.vert");
+	PlaneShader.attach(GL_VERTEX_SHADER, "plane.vert");
 	PlaneShader.attach(GL_FRAGMENT_SHADER, "plane.frag");
 	PlaneShader.link();
 	PlaneShader.info();
 	m_program = PlaneShader.getProgram();
-	tex_loc = glGetUniformLocation(m_program, "u_tex");
+
+	//assert(tex_loc != 0xffffffff);
+	//	CHECK_OGL_UNIFORM(tex_loc != 0xffffffff, "Texture Location" );
 	mvp_loc = glGetUniformLocation(m_program, "u_mvp");
+	tex_loc = glGetUniformLocation(m_program, "u_tex");
 }
+
 
 void Plane::init_buffer()
 {
 	GLfloat VertexData[] ={
 		// Positions        // Texture Coords
 		-1.0f, 0.0f, -1.0f,    0.0f, 0.0f,
-		-1.0f, 0.0f,  1.0f,    1.0f, 0.0f,
+		-1.0f, 0.0f,  1.0f,    0.0f, 1.0f,
 		 1.0f, 0.0f,  1.0f,    1.0f, 1.0f,
-		 1.0f, 0.0f, -1.0f,    0.0f, 1.0f,
+		 1.0f, 0.0f, -1.0f,    1.0f, 0.0f,
 	};
 
 

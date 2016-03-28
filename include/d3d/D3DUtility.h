@@ -1,5 +1,5 @@
-#ifndef UTILITY_H
-#define UTILITY_H
+#ifndef D3DUTILITY_H
+#define D3DUTILITY_H
 
 #include <windows.h>
 

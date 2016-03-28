@@ -196,8 +196,12 @@
     <None Include="plane.vert" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="rtt.psh" />
-    <FxCompile Include="rtt.vsh" />
+    <None Include="rtt.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="rtt.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

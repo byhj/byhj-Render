@@ -16,9 +16,9 @@ namespace byhj
 	void OGLRender::v_init()
 	{
 		m_plane.init();
-		m_oglRTT.init(glm::vec2(0, 1000), glm::vec2(300, 300) );
-		OGLEulerCamera::getInstance()->setPos( glm::vec3(0.0f, 3.0f, 0.0f) );
-		//init_fbo();
+		m_oglRTT.init(glm::vec2(0, 0), glm::vec2(1.0, 1.0) );
+		OGLEulerCamera::getInstance()->setPos( glm::vec3(0.0f, 3.0f, 10.0f) );
+		init_fbo();
 	}
 
 	void OGLRender::v_update()
@@ -42,15 +42,13 @@ namespace byhj
 		glm::mat4 proj  = glm::perspective(glm::radians(OGLEulerCamera::getInstance()->getZoom()), 1.5f, 0.1f, 1000.0f);
         glm::mat4 mvp = proj * view * model;
 
-		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		m_plane.render(mvp);
 
-	//	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//	m_oglRTT.render(colorBuffer);
+	    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	    m_oglRTT.render(colorBuffer);
 	}
 
 	void OGLRender::v_shutdown()

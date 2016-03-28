@@ -28,14 +28,6 @@ namespace byhj
 		return (res - 1.0f);
 	}
 
-	float ramdom()
-	{
-		static std::default_random_engine generator;
-	    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-		double number = distribution(generator);
-    
-	}
-
 #define ARRAY_SIZE(arr) sizeof(arr) / sizeof(arr[0])
 #define SAFE_DELETE(ptr) if (ptr != nullptr) { delete ptr; ptr = nullptr; }
 
@@ -50,17 +42,17 @@ enum  FontType {
 	D3D_FT_FONT  // Freetype
 };
 
-bool test(bool expression, std::string desc, int line, char* file, bool ignore);
+bool checkOGLUniform(GLuint loc, std::string desc, int line, char* file, bool ignore);
 
 #ifdef _DEBUG
-#define CHECK_OGL_UNIFORM(expression, description) \
+#define CHECK_OGL_UNIFORM(loc, description) \
      { static bool ignoreAlways = false; \
         if (!ignoreAlways) \
-          if (test( (int)expression, description, __LINE__, __FILE__, &ignoreAlways)) \
+          if (checkOGLUniform(loc, description, __LINE__, __FILE__, &ignoreAlways)) \
              {_asm{int 3} } \
 	 }
 #else
-#define CHECK_OGL_UNIFORM(expression, description)
+#define assert(expression && description)
 #endif
 
 
