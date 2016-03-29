@@ -32,10 +32,9 @@ void D3DRTT::render(ID3D11DeviceContext *pD3D11DeviceContext, ID3D11ShaderResour
 	unsigned int offset;
 	stride = sizeof(Vertex); 
 	offset = 0;
-
 	pD3D11DeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
 	pD3D11DeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-	pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
 	pD3D11DeviceContext->PSSetShaderResources(0, 1, &pTexture);  
 	pD3D11DeviceContext->PSSetSamplers( 0, 1, &m_pTexSamplerState );
 
@@ -49,12 +48,12 @@ void D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	HRESULT hr;
 
 	Vertex *VertexData;
-	unsigned long *IndexData;
+	UINT *IndexData;
 	m_VertexCount = 6;
 	m_IndexCount = 6;
 
 	VertexData = new Vertex[m_VertexCount];
-	IndexData = new unsigned long[m_IndexCount];
+	IndexData = new UINT[m_IndexCount];
 
 	memset(VertexData, 0, sizeof(Vertex) * m_VertexCount);
 
@@ -122,7 +121,7 @@ void D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	// Set up the description of the static index buffer.
 	D3D11_BUFFER_DESC IndexBufferDesc;
 	IndexBufferDesc.Usage               = D3D11_USAGE_DEFAULT;
-	IndexBufferDesc.ByteWidth           = sizeof(unsigned long) * m_IndexCount;
+	IndexBufferDesc.ByteWidth           = sizeof(UINT) * m_IndexCount;
 	IndexBufferDesc.BindFlags           = D3D11_BIND_INDEX_BUFFER;
 	IndexBufferDesc.CPUAccessFlags      = 0;
 	IndexBufferDesc.MiscFlags           = 0;
@@ -177,21 +176,21 @@ void D3DRTT::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 	HRESULT result;
 	std::vector<D3D11_INPUT_ELEMENT_DESC> vInputLayoutDesc;
 	D3D11_INPUT_ELEMENT_DESC pInputLayoutDesc;
-	pInputLayoutDesc.SemanticName = "POSITION";
-	pInputLayoutDesc.SemanticIndex = 0;
-	pInputLayoutDesc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
-	pInputLayoutDesc.InputSlot = 0;
-	pInputLayoutDesc.AlignedByteOffset = 0;
-	pInputLayoutDesc.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	pInputLayoutDesc.SemanticName         = "POSITION";
+	pInputLayoutDesc.SemanticIndex        = 0;
+	pInputLayoutDesc.Format               = DXGI_FORMAT_R32G32B32_FLOAT;
+	pInputLayoutDesc.InputSlot            = 0;
+	pInputLayoutDesc.AlignedByteOffset    = 0;
+	pInputLayoutDesc.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
 	pInputLayoutDesc.InstanceDataStepRate = 0;
 	vInputLayoutDesc.push_back(pInputLayoutDesc);
 
-	pInputLayoutDesc.SemanticName = "TEXCOORD";
-	pInputLayoutDesc.SemanticIndex = 0;
-	pInputLayoutDesc.Format = DXGI_FORMAT_R32G32_FLOAT;
-	pInputLayoutDesc.InputSlot = 0;
-	pInputLayoutDesc.AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
-	pInputLayoutDesc.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	pInputLayoutDesc.SemanticName         = "TEXCOORD";
+	pInputLayoutDesc.SemanticIndex        = 0;
+	pInputLayoutDesc.Format               = DXGI_FORMAT_R32G32_FLOAT;
+	pInputLayoutDesc.InputSlot            = 0;
+	pInputLayoutDesc.AlignedByteOffset    = D3D11_APPEND_ALIGNED_ELEMENT;
+	pInputLayoutDesc.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
 	pInputLayoutDesc.InstanceDataStepRate = 0;
 	vInputLayoutDesc.push_back(pInputLayoutDesc);
 

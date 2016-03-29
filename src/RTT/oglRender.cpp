@@ -15,8 +15,10 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
+		auto sw = WindowInfo::getInstance()->getWidth();
+		auto sh = WindowInfo::getInstance()->getHeight();
 		m_plane.init();
-		m_oglRTT.init(glm::vec2(800, 670), glm::vec2(250, 250) );
+		m_oglRTT.init(glm::vec2(sw - 300, sh - 10), glm::vec2(250, 250) );
 		OGLEulerCamera::getInstance()->setPos( glm::vec3(0.0f, 3.0f, 10.0f) );
 		init_fbo();
 	}
@@ -40,7 +42,7 @@ namespace byhj
         glm::mat4 mvp = proj * view * model;
 				
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		GLfloat color[] ={ 0.2f, 0.3f, 0.4f, 1.0f };
+		GLfloat color[] ={ 0.1f, 0.2f, 0.3f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, color);
 
 
@@ -48,7 +50,9 @@ namespace byhj
 
 	    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	    m_oglRTT.render(colorBuffer);
+		m_plane.render(mvp);
+		m_oglRTT.render(colorBuffer);
+
 	}
 
 	void OGLRender::v_shutdown()

@@ -34,6 +34,15 @@ void D3DPlane::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatr
 	m_matrix.proj  = matrix.proj;
 	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &m_matrix, 0, 0);
 	pD3D11DeviceContext->VSSetConstantBuffers(0, 1, m_pMVPBuffer.GetAddressOf() );
+
+	unsigned int stride;
+	unsigned int offset;
+	stride = sizeof(Vertex);
+	offset = 0;
+
+	pD3D11DeviceContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
+	pD3D11DeviceContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+
 	pD3D11DeviceContext->PSSetShaderResources(0, 1, m_pTexture.GetAddressOf());
 	pD3D11DeviceContext->PSSetSamplers(0, 1, m_pTexSamplerState.GetAddressOf());
 
@@ -125,15 +134,6 @@ void D3DPlane::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D
 	VertexData = 0;
 	delete[] IndexData;
 	IndexData = 0;
-
-	// Set vertex buffer stride and offset.=
-	unsigned int stride;
-	unsigned int offset;
-	stride = sizeof(Vertex);
-	offset = 0;
-	pD3D11DeviceContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
-	pD3D11DeviceContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0); 
-	pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	////////////////////////////////Const Buffer//////////////////////////////////////
 

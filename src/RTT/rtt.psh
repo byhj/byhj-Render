@@ -1,17 +1,16 @@
 
-struct VS_OUT {
-   float4 Pos : SV_POSITION;
-   float4 Tex : TEXCOORD;
+struct VS_OUT
+{
+    float4 Pos : SV_POSITION;
+    float4 Tex : TEXCOORD0;
 };
 
+Texture2D tex          : register(t0);
+SamplerState texSample : register(s0);
 
-Texture2D g_tex : register(t0);
-SamplerState g_sampler : register(s0);
-
-float4 RTT_PS(VS_OUT vs_out) : SV_Target
+float4 RTT_PS(VS_OUT ps_in) : SV_TARGET
 {
-  
-  float4 texColor = g_tex.Sample(g_sampler, vs_out.Tex);
+  float4 pixelColor = tex.Sample(texSample, ps_in.Tex);
 
-  return float4(1.0f, 1.0f, 1.0f, 1.0f);//texColor;
+  return pixelColor;
 }

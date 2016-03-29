@@ -1,5 +1,6 @@
 #include "D3D11Render.h"
 #include "windowInfo.h"
+#include "textureMgr.h"
 
 namespace byhj
 {
@@ -29,25 +30,27 @@ namespace byhj
 	{
 
 		//////////////////////////////////////////////////////////////////
-     	float bgColor[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
-		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRttRenderTargetView, m_pDepthStencilView);
-		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRttRenderTargetView, bgColor);
-		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-		XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, 1.5f, 1.0f, 1000.0f);
-		XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(Proj));
-
-		m_matrix.view = D3DEulerCamera::getInstance()->getViewMat();
-		m_plane.render(m_pD3D11DeviceContext, m_matrix);
-		
-
+     	float bgColor[] ={ 0.2f, 0.3f, 0.4f, 1.0f };
+		//m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		//m_pD3D11DeviceContext->RSSetState(m_pRasterState);
+		//m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRttRenderTargetView, m_pDepthStencilView);
+		//m_pD3D11DeviceContext->ClearRenderTargetView(m_pRttRenderTargetView, bgColor);
+		//m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		//XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, 1.5f, 1.0f, 1000.0f);
+		//XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(Proj));
+		//
+		//m_matrix.view = D3DEulerCamera::getInstance()->getViewMat();
+		//m_plane.render(m_pD3D11DeviceContext, m_matrix);
+		m_pRttShaderResourceView = TextureMgr::getInstance()->loadD3DTexture(m_pD3D11Device, "grass.dds");
+		m_pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		m_pD3D11DeviceContext->RSSetState(m_pRasterState);
-		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
-		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
-		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		
-		 XMMATRIX ortho = XMMatrixOrthographicLH(2.0f, 2.0f, -1.0f, 1.0f);
-	     XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(ortho));
-		 m_d3dRTT.render(m_pD3D11DeviceContext, m_pRttShaderResourceView, m_matrix);
+		 m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+		 m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
+		 m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	   
+		 XMMATRIX ortho = XMMatrixOrthographicLH(getClientWidth(), getClientHeight(), -1.0f, 1.0f);
+	//	 XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(ortho));
+	   m_d3dRTT.render(m_pD3D11DeviceContext, m_pRttShaderResourceView, m_matrix);
 		//drawInfo();
 
 		
@@ -128,7 +131,6 @@ namespace byhj
 
 		m_pD3D11Device->CreateTexture2D(&depthStencilDesc, NULL, &m_pDepthStencilBuffer);
 		m_pD3D11Device->CreateDepthStencilView(m_pDepthStencilBuffer, NULL, &m_pDepthStencilView);
-		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
     
     
     	// Setup the raster description which will determine how and what polygons will be drawn.
@@ -204,7 +206,6 @@ namespace byhj
     	m_Font.init(m_pD3D11Device);
 		m_d3dRTT.init_window(getClientWidth(), getClientHeight(), 0, 0, 300, 300);
 		m_d3dRTT.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
-
 		m_plane.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
     }
     
