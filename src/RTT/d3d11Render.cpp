@@ -35,41 +35,18 @@ namespace byhj
 
 		drawInfo();
 		//////////////////////////////////////////////////////////////////
-		float bgColor[] ={ 0.5f, 0.5f, 0.5f, 1.0f };
-		m_pD3D11DeviceContext->OMSetRenderTargets(1, &pRttRenderTargetView, m_pDepthStencilView.Get());
-		m_pD3D11DeviceContext->ClearRenderTargetView(pRttRenderTargetView, bgColor);
-		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
-
-		XMMATRIX objectModel = XMMatrixTranslation(0.0f, -1.0f, 0.0f);
-		XMStoreFloat4x4(&m_Matrix.Model, XMMatrixTranspose(objectModel));
-		ObjModel.Render(m_pD3D11DeviceContext.Get(), m_Matrix.Model, m_Matrix.View, m_Matrix.Proj);
-		m_pD3D11DeviceContext->OMSetBlendState(0, 0, 0xffffffff);
-
-		m_pD3D11DeviceContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
-		////////////////////////////////////////////////////////
-
-		BeginScene();
-
-		ObjModel.Render(m_pD3D11DeviceContext.Get(), m_Matrix.Model, m_Matrix.View, m_Matrix.Proj);
-
-		XMMATRIX sphereWorld = XMMatrixIdentity();
-		m_Matrix.View._14 = 0.0f;
-		m_Matrix.View._24 = 0.0f;
-		m_Matrix.View._34 = 0.0f;
-		m_Matrix.View._41 = 0.0f;
-		m_Matrix.View._42 = 0.0f;
-		m_Matrix.View._43 = 0.0f;
-		XMStoreFloat4x4(&m_Matrix.Model, XMMatrixTranspose(sphereWorld));
-
-		m_Skymap.Render(m_pD3D11DeviceContext.Get(), m_Matrix);
-
-		///////////////////////////////////////////////////////
-
-		// Create an orthographic projection matrix for 2D rendering. 
-		XMMATRIX tProj = XMMatrixOrthographicLH(2.0f, 2.0f, 0.1f, 1000.0f);
-		XMFLOAT4X4 ortho;
-		XMStoreFloat4x4(&ortho, XMMatrixTranspose(tProj));
-		d3dRtt.Render(m_pD3D11DeviceContext.Get(), pRttShaderResourceView, m_Matrix.Model, m_Matrix.View, ortho);
+//		float bgColor[] ={ 0.5f, 0.5f, 0.5f, 1.0f };
+		//m_pD3D11DeviceContext->OMSetRenderTargets(1, &pRttRenderTargetView, m_pDepthStencilView.Get());
+		//m_pD3D11DeviceContext->ClearRenderTargetView(pRttRenderTargetView, bgColor);
+		//m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+		//
+		/////////////////////////////////////////////////////////
+		//
+		//// Create an orthographic projection matrix for 2D rendering. 
+		//XMMATRIX tProj = XMMatrixOrthographicLH(2.0f, 2.0f, 0.1f, 1000.0f);
+		//XMFLOAT4X4 ortho;
+		//XMStoreFloat4x4(&ortho, XMMatrixTranspose(tProj));
+		//m_d3dRTT.Render(m_pD3D11DeviceContext.Get(), pRttShaderResourceView, m_Matrix.Model, m_Matrix.View, ortho);
 		m_pSwapChain->Present(0, 0);
 	}
 

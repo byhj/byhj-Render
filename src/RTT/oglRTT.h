@@ -17,8 +17,6 @@ namespace byhj {
 		void shutdown();
 
 	private:
-		const int m_IndexCount = 6;
-		const int m_VertexCount = 6;
 
 		void init_buffer(glm::vec2 pos, glm::vec2 size);
 		void init_vertexArray();
@@ -30,8 +28,6 @@ namespace byhj {
 		GLuint m_program = OGLVALUE;
 		GLuint tex_loc;
 		OGLShader m_rttShader = "OGLRTT Shader";
-		std::vector<GLuint> m_IndexData;
-		std::vector<GLfloat> m_VertexData;
 	}; 
 }
 

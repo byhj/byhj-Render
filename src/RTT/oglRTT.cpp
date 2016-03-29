@@ -24,6 +24,8 @@ namespace byhj {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, rttTex);
 
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
@@ -38,26 +40,26 @@ namespace byhj {
 		GLfloat w = size.x;
 		GLfloat h = size.y;
 		// Update VBO for each character
-		GLfloat VertexData[6][5] ={
-			{ pos.x,     pos.y + h,  0.0f,  0.0, 0.0 },
-			{ pos.x,     pos.y,      0.0f,  0.0, 1.0 },
-			{ pos.x + w, pos.y,      0.0f,  1.0, 1.0 },
-			{ pos.x,     pos.y + h,  0.0f,  0.0, 0.0 },
-			{ pos.x + w, pos.y,      0.0f,  1.0, 1.0 },
-			{ pos.x + w, pos.y + h,  0.0f,  1.0, 0.0 }
+		GLfloat VertexData[] = {
+		   -1.0, -1.0, 0.0,   0.0, 0.0,
+			1.0, -1.0, 0.0,   1.0, 0.0,
+			1.0,  1.0, 0.0,   1.0, 1.0,
+		   -1.0,  1.0, 0.0,   0.0, 1.0
+
 		};
-		for (int i = 0; i != m_IndexCount; ++i) {
-		    m_IndexData.push_back(i);
-		}
+		GLuint IndexData[] ={ 
+			0, 1, 2, // First Triangle
+	        2, 3, 0  // Second Triangle
+		};
 
 		glGenBuffers(1, &m_vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 24, VertexData[0],  GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexData), VertexData,  GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		glGenBuffers(1, &m_ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * m_IndexCount, &m_IndexData[0], GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(IndexData), IndexData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
@@ -67,13 +69,10 @@ namespace byhj {
 		glBindVertexArray(m_vao);
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
-		//Position : Index 1
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, 0);
-		
-		//Texture Coord :Index 2
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, GL_BUFFER_OFFSET( sizeof(GLfloat) * 3) );
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 		  
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 
