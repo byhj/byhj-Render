@@ -27,7 +27,7 @@ VS_OUT Plane_VS( VS_IN vs_in )
    vs_out.Pos = mul(vs_out.Pos, g_View);
    vs_out.Pos = mul(vs_out.Pos, g_Proj);
 
-   vs_out.Tex = vs_in.Tex;
+   vs_out.Tex = vs_in.Tex * 5.0f;
  
    return vs_out;
 }

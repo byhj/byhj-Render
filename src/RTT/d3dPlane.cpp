@@ -29,8 +29,6 @@ void D3DPlane::update()
 
 void D3DPlane::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix)
 {
-
-
 	m_matrix.model = matrix.model;
 	m_matrix.view  = matrix.view;
 	m_matrix.proj  = matrix.proj;
@@ -40,7 +38,7 @@ void D3DPlane::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatr
 	pD3D11DeviceContext->PSSetSamplers(0, 1, m_pTexSamplerState.GetAddressOf());
 
 	TriangleShader.use(pD3D11DeviceContext);
-	pD3D11DeviceContext->DrawIndexed(3, 0, 0);
+	pD3D11DeviceContext->DrawIndexed(6, 0, 0);
 
 
 }
@@ -55,17 +53,24 @@ void D3DPlane::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D
 	HRESULT hr;
 
 	///////////////////////////Index Buffer ////////////////////////////////
-	m_VertexCount = 3;
+	m_VertexCount = 6;
 	Vertex *VertexData = new Vertex[m_VertexCount];
 
 
-	VertexData[0].Position = XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
-	VertexData[1].Position = XMFLOAT3(0.0f, 1.0f, 0.0f);    // Top middle.
-	VertexData[2].Position = XMFLOAT3(1.0f, -1.0f, 0.0f);   // Bottom right.
+	VertexData[0].Position = XMFLOAT3(-1.0f, 0.0f, 1.0f);  // Bottom left.
+	VertexData[1].Position = XMFLOAT3(1.0f, 0.0f,  1.0f);    // Top middle.
+	VertexData[2].Position = XMFLOAT3(1.0f, 0.0f, -1.0f);   // Bottom right.
 
-	VertexData[0].TexCoord = XMFLOAT2(0.0f, 1.0f);
-	VertexData[1].TexCoord = XMFLOAT2(0.5f, 0.0f);
+	VertexData[3].Position = XMFLOAT3(1.0f, 0.0f, -1.0f);  // Bottom left.
+	VertexData[4].Position = XMFLOAT3(-1.0f, 0.0f, -1.0f);    // Top middle.
+	VertexData[5].Position = XMFLOAT3(-1.0f,0.0f, 1.0f);   // Bottom right.
+
+	VertexData[0].TexCoord = XMFLOAT2(0.0f, 0.0f);
+	VertexData[1].TexCoord = XMFLOAT2(1.0f, 0.0f);
 	VertexData[2].TexCoord = XMFLOAT2(1.0f, 1.0f);
+	VertexData[3].TexCoord = XMFLOAT2(1.0f, 1.0f);
+	VertexData[4].TexCoord = XMFLOAT2(1.0f, 0.0f);
+	VertexData[5].TexCoord = XMFLOAT2(0.0f, 0.0f);
 
 	// Set up the description of the static vertex buffer.
 	D3D11_BUFFER_DESC VertexBufferDesc;
@@ -87,11 +92,14 @@ void D3DPlane::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D
 	//DebugHR(hr);
 
 	/////////////////////////////////Index Buffer ///////////////////////////////////////
-	m_IndexCount = 3;
+	m_IndexCount = 6;
 	unsigned long *IndexData= new unsigned long[m_IndexCount];
 	IndexData[0] = 0;  // Bottom left.
 	IndexData[1] = 1;  // Top middle.
 	IndexData[2] = 2;  // Bottom right.
+		IndexData[3] = 3;  // Bottom right.
+			IndexData[4] = 4;  // Bottom right.
+				IndexData[5] = 5;  // Bottom right.
 
 	// Set up the description of the static index buffer.
 	D3D11_BUFFER_DESC IndexBufferDesc;
@@ -176,7 +184,7 @@ void D3DPlane::init_texture(ID3D11Device *pD3D11Device)
 {
 
 	HRESULT hr;
-	 TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "grass.dds");
+	 m_pTexture = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "grass.dds");
 	//DebugHR(hr);
 
 	// Create a texture sampler state description.

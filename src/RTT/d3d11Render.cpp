@@ -22,18 +22,21 @@ namespace byhj
 
 	void D3D11Render::v_update()
 	{
-
+		D3DEulerCamera::getInstance()->detectInput(m_Timer.getDeltaTime(), getHwnd());
 	}
 
 	void D3D11Render::v_render()
 	{
 
 		//////////////////////////////////////////////////////////////////
-     	float bgColor[] ={ 0.5f, 0.5f, 0.5f, 1.0f };
+     	float bgColor[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRttRenderTargetView, m_pDepthStencilView);
 		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRttRenderTargetView, bgColor);
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-		
+		XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, 1.5f, 1.0f, 1000.0f);
+		XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(Proj));
+
+		m_matrix.view = D3DEulerCamera::getInstance()->getViewMat();
 		m_plane.render(m_pD3D11DeviceContext, m_matrix);
 		
 
@@ -41,17 +44,17 @@ namespace byhj
 		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-		m_d3dRTT.render(m_pD3D11DeviceContext, m_pRttShaderResourceView, m_matrix);
+		
+		 XMMATRIX ortho = XMMatrixOrthographicLH(2.0f, 2.0f, -1.0f, 1.0f);
+	     XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(ortho));
+		 m_d3dRTT.render(m_pD3D11DeviceContext, m_pRttShaderResourceView, m_matrix);
 		//drawInfo();
 
 		
 		/////////////////////////////////////////////////////////
 		//
 		//// Create an orthographic projection matrix for 2D rendering. 
-		//XMMATRIX tProj = XMMatrixOrthographicLH(2.0f, 2.0f, 0.1f, 1000.0f);
-		//XMFLOAT4X4 ortho;
-		//XMStoreFloat4x4(&ortho, XMMatrixTranspose(tProj));
+
 		//m_d3dRTT.Render(m_pD3D11DeviceContext.Get(), pRttShaderResourceView, m_Matrix.Model, m_Matrix.View, ortho);
 		m_pSwapChain->Present(0, 0);
 	}
@@ -180,25 +183,26 @@ namespace byhj
     	m_pD3D11DeviceContext->RSSetViewports(1, &vp);
 
 		//MVP Matrix
-		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -5.0f, 0.0f);
+		XMVECTOR camPos    = XMVectorSet(0.0f, 3.0f, 0.0f, 0.0f);
 		XMVECTOR camTarget = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 		XMVECTOR camUp     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 		XMMATRIX View      = XMMatrixLookAtLH(camPos, camTarget, camUp);
 		XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, 1.5f, 1.0f, 1000.0f);
-		XMMATRIX Model     = XMMatrixRotationY(60.0f);
+		XMMATRIX Model     = XMMatrixScaling(5.0f, 0.0f, 5.0f);
 
 
 		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(Model));
 		XMStoreFloat4x4(&m_matrix.view, XMMatrixTranspose(View));
 		XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(Proj));
     
+		D3DEulerCamera::getInstance()->init(getAppInst(), getHwnd());
     }
     
     void D3D11Render::init_object()
     {
     	m_Timer.reset();
     	m_Font.init(m_pD3D11Device);
-				m_d3dRTT.init_window(getClientWidth(), getClientHeight(), 0, 0, 300, 300);
+		m_d3dRTT.init_window(getClientWidth(), getClientHeight(), 0, 0, 300, 300);
 		m_d3dRTT.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
 
 		m_plane.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());

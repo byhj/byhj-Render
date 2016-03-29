@@ -3,8 +3,10 @@
 
 #include "d3d/d3dApp.h"
 #include "d3d/d3dFWFont.h"
+#include "d3d/d3dEulerCamera.h"
 
 #include "d3dPlane.h"
+
 
 #include <d3d11.h>
 #include <wrl.h>

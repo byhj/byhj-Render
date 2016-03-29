@@ -20,9 +20,16 @@ namespace byhj {
 		glUseProgram(m_program);
 		glBindVertexArray(m_vao);
 
+
+
 		glUniform1i(tex_loc, 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, rttTex);
+		GLfloat sw = WindowInfo::getInstance()->getWidth();
+		GLfloat sh = WindowInfo::getInstance()->getHeight();
+		glm::mat4 ortho = glm::ortho(-sw/2, sw/2, -sh/2, sh/2, -1.0f, 1.0f);
+
+		glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, &ortho[0][0]);
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -37,19 +44,38 @@ namespace byhj {
 
 	void OGLRTT::init_buffer(glm::vec2 pos, glm::vec2 size)
 	{
-		GLfloat w = size.x;
-		GLfloat h = size.y;
+		GLfloat width = size.x;
+		GLfloat height = size.y;
+		GLfloat posX = pos.x;
+		GLfloat posY = pos.y;
+		GLfloat sw = WindowInfo::getInstance()->getWidth();
+		GLfloat sh = WindowInfo::getInstance()->getHeight();
+		// Calculate the screen coordinates of the left side of the bitmap.
+		float left = (float)((sw / 2) * -1) + (float)posX;
+
+		// Calculate the screen coordinates of the right side of the bitmap.
+		float  right = left + (float)width;
+
+		// Calculate the screen coordinates of the top of the bitmap.
+		float  top = (float)((sh / 2) * -1) + (float)posY;
+
+		// Calculate the screen coordinates of the bottom of the bitmap.
+		float  bottom = top - (float)height;
+
 		// Update VBO for each character
 		GLfloat VertexData[] = {
-		   -1.0, -1.0, 0.0,   0.0, 0.0,
-			1.0, -1.0, 0.0,   1.0, 0.0,
-			1.0,  1.0, 0.0,   1.0, 1.0,
-		   -1.0,  1.0, 0.0,   0.0, 1.0
+			// First triangle.
+			left, top,      0.0f, 0.0f, 1.0f,
+			left, bottom,   0.0f, 0.0f, 0.0f,
+			right, bottom,  0.0f, 1.0f, 0.0f,
 
+	        right, bottom,  0.0f, 1.0f, 0.0f,
+		    right, top,     0.0f, 1.0f, 1.0f,
+ 		    left, top,      0.0f, 0.0f, 1.0f,
 		};
 		GLuint IndexData[] ={ 
-			0, 1, 2, // First Triangle
-	        2, 3, 0  // Second Triangle
+            0, 1, 2,
+			3, 4, 5
 		};
 
 		glGenBuffers(1, &m_vbo);
@@ -88,5 +114,6 @@ namespace byhj {
 		m_rttShader.info();
 		m_program = m_rttShader.getProgram();
 		tex_loc = glGetUniformLocation(m_program, "u_tex");
+		mvp_loc = glGetUniformLocation(m_program, "u_ortho");
 	}
 }

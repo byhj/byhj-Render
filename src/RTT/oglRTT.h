@@ -27,6 +27,7 @@ namespace byhj {
 		GLuint m_ibo = OGLVALUE;
 		GLuint m_program = OGLVALUE;
 		GLuint tex_loc;
+		GLuint mvp_loc;
 		OGLShader m_rttShader = "OGLRTT Shader";
 	}; 
 }
