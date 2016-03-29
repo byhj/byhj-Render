@@ -1,5 +1,5 @@
-#ifndef Triangle_H
-#define Triangle_H
+#ifndef D3DPlane_H
+#define D3DPlane_H
 
 #include <windows.h>
 #include "d3d/d3dShader.h"
@@ -9,16 +9,16 @@ namespace byhj
 {
 
 
-class Triangle
+class D3DPlane
 {
 public:
-	Triangle();
-	~Triangle();
+	D3DPlane();
+	~D3DPlane();
 
-	void Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
-	void Update();
-	void Render(ID3D11DeviceContext *pD3D11DeviceContext, const d3d::MatrixBuffer &matrix);
-	void Shutdown();
+	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
+	void update();
+	void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
+	void shutdown();
 
 private:
 	void init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
@@ -32,7 +32,7 @@ private:
 	};
 
 
-	d3d::MatrixBuffer cbMatrix;
+	D3DMVPMatrix m_matrix;
 	ComPtr<ID3D11InputLayout> m_pInputLayout;
 	ComPtr<ID3D11Buffer> m_pMVPBuffer;
 	ComPtr<ID3D11Buffer> m_pVertexBuffer;

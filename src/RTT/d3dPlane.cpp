@@ -1,20 +1,20 @@
-#include "Triangle.h"
-#include "DirectXTK/DDSTextureLoader.h"
+#include "D3DPlane.h"
+#include "textureMgr.h"
 
 namespace byhj
 {
 
-Triangle::Triangle()
+D3DPlane::D3DPlane()
 {
 
 }
 
-Triangle::~Triangle()
+D3DPlane::~D3DPlane()
 {
 
 }
 
-void Triangle::Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
+void D3DPlane::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
 {
  
 	init_buffer(pD3D11Device, pD3D11DeviceContext);
@@ -22,19 +22,19 @@ void Triangle::Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11Devic
 	init_texture(pD3D11Device);
 }
 
-void Triangle::Update()
+void D3DPlane::update()
 {
 
 }
 
-void Triangle::Render(ID3D11DeviceContext *pD3D11DeviceContext, const d3d::MatrixBuffer &matrix)
+void D3DPlane::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix)
 {
 
 
-	cbMatrix.model = matrix.model;
-	cbMatrix.view  = matrix.view;
-	cbMatrix.proj  = matrix.proj;
-	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &cbMatrix, 0, 0);
+	m_matrix.model = matrix.model;
+	m_matrix.view  = matrix.view;
+	m_matrix.proj  = matrix.proj;
+	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &m_matrix, 0, 0);
 	pD3D11DeviceContext->VSSetConstantBuffers(0, 1, m_pMVPBuffer.GetAddressOf() );
 	pD3D11DeviceContext->PSSetShaderResources(0, 1, m_pTexture.GetAddressOf());
 	pD3D11DeviceContext->PSSetSamplers(0, 1, m_pTexSamplerState.GetAddressOf());
@@ -45,12 +45,12 @@ void Triangle::Render(ID3D11DeviceContext *pD3D11DeviceContext, const d3d::Matri
 
 }
 
-void Triangle::Shutdown()
+void D3DPlane::shutdown()
 {
 
 }
 
-void Triangle::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
+void D3DPlane::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 {
 	HRESULT hr;
 
@@ -132,7 +132,7 @@ void Triangle::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D
 	D3D11_BUFFER_DESC mvpDesc;
 	ZeroMemory(&mvpDesc, sizeof(D3D11_BUFFER_DESC));
 	mvpDesc.Usage          = D3D11_USAGE_DEFAULT;
-	mvpDesc.ByteWidth      = sizeof(d3d::MatrixBuffer);
+	mvpDesc.ByteWidth      = sizeof(D3DMVPMatrix);
 	mvpDesc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
 	mvpDesc.CPUAccessFlags = 0;
 	mvpDesc.MiscFlags      = 0;
@@ -141,7 +141,7 @@ void Triangle::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D
 
 }
 
-void Triangle::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
+void D3DPlane::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 {
 	D3D11_INPUT_ELEMENT_DESC pInputLayoutDesc;
 	std::vector<D3D11_INPUT_ELEMENT_DESC> vInputLayoutDesc;
@@ -165,18 +165,18 @@ void Triangle::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 	vInputLayoutDesc.push_back(pInputLayoutDesc);
 
 	TriangleShader.init(pD3D11Device, vInputLayoutDesc);
-	TriangleShader.attachVS(L"triangle.vsh", "VS", "vs_5_0");
-	TriangleShader.attachPS(L"triangle.psh", "PS", "ps_5_0");
+	TriangleShader.attach(D3D_VERTEX_SHADER, L"plane.vsh", "Plane_VS", "vs_5_0");
+	TriangleShader.attach(D3D_PIXEL_SHADER,  L"plane.psh", "Plane_PS", "ps_5_0");
 	TriangleShader.end();
 }
 
 
 
-void Triangle::init_texture(ID3D11Device *pD3D11Device)
+void D3DPlane::init_texture(ID3D11Device *pD3D11Device)
 {
 
 	HRESULT hr;
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/stone.dds", NULL,  &m_pTexture);
+	 TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "grass.dds");
 	//DebugHR(hr);
 
 	// Create a texture sampler state description.

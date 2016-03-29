@@ -4,6 +4,7 @@
 #include "d3d/d3dApp.h"
 #include "d3d/d3dFWFont.h"
 
+#include "d3dPlane.h"
 
 #include <d3d11.h>
 #include <wrl.h>
@@ -34,9 +35,13 @@ namespace byhj
 		void drawInfo();
 		D3DFWFont m_Font;
 		D3DRTT m_d3dRTT;
+		D3DPlane m_plane;
 
 		Timer m_Timer;
 
+
+
+		D3DMVPMatrix m_matrix;
 		float fps = 0.0f;
 		int m_videoCardMemory;
 		std::wstring m_videoCardInfo;
@@ -48,9 +53,10 @@ namespace byhj
 		ID3D11DepthStencilView * m_pDepthStencilView;
 		ID3D11Texture2D        * m_pDepthStencilBuffer;
 		ID3D11RasterizerState  * m_pRasterState;
-		ComPtr<ID3D11Texture2D          > m_pRttRenderTargetTexture;
-		ComPtr<ID3D11RenderTargetView   > m_pRttRenderTargetView;
-		ComPtr<ID3D11ShaderResourceView > m_pRttShaderResourceView;
+
+		ID3D11Texture2D           *m_pRttRenderTargetTexture;
+		ID3D11RenderTargetView    *m_pRttRenderTargetView;
+		ID3D11ShaderResourceView  *m_pRttShaderResourceView;
 	};
 }
 #endif

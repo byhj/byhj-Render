@@ -196,8 +196,8 @@ void D3DRTT::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 	vInputLayoutDesc.push_back(pInputLayoutDesc);
 
 	m_D3DRTTShader.init(pD3D11Device, vInputLayoutDesc);
-	m_D3DRTTShader.attach(D3D_VERTEX_SHADER, L"D3DRTT.vsh", "RTT_VS", "vs_5_0");
-	m_D3DRTTShader.attach(D3D_PIXEL_SHADER,  L"D3DRTT.psh", "RTT_PS", "ps_5_0");
+	m_D3DRTTShader.attach(D3D_VERTEX_SHADER, L"rtt.vsh", "RTT_VS", "vs_5_0");
+	m_D3DRTTShader.attach(D3D_PIXEL_SHADER,  L"rtt.psh", "RTT_PS", "ps_5_0");
 	m_D3DRTTShader.end();
 
 }

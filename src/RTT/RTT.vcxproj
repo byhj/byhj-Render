@@ -149,6 +149,7 @@
     <ClCompile Include="oglRender.cpp" />
     <ClCompile Include="oglRTT.cpp" />
     <ClCompile Include="plane.cpp" />
+    <ClCompile Include="d3dPlane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="oglRender.h" />
     <ClInclude Include="oglRTT.h" />
     <ClInclude Include="plane.h" />
+    <ClInclude Include="d3dPlane.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="rtt.frag" />
@@ -200,6 +202,14 @@
       <FileType>Document</FileType>
     </None>
     <None Include="rtt.vsh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="plane.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="plane.vsh">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

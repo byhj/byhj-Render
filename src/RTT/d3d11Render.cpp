@@ -17,6 +17,7 @@ namespace byhj
 		init_device();
 		init_camera();
 		init_object();
+		init_fbo();
 	}
 
 	void D3D11Render::v_update()
@@ -26,20 +27,25 @@ namespace byhj
 
 	void D3D11Render::v_render()
 	{
-		float bgColor[4] ={ 0.0f, 0.0f, 0.0f, 1.0f };
+
+		//////////////////////////////////////////////////////////////////
+     	float bgColor[] ={ 0.5f, 0.5f, 0.5f, 1.0f };
+		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRttRenderTargetView, m_pDepthStencilView);
+		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRttRenderTargetView, bgColor);
+		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+		
+		m_plane.render(m_pD3D11DeviceContext, m_matrix);
+		
 
 		m_pD3D11DeviceContext->RSSetState(m_pRasterState);
 		m_pD3D11DeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-		drawInfo();
-		//////////////////////////////////////////////////////////////////
-//		float bgColor[] ={ 0.5f, 0.5f, 0.5f, 1.0f };
-		//m_pD3D11DeviceContext->OMSetRenderTargets(1, &pRttRenderTargetView, m_pDepthStencilView.Get());
-		//m_pD3D11DeviceContext->ClearRenderTargetView(pRttRenderTargetView, bgColor);
-		//m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
-		//
+		m_d3dRTT.render(m_pD3D11DeviceContext, m_pRttShaderResourceView, m_matrix);
+		//drawInfo();
+
+		
 		/////////////////////////////////////////////////////////
 		//
 		//// Create an orthographic projection matrix for 2D rendering. 
@@ -172,6 +178,19 @@ namespace byhj
 		vp.Width    = static_cast<FLOAT>(getClientWidth());
 		vp.Height   = static_cast<FLOAT>(getClientHeight());
     	m_pD3D11DeviceContext->RSSetViewports(1, &vp);
+
+		//MVP Matrix
+		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -5.0f, 0.0f);
+		XMVECTOR camTarget = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+		XMVECTOR camUp     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+		XMMATRIX View      = XMMatrixLookAtLH(camPos, camTarget, camUp);
+		XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, 1.5f, 1.0f, 1000.0f);
+		XMMATRIX Model     = XMMatrixRotationY(60.0f);
+
+
+		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(Model));
+		XMStoreFloat4x4(&m_matrix.view, XMMatrixTranspose(View));
+		XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(Proj));
     
     }
     
@@ -179,8 +198,10 @@ namespace byhj
     {
     	m_Timer.reset();
     	m_Font.init(m_pD3D11Device);
+				m_d3dRTT.init_window(getClientWidth(), getClientHeight(), 0, 0, 300, 300);
 		m_d3dRTT.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
-		m_d3dRTT.init_window(getClientWidth(), getClientHeight(), 0, 0, 300, 300);
+
+		m_plane.init(m_pD3D11Device, m_pD3D11DeviceContext, getHwnd());
     }
     
 	void D3D11Render::drawfps()
@@ -245,13 +266,13 @@ namespace byhj
 		renderTargetViewDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 		renderTargetViewDesc.Texture2D.MipSlice = 0;
 
-		result = m_pD3D11Device->CreateRenderTargetView(m_pRttRenderTargetTexture.Get(), &renderTargetViewDesc, m_pRttRenderTargetView.GetAddressOf());
+		result = m_pD3D11Device->CreateRenderTargetView(m_pRttRenderTargetTexture, &renderTargetViewDesc, &m_pRttRenderTargetView);
 
 		shaderResourceViewDesc.Format = textureDesc.Format;
 		shaderResourceViewDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		shaderResourceViewDesc.Texture2D.MostDetailedMip = 0;
 		shaderResourceViewDesc.Texture2D.MipLevels = 1;
-		result = m_pD3D11Device->CreateShaderResourceView(m_pRttRenderTargetTexture.Get(), &shaderResourceViewDesc, m_pRttShaderResourceView.GetAddressOf());
+		result = m_pD3D11Device->CreateShaderResourceView(m_pRttRenderTargetTexture, &shaderResourceViewDesc, &m_pRttShaderResourceView);
 
 	}
 }

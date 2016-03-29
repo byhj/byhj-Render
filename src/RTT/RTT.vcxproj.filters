@@ -144,6 +144,9 @@
     <ClCompile Include="d3dRTT.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="d3dPlane.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
@@ -257,6 +260,9 @@
     <ClInclude Include="d3dRTT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="d3dPlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="plane.vert">
@@ -275,6 +281,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="rtt.psh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="plane.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="plane.psh">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

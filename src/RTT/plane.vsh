@@ -1,5 +1,5 @@
 
-cbuffer cbMatrix : register(b0)
+cbuffer MVPMatrix : register(b0)
 {
    float4x4 g_World;
    float4x4 g_View;
@@ -18,7 +18,7 @@ struct VS_OUT
     float4 Tex : TEXCOORD0;
 };
 
-VS_OUT VS( VS_IN vs_in )
+VS_OUT Plane_VS( VS_IN vs_in )
 {	
  
    VS_OUT vs_out;

@@ -8,7 +8,7 @@ struct VS_OUT
 Texture2D tex          : register(t0);
 SamplerState texSample : register(s0);
 
-float4 PS(VS_OUT ps_in) : SV_TARGET
+float4 Plane_PS(VS_OUT ps_in) : SV_TARGET
 {
   float4 pixelColor = tex.Sample(texSample, ps_in.Tex);
 
