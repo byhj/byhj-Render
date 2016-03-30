@@ -1,0 +1,29 @@
+
+struct VS_OUT
+{
+  float4 Pos        : SV_POSITION;
+  float2 Tex        : TEXCOORD;
+  float4 ReflectPos : TEXCOORD1;
+};
+
+Texture2D floorTex        : register(t0);
+Texture2D reflectTex      : register(t1);
+SamplerState texState     : register(s0);
+
+float4 PS(VS_OUT ps_in) : SV_TARGET
+{
+    float4 texColor = floorTex.Sample(texState, ps_in.Tex);
+
+	//Calc the reflectTexCoord and adjust the range form [-1, +1] to [0, 1];
+	 float2 reflectTexCoord;
+	 reflectTexCoord.x = ( ps_in.ReflectPos.x / ps_in.ReflectPos.w / 2.0f ) + 0.5f;
+	 reflectTexCoord.y = -(ps_in.ReflectPos.y / ps_in.ReflectPos.w / 2.0f ) + 0.5f;
+
+	 float4 reflectTexColor = reflectTex.Sample( texState, reflectTexCoord ); 
+
+	 //Finally we blend the texture from the floor with the reflection texture 
+
+	 float4 pixelColor = lerp(texColor, reflectTexColor, 0.35f);
+	
+	 return pixelColor ;
+}

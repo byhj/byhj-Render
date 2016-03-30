@@ -1,10 +1,8 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "d3d/App.h"
-#include "d3d/Shader.h"
-#include "d3d/Utility.h"
-#include "d3d/d3dLight.h"
+#include "d3d/d3dShader.h"
+#include "d3d/d3dUtility.h"
 
 namespace byhj
 {
@@ -13,33 +11,27 @@ namespace byhj
 class Object
 {
 public:
-	Object()
-	{
-	}
+	void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeivceContext, HWND hWnd);
+	void update();
+	void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
+	void shutdown();
 
-	void Render(ID3D11DeviceContext *pD3D11DeviceContext, const XMFLOAT4X4 &Model,  
-		                             const XMFLOAT4X4 &View, const XMFLOAT4X4 &Proj);
 
-	void Shutdown()
-	{
-
-	}
-
-	bool LoadModel(char *modelFile);
 	bool init_buffer (ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	bool init_shader (ID3D11Device *pD3D11Device, HWND hWnd);
-	void init_texture(ID3D11Device *pD3D11Device, LPCWSTR texFile, ID3D11ShaderResourceView *m_pTexture);
+	void init_texture(ID3D11Device *pD3D11Device);
 private:
+	bool loadModel(char *modelFile);
 
-	d3d::MatrixBuffer cbMatrix;
+	D3DMVPMatrix cbMatrix;
 
 	struct DistortionBuffer
 	{    
 		XMFLOAT2 distortion1;
 		XMFLOAT2 distortion2;
 		XMFLOAT2 distortion3;
-		FLOAT  distortionScale;
-		FLOAT  distortionBias;
+		FLOAT    distortionScale;
+		FLOAT    distortionBias;
 	};
 	DistortionBuffer cbDistortion;
 
@@ -80,8 +72,7 @@ private:
 	int m_VertexCount;
 	int m_IndexCount;
 
-	d3d::Shader ObjectShader;
-	std::vector<D3DPointLight> pointLights;
+	D3DShader ObjectShader;
 };
 
 }

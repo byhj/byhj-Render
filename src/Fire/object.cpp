@@ -1,62 +1,72 @@
 #include "object.h"
-#include "DirectXTK/DDSTextureLoader.h"
+#include "textureMgr.h"
+
 
 namespace byhj
 {
 
-
-void Object::Render(ID3D11DeviceContext *pD3D11DeviceContext, const XMFLOAT4X4 &Model,  
-					const XMFLOAT4X4 &View, const XMFLOAT4X4 &Proj)
-{
-
-	cbMatrix.model  = Model;
-	cbMatrix.view   = View;
-	cbMatrix.proj   = Proj;
-	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &cbMatrix, 0, 0 );
-	pD3D11DeviceContext->VSSetConstantBuffers( 0, 1, m_pMVPBuffer.GetAddressOf());
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	static float frameTime = 0.0f;
-	// Increment the frame time counter.
-	frameTime += 0.0001f;
-	if(frameTime > 1000.0f)
+	void Object::init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeivceContext, HWND hWnd)
 	{
-		frameTime = 0.0f;
+		init_buffer(pD3D11Device, pD3D11DeivceContext);
+		init_shader(pD3D11Device, hWnd);
+		init_texture(pD3D11Device);
 	}
-	cbNoise.frameTime = frameTime;
-	cbNoise.scrollSpeeds = XMFLOAT3(1.3f, 2.1f, 2.3f);
-	cbNoise.scales       = XMFLOAT3(1.0f, 2.0f, 3.0f);
-	cbNoise.padding = 0.0f;
-	pD3D11DeviceContext->UpdateSubresource(m_pNoiseBuffer.Get(), 0, NULL, &cbNoise, 0, 0 );
-	pD3D11DeviceContext->VSSetConstantBuffers(1, 1, m_pNoiseBuffer.GetAddressOf());
 
-	int lightSlot = 0;
-	pD3D11DeviceContext->PSSetConstantBuffers(lightSlot, 1, m_pDistortBuffer.GetAddressOf());
+	void Object::update()
+	{
 
-	///////////////////////////////////////////////////////////////////////////////
-	unsigned int stride;
-	unsigned int offset;
-	stride = sizeof(Vertex); 
-	offset = 0;
+	}
 
-	pD3D11DeviceContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
-	pD3D11DeviceContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0); 
-	pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	pD3D11DeviceContext->PSSetShaderResources(0, 3, m_pTextures);  
-	pD3D11DeviceContext->PSSetSamplers( 0, 1, m_pTexSamplerState.GetAddressOf() );
-	pD3D11DeviceContext->PSSetSamplers( 1, 1, m_pTexSamplerState1.GetAddressOf() );
-	ObjectShader.use(pD3D11DeviceContext);
-	pD3D11DeviceContext->DrawIndexed(m_IndexCount, 0, 0);
+	void Object::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix)
+	{
+	    cbMatrix.model  = matrix.model;
+	    cbMatrix.view   = matrix.view;
+	    cbMatrix.proj   = matrix.proj;
+	    pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &cbMatrix, 0, 0 );
+	    pD3D11DeviceContext->VSSetConstantBuffers( 0, 1, m_pMVPBuffer.GetAddressOf());
+	    
+	    
+	    //////////////////////////////////////////////////////////////////////////////
+	    static float frameTime = 0.0f;
+	    // Increment the frame time counter.
+	    frameTime += 0.0001f;
+	    if(frameTime > 1000.0f)
+	    {
+	    	frameTime = 0.0f;
+	    }
+	    cbNoise.frameTime = frameTime;
+	    cbNoise.scrollSpeeds = XMFLOAT3(1.3f, 2.1f, 2.3f);
+	    cbNoise.scales       = XMFLOAT3(1.0f, 2.0f, 3.0f);
+	    cbNoise.padding = 0.0f;
+	    pD3D11DeviceContext->UpdateSubresource(m_pNoiseBuffer.Get(), 0, NULL, &cbNoise, 0, 0 );
+	    pD3D11DeviceContext->VSSetConstantBuffers(1, 1, m_pNoiseBuffer.GetAddressOf());
+	    
+	    int lightSlot = 0;
+	    pD3D11DeviceContext->PSSetConstantBuffers(lightSlot, 1, m_pDistortBuffer.GetAddressOf());
+	    
+	    ///////////////////////////////////////////////////////////////////////////////
+	    unsigned int stride;
+	    unsigned int offset;
+	    stride = sizeof(Vertex); 
+	    offset = 0;
+	    
+	    pD3D11DeviceContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
+	    pD3D11DeviceContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0); 
+	    pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	    pD3D11DeviceContext->PSSetShaderResources(0, 3, m_pTextures);  
+	    pD3D11DeviceContext->PSSetSamplers( 0, 1, m_pTexSamplerState.GetAddressOf() );
+	    pD3D11DeviceContext->PSSetSamplers( 1, 1, m_pTexSamplerState1.GetAddressOf() );
+	    ObjectShader.use(pD3D11DeviceContext);
+	    pD3D11DeviceContext->DrawIndexed(m_IndexCount, 0, 0);
 
-}
+    }
 
 bool Object::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
 {
 	HRESULT hr;
 
 	///////////////////////////Index Buffer ////////////////////////////////
-	LoadModel("../../media/objects/square.txt");
+	loadModel("../../media/objects/square.txt");
 
 
 	Vertex *VertexData = new Vertex[m_VertexCount];
@@ -115,7 +125,7 @@ bool Object::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	D3D11_BUFFER_DESC mvpBufferDesc;	
 	ZeroMemory(&mvpBufferDesc, sizeof(D3D11_BUFFER_DESC));
 	mvpBufferDesc.Usage          = D3D11_USAGE_DEFAULT;
-	mvpBufferDesc.ByteWidth      = sizeof(d3d::MatrixBuffer);
+	mvpBufferDesc.ByteWidth      = sizeof(D3DMVPMatrix);
 	mvpBufferDesc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
 	mvpBufferDesc.CPUAccessFlags = 0;
 	mvpBufferDesc.MiscFlags      = 0;
@@ -179,6 +189,13 @@ bool Object::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	//DebugHR(hr);
 
 
+
+	return true;
+}
+
+void Object::init_texture(ID3D11Device *pD3D11Device)
+{
+
 	D3D11_SAMPLER_DESC samplerDesc2;
 	samplerDesc2.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	samplerDesc2.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -193,17 +210,12 @@ bool Object::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	samplerDesc2.BorderColor[3] = 0;
 	samplerDesc2.MinLOD = 0;
 	samplerDesc2.MaxLOD = D3D11_FLOAT32_MAX;
-	hr = pD3D11Device->CreateSamplerState(&samplerDesc2, &m_pTexSamplerState1);
+	HRESULT hr = pD3D11Device->CreateSamplerState(&samplerDesc2, &m_pTexSamplerState1);
 
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/fire01.dds", NULL,  &m_pTextures[0]);
-	//DebugHR(hr);
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/noise01.dds", NULL, &m_pTextures[1]);
-	//DebugHR(hr);
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/alpha01.dds", NULL, &m_pTextures[2]);
-	//DebugHR(hr);
-	return true;
+	m_pTextures[0] = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "fire01.dds");
+	m_pTextures[1] = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "noise01.dds");
+	m_pTextures[2] = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "alpha01.dds");
 }
-
 
 bool Object::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 {
@@ -241,14 +253,14 @@ bool Object::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
 	
 
 	ObjectShader.init(pD3D11Device, vInputLayoutDesc);
-	ObjectShader.attachVS(L"light.vsh", "VS", "vs_5_0");
-	ObjectShader.attachPS(L"light.psh", "PS", "ps_5_0");
+	ObjectShader.attach(D3D_VERTEX_SHADER, L"light.vsh", "VS", "vs_5_0");
+	ObjectShader.attach(D3D_PIXEL_SHADER,  L"light.psh", "PS", "ps_5_0");
 	ObjectShader.end();
 
 	return true;
 }
 
-bool Object::LoadModel(char *modelFile)
+bool Object::loadModel(char *modelFile)
 {
 	std::ifstream fin;
 	char ch;
