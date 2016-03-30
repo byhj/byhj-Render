@@ -192,7 +192,7 @@ void OGLApp::v_run()
 		m_pFont.render("GL Version: " + m_GLVersion, 10, sh - 70);
 		m_pFont.render("GLSL Version: " + m_GLSLVersion, 10, sh - 100);
 		m_pFont.render("FPS: " + std::to_string(m_fps), 10, 30);
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 #endif
 
 #ifdef USE_CEGUI

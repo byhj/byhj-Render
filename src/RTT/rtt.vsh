@@ -8,14 +8,14 @@ cbuffer MVPMatrix : register(b0)
 
 struct VS_IN
 {
-   float4 Pos : POSITION0;
-   float4 Tex : TEXCOORD0;
+   float4 Pos : POSITION;
+   float4 Tex : TEXCOORD;
 };
 
 struct VS_OUT
 {
     float4 Pos : SV_POSITION;
-    float4 Tex : TEXCOORD0;
+    float4 Tex : TEXCOORD;
 };
 
 VS_OUT RTT_VS( VS_IN vs_in )

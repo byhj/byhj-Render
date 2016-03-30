@@ -22,9 +22,9 @@ void D3DRTT::init_window(int sw, int sh, int posX, int posY, int width, int heig
 void D3DRTT::render(ID3D11DeviceContext *pD3D11DeviceContext, ID3D11ShaderResourceView *pTexture, const D3DMVPMatrix &matrix)
 {
 
-	m_matrix.model  =  matrix.model;
-	m_matrix.view   =  matrix.view;
-	m_matrix.proj   =  matrix.proj;
+	XMStoreFloat4x4(&m_matrix.model, XMMatrixIdentity());
+	m_matrix.view = matrix.view;
+	m_matrix.proj = matrix.proj;
 	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer, 0, NULL, &m_matrix, 0, 0 );
 	pD3D11DeviceContext->VSSetConstantBuffers( 0, 1, &m_pMVPBuffer);
 
@@ -78,22 +78,21 @@ void D3DRTT::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11
 	VertexData[0].Pos = XMFLOAT3(left, top, 0.0f);  // Top left.
 	VertexData[0].Tex = XMFLOAT2(0.0f, 0.0f);
 
-	VertexData[1].Pos = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
-	VertexData[1].Tex = XMFLOAT2(1.0f, 1.0f);
+	VertexData[1].Pos = XMFLOAT3(right, top, 0.0f);  // Bottom right.
+	VertexData[1].Tex = XMFLOAT2(1.0f, 0.0f);
 
-	VertexData[2].Pos = XMFLOAT3(left, bottom, 0.0f);  // Bottom left.
-	VertexData[2].Tex = XMFLOAT2(0.0f, 1.0f);
+	VertexData[2].Pos = XMFLOAT3(right, bottom, 0.0f);  // Bottom left.
+	VertexData[2].Tex = XMFLOAT2(1.0f, 1.0f);
 
 	// Second triangle.
-	VertexData[3].Pos = XMFLOAT3(left, top, 0.0f);  // Bottom left.
-	VertexData[3].Tex = XMFLOAT2(0.0f, 0.0f);
+	VertexData[3].Pos = XMFLOAT3(right, bottom, 0.0f);  // Bottom left.
+	VertexData[3].Tex = XMFLOAT2(1.0f, 1.0f);
 
-	VertexData[4].Pos = XMFLOAT3(right, top, 0.0f); // Top right.
-	VertexData[4].Tex = XMFLOAT2(1.0f, 0.0f);
+	VertexData[4].Pos = XMFLOAT3(left, bottom, 0.0f); // Top right.
+	VertexData[4].Tex = XMFLOAT2(0.0f, 1.0f);
 
-	VertexData[5].Pos = XMFLOAT3(right, bottom, 0.0f);  // Bottom right.
-	VertexData[5].Tex = XMFLOAT2(1.0f, 1.0f);
-
+	VertexData[5].Pos = XMFLOAT3(left, top, 0.0f);  // Bottom right.
+	VertexData[5].Tex = XMFLOAT2(0.0f, 0.0f);
 
 	///////////////////////////Index Buffer ////////////////////////////////
 

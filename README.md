@@ -146,6 +146,12 @@ Use normal texture to make the normal mapping effect.
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/tess.png">
 
 ---
+
+## Render To Texture (OpenGL3+ & DirectX11)
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/RTT.png">
+
+---
+
 ## Fur (OpenGL3+)
 ---
 
