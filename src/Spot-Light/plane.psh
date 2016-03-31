@@ -1,0 +1,46 @@
+
+cbuffer LightBuffer :register(b0)
+{
+    float4 ambientColor;
+	float4 diffuseColor;
+
+	float3 lightDir;
+	float  padding1;
+
+	float3 lightPos;
+	float  range;
+
+	float3 att;
+	float  padding2;
+}
+
+struct VS_OUT
+{
+    float4 Pos : SV_POSITION;
+    float2 Tex : TEXCOORD0;
+	float3 Normal : NORMAL;
+    float3 worldPos : POSITION;
+};
+
+Texture2D tex           : register(t0); 
+SamplerState texSampler : register(s0);
+
+float4 PS(VS_OUT ps_in) : SV_TARGET
+{
+   float4 ambient = saturate(ambientColor) ;
+   float4 texColor = tex.Sample(texSampler, ps_in.Tex);
+
+   float3 lightToPos = lightPos - ps_in.worldPos;
+   float  len = length(lightToPos);
+   if (len > range)
+      return ambient * texColor;
+
+   lightToPos   = normalize(lightToPos);
+   ps_in.Normal = normalize(ps_in.Normal);
+   float intensity = dot(lightToPos, ps_in.Normal);
+
+   float4 diffuse = max(intensity, 0.0f) * diffuseColor ;
+   diffuse /= (att[0] + (att[1] * len) + att[2] * len *len);
+
+   return  texColor * saturate(ambient + diffuse);
+}

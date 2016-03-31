@@ -110,6 +110,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <FxCompile Include="cubemap.psh" />
+    <FxCompile Include="cubemap.vsh" />
+    <FxCompile Include="plane.psh" />
+    <FxCompile Include="plane.vsh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ch20-Spot-Light.cpp" />
+    <ClCompile Include="Cubemap.cpp" />
+    <ClCompile Include="plane.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="Cubemap.h" />
+    <ClInclude Include="plane.h" />
+    <ClInclude Include="RenderSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

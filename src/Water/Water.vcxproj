@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -111,11 +111,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bath.cpp" />
+    <ClCompile Include="d3d11Render.cpp" />
+    <ClCompile Include="ground.cpp" />
+    <ClCompile Include="lightShader.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="refractShader.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="wall.cpp" />
+    <ClCompile Include="water.cpp" />
+    <ClCompile Include="waterShader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="oglRender.h" />
+    <ClInclude Include="bath.h" />
+    <ClInclude Include="d3d11Render.h" />
+    <ClInclude Include="ground.h" />
+    <ClInclude Include="lightShader.h" />
+    <ClInclude Include="refractShader.h" />
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="wall.h" />
+    <ClInclude Include="water.h" />
+    <ClInclude Include="waterShader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="light.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="light.vsh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="refraction.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="refraction.vsh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="water.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="water.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

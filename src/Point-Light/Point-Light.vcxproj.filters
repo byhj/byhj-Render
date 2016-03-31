@@ -135,6 +135,15 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
+    <ClInclude Include="plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -242,6 +251,12 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
+    <ClCompile Include="plane.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="model.vsh">
@@ -256,5 +271,19 @@
     <None Include="skymap.psh">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="plane.psh">
+      <Filter>Header Files</Filter>
+    </FxCompile>
+    <FxCompile Include="plane.vsh">
+      <Filter>Header Files</Filter>
+    </FxCompile>
+    <FxCompile Include="light.psh">
+      <Filter>Header Files</Filter>
+    </FxCompile>
+    <FxCompile Include="light.vsh">
+      <Filter>Header Files</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

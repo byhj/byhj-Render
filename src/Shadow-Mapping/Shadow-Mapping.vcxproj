@@ -141,10 +141,17 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
+    <ClCompile Include="depthShader.cpp" />
+    <ClCompile Include="Device.cpp" />
     <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
+    <ClCompile Include="model.cpp" />
     <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="SceneShader.cpp" />
+    <ClCompile Include="shadowShader.cpp" />
+    <ClCompile Include="TextureMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
@@ -177,15 +184,28 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
+    <ClInclude Include="depthShader.h" />
+    <ClInclude Include="Device.h" />
     <ClInclude Include="LightGUI.h" />
     <ClInclude Include="MeshLoad.h" />
+    <ClInclude Include="model.h" />
     <ClInclude Include="oglRender.h" />
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="sceneShader.h" />
+    <ClInclude Include="shadowShader.h" />
+    <ClInclude Include="TextureMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="plane.frag" />
     <None Include="plane.vert" />
     <None Include="shadow.frag" />
     <None Include="shadow.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="depth.psh" />
+    <FxCompile Include="depth.vsh" />
+    <FxCompile Include="scene.psh" />
+    <FxCompile Include="scene.vsh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

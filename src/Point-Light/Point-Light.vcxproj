@@ -65,7 +65,10 @@
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="light.h" />
     <ClInclude Include="MeshLoad.h" />
+    <ClInclude Include="plane.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Skymap.h" />
     <ClInclude Include="d3d11Render.h" />
   </ItemGroup>
@@ -102,9 +105,17 @@
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
+    <ClCompile Include="plane.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Skymap.cpp" />
     <ClCompile Include="d3d11Render.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="light.psh" />
+    <FxCompile Include="light.vsh" />
+    <FxCompile Include="plane.psh" />
+    <FxCompile Include="plane.vsh" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{72899F7B-9687-4704-8BF9-4B59546AC6D6}</ProjectGuid>

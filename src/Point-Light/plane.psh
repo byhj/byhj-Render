@@ -1,0 +1,42 @@
+#define NUM_POINTLIGHTS 4
+
+struct PointLight
+{
+   float4 color;
+   float4 pos;
+};
+
+cbuffer LightBuffer	 : register(b0)
+{
+   PointLight pLights[NUM_POINTLIGHTS];
+};
+
+struct VS_OUTPUT 
+{
+    float4 Pos : SV_POSITION;
+   	float2 Tex : TEXCOORD0;
+	float3 Normal: NORMAL;
+	float4 WorldPos: TEXCOORD1;
+};
+
+Texture2D tex: register(t0);
+SamplerState texSample : register(s0);
+
+float4 PS(VS_OUTPUT ps_in) : SV_TARGET
+{
+
+  float4 texColor = tex.Sample(texSample, ps_in.Tex);
+  float4 diffuse;
+  float4 instensity;
+  float4 pixelColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+    
+  for (int i = 0; i != NUM_POINTLIGHTS; ++i)
+  {
+     float4 lightDir = normalize(pLights[i].pos - ps_in.WorldPos);
+     instensity = saturate( dot(ps_in.Normal, lightDir.xyz) );
+	 diffuse = instensity * pLights[i].color;
+	 pixelColor += diffuse;
+  }
+
+  return saturate(pixelColor) * texColor;
+}

@@ -1,0 +1,62 @@
+
+cbuffer LightBuffer	 : register(b0)
+{
+  float4 ambientColor;
+  float4 diffuseColor;
+};
+
+struct VS_OUTPUT 
+{
+    float4 Pos         : SV_POSITION;
+   	float2 Tex         : TEXCOORD0;
+	float3 Normal      : NORMAL;
+	float4 LightViewPos: TEXCOORD1;
+	float3 LightPos    : TEXCOORD2;
+};
+
+Texture2D colorTex     : register(t0);
+Texture2D depthMapTex  : register(t1);
+
+SamplerState texSampleClamp : register(s0);
+SamplerState texSampleWrap  : register(s1);
+
+float4 PS(VS_OUTPUT ps_in) : SV_TARGET
+{
+   ps_in.Normal = normalize(ps_in.Normal);
+
+  float bias = 0.01f;
+  float4 color = ambientColor;
+
+  float2 projTexCoord;
+  projTexCoord.x =  ps_in.LightViewPos.x / ps_in.LightViewPos.w / 2.0f + 0.5f;
+  projTexCoord.y = -ps_in.LightViewPos.y / ps_in.LightViewPos.w / 2.0f + 0.5f;
+
+  // Determine if the projected coordinates are in the 0 to 1 range.  If so then this pixel is in the view of the light.
+   if(  (saturate(projTexCoord.x) == projTexCoord.x) && (saturate(projTexCoord.y) == projTexCoord.y)  )
+   {
+        float depthValue = depthMapTex.Sample(texSampleClamp, projTexCoord).r;
+        
+        // Calculate the depth of the light.
+        float  lightDepthValue = ps_in.LightViewPos.z / ps_in.LightViewPos.w;
+        lightDepthValue = lightDepthValue - bias;
+  		// Compare the depth of the shadow map value and the depth of the light to determine whether to shadow or to light this pixel.
+		// If the light is in front of the object then light the pixel, if not then shadow this pixel since an object (occluder) is casting a shadow on it.
+		if(lightDepthValue < depthValue)
+		{
+			float lightIntensity = saturate(dot(ps_in.Normal, ps_in.LightPos));
+
+		    if(lightIntensity > 0.0f)
+			{
+				color += (diffuseColor * lightIntensity);
+				color = saturate(color);
+			}
+		}
+		else
+		  color = float4(0.0f, 0.0f, 0.0f, 1.0f);
+   }
+   color = saturate(color);
+   float4 texColor = colorTex.Sample(texSampleWrap, ps_in.Tex);
+   float4 pixelColor =  color * texColor;
+
+   return pixelColor ;
+}

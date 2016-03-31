@@ -15,16 +15,84 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="lightShader.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="oglRender.cpp">
+    <ClCompile Include="refractShader.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wall.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="water.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waterShader.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bath.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ground.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d11Render.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="oglRender.h">
+    <ClInclude Include="lightShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="refractShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="water.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waterShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d11Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="light.psh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="light.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="refraction.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="refraction.psh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="water.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="water.psh">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
