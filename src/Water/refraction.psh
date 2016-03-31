@@ -1,0 +1,34 @@
+
+struct VS_OUT
+{
+  float4 Pos      : SV_POSITION;
+  float2 Tex      : TEXCOORD;
+  float3 Normal   :Normal;
+  float  clipDis  :SV_ClipDistance;
+};
+
+cbuffer LightBuffer	 : register(b0)
+{
+  float4 ambientColor;
+  float4 diffuseColor;
+  float3 lightDirection;
+  float padding;
+};
+
+Texture2D tex             : register(t0);
+SamplerState texState     : register(s0);
+
+float4 PS(VS_OUT ps_in) : SV_TARGET
+{
+    float4 texColor = tex.Sample(texState, ps_in.Tex);
+
+    float4 pixelColor  = ambientColor;
+    float3 lightDir = -lightDirection;
+	float intensity = saturate( dot(ps_in.Normal, lightDir) );
+	pixelColor  += max(0.0f, intensity) * diffuseColor;
+
+    pixelColor  = saturate(color);
+	pixelColor  *= texColor;
+
+	return pixelColor ;
+}

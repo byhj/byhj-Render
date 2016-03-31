@@ -1,0 +1,56 @@
+
+cbuffer WaterBufer : register(b0)
+{
+   float waterTranslation;
+   float reflectRefractScale;
+   float2 padding;
+};
+
+struct VS_OUT
+{
+    float4 Pos        : SV_POSITION;
+    float2 Tex        : TEXCOORD0;
+	float4 reflectPos : TEXCOORD1;
+	float4 refractPos : TEXCOORD2;
+};
+
+Texture2D normalTex  : register(t0);
+Texture2D reflectTex : register(t1);
+Texture2D refractTex : register(t2);
+
+
+SamplerState texSample : register(s0);
+
+float4 WaterPS(VS_OUT ps_in) : SV_TARGET
+{
+  // Move the position the water normal is sampled from to simulate moving water.	
+  ps_in.Tex.y += waterTranslation;
+
+  float2 reflectTexCoord;
+  // Calculate the projected reflection texture coordinates.
+  reflectTexCoord.x = ps_in.reflectPos.x / ps_in.reflectPos.w / 2.0f + 0.5f;
+  reflectTexCoord.y = -ps_in.reflectPos.y / ps_in.reflectPos.w / 2.0f + 0.5f;
+ 
+  float2 refractTexCoord;
+ // Calculate the projected refraction texture coordinates.
+  refractTexCoord.x = ps_in.refractPos.x / ps_in.refractPos.w / 2.0f + 0.5f;
+  refractTexCoord.y = -ps_in.refractPos.y / ps_in.refractPos.w / 2.0f + 0.5f;
+
+   // Sample the normal from the normal map texture.
+   float4 normalMap = normalTex.Sample(texSample, ps_in.Tex);
+	// Expand the range of the normal from (0,1) to (-1,+1).
+   float3 normal = (normalMap.xyz * 2.0f) - 1.0f;
+
+	// Re-position the texture coordinate sampling position by the normal map value to simulate the rippling wave effect.
+	reflectTexCoord = reflectTexCoord + (normal.xy * reflectRefractScale);
+	refractTexCoord = refractTexCoord + (normal.xy * reflectRefractScale);
+
+	// Sample the texture pixels from the textures using the updated texture coordinates.
+    float4 reflectionColor = reflectTex.Sample(texSample, reflectTexCoord);
+    float4 refractionColor = refractTex.Sample(texSample, refractTexCoord);
+
+	// Combine the reflection and refraction results for the final color.
+   float4 pixelColor = reflectionColor;//lerp(reflectionColor, refractionColor, 0.6f);
+
+   return pixelColor;
+}
