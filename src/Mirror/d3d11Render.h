@@ -3,7 +3,7 @@
 
 #include "d3d/d3dApp.h"
 #include "d3d/d3dFWFont.h"
-
+#include "d3d/d3dEulerCamera.h"
 
 #include <d3d11.h>
 #include <wrl.h>
@@ -39,6 +39,7 @@ namespace byhj
 		void drawfps();
 		void drawInfo();
 		void init_fbo();
+
 		D3DFWFont m_Font;
 		Timer m_Timer;
 		byhj::Cube m_Cube;

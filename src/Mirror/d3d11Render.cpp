@@ -17,26 +17,27 @@ namespace byhj
 		init_device();
 		init_camera();
 		init_object();
+		init_fbo();
 	}
 
 	void D3D11Render::v_update()
 	{
-
+		D3DEulerCamera::getInstance()->detectInput(m_Timer.getDeltaTime(), getHwnd());
 	}
 
 	void D3D11Render::v_render()
 	{
 		//Render Scene to texture
 		float bgColor[4] ={ 0.5f, 0.5f, 0.5f, 1.0f };
-		m_pD3D11DeviceContext->OMSetRenderTargets(1, m_pRttRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
+		m_pD3D11DeviceContext->OMSetRenderTargets(1, m_pRttRenderTargetView.GetAddressOf(), m_pDepthStencilView);
 		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRttRenderTargetView.Get(), bgColor);
 		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 
-		XMFLOAT4X4 View;// = m_Camera.GetViewMatrix();
-		XMFLOAT3 camPos = m_Camera.GetPos();
+		XMFLOAT4X4 View = D3DEulerCamera::getInstance()->getViewMat();
+		XMFLOAT4 camPos = D3DEulerCamera::getInstance()->getCamPos();
 		camPos.y =  -camPos.y;
-		XMVECTOR pos    = XMLoadFloat3(&camPos);
+		XMVECTOR pos    = XMLoadFloat4(&camPos);
 		XMVECTOR target = XMVectorZero();
 		XMVECTOR up     = XMVectorSet(0.0f, 1.0f, 0.0f, 1.0f);
 		XMMATRIX reflectMat = XMMatrixLookAtLH(pos, target, up);
@@ -46,10 +47,14 @@ namespace byhj
 		m_matrix.view = Reflect;
 		m_Cube.render(m_pD3D11DeviceContext, m_matrix);
 
+		m_pD3D11DeviceContext->OMSetRenderTargets(1,  &m_pRenderTargetView, m_pDepthStencilView);
+		m_pD3D11DeviceContext->ClearRenderTargetView(m_pRenderTargetView, bgColor);
+		m_pD3D11DeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
 		m_matrix.view = View;
 		m_Cube.render(m_pD3D11DeviceContext, m_matrix);
 
-		m_Plane.render(m_pD3D11DeviceContext, m_pRttShaderResourceView.Get(),  Reflect);
+		m_Plane.render(m_pD3D11DeviceContext, m_pRttShaderResourceView.Get(),  m_matrix, Reflect);
 
 
 		drawInfo();
@@ -277,6 +282,7 @@ namespace byhj
 		XMStoreFloat4x4(&m_matrix.model, XMMatrixTranspose(Model));
 		XMStoreFloat4x4(&m_matrix.view, XMMatrixTranspose(View));
 		XMStoreFloat4x4(&m_matrix.proj, XMMatrixTranspose(Proj));
+		D3DEulerCamera::getInstance()->init(getAppInst(), getHwnd());
     }
     
     void D3D11Render::init_object()

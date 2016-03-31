@@ -1,5 +1,5 @@
 #include "Cube.h"
-#include "DirectXTK/DDSTextureLoader.h"
+#include "textureMgr.h"
 
 namespace byhj
 {
@@ -258,10 +258,8 @@ void Cube::init_texture(ID3D11Device *pD3D11Device)
 {
 
 	HRESULT hr;
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/stone01.dds", NULL, &m_pTextures[0]);
-	//DebugHR(hr);
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/bump01.dds", NULL, &m_pTextures[1]);
-	//DebugHR(hr);
+	m_pTextures[0] = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device,  "stone01.dds");
+	m_pTextures[1] = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "bump01.dds");
 
 
 	// Create a texture sampler state description.
