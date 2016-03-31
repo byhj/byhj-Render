@@ -7,7 +7,7 @@
 using namespace DirectX;
 
 #include "Common.h"
-#include "d3d/Shader.h"
+#include "d3d/d3dShader.h"
 
 namespace byhj
 {
@@ -42,7 +42,7 @@ namespace byhj
 		int m_IndexCount = 0;
 		byhj::MatrixBuffer m_cbMatrix;
 		byhj::LightBuffer cbLight;
-		d3d::Shader TestShader;
+		D3DShader TestShader;
 
 		ComPtr<ID3D11Buffer> m_pVertexBuffer;
 		ComPtr<ID3D11Buffer> m_pIndexBuffer;

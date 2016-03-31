@@ -4,7 +4,7 @@
 #include "d3d/d3dApp.h"
 #include "d3d/d3dUtility.h"
 #include "d3d/d3dFWFont.h"
-#include "d3d/d3dCamera.h"
+#include "d3d/d3dEulerCamera.h"
 
 #include "Timer.h"
 #include "Cube.h"
@@ -24,12 +24,6 @@ public:
 	void v_render();
 	void v_shutdown();
 
-	void UpdateScene();
-	void v_onMouseDown(WPARAM btnState, int x, int y);
-	void v_onMouseMove(WPARAM btnState, int x, int y);
-	void v_onMouseUp(WPARAM btnState, int x, int y);
-	void v_onMouseWheel(WPARAM btnState, int x, int y);
-
 private:
 	void init_device();
 	void init_camera();
@@ -48,7 +42,6 @@ private:
 	byhj::Fade m_Fade;
 	D3DFWFont m_Font;
 	Timer m_Timer;
-	D3DCamera m_Camera;
 
 	float fps = 0.0f;
 	int m_videoCardMemory;

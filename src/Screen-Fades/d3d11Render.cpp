@@ -24,19 +24,18 @@ void D3D11Render::v_init()
 
 void D3D11Render::v_update()
 {
-
+	D3DEulerCamera::getInstance()->detectInput(m_Timer.getDeltaTime(), getHwnd());
 }
 
 void D3D11Render::v_render()
 {
 
 	static float rot = 0.0f;
-	rot +=  m_Timer.GetDeltaTime();
-	UpdateScene();
+	rot +=  m_Timer.getDeltaTime();
 
 	XMMATRIX Model = XMMatrixRotationY(rot);
 	XMStoreFloat4x4(&m_Matrix.model, XMMatrixTranspose(Model));
-	m_Matrix.view = m_Camera.getViewMat();
+    m_Matrix.view = D3DEulerCamera::getInstance()->getViewMat();
 
 	float bgColor[4] ={ 0.2f, 0.3f, 0.4f, 1.0f };
 	m_pD3D11DeviceContext->OMSetRenderTargets(1, m_pRttRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
@@ -64,16 +63,17 @@ void D3D11Render::v_render()
 
 		// Create an orthographic projection matrix for 2D rendering. 
 		Model = XMMatrixIdentity();
+		m_Matrix.view = D3DEulerCamera::getInstance()->getViewMat();
 		XMStoreFloat4x4(&m_Matrix.model, XMMatrixTranspose(Model));
 
-		XMMATRIX orthProj = XMMatrixOrthographicLH((float)m_ScreenWidth, (float)m_ScreenHeight, 0.1f, 1000.0f);
+		XMMATRIX orthProj = XMMatrixOrthographicLH(getClientWidth(), getClientHeight(), 0.1f, 1000.0f);
 		XMFLOAT4X4 orth;
-		XMStoreFloat4x4(&orth, XMMatrixTranspose(orthProj));
-		m_Fade.render(m_pD3D11DeviceContext.Get(), m_pRttShaderResourceView.Get(), m_Matrix.model, m_Matrix.view, orth, fadePercentage);
+		XMStoreFloat4x4(&m_Matrix.proj, XMMatrixTranspose(orthProj));
+		m_Fade.render(m_pD3D11DeviceContext.Get(), m_pRttShaderResourceView.Get(), m_Matrix, fadePercentage);
 
 		TurnZBufferOn();
 
-		accumulatedTime += m_Timer.GetDeltaTime();
+		accumulatedTime += m_Timer.getDeltaTime();
 		// While the time goes on increase the fade in amount by the time that is passing each frame.
 		if (accumulatedTime < fadeInTime)
 			fadePercentage = accumulatedTime / fadeInTime;
@@ -97,30 +97,6 @@ void D3D11Render::v_shutdown()
 
 	m_Cube.shutdown();
 
-}
-
-
-void D3D11Render::UpdateScene()
-{
-	m_Camera.update();
-}
-void D3D11Render::v_onMouseDown(WPARAM btnState, int x, int y)
-{
-	m_Camera.OnMouseDown(btnState, x, y, getHwnd());
-}
-
-void  D3D11Render::v_onMouseMove(WPARAM btnState, int x, int y)
-{
-	m_Camera.OnMouseMove(btnState, x, y);
-}
-
-void  D3D11Render::v_onMouseUp(WPARAM btnState, int x, int y)
-{
-	m_Camera.OnMouseUp(btnState, x, y);
-}
-void  D3D11Render::v_onMouseWheel(WPARAM btnState, int x, int y)
-{
-	m_Camera.OnMouseWheel(btnState, x, y, WindowInfo::getInstance()->getAspect());
 }
 
 
@@ -313,8 +289,8 @@ void D3D11Render::init_camera()
 	vp.TopLeftY = 0;
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
-	vp.Width    = static_cast<FLOAT>(m_ScreenWidth);
-	vp.Height   = static_cast<FLOAT>(m_ScreenHeight);
+	vp.Width    = static_cast<FLOAT>(getClientWidth());
+	vp.Height   = static_cast<FLOAT>(getClientHeight());
 	m_pD3D11DeviceContext->RSSetViewports(1, &vp);
 
 	//MVP Matrix
@@ -330,6 +306,7 @@ void D3D11Render::init_camera()
 	XMStoreFloat4x4(&m_Matrix.view,  XMMatrixTranspose(View) );
 	XMStoreFloat4x4(&m_Matrix.proj,  XMMatrixTranspose(Proj) );
 
+	D3DEulerCamera::getInstance()->init(getAppInst(), getHwnd());
 }
 
 void D3D11Render::init_object()
