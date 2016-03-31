@@ -1,24 +1,23 @@
 #include "Plane.h"
-#include "d3d/d3dDebug.h"
-#include "DirectXTK/WICTextureLoader.h"
+#include "textureMgr.h"
 
 #include <array>
 
 namespace byhj
 {
 
-	void Plane::Init(ID3D11Device *pD3D11Device,ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
+	void Plane::init(ID3D11Device *pD3D11Device,ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
 	{
 		init_buffer(pD3D11Device, pD3D11DeviceContext);
 		init_shader(pD3D11Device, hWnd);
 		init_texture(pD3D11Device);
 	}
 
-	void Plane::Render(ID3D11DeviceContext *pD3D11DeviceContext, const byhj::MatrixBuffer &matrix)
+	void Plane::render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix)
 	{
-		m_cbMatrix.Model = matrix.Model;
-		m_cbMatrix.View  = matrix.View;
-		m_cbMatrix.Proj  = matrix.Proj;
+		m_cbMatrix.Model = matrix.model;
+		m_cbMatrix.View  = matrix.view;
+		m_cbMatrix.Proj  = matrix.proj;
 		pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &m_cbMatrix, 0, 0 );
 		pD3D11DeviceContext->VSSetConstantBuffers( 0, 1, m_pMVPBuffer.GetAddressOf());
 		pD3D11DeviceContext->PSSetConstantBuffers(0, 1, m_pLightBuffer.GetAddressOf());
@@ -42,7 +41,7 @@ namespace byhj
 
 	}
 
-	void Plane::Shutdown()
+	void Plane::shutdown()
 	{
 
 	}
@@ -132,7 +131,7 @@ namespace byhj
 
 		plightData->ambient   = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 		plightData->diffuse   = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-		plightData->lightDir  = XMFLOAT3(0.25f, 0.5f, -1.0f);
+		plightData->lightDir  = XMFLOAT3(0.25f, 0.5f, 1.0f);
 		plightData->padding1  = 0.0f;
 		plightData->lightPos  = XMFLOAT3(1.0f, 1.0f, 3.0f);
 		plightData->range     = 100.0f;
@@ -176,18 +175,16 @@ namespace byhj
 		vInputLayoutDesc.push_back(InputLayout);     
 
 		TestShader.init(pD3D11Device, vInputLayoutDesc);
-		TestShader.attachVS(L"Plane.vsh", "VS", "vs_5_0");
-		TestShader.attachPS(L"Plane.psh", "PS", "ps_5_0");
+		TestShader.attach(D3D_VERTEX_SHADER, L"Plane.vsh", "VS", "vs_5_0");
+		TestShader.attach(D3D_PIXEL_SHADER,  L"Plane.psh", "PS", "ps_5_0");
 
 	}
 
 	void Plane::init_texture(ID3D11Device *pD3D11Device)
 	{
-		LPCWSTR  texFile = L"../../media/textures/grass.jpg";
 
 		HRESULT hr;
-		//Use shaderResourceView to make texture to the shader
-		hr = CreateWICTextureFromFile(pD3D11Device, texFile, NULL, &m_pTexture);
+		m_pTexture = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "grass.jpg");
 		//DebugHR(hr);
 
 

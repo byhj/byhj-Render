@@ -117,7 +117,7 @@ void D3DEulerCamera::update()
 	static XMVECTOR camRight       = XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
 
 	static XMVECTOR camUp  = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	static XMVECTOR camPosition    = XMVectorSet(0.0f, 2.0f, -5.0f, 0.0f);
+	static XMVECTOR camPosition    = XMVectorSet(0.0f, 2.0f, -3.0f, 0.0f);
 	static XMVECTOR camTarget      = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 	static XMMATRIX camView;
 

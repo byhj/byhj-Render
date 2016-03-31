@@ -1,5 +1,5 @@
-#ifndef TRIANGLE_H
-#define TRIANGLE_H
+#ifndef Plane_H
+#define Plane_H
 
 #include <d3d11.h>
 
@@ -8,6 +8,7 @@ using namespace DirectX;
 
 #include "Common.h"
 #include "d3d/d3dShader.h"
+#include "d3d/d3dUtility.h"
 
 namespace byhj
 {
@@ -28,9 +29,9 @@ namespace byhj
 		~Plane() {}
 
 	public:
-		void Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
-		void Render(ID3D11DeviceContext *pD3D11DeviceContext, const byhj::MatrixBuffer &matrix);
-		void Shutdown();
+		void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
+		void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
+		void shutdown();
 
 	private:
 
