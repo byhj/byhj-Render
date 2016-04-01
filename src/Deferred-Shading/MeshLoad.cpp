@@ -1,5 +1,6 @@
 #include "MeshLoad.h"
 #include "windowInfo.h"
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
@@ -11,23 +12,21 @@ namespace byhj
 		1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
 	};
 
-	void MeshLoad::Init(int sw, int sh)
+	void MeshLoad::init()
 	{
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
-
-		m_LightGui.v_init(sw, sh);
-		m_RotationGui.v_init(sw, sh);
-
 		init_buffer();
 		init_shader();
 		init_fbo();
 	}
 
-	void MeshLoad::Update(const glm::mat4 &camMat)
+	void MeshLoad::update()
 	{
 
+
+	}
+
+	void MeshLoad::render()
+	{
 		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 		static const GLfloat one[] ={ 1.0f };
 		glBindFramebuffer(GL_FRAMEBUFFER, gbuffer.fbo);
@@ -37,18 +36,16 @@ namespace byhj
 		glClearBufferfv(GL_DEPTH, 0, one);
 
 		glUseProgram(m_DeferredProgram);
-	
 
-		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f)) * m_RotationGui.getRotationMat();
-		glm::mat4 view  = camMat;
+		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
+		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &view[0][0]);
 		glUniformMatrix4fv(uniform_loc.proj, 1, GL_FALSE, &proj[0][0]);
-		glUniform3fv(uniform_loc.ambient, 1, &m_LightGui.getLight(0)[0]);
 
-		m_Model.draw(m_DeferredProgram);
+		ModelMgr::getInstance()->render(m_DeferredProgram);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClearBufferfv(GL_COLOR, 0, black);
@@ -69,38 +66,18 @@ namespace byhj
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glBindVertexArray(0);
 
-		m_LightGui.v_update();
-		m_RotationGui.v_update();
-
-	    GLfloat time = glfwGetTime();
-
-
-
+		GLfloat time = glfwGetTime();
 		glUseProgram(0);
 	}
 
-	void MeshLoad::Render()
-	{
-
-
-		glDisable(GL_DEPTH_TEST);
-
-		m_RotationGui.v_render();
-		m_LightGui.v_render();
-
-		glEnable(GL_DEPTH_TEST);
-
-
-		glUseProgram(0);
-	}
-
-	void MeshLoad::Shutdown()
+	void MeshLoad::shutdown()
 	{
 	}
 
 	void MeshLoad::init_buffer()
 	{
-		ModelMgr::loadModel("armadillo.obj", LoadType::OGL);
+		ModelMgr::getInstance()->loadOGLModel("BB8/bb8.FBX");
+
 		sw = WindowInfo::getInstance()->getWidth();
 		sh = WindowInfo::getInstance()->getHeight();
 		aspect = WindowInfo::getInstance()->getAspect();

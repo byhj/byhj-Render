@@ -8,8 +8,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "modelMgr.h"
-#include "LightGUI.h"
-#include "RotationGui.h"
 #include "ogl/oglShader.h"
 
 namespace byhj
@@ -18,10 +16,10 @@ namespace byhj
 	{
 	public:
 
-		void Init(int sw, int sh);
-		void Update(const glm::mat4 &camMat);
-		void Render();
-        void Shutdown();
+		void init();
+		void update();
+		void render();
+        void shutdown();
 
 	private:
 		void init_buffer();
@@ -49,8 +47,6 @@ namespace byhj
 		GLuint m_DeferredProgram;
 		GLuint m_LightProgram;
 		GLfloat sw, sh, aspect;
-		LightGui m_LightGui;
-		RotationGui m_RotationGui;
 
 	};
 }

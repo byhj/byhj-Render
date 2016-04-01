@@ -47,12 +47,6 @@
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="RotationGUI.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LightGUI.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="MeshLoad.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -155,12 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="oglRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationGUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LightGUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshLoad.h">

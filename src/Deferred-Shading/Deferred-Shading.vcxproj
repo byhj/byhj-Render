@@ -148,11 +148,9 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshLoad.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="RotationGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -186,10 +184,8 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="LightGUI.h" />
     <ClInclude Include="MeshLoad.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="RotationGUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
