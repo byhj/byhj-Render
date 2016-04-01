@@ -3,9 +3,9 @@
 
 #include "ogl/oglShader.h"
 #include "ogl/oglUtility.h"
-#include "ogl/oglModel.h"
-#include "ogl/oglCamera.h"
+#include "ogl/oglEulerCamera.h"
 
+#include "ModelMgr.h"
 
 namespace byhj
 {
@@ -18,7 +18,7 @@ namespace byhj
 
 	public:
 		void init();
-		void render( const OGLCamera &camera);
+		void render();
 		void shutdown();
 		void changeShadow();
 
@@ -31,7 +31,6 @@ namespace byhj
 		void init_fbo();
 
 		void RenderQuad();
-		void RenderCube();
 
 		GLuint cubeVAO, planeVAO, cubeVBO, planeVBO;
 		GLuint    model_prog, light_prog, blur_prog, ssao_prog;

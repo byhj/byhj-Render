@@ -25,6 +25,7 @@ void main()
     g_posDepth.xyz = vs_out.fragPos;
     // And store linear depth into gPositionDepth's alpha component
     g_posDepth.a = LinearizeDepth(gl_FragCoord.z); // Divide by FAR if you need to store depth in range 0.0 - 1.0 (if not using floating point colorbuffer)
+
     // Also store the per-fragment normals into the gbuffer
     g_normal = normalize(vs_out.normal);
     // And the diffuse per-fragment color

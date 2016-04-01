@@ -20,51 +20,6 @@ namespace byhj
 		1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
 	};
 
-	GLfloat cubeVertices[] = {
-		// Back face
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // Bottom-left
-		0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top-right
-		0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom-right         
-		0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,  // top-right
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,  // bottom-left
-		-0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,// top-left
-		// Front face
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
-		0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  // bottom-right
-		0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,  // top-right
-		0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top-right
-		-0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,  // top-left
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,  // bottom-left
-		// Left face
-		-0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
-		-0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-left
-		-0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom-left
-		-0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
-		-0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // bottom-right
-		-0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
-		// Right face
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-left
-		0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-right
-		0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-right         
-		0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom-right
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  // top-left
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom-left     
-		// Bottom face
-		-0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
-		0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top-left
-		0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,// bottom-left
-		0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom-left
-		-0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom-right
-		-0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
-		// Top face
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,// top-left
-		0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
-		0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top-right     
-		0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,// top-left
-		-0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f // bottom-left     
-	};
-#pragma endregion
 
 	void Scene::init()
 	{
@@ -83,19 +38,12 @@ namespace byhj
 		glBindVertexArray(0);
 	}
 
-	void  Scene::RenderCube()
-	{
-		glBindVertexArray(cubeVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
-	}
-
-	void Scene::render(const OGLCamera &camera)
+	void Scene::render()
 	{		
 		// Lights
 		glm::vec3 lightPos = glm::vec3(1.0, 1.0, 3.0);
-		glm::vec3 lightColor = glm::vec3(0.2, 0.2, 0.7);
-		glm::mat4 view = camera.GetViewMatrix();
+		glm::vec3 lightColor = glm::vec3(0.8, 0.8, 0.9);
+		glm::mat4 view = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 		glm::mat4 model = glm::mat4(1.0f);
 
@@ -112,7 +60,7 @@ namespace byhj
 
 		// draw model on the floor
 
-	    m_model.draw(model_prog);
+	    ModelMgr::getInstance()->render(model_prog);
 	
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
@@ -176,41 +124,43 @@ namespace byhj
 		glUseProgram(0);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		////////////////////////////////////////////////////////////////////////////////////////////
-		// 4. Lighting Pass: traditional deferred Blinn-Phong lighting now with added screen-space ambient occlusion
-		glUseProgram(light_prog);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, m_posDepthTex);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, m_normalTex);
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, m_colorTex);
-		glActiveTexture(GL_TEXTURE3); // Add extra SSAO texture to lighting pass
-		glBindTexture(GL_TEXTURE_2D, m_ssaoColorBlurTex);
-
-		glUniform1i(glGetUniformLocation(light_prog, "u_posDepthTex"), 0);
-		glUniform1i(glGetUniformLocation(light_prog, "u_normalTex"), 1);
-		glUniform1i(glGetUniformLocation(light_prog, "u_colorTex"), 2);
-		glUniform1i(glGetUniformLocation(light_prog, "u_ssaoTex"), 3);
-
-		// Also send light relevant uniforms
-		glm::vec3 lightPosView = glm::vec3(camera.GetViewMatrix() * glm::vec4(lightPos, 1.0));
-		glUniform3fv(glGetUniformLocation(light_prog, "light.Position"), 1, &lightPosView[0]);
-		glUniform3fv(glGetUniformLocation(light_prog, "light.Color"), 1, &lightColor[0]);
-		
-		int draw_mode = 1;
-		// Update attenuation parameters
-		const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
-		const GLfloat linear = 0.09;
-		const GLfloat quadratic = 0.032;
-		glUniform1f(glGetUniformLocation(light_prog, "light.Linear"), linear);
-		glUniform1f(glGetUniformLocation(light_prog, "light.Quadratic"), quadratic);
-		glUniform1i(glGetUniformLocation(light_prog, "draw_mode"), draw_mode);
-		RenderQuad();
-
-		glUseProgram(0);
+	  ////////////////////////////////////////////////////////////////////////////////////////////
+	  // 4. Lighting Pass: traditional deferred Blinn-Phong lighting now with added screen-space ambient occlusion
+	  glUseProgram(light_prog);
+	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  
+	  glActiveTexture(GL_TEXTURE0);
+	  glBindTexture(GL_TEXTURE_2D, m_posDepthTex);
+	  glActiveTexture(GL_TEXTURE1);
+	  glBindTexture(GL_TEXTURE_2D, m_normalTex);
+	  glActiveTexture(GL_TEXTURE2);
+	  glBindTexture(GL_TEXTURE_2D, m_colorTex);
+	  glActiveTexture(GL_TEXTURE3); // Add extra SSAO texture to lighting pass
+	  glBindTexture(GL_TEXTURE_2D, m_ssaoColorBlurTex);
+	  
+	  glUniform1i(glGetUniformLocation(light_prog, "u_posDepthTex"), 0);
+	  glUniform1i(glGetUniformLocation(light_prog, "u_normalTex"), 1);
+	  glUniform1i(glGetUniformLocation(light_prog, "u_colorTex"), 2);
+	  glUniform1i(glGetUniformLocation(light_prog, "u_ssaoTex"), 3);
+	  
+	  // Also send light relevant uniforms
+	  glm::vec3 lightPosView = glm::vec3(OGLEulerCamera::getInstance()->getViewMat() * glm::vec4(lightPos, 1.0));
+	  auto lightPosLoc = glGetUniformLocation(light_prog, "light.Position");
+	  auto lightColorLoc =  glGetUniformLocation(light_prog, "light.Color");
+	  glUniform3fv(lightPosLoc, 1, &lightPosView[0]);
+	  glUniform3fv(lightColorLoc, 1, &lightColor[0]);
+	  
+	  int draw_mode = 1;
+	  // Update attenuation parameters
+	  const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
+	  const GLfloat linear = 0.09;
+	  const GLfloat quadratic = 0.032;
+	  glUniform1f(glGetUniformLocation(light_prog, "light.Linear"), linear);
+	  glUniform1f(glGetUniformLocation(light_prog, "light.Quadratic"), quadratic);
+	  glUniform1i(glGetUniformLocation(light_prog, "draw_mode"), draw_mode);
+	  RenderQuad();
+	  
+	  glUseProgram(0);
 	
 
 	}
@@ -221,17 +171,13 @@ namespace byhj
 
 	void Scene::init_buffer()
 	{
-	    m_model.loadModel("armadillo.obj");
+	    ModelMgr::getInstance()->loadOGLModel("dragon.obj");
 
 		glGenBuffers(1, &planeVBO);
 		glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), &planeVertices, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		glGenBuffers(1, &cubeVBO);
-		glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	void Scene::init_vertexArray()
@@ -243,17 +189,6 @@ namespace byhj
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-		glBindVertexArray(0);
-
-		glGenVertexArrays(1, &cubeVAO);
-		glBindVertexArray(cubeVAO);
-		glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
 		glBindVertexArray(0);
 	}
 

@@ -1,4 +1,4 @@
-#version 330 core
+#version 430 core
 
 layout (location = 0) out vec4 g_fragColor;
 
@@ -6,10 +6,10 @@ in VS_OUT {
  vec2 texcoord;
 }vs_out;
 
-uniform sampler2D g_posDepthTex;
-uniform sampler2D g_normalTex;
-uniform sampler2D g_colorTex;
-uniform sampler2D g_ssaoTex;
+layout (binding = 0) uniform sampler2D u_posDepthTex;
+layout (binding = 1) uniform sampler2D u_normalTex;
+layout (binding = 2) uniform sampler2D u_colorTex;
+layout (binding = 3) uniform sampler2D u_ssaoTex;
 
 struct Light {
     vec3 Position;
@@ -24,10 +24,10 @@ uniform vec3 u_viewPos;
 void main()
 {             
     // Retrieve data from g-buffer
-    vec3 FragPos = texture(g_posDepthTex, vs_out.texcoord).rgb;
-    vec3 Normal  = texture(g_normalTex,   vs_out.texcoord).rgb;
-    vec3 Diffuse = texture(g_colorTex,    vs_out.texcoord).rgb;
-    float AmbientOcclusion = texture(g_ssaoTex, vs_out.texcoord).r;
+    vec3 FragPos = texture(u_posDepthTex, vs_out.texcoord).rgb;
+    vec3 Normal  = texture(u_normalTex,   vs_out.texcoord).rgb;
+    vec3 Diffuse = texture(u_colorTex,    vs_out.texcoord).rgb;
+    float AmbientOcclusion = texture(u_ssaoTex, vs_out.texcoord).r;
     
     // Then calculate lighting as usual
     vec3 ambient = vec3(0.3 * AmbientOcclusion); // <-- this is where we use ambient occlusion
