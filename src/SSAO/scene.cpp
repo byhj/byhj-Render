@@ -40,19 +40,23 @@ namespace byhj
 
 	void Scene::render()
 	{		
+		float bgColor[] = {0.0f, 0.0f, 0.0f, 1.0f};
+		float one[] = {1.0f};
 		// Lights
-		glm::vec3 lightPos = glm::vec3(1.0, 1.0, 3.0);
+		glm::vec3 lightPos = glm::vec3(3.0, 8.0, 1.0);
 		glm::vec3 lightColor = glm::vec3(0.8, 0.8, 0.9);
 		glm::mat4 view = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
-		glm::mat4 model = glm::mat4(1.0f);
+		glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 5.0f, 5.0f));
 
 		//////////////////////////////////////////////////////////////////////////////////
 		// 1. Geometry Pass: render scene's geometry/normal/color data into gbuffer
 		glUseProgram(model_prog);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_gbufferFbo);
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearBufferfv(GL_COLOR, 0,  bgColor);
+		glClearBufferfv(GL_COLOR, 1,  bgColor);
+		glClearBufferfv(GL_COLOR, 2,  bgColor);
+		glClearBufferfv(GL_DEPTH, 0,  one);
 
 		glUniformMatrix4fv(glGetUniformLocation(model_prog, "u_model"), 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(glGetUniformLocation(model_prog, "u_proj"), 1, GL_FALSE, &proj[0][0]);
@@ -60,8 +64,9 @@ namespace byhj
 
 		// draw model on the floor
 
-	    ModelMgr::getInstance()->render(model_prog);
-	
+	    ModelMgr::getInstance()->render("dragon.obj", model_prog);
+	    ModelMgr::getInstance()->render("plane.obj", model_prog);
+
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
 
@@ -70,7 +75,8 @@ namespace byhj
 		glUseProgram(ssao_prog);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, m_ssaoFbo);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearBufferfv(GL_COLOR, 0,  bgColor);
+		glClearBufferfv(GL_DEPTH, 0,  one);
 
 		glUniformMatrix4fv(glGetUniformLocation(ssao_prog, "u_proj"), 1, GL_FALSE, &proj[0][0]);
 		glUniform1i(glGetUniformLocation(ssao_prog, "u_posDepthTex"), 0);
@@ -115,7 +121,8 @@ namespace byhj
 		// 3. Blur SSAO texture to remove noise
 		glUseProgram(blur_prog);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_ssaoBlurFbo);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearBufferfv(GL_COLOR, 0, bgColor);
+		glClearBufferfv(GL_DEPTH, 0, one);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_ssaoColorTex);
@@ -127,7 +134,8 @@ namespace byhj
 	  ////////////////////////////////////////////////////////////////////////////////////////////
 	  // 4. Lighting Pass: traditional deferred Blinn-Phong lighting now with added screen-space ambient occlusion
 	  glUseProgram(light_prog);
-	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  glClearBufferfv(GL_COLOR, 0, bgColor);
+	  glClearBufferfv(GL_DEPTH, 0, one);
 	  
 	  glActiveTexture(GL_TEXTURE0);
 	  glBindTexture(GL_TEXTURE_2D, m_posDepthTex);
@@ -172,6 +180,7 @@ namespace byhj
 	void Scene::init_buffer()
 	{
 	    ModelMgr::getInstance()->loadOGLModel("dragon.obj");
+	   ModelMgr::getInstance()->loadOGLModel("plane.obj");
 
 		glGenBuffers(1, &planeVBO);
 		glBindBuffer(GL_ARRAY_BUFFER, planeVBO);

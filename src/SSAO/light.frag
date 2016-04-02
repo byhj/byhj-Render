@@ -30,7 +30,7 @@ void main()
     float AmbientOcclusion = texture(u_ssaoTex, vs_out.texcoord).r;
     
     // Then calculate lighting as usual
-    vec3 ambient = vec3(0.3 * AmbientOcclusion); // <-- this is where we use ambient occlusion
+    vec3 ambient = vec3(0.5 * AmbientOcclusion); // <-- this is where we use ambient occlusion
     vec3 lighting  = ambient; 
     vec3 viewDir  = normalize(u_viewPos-FragPos); // Viewpos is (0.0.0)
 
