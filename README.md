@@ -87,10 +87,6 @@ For the DirectX:
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/Terrain-height.png">
 
 ---
-
-## Skybox (OpenGL3+ & DirectX11)
-Use normal texture to make the normal mapping effect.
-
 ---
 ## Fog (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/fog.png">
@@ -106,7 +102,7 @@ Use normal texture to make the normal mapping effect.
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ogl-normal-map.png">
 
 ---
-## Skybox
+## Skybox (OpenGL3+）
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/skybox.png">
 
 ---
@@ -117,8 +113,6 @@ Use normal texture to make the normal mapping effect.
 
 ## Sprites
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/sprite.png">
-## SSAO (OpenGL3+)
-
 ---
 
 ## Texture-Array
@@ -151,27 +145,27 @@ Use normal texture to make the normal mapping effect.
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/RTT.png">
 
 ---
-## SSAO
+## SSAO (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ssao.png">
 ---
-## Layer Rendering
+## Layer Rendering （OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/layer.png">
 
 ---
-## Blinn-Phong
+## Blinn-Phong （OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/phong.png">
 ---
 
-## Point-Light
+## Point-Light （OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/point-light.png">
 
 ---
-## Instance Rendering
+## Instance Rendering （OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/instance.png">
 
 ---
 
-## Model Blending
+## Model Blending  （DirectX11)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/blend.png">
 
 ---
