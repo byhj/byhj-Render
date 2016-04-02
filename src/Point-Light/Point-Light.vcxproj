@@ -19,20 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="skymap.psh">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="skymap.vsh">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="model.psh">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="model.vsh">
-      <FileType>Document</FileType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
@@ -64,13 +50,10 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="Common.h" />
     <ClInclude Include="light.h" />
-    <ClInclude Include="MeshLoad.h" />
+    <ClInclude Include="LightGUI.h" />
+    <ClInclude Include="oglRender.h" />
     <ClInclude Include="plane.h" />
-    <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="Skymap.h" />
-    <ClInclude Include="d3d11Render.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
@@ -104,18 +87,14 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="MeshLoad.cpp" />
-    <ClCompile Include="plane.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="Skymap.cpp" />
-    <ClCompile Include="d3d11Render.cpp" />
+    <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="plane.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="light.psh" />
-    <FxCompile Include="light.vsh" />
-    <FxCompile Include="plane.psh" />
-    <FxCompile Include="plane.vsh" />
+    <None Include="light.frag" />
+    <None Include="light.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{72899F7B-9687-4704-8BF9-4B59546AC6D6}</ProjectGuid>

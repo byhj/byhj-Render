@@ -2,7 +2,6 @@
 #define OGLRender_H
 
 #include "ogl/oglApp.h"
-#include "ogl/oglCamera.h"
 
 #include "cube.h"
 #include "plane.h"

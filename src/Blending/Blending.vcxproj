@@ -111,10 +111,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="cube.frag" />
-    <None Include="cube.vert" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp" />
@@ -146,9 +142,10 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="d3d11Render.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="MeshLoad.cpp" />
+    <ClCompile Include="Skymap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -182,8 +179,24 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="oglRender.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="d3d11Render.h" />
+    <ClInclude Include="MeshLoad.h" />
+    <ClInclude Include="Skymap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="model.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="model.vsh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="skymap.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="skymap.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

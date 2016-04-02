@@ -154,6 +154,27 @@ Use normal texture to make the normal mapping effect.
 ## SSAO
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/ssao.png">
 ---
+## Layer Rendering
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/layer.png">
+
+---
+## Blinn-Phong
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/phong.png">
+---
+
+## Point-Light
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/point-light.png">
+
+---
+## Instance Rendering
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/instance.png">
+
+---
+
+## Model Blending
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/blend.png">
+
+---
 ## Fur (OpenGL3+)
 ---
 

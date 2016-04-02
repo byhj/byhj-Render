@@ -1,16 +1,13 @@
 #include "Asteroid.h"
 #include "ogl/oglEulerCamera.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
-	static const int ASTEROID_AMOUNT = 200;
+	static const int ASTEROID_AMOUNT = 1000;
 
 	void Asteroid::init()
 	{
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
-
 		m_LightGui.v_init();
 		m_RotationGui.v_init();
 
@@ -27,7 +24,7 @@ namespace byhj
 		m_RotationGui.v_update();
 
 	    GLfloat time = static_cast<GLfloat>( glfwGetTime() );
-
+		m_Aspect = WindowInfo::getInstance()->getAspect();
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -30.0f)) * m_RotationGui.getRotationMat() * glm::rotate(glm::mat4(1.0f), time / 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);

@@ -142,11 +142,10 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="d3dRender.cpp" />
     <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -180,10 +179,9 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="d3dRender.h" />
     <ClInclude Include="LightGUI.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="Plane.h" />
+    <ClInclude Include="plane.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="light.frag" />

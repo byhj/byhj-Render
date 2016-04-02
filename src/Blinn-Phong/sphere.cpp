@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glfw/glfw3.h>
+#include "windowInfo.h"
 
 namespace byhj
 {
@@ -33,10 +34,10 @@ void Sphere::render()
 	//Use this shader and vao data to render
 	glUseProgram(program);
 	glBindVertexArray(vao);
-
+	static float aspect = WindowInfo::getInstance()->getAspect();
 	float currentTime = static_cast<float>( glfwGetTime());
 	glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
+	glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 	glm::mat4 model = glm::rotate(glm::mat4(1.0f), currentTime, glm::vec3(1.0f, 1.0f, 1.0f));
 	glUniformMatrix4fv(uniform.model_loc, 1, GL_FALSE, &model[0][0]);
 	glUniformMatrix4fv(uniform.view_loc, 1, GL_FALSE, &view[0][0]);

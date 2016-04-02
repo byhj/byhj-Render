@@ -1,8 +1,8 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-#include "ogl/Shader.h"
-#include "ogl/Utility.h"
+#include "ogl/oglShader.h"
+#include "ogl/oglUtility.h"
 
 #include <glfw/glfw3.h>
 
@@ -16,10 +16,10 @@ namespace byhj
 		~Cube() {}
 
 	public:
-		void Init();
-		void Render(const const ogl::MvpMatrix &matrix);
-		void RenderColor(const const ogl::MvpMatrix &matrix);
-		void Shutdown();
+		void init();
+		void render();
+		void renderColor();
+		void shutdown();
 	
 	private:
 		void init_shader();

@@ -1,283 +1,178 @@
 #include "Plane.h"
-#include "DirectXTK/DDSTextureLoader.h"
+#include "windowInfo.h"
+
+#pragma region VertexData
+
+glm::vec3 lightPositions[] =
+{
+	glm::vec3(-3.0f, 0.0f, 0.0f),
+	glm::vec3(-1.0f, 0.0f, 0.0f),
+	glm::vec3(1.0f, 0.0f, 0.0f),
+	glm::vec3(3.0f, 0.0f, 0.0f)
+};
+
+glm::vec3 lightColors[] =
+{
+	glm::vec3(0.5f, 0.0f, 0.0f),
+	glm::vec3(0.0f, 0.5f, 0.0f),
+	glm::vec3(0.0f, 0.0f, 0.5f),
+	glm::vec3(0.5f, 0.0f, 0.0f)
+};
+
+const static GLfloat PlaneVertex[] =
+{
+	// Positions          // Normals         // Texture Coords
+	8.0f, -0.5f,  8.0f,  0.0f, 1.0f, 0.0f,  5.0f, 0.0f,
+   -8.0f, -0.5f,  8.0f,  0.0f, 1.0f, 0.0f,  0.0f, 0.0f,
+   -8.0f, -0.5f, -8.0f,  0.0f, 1.0f, 0.0f,  0.0f, 5.0f,
+
+	8.0f, -0.5f,  8.0f,  0.0f, 1.0f, 0.0f,  5.0f, 0.0f,
+   -8.0f, -0.5f, -8.0f,  0.0f, 1.0f, 0.0f,  0.0f, 5.0f,
+	8.0f, -0.5f, -8.0f,  0.0f, 1.0f, 0.0f,  5.0f, 5.0f
+};
+const static GLsizei PlaneVertexSize = sizeof(PlaneVertex);
+
+#pragma  endregion
 
 namespace byhj
 {
-
-Plane::Plane()
-{
-
-}
-
-Plane::~Plane()
-{
-
-}
-
-void Plane::Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd)
-{
- 
-	init_buffer(pD3D11Device, pD3D11DeviceContext);
-	init_shader(pD3D11Device, hWnd);
-	init_texture(pD3D11Device);
-}
-
-void Plane::Render(ID3D11DeviceContext *pD3D11DeviceContext, const d3d::MatrixBuffer &matrix)
-{
-
-
-	cbMatrix.model = matrix.model;
-	cbMatrix.view  = matrix.view;
-	cbMatrix.proj  = matrix.proj;
-	pD3D11DeviceContext->UpdateSubresource(m_pMVPBuffer.Get(), 0, NULL, &cbMatrix, 0, 0);
-	pD3D11DeviceContext->VSSetConstantBuffers(0, 1, m_pMVPBuffer.GetAddressOf() );
-	pD3D11DeviceContext->PSSetShaderResources(0, 1, m_pTexture.GetAddressOf());
-	pD3D11DeviceContext->PSSetSamplers(0, 1, m_pTexSamplerState.GetAddressOf());
-
-	PlaneShader.use(pD3D11DeviceContext);
-	pD3D11DeviceContext->DrawIndexed(m_VertexData.size(), 0, 0);
-
-
-}
-
-void Plane::Shutdown()
-{
-
-
-}
-
-void Plane::init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext)
-{
-	HRESULT hr;
-	load_model("../../media/objects/floor.txt");
-
-	///////////////////////////Index Buffer ////////////////////////////////
-
-	// Set up the description of the static vertex buffer.
-	D3D11_BUFFER_DESC VertexBufferDesc;
-	VertexBufferDesc.Usage               = D3D11_USAGE_DEFAULT;
-	VertexBufferDesc.ByteWidth           = sizeof(Vertex)* m_VertexData.size();
-	VertexBufferDesc.BindFlags           = D3D11_BIND_VERTEX_BUFFER;
-	VertexBufferDesc.CPUAccessFlags      = 0;
-	VertexBufferDesc.MiscFlags           = 0;
-	VertexBufferDesc.StructureByteStride = 0;
-
-	// Give the subresource structure a pointer to the vertex data.
-	D3D11_SUBRESOURCE_DATA VBO;
-	VBO.pSysMem          = &m_VertexData[0];
-	VBO.SysMemPitch      = 0;
-	VBO.SysMemSlicePitch = 0;
-
-	// Now create the vertex buffer.
-	hr = pD3D11Device->CreateBuffer(&VertexBufferDesc, &VBO, &m_pVertexBuffer);
-	//DebugHR(hr);
-
-	/////////////////////////////////Index Buffer ///////////////////////////////////////
-
-	// Set up the description of the static index buffer.
-	D3D11_BUFFER_DESC IndexBufferDesc;
-	IndexBufferDesc.Usage               = D3D11_USAGE_DEFAULT;
-	IndexBufferDesc.ByteWidth           = sizeof(DWORD)* m_IndexData.size();
-	IndexBufferDesc.BindFlags           = D3D11_BIND_INDEX_BUFFER;
-	IndexBufferDesc.CPUAccessFlags      = 0;
-	IndexBufferDesc.MiscFlags           = 0;
-	IndexBufferDesc.StructureByteStride = 0;
-
-	// Give the subresource structure a pointer to the index data.
-	D3D11_SUBRESOURCE_DATA IBO;
-	IBO.pSysMem          = &m_IndexData[0];
-	IBO.SysMemPitch      = 0;
-	IBO.SysMemSlicePitch = 0;
-
-	hr = pD3D11Device->CreateBuffer(&IndexBufferDesc, &IBO, &m_pIndexBuffer);
-	//DebugHR(hr);
-
-	////////////////////////////////////////////////////////////////////////////////////////
-
-	// Set vertex buffer stride and offset.=
-	unsigned int stride;
-	unsigned int offset;
-	stride = sizeof(Vertex);
-	offset = 0;
-	pD3D11DeviceContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
-	pD3D11DeviceContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0); 
-	pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	////////////////////////////////Const Buffer//////////////////////////////////////
-
-	D3D11_BUFFER_DESC mvpDesc;
-	ZeroMemory(&mvpDesc, sizeof(D3D11_BUFFER_DESC));
-	mvpDesc.Usage          = D3D11_USAGE_DEFAULT;
-	mvpDesc.ByteWidth      = sizeof(d3d::MatrixBuffer);
-	mvpDesc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
-	mvpDesc.CPUAccessFlags = 0;
-	mvpDesc.MiscFlags      = 0;
-	hr = pD3D11Device->CreateBuffer(&mvpDesc, NULL, &m_pMVPBuffer);
-	//DebugHR(hr);
-
-
-	///////////////////////////////////////Light buffer////////////////////////////////////////
-	D3DPointLight pLight;
-	XMFLOAT4 color;
-	XMFLOAT4 pos;
-
-	color = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
-	pos   = XMFLOAT4(-3.0f, 1.0f, 3.0f, 1.0f);
-	pLight.SetLightColor(color);
-	pLight.SetLightPos(pos);
-	pointLights.push_back(pLight);
-
-	color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
-	pos   = XMFLOAT4(3.0f, 1.0f, 3.0f, 1.0f);
-	pLight.SetLightColor(color);
-	pLight.SetLightPos(pos);
-	pointLights.push_back(pLight);
-
-	color = XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
-	pos   = XMFLOAT4(-3.0f, 1.0f, -3.0f, 1.0f);
-	pLight.SetLightColor(color);
-	pLight.SetLightPos(pos);
-	pointLights.push_back(pLight);
-
-	color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	pos   = XMFLOAT4(3.0f, 1.0f, -3.0f, 1.0f);
-	pLight.SetLightColor(color);
-	pLight.SetLightPos(pos);
-	pointLights.push_back(pLight);
-
-	D3D11_BUFFER_DESC lightBufferDesc;
-	ZeroMemory(&lightBufferDesc, sizeof(D3D11_BUFFER_DESC));
-	lightBufferDesc.Usage          = D3D11_USAGE_DEFAULT;
-	lightBufferDesc.ByteWidth      = sizeof(D3DPointLight)* pointLights.size();
-	lightBufferDesc.BindFlags      = D3D11_BIND_CONSTANT_BUFFER;
-	lightBufferDesc.CPUAccessFlags = 0;
-	lightBufferDesc.MiscFlags      = 0;
-
-	// Give the subresource structure a pointer to the index data.
-	D3D11_SUBRESOURCE_DATA lightSub;
-	lightSub.pSysMem          = &pointLights[0];
-	lightSub.SysMemPitch      = 0;
-	lightSub.SysMemSlicePitch = 0;
-	hr = pD3D11Device->CreateBuffer(&lightBufferDesc, &lightSub, m_pLightBuffer.GetAddressOf());
-	//DebugHR(hr);
-	int lightSlot = 0;
-	pD3D11DeviceContext->PSSetConstantBuffers(lightSlot, 1, m_pLightBuffer.GetAddressOf());
-
-}
-
-void Plane::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)
-{
-	D3D11_INPUT_ELEMENT_DESC pInputLayoutDesc;
-	std::vector<D3D11_INPUT_ELEMENT_DESC> vInputLayoutDesc;
-
-	pInputLayoutDesc.SemanticName         = "POSITION";
-	pInputLayoutDesc.SemanticIndex        = 0;
-	pInputLayoutDesc.Format               = DXGI_FORMAT_R32G32B32_FLOAT;
-	pInputLayoutDesc.InputSlot            = 0;
-	pInputLayoutDesc.AlignedByteOffset    = 0;
-	pInputLayoutDesc.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
-	pInputLayoutDesc.InstanceDataStepRate = 0;
-	vInputLayoutDesc.push_back(pInputLayoutDesc);
-
-	pInputLayoutDesc.SemanticName         = "TEXCOORD";
-	pInputLayoutDesc.SemanticIndex        = 0;
-	pInputLayoutDesc.Format               = DXGI_FORMAT_R32G32_FLOAT;
-	pInputLayoutDesc.InputSlot            = 0;
-	pInputLayoutDesc.AlignedByteOffset    = D3D11_APPEND_ALIGNED_ELEMENT;
-	pInputLayoutDesc.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
-	pInputLayoutDesc.InstanceDataStepRate = 0;
-	vInputLayoutDesc.push_back(pInputLayoutDesc);
-
-	pInputLayoutDesc.SemanticName         = "NORMAL";
-	pInputLayoutDesc.SemanticIndex        = 0;
-	pInputLayoutDesc.Format               = DXGI_FORMAT_R32G32B32_FLOAT;
-	pInputLayoutDesc.InputSlot            = 0;
-	pInputLayoutDesc.AlignedByteOffset    = D3D11_APPEND_ALIGNED_ELEMENT;
-	pInputLayoutDesc.InputSlotClass       = D3D11_INPUT_PER_VERTEX_DATA;
-	pInputLayoutDesc.InstanceDataStepRate = 0;
-	vInputLayoutDesc.push_back(pInputLayoutDesc);
-	
-
-	PlaneShader.init(pD3D11Device, vInputLayoutDesc);
-	PlaneShader.attachVS(L"Plane.vsh", "VS", "vs_5_0");
-	PlaneShader.attachPS(L"Plane.psh", "PS", "ps_5_0");
-	PlaneShader.end();
-}
-
-
-
-void Plane::init_texture(ID3D11Device *pD3D11Device)
-{
-
-	HRESULT hr;
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/stone.dds", NULL, &m_pTexture);
-	//DebugHR(hr);
-
-	// Create a texture sampler state description.
-	D3D11_SAMPLER_DESC samplerDesc;
-	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.MipLODBias = 0.0f;
-	samplerDesc.MaxAnisotropy = 1;
-	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
-	samplerDesc.BorderColor[0] = 0;
-	samplerDesc.BorderColor[1] = 0;
-	samplerDesc.BorderColor[2] = 0;
-	samplerDesc.BorderColor[3] = 0;
-	samplerDesc.MinLOD = 0;
-	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
-
-	// Create the texture sampler state.
-	hr = pD3D11Device->CreateSamplerState(&samplerDesc, &m_pTexSamplerState);
-	//DebugHR(hr);
-}
-
-void Plane::load_model(char *modelFile)
-{
-	std::ifstream fin;
-	char ch;
-	int i;
-	fin.open(modelFile);
-
-	if (fin.fail())
-		return;
-
-	// Read up to the value of vertex count.
-	fin.get(ch);
-	while (ch != ':')
+	void Plane::init()
 	{
-		fin.get(ch);
+
+		m_LightGUI.v_init();
+		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 3.0f, 5.0f));
+		init_buffer();
+		init_vertexArray();
+		init_shader();
+		init_texture();
 	}
 
-	int VertexCount, IndexCount;
-	// Read in the vertex count.
-	fin >> VertexCount;
-	IndexCount = VertexCount;
-	m_VertexData.resize(VertexCount);
-	m_IndexData.resize(IndexCount);
-
-
-	//Read up the beginning of the data
-	fin.get(ch);
-	while (ch != ':')
+	void Plane::update()
 	{
-		fin.get(ch);
+		static GLfloat lastFrame = static_cast<float> (glfwGetTime());
+		GLfloat currentFrame = static_cast<float> (glfwGetTime());
+		GLfloat deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+		OGLEulerCamera::getInstance()->update(deltaTime);
+
+		glUseProgram(program);
+
+		auto gamma = m_LightGUI.getGamma();
+		glUniform1i(uniform_loc.gamma, gamma);
+
+		//map the texture to the shader;
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, woodTexs[gamma]);
+		glUniform1i(uniform_loc.woodTex, 0);
+
+		glm::mat4 model =  glm::mat4(1.0f);
+		glm::mat4 view  =  OGLEulerCamera::getInstance()->getViewMat();
+		glm::mat4 proj  =  glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
+
+		glm::vec3 camPos = OGLEulerCamera::getInstance()->getPos();
+
+		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
+		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &view[0][0]);
+		glUniformMatrix4fv(uniform_loc.proj, 1, GL_FALSE, &proj[0][0]);
+
+		lightColors[0] = m_LightGUI.getLight(0);
+		lightColors[1] = m_LightGUI.getLight(1);
+		lightColors[2] = m_LightGUI.getLight(2);
+		lightColors[3] = m_LightGUI.getLight(3);
+		glUniform3fv(uniform_loc.lightPos, 4, &lightPositions[0][0]);
+		glUniform3fv(uniform_loc.lightColor, 4, &lightColors[0][0]);
+		glUniform3fv(uniform_loc.viewPos, 1, &camPos[0]);
+
+		glUseProgram(0);
 	}
 
-	for (int i = 0; i != VertexCount; ++i)
+	void Plane::render()
 	{
-		fin >> m_VertexData[i].Position.x >> m_VertexData[i].Position.y >> m_VertexData[i].Position.z;
-		fin >> m_VertexData[i].TexCoord.x >> m_VertexData[i].TexCoord.y;
-		fin >> m_VertexData[i].Normal.x   >> m_VertexData[i].Normal.y   >> m_VertexData[i].Normal.z;
+		glUseProgram(program);
+		glBindVertexArray(vao);
 
-		m_IndexData[i] = static_cast<DWORD>(i);
+		auto lightIndex = m_LightGUI.getLightModel();
+		glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &uniform_loc.lightSub[lightIndex]);
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);	
+
+		glBindVertexArray(0);
+		glUseProgram(0);
+
+		m_LightGUI.v_render();
 	}
-	fin.close();
+
+	void Plane::shutdown()
+	{
+		m_LightGUI.v_shutdown();
+	}
+
+	void Plane::init_buffer()
+	{
+		glGenBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, PlaneVertexSize, PlaneVertex, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		//glGenBuffers(1, &ibo);
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+		//glBufferData(GL_ELEMENT_ARRAY_BUFFER, );
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	}
+
+	void Plane::init_vertexArray()
+	{
+		glGenVertexArrays(1, &vao);
+		glBindVertexArray(vao);
+
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *)(0));
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid *)(6 * sizeof(GLfloat)));
+
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	void Plane::init_shader()
+	{
+		m_PlaneShader.init();
+		m_PlaneShader.attach(GL_VERTEX_SHADER, "light.vert");
+		m_PlaneShader.attach(GL_FRAGMENT_SHADER, "light.frag");
+		m_PlaneShader.link();
+		m_PlaneShader.info();
 
 
-}
+		uniform_loc.lightSub[0]  = -1;		uniform_loc.lightSub[1]  = -1;
+		program = m_PlaneShader.getProgram();
+		uniform_loc.woodTex = glGetUniformLocation(program, "u_WoodTex");
+		uniform_loc.lightSub[0] = glGetSubroutineIndex(program, GL_FRAGMENT_SHADER, "Phong");
+		uniform_loc.lightSub[1] = glGetSubroutineIndex(program, GL_FRAGMENT_SHADER, "BlinnPhong");
+		uniform_loc.lightModelSub = glGetSubroutineUniformLocation(program, GL_FRAGMENT_SHADER, "lightModelUniform");
+
+		uniform_loc.model = glGetUniformLocation(program, "u_Model");
+		uniform_loc.view  = glGetUniformLocation(program, "u_View");
+		uniform_loc.proj  = glGetUniformLocation(program, "u_Proj");
+		uniform_loc.gamma = glGetUniformLocation(program, "u_Gamma");
+		uniform_loc.lightPos =    glGetUniformLocation(program, "u_LightPos");
+		uniform_loc.lightColor = 	glGetUniformLocation(program, "u_LightColor");
+		uniform_loc.viewPos = 	glGetUniformLocation(program, "u_ViewPos");
+	}
+
+	void Plane::init_texture()
+	{
+		TextureMgr::getInstance()->loadOGLTexture("wood.png");
+		woodTexs[0] = TextureMgr::getInstance()->getOGLTextureByName("wood.png");
+		woodTexs[1] = TextureMgr::getInstance()->getOGLTextureByName("wood.png");
+	}
 
 
 }

@@ -132,10 +132,7 @@
     <ClCompile Include="oglRender.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Plane.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="d3dRender.cpp">
+    <ClCompile Include="plane.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -239,19 +236,16 @@
     <ClInclude Include="oglRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="d3dRender.h">
+    <ClInclude Include="plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="light.vert">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="light.frag">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

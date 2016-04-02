@@ -1,6 +1,7 @@
 #include "Planet.h"
 #include "ogl/oglEulerCamera.h"
 #include "modelMgr.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
@@ -19,7 +20,7 @@ namespace byhj
 
 
 		GLfloat time = glfwGetTime();
-
+		m_Aspect = WindowInfo::getInstance()->getAspect();
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -2.0f, -20.0f)) 
 			            * glm::rotate(glm::mat4(1.0f), time / 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();

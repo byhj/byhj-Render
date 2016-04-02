@@ -38,7 +38,7 @@ namespace byhj
 		glClearBufferfv(GL_COLOR, 0, black);
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
-
+		glEnable(GL_DEPTH_TEST);
 		m_Asteroid.render();
 		m_Planet.render();
 

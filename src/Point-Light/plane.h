@@ -1,75 +1,60 @@
 #ifndef Plane_H
 #define Plane_H
 
-#include <windows.h>
-
-#include <vector>
-
-#include "d3d/Shader.h"
-#include "d3d/Utility.h"
-#include "d3d/d3dLight.h"
+#include "ogl/oglShader.h"
+#include "TextureMgr.h"
+#include "LightGUI.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
 
+   class Plane
+   {
+   public:
+	   Plane() = default;
+	  ~Plane() = default;
 
-class Plane
-{
-public:
-	Plane();
-	~Plane();
+	  void init();
+	  void update();
+	  void render();
+	  void shutdown();
 
-	void Init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
-	void Render(ID3D11DeviceContext *pD3D11DeviceContext, const d3d::MatrixBuffer &matrix);
-	void Shutdown();
+   private:
+	   void init_buffer();
+	   void init_vertexArray();
+	   void init_shader();
+	   void init_texture();
 
-private:
-	void init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
-	void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
-	void init_texture(ID3D11Device *pD3D11Device);
-	void load_model(char *modelFile);
+	   OGLShader m_PlaneShader;
 
-	struct LightBuffer
-	{
-		XMFLOAT4 ambientColor;
-		XMFLOAT4 diffuseColor;
-		XMFLOAT3 lightDirection;
-		float specularPower;
-		XMFLOAT4 specularColor;
-	};
-	LightBuffer cbLight;
+	   LightGui m_LightGUI;
 
-	struct CameraBuffer
-	{
-		XMFLOAT3 camPos;
-		float padding;
-	};
+	   struct UniformLoc
+	   {
+		   GLuint model;
+		   GLuint view;
+		   GLuint proj;
+		   GLuint gamma;
+		   GLuint viewPos;
+		   GLuint lightPos;
+		   GLuint lightColor;
+		   GLuint woodTex;
+		   GLuint lightModelSub;
+		   GLuint lightSub[2];
+	   }uniform_loc;
 
-	struct  Vertex
-	{
-		XMFLOAT3 Position;
-		XMFLOAT2 TexCoord;
-		XMFLOAT3 Normal;
-	};
+	   GLuint program = 0;
+	   GLuint vao = 0;
+	   GLuint vbo = 0;
+	   GLuint ibo = 0;
+	   GLuint woodTexs[2];
+	   GLfloat aspect = 1.0f;
 
-	std::vector<D3DPointLight> pointLights;
-	d3d::MatrixBuffer cbMatrix;
-
-	ComPtr<ID3D11InputLayout> m_pInputLayout;
-	ComPtr<ID3D11Buffer> m_pMVPBuffer;
-	ComPtr<ID3D11Buffer> m_pIndexBuffer;
-	ComPtr<ID3D11Buffer> m_pVertexBuffer;
-	ComPtr<ID3D11Buffer> m_pLightBuffer;
-	ComPtr<ID3D11ShaderResourceView> m_pTexture;
-	ComPtr<ID3D11SamplerState> m_pTexSamplerState;
-	d3d::Shader PlaneShader;
-
-	std::vector<Vertex> m_VertexData;
-	std::vector<DWORD> m_IndexData;
-};
+   };
 
 
 }
-
-
-#endif 
+#endif

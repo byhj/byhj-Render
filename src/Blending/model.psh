@@ -1,0 +1,54 @@
+
+cbuffer Material
+{
+  float4 ambient;
+  float4 diffuse;
+  float4 specular;
+  float4 emissive;
+ // float  shininess;
+};
+
+struct VS_OUT
+{
+    float4 Pos    : SV_POSITION;
+	float3 Normal : NORMAL;
+	float2 Tex    : TEXCOORD0;
+	float3 worldPos : POSITION;
+};
+
+Texture2D tex;
+SamplerState texState;
+
+float4 Model_PS(VS_OUT ps_in) : SV_TARGET
+{
+
+   float3 lightPos = float3(0.0f, 0.0f, 0.0f);
+   float3 lightDir = float3(0.0f, 0.0f, 5.0f);
+   float range = 100.0f;
+   float3 att = float3(0.4, 0.02, 0.0f);
+   float cone      = 30.0f;
+   float4 texColor = tex.Sample(texState, ps_in.Tex);
+   ps_in.Normal   = normalize(ps_in.Normal);
+
+   float3 lightToPos = lightPos - ps_in.worldPos;
+   float  len = length(lightToPos);
+   if (len > range)
+      return ambient * texColor;
+
+   lightToPos   = normalize(lightToPos);
+   float intensity = dot(lightToPos, ps_in.Normal);
+   float4 dif = max(intensity, 0.0f) * diffuse ;
+
+   dif /= (att[0] + (att[1] * len) + att[2] * len *len);
+	
+	//Calculate falloff from center to edge of pointlight cone
+   dif *= pow(max(dot(-lightToPos, lightDir), 0.0f), cone);
+
+   float4 pixelColor;
+  if (texColor.r > 0.0f) {
+    pixelColor = texColor * saturate(ambient + dif);
+  }  else {
+     return saturate(ambient + dif);
+  }
+   return texColor;
+}

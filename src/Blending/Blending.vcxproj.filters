@@ -30,22 +30,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cube.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="cube.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="oglRender.cpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglApp.cpp">
       <Filter>Render\ogl</Filter>
@@ -140,14 +126,17 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
+    <ClCompile Include="Skymap.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d11Render.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshLoad.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="oglRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
@@ -241,5 +230,31 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
+    <ClInclude Include="d3d11Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skymap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="skymap.psh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="model.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="model.psh">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="skymap.vsh">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
