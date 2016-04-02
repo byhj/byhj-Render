@@ -9,15 +9,15 @@ out VS_OUT {
   vec2 texcoord;
 }vs_out;
 
-uniform mat4 g_Model;
-uniform mat4 g_View;
-uniform mat4 g_Proj;
+uniform mat4 u_model;
+uniform mat4 u_view;
+uniform mat4 u_proj;
 
 
 void main(void)
 {
-   mat4 mvp = g_Proj * g_View * g_Model;
-   vs_out.normal = inverse( transpose( mat3(g_View * g_Model) ) ) * g_Normal;
+   mat4 mvp = u_proj * u_view * u_model;
+   vs_out.normal =  transpose(inverse( mat3(u_view * u_model) ) ) * g_Normal;
    vs_out.texcoord = g_Texcoord;
 
    gl_Position = mvp * vec4(g_Positoin, 1.0f);

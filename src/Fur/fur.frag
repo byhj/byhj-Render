@@ -9,5 +9,5 @@ in GEOM_OUT {
 
 void main(void)
 {
-   g_FragColor = vec4(1.0f);
+   g_FragColor = vec4(0.5f, 0.5, 0.5, 1.0f);
 }

@@ -244,5 +244,11 @@
     <None Include="fur.geom">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="base.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="base.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

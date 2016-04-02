@@ -27,7 +27,8 @@ namespace byhj
 	{
 		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, &black[0]);
-
+		static const GLfloat one[] ={ 1.0f };
+		glClearBufferfv(GL_DEPTH, 0, one);
 		m_pFur->render();
 	}
 

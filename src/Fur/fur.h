@@ -3,6 +3,7 @@
 
 #include "ogl/oglShader.h"
 #include "modelMgr.h"
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
@@ -24,10 +25,11 @@ namespace byhj
 			GLuint model;
 			GLuint view;
 			GLuint proj;
-		}uniform_loc;
-
-		GLuint m_program;
+		};
+		Uniform_Loc furLoc, baseLoc;
+		GLuint base_prog, fur_prog;
 		OGLShader m_FurShader = "Fur Shader";
+		OGLShader m_BaseShader = "Base Shader";
 	};
 }
 #endif

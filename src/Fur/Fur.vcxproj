@@ -182,6 +182,8 @@
     <ClInclude Include="oglRender.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="base.frag" />
+    <None Include="base.vert" />
     <None Include="fur.frag" />
     <None Include="fur.geom" />
     <None Include="fur.vert" />

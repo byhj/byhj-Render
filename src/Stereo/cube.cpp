@@ -121,7 +121,7 @@ void Cube::init_shader()
 	StereoShader.attach(GL_VERTEX_SHADER, "stereo.vert");
 	StereoShader.attach(GL_FRAGMENT_SHADER, "stereo.frag");
 	StereoShader.link();
-	view_program = StereoShader.GetProgram();
+	view_program = StereoShader.getProgram();
 
 	uniforms.view.proj_matrix = glGetUniformLocation(view_program, "proj_matrix");
 	uniforms.view.mv_matrix = glGetUniformLocation(view_program, "mv_matrix");

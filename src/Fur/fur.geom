@@ -13,7 +13,7 @@ out GEOM_OUT {
    vec2 texcoord;
 }geom_out;
 
-uniform float fur_length = 0.003f;
+uniform float fur_length = 0.5f;
 
 void main(void)
 {
@@ -25,15 +25,14 @@ void main(void)
 	//Calc the triangle centroid   
 	vec4 tri_centroid = (gl_in[0].gl_Position + gl_in[1].gl_Position + gl_in[2].gl_Position) / 3.0;   
 
-
-	gl_Position =  tri_centroid;                           
-    EmitVertex();                                                  
-                                                                                                                           
-    gl_Position =  (tri_centroid + vec4(face_normal * fur_length, 0.0));                                      
-    EmitVertex();                                                      
-    EndPrimitive();                                                    
+   // 
+   // gl_Position =  tri_centroid;                           
+   //  EmitVertex();                                                  
+   //                                                                                                                         
+   //  gl_Position =  (tri_centroid + vec4(face_normal * fur_length, 0.0));                                      
+   //  EmitVertex();                                                      
+   //  EndPrimitive();                                                    
            
-		   
 		                                                               
     gl_Position = gl_in[0].gl_Position;                                                             
     EmitVertex();                                                      

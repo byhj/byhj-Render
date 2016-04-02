@@ -69,7 +69,7 @@ private:
 	} mode = RENDER_FULL;
 
 	bool paused;
-	ogl::Shader StereoShader;
+	OGLShader StereoShader;
 };
 
 }
