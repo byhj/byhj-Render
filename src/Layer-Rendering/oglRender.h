@@ -1,10 +1,7 @@
 #ifndef OGLRender_H
 #define OGLRender_H
-
-#include "ogl/oglapp.h"
-#include "sphere.h"
-#include <memory>
-#include <gl/glew.h>
+#include "ogl/oglApp.h"
+#include "MeshLoad.h"
 
 namespace byhj
 {
@@ -20,7 +17,7 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		Sphere m_sphere;
+		MeshLoad m_meshload;
 	};
 }
 #endif

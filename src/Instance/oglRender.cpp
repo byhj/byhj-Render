@@ -16,8 +16,9 @@ namespace byhj
 	
 	void OGLRender::v_init()
 	{
-		m_Asteroid.init();
 		m_Planet.init();
+		m_Asteroid.init();
+
 	}
 
 	void OGLRender::v_update()

@@ -41,7 +41,7 @@ void main(void)
         gs_out.color = colors[gl_InvocationID];
         gs_out.normal = mat3(u_mv[gl_InvocationID]) * gs_in[i].normal;
 
-        gl_Position = u_pro * u_mv[gl_InvocationID] * gl_in[i].gl_Position;
+        gl_Position = u_proj * u_mv[gl_InvocationID] * gl_in[i].gl_Position;
         gl_Layer = gl_InvocationID;
         EmitVertex();
     }

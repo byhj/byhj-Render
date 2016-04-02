@@ -17,12 +17,12 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		m_sphere.init();
+		m_plane.init();
 	}
 
 	void OGLRender::v_update()
 	{
-		m_sphere.update();
+		m_plane.update();
 	}
 
 	void OGLRender::v_render()
@@ -35,11 +35,11 @@ namespace byhj
 		static const GLfloat one[] ={ 1.0f };
 		glClearBufferfv(GL_DEPTH, 0, one);
 
-		m_sphere.render();
+		m_plane.render();
 
 	}
 	void OGLRender::v_shutdown()
 	{
-		m_sphere.shutdown();
+		m_plane.shutdown();
 	}
 }

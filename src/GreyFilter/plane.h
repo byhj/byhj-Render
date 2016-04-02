@@ -1,7 +1,6 @@
 #ifndef Plane_H
 #define Plane_H
 
-#include <GL/glew.h>
 #include "ogl/oglShader.h"
 #include "ogl/oglUtility.h"
 
@@ -14,9 +13,10 @@ public:
 	Plane();
 	~Plane();
 
-	void Init();
-	void Render();
-	void Shutdown();
+	void init();
+	void update();
+	void render();
+	void shutdown();
 
 private:
 	void init_buffer();
@@ -24,15 +24,12 @@ private:
 	void init_shader();
 	void init_texture();
 
-	Shader PlaneShader = { "Plane Shader" };
-	GLuint program = byhj::OGL_VALUE;
+	OGLShader PlaneShader =  "Plane Shader" ;
+	GLuint program;
 	GLuint vao, ibo, vbo;
 	GLuint tex_index = 0;
 
-	struct Uniform
-	{
-		GLuint tex_loc = byhj::OGL_VALUE;
-	}uniform;
+	GLuint tex_loc;
 
 };
 

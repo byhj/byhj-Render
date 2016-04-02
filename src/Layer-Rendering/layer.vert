@@ -11,7 +11,7 @@ out VS_OUT
 
 void main(void)
 {
-    vs_out.normal = normal;
-    gl_Position = position;
+    vs_out.normal = g_normal;
+    gl_Position = g_position;
 
 }

@@ -118,7 +118,6 @@
     <None Include="show.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dMesh.cpp" />
@@ -150,9 +149,10 @@
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="meshload.cpp" />
+    <ClCompile Include="oglRender.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFWFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
@@ -183,6 +183,8 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
+    <ClInclude Include="meshload.h" />
+    <ClInclude Include="oglRender.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

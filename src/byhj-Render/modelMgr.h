@@ -33,6 +33,7 @@ namespace byhj
 	  void render(GLuint program);
 	  void render(std::string modelName, GLuint program);
 	  void renderInstance(GLuint program, GLuint amount);
+	  void renderInstance(std::string modelName, GLuint program, GLuint amount);
 
 	private:
 		std::unordered_map<std::string, OGLModel> m_OGLModels;

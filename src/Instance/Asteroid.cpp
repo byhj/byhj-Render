@@ -3,7 +3,7 @@
 
 namespace byhj
 {
-	static const int ASTEROID_AMOUNT = 100;
+	static const int ASTEROID_AMOUNT = 200;
 
 	void Asteroid::init()
 	{
@@ -28,8 +28,7 @@ namespace byhj
 
 	    GLfloat time = static_cast<GLfloat>( glfwGetTime() );
 
-		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -30.0f)) * m_RotationGui.getRotationMat()
-			* glm::rotate(glm::mat4(1.0f), time / 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -30.0f)) * m_RotationGui.getRotationMat() * glm::rotate(glm::mat4(1.0f), time / 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);
 
@@ -44,18 +43,13 @@ namespace byhj
 	void Asteroid::render()
 	{
 		glUseProgram(m_Program);
-		glBindVertexArray(m_vao);
-	
 
-		ModelMgr::getInstance()->renderInstance(m_Program, ASTEROID_AMOUNT);
+		ModelMgr::getInstance()->renderInstance("rock/rock.obj", m_Program, ASTEROID_AMOUNT);
 
 		glDisable(GL_DEPTH_TEST);
-
 		m_RotationGui.v_render();
 		m_LightGui.v_render();
 		glEnable(GL_DEPTH_TEST);
-
-
 
 		glUseProgram(0);
 	}
@@ -124,6 +118,7 @@ namespace byhj
 			glVertexAttribDivisor(6, 1);
 
 			glBindVertexArray(0);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		delete[] modelMatrices;
 	}

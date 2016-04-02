@@ -1,5 +1,6 @@
 #include "Plane.h"
-#include "ogl/TextureManager.h"
+#include "textureMgr.h"
+
 namespace byhj
 {
 
@@ -13,7 +14,7 @@ Plane::~Plane()
 
 }
 
-void Plane::Init()
+void Plane::init()
 {
 	init_buffer();
 	init_vertexArray();
@@ -21,16 +22,15 @@ void Plane::Init()
 	init_texture();
 }
 
-void Plane::Render()
+void Plane::render()
 {
 	//Use this shader and vao data to render
 	glUseProgram(program);
 	glBindVertexArray(vao);
 
 	glActiveTexture(GL_TEXTURE0);
-	
-	glUniform1i(uniform.tex_loc, 0);
-	TextureManager::Inst()->BindTexture(tex_index);
+	glUniform1i(tex_loc, 0);
+	glBindTexture(GL_TEXTURE_2D, tex_index);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -39,7 +39,7 @@ void Plane::Render()
 }
 
 
-void Plane::Shutdown()
+void Plane::shutdown()
 {
 	glDeleteProgram(program);
 }
@@ -80,7 +80,7 @@ void Plane::init_vertexArray()
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);         //notice, sizeof(GLfloat) usually is 4
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), BUFFER_OFFSET(3 * sizeof(GLfloat)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 	
 	glBindVertexArray(0);
@@ -92,13 +92,13 @@ void Plane::init_shader()
 	PlaneShader.attach(GL_VERTEX_SHADER, "Plane.vert");
 	PlaneShader.attach(GL_FRAGMENT_SHADER, "Plane.frag");
 	PlaneShader.link();
-	program = PlaneShader.GetProgram();
-	uniform.tex_loc = glGetUniformLocation(program, "tex");
+	program = PlaneShader.getProgram();
+	tex_loc = glGetUniformLocation(program, "tex");
 }
 
 void Plane::init_texture()
 {
-	TextureManager::Inst()->LoadTexture("../../media/textures/desert.tga", tex_index, GL_RGB, GL_RGB);
+	tex_index = TextureMgr::getInstance()->loadOGLDDS("desert.tga");
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

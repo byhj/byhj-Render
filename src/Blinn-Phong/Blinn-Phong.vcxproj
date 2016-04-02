@@ -111,8 +111,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="light.frag" />
-    <None Include="light.vert" />
+    <None Include="sphere.frag" />
+    <None Include="sphere.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
@@ -149,7 +149,7 @@
     <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -185,7 +185,7 @@
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="LightGUI.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="Plane.h" />
+    <ClInclude Include="sphere.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

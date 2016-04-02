@@ -2,7 +2,7 @@
 #define OGLRender_H
 
 #include "ogl/oglapp.h"
-#include "sphere.h"
+#include "plane.h"
 #include <memory>
 #include <gl/glew.h>
 
@@ -20,7 +20,7 @@ namespace byhj
 		void v_shutdown();
 
 	private:
-		Sphere m_sphere;
+		Plane m_plane;
 	};
 }
 #endif

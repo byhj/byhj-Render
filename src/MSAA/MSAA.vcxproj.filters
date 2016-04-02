@@ -26,18 +26,22 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cube.vert" />
-    <None Include="cube.frag" />
+    <None Include="cube.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cube.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framebuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="cube.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

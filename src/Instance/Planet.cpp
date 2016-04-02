@@ -7,9 +7,6 @@ namespace byhj
 
 	void Planet::init()
 	{
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
 
 		init_buffer();
 		init_shader();
@@ -38,11 +35,11 @@ namespace byhj
 	void Planet::render()
 	{
 		glUseProgram(m_Program);
-		glBindVertexArray(m_vao);
 
-		ModelMgr::getInstance()->render(m_Program);
+		ModelMgr::getInstance()->render("planet/planet.obj", m_Program);
 
 		glUseProgram(0);
+
 	}
 
 	void Planet::shutdown()

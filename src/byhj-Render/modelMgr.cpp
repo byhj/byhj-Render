@@ -100,5 +100,13 @@ namespace byhj
 			iter->second.renderInstance(program, amount);
 		}
 	}
+	void ModelMgr::renderInstance(std::string modelName, GLuint program, GLuint amount)
+	{
+		if (m_OGLModels.find(modelName) == m_OGLModels.end()) {
+			std::cerr << "Error, not load the model:" << modelName << std::endl;
+			return;
+		}
+			m_OGLModels[modelName].renderInstance(program, amount);
+	}
 
 }

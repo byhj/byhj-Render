@@ -1,60 +1,59 @@
 #ifndef Plane_H
 #define Plane_H
 
-#include <d3d11.h>
-
-#include <DirectXMath.h> 
-using namespace DirectX;
-
-#include "Common.h"
-#include "d3d/d3dShader.h"
-#include "d3d/d3dUtility.h"
+#include "ogl/oglShader.h"
+#include "TextureMgr.h"
+#include "LightGUI.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace byhj
 {
 
-	class Plane
-	{
+   class Plane
+   {
+   public:
+	   Plane() = default;
+	  ~Plane() = default;
 
-	public:
-		Plane() 
-		{
-			m_VertexCount = 0;
-			m_IndexCount  = 0;
-			m_pVertexBuffer = nullptr;
-			m_pIndexBuffer  = nullptr;
-			m_pTexture         = nullptr;
-			m_pTexSamplerState = nullptr;
-		}
-		~Plane() {}
+	  void init();
+	  void update();
+	  void render();
+	  void shutdown();
 
-	public:
-		void init(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext, HWND hWnd);
-		void render(ID3D11DeviceContext *pD3D11DeviceContext, const D3DMVPMatrix &matrix);
-		void shutdown();
+   private:
+	   void init_buffer();
+	   void init_vertexArray();
+	   void init_shader();
+	   void init_texture();
 
-	private:
+	   OGLShader m_PlaneShader;
 
-		void init_buffer(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
-		void init_shader(ID3D11Device *pD3D11Device, HWND hWnd);
-		void init_texture(ID3D11Device *pD3D11Device);
+	   LightGui m_LightGUI;
 
-		int m_VertexCount = 0;
-		int m_IndexCount = 0;
-		byhj::MatrixBuffer m_cbMatrix;
-		byhj::LightBuffer cbLight;
-		D3DShader TestShader;
+	   struct UniformLoc
+	   {
+		   GLuint model;
+		   GLuint view;
+		   GLuint proj;
+		   GLuint gamma;
+		   GLuint viewPos;
+		   GLuint lightPos;
+		   GLuint lightColor;
+		   GLuint woodTex;
+		   GLuint lightModelSub;
+		   GLuint lightSub[2];
+	   }uniform_loc;
 
-		ComPtr<ID3D11Buffer> m_pVertexBuffer;
-		ComPtr<ID3D11Buffer> m_pIndexBuffer;
-		ComPtr<ID3D11Buffer> m_pMVPBuffer;
-		ComPtr<ID3D11Buffer> m_pLightBuffer;
-		ComPtr<ID3D11ShaderResourceView> m_pTexture;
-		ComPtr<ID3D11SamplerState> m_pTexSamplerState;
-	};
+	   GLuint program = 0;
+	   GLuint vao = 0;
+	   GLuint vbo = 0;
+	   GLuint ibo = 0;
+	   GLuint woodTexs[2];
+	   GLfloat aspect = 1.0f;
+
+   };
 
 
 }
-
-
 #endif

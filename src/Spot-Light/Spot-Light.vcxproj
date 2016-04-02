@@ -111,14 +111,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="plane.psh">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="plane.vsh">
-      <FileType>Document</FileType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
@@ -150,9 +142,11 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="d3d11Render.cpp" />
+    <ClCompile Include="d3dRender.cpp" />
+    <ClCompile Include="LightGUI.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="plane.cpp" />
+    <ClCompile Include="oglRender.cpp" />
+    <ClCompile Include="Plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -186,9 +180,14 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="d3d11Render.h" />
-    <ClInclude Include="plane.h" />
+    <ClInclude Include="d3dRender.h" />
+    <ClInclude Include="LightGUI.h" />
+    <ClInclude Include="oglRender.h" />
+    <ClInclude Include="Plane.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="light.frag" />
+    <None Include="light.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
