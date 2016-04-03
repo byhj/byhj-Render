@@ -87,7 +87,6 @@ For the DirectX:
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/Terrain-height.png">
 
 ---
----
 ## Fog (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/fog.png">
 ---
@@ -170,12 +169,15 @@ For the DirectX:
 
 ---
 ## Fur (OpenGL3+)
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/fur.png">
+
+
 ---
 
 ## GUI
-
----
-## Instance Draw (OpenGL3+)
+- CEGUI
+- DXUT
+- AntWeakbar
 
 ---
 ## Water

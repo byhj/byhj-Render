@@ -2,6 +2,7 @@
 #define OGLRender_H
 
 #include "ogl/oglApp.h"
+#include "cube.h"
 
 namespace byhj
 {
@@ -21,9 +22,7 @@ public:
 private:
 
 
-	byhj::Cube   m_Cube;
-	byhj::Plane  m_Plane;
-	byhj::Window m_Window;
+	byhj::Cube   m_cube;
 
 };
 

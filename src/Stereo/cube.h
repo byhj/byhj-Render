@@ -15,9 +15,10 @@ public:
 	Cube();
 	~Cube();
 
-	void Init();
-	void Render(GLfloat aspect);
-	void Shutdown();
+	void init();
+	void update();
+	void render();
+	void shutdown();
 
 private:
 	void init_buffer();
@@ -44,10 +45,10 @@ private:
 		} view;
 	} uniforms;
 
-	enum { OBJECT_COUNT = 4 };
+	enum { OBJECT_COUNT = 2 };
 	struct
 	{
-		sb6::Object     obj;
+		std::string name;
 		glm::mat4  model_matrix;
 	} objects[OBJECT_COUNT];
 

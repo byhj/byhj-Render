@@ -5,6 +5,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "modelMgr.h"
+#include "windowInfo.h"
+#include "ogl/oglEulerCamera.h"
 
 #define DEPTH_TEXTURE_SIZE      4096
 #define FRUSTUM_DEPTH           1000
@@ -23,18 +26,27 @@ Cube::~Cube()
 
 }
 
-void Cube::Init()
+void Cube::init()
 {
 	init_buffer();
 	init_vertexArray();
 	init_shader();
 }
 
-void Cube::Render(GLfloat aspect)
+void Cube::update()
+{
+	static GLfloat lastFrame = static_cast<float> (glfwGetTime());
+	GLfloat currentFrame = static_cast<float> (glfwGetTime());
+	GLfloat deltaTime = currentFrame - lastFrame;
+	lastFrame = currentFrame;
+
+	OGLEulerCamera::getInstance()->update(deltaTime * 10.0f);
+}
+void Cube::render()
 {
 
 	static const GLfloat zeros[] ={ 0.0f, 0.0f, 0.0f, 0.0f };
-
+	static float aspect = WindowInfo::getInstance()->getAspect();
 	static double last_time = 0.0;
 	static double total_time = 0.0;
 	float currentTime = glfwGetTime() / 100.0f;
@@ -45,8 +57,8 @@ void Cube::Render(GLfloat aspect)
 	const float f = (float)total_time + 30.0f;
 
 	glm::vec3 light_position = glm::vec3(20.0f, 20.0f, 20.0f);
-	glm::vec3 view_position = glm::vec3(0.0f, 0.0f, 150.0f);
-
+	glm::vec3 view_position = OGLEulerCamera::getInstance()->getPos();
+	
 	light_proj_matrix = glm::frustum(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 200.0f);
 	light_view_matrix = glm::lookAt(light_position, glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
@@ -84,7 +96,7 @@ void Cube::Render(GLfloat aspect)
 }
 
 
-void Cube::Shutdown()
+void Cube::shutdown()
 {
 }
 
@@ -92,15 +104,14 @@ void Cube::init_buffer()
 {
 	static const char * const object_names[] =
 	{
-		"../../../media/objects/dragon.sbm",
-		"../../../media/objects/sphere.sbm",
-		"../../../media/objects/cube.sbm",
-		"../../../media/objects/torus.sbm"
+		"dragon.obj",
+		"sphere.obj",
 	};
 
 	for (int i = 0; i < OBJECT_COUNT; i++)
 	{
-		objects[i].obj.load(object_names[i]);
+		objects[i].name = object_names[i];
+		ModelMgr::getInstance()->loadOGLModel(object_names[i]);
 	}
 
 	glEnable(GL_DEPTH_TEST);
@@ -169,15 +180,15 @@ void Cube::render_scene(double currentTime)
 
 		glClearBufferfv(GL_COLOR, 0, gray);
 		glClearBufferfv(GL_DEPTH, 0, ones);
-		for (i = 0; i < 4; i++)
+		for (i = 0; i <  OBJECT_COUNT; i++)
 		{
 			glm::mat4& model_matrix = objects[i].model_matrix;
 			glm::mat4 shadow_matrix = shadow_sbpv_matrix * model_matrix;
 			glUniformMatrix4fv(uniforms.view.shadow_matrix, 1, GL_FALSE, &shadow_matrix[0][0]);
 			glUniformMatrix4fv(uniforms.view.mv_matrix, 1, GL_FALSE, &(camera_view_matrix[j] * objects[i].model_matrix)[0][0]);
-			glUniform1i(uniforms.view.full_shading, mode == RENDER_FULL ? 1 : 0);
+			glUniform1i(uniforms.view. full_shading, mode == RENDER_FULL ? 1 : 0);
 			glUniform3fv(uniforms.view.diffuse_albedo, 1, &(diffuse_colors[i])[0]);
-			objects[i].obj.render();
+			ModelMgr::getInstance()->render(objects[i].name, view_program);
 		}
 	}
 }
