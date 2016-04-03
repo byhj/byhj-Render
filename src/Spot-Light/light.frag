@@ -15,39 +15,38 @@ uniform sampler2D u_WoodTex;
 
 uniform vec3 u_LightPos[LIGHTNUMS];
 uniform vec3 u_LightColor[LIGHTNUMS];
+uniform float u_LightCutOff[LIGHTNUMS];
+uniform float u_LightOuterCutOff[LIGHTNUMS];
+
 uniform vec3 u_ViewPos;
-uniform bool u_Gamma = false;
+uniform bool u_Gamma = true;
 
-subroutine vec3 LightModelSub(vec3 normal, vec3 fragPos, vec3 lightPos, vec3 lightColor);
+vec3 BlinnPhong(vec3 normal, vec3 fragPos, vec3 lightPos, vec3 lightColor);
 
-subroutine(LightModelSub) vec3 Phong(vec3 normal, vec3 fragPos, vec3 lightPos, vec3 lightColor)
+void main()
 {
-  //Diffuse
-  vec3 lightDir = normalize(lightPos - fragPos);
-  float diff    = max(0.0f, dot(lightDir, normal) );
-  vec3 diffuse  = diff * lightColor;
+  vec4 texColor = texture(u_WoodTex, vs_out.TexCoord);
+  vec3 light = vec3(0.01f);
+  for (int i = 0; i != 4; ++i) {
+  //your should normalize the lightDir, then dot(A, B) = cos(A, B)
+        vec3 lightDir = normalize(u_LightPos[i] - vs_out.FragPos);
+        float theta = dot(lightDir, normalize(vec3(0.0f, 1.0f, 0.0f)));
+		float epsilon = (u_LightCutOff[i] - u_LightOuterCutOff[i]);
+        float intensity = clamp((theta - u_LightOuterCutOff[i]) / epsilon, 0.0, 1.0);
 
-  //Specular
-  vec3 viewDir = normalize(u_ViewPos - fragPos);
-  vec3 reflectDir = reflect(-lightDir, normal);
-  float spec = pow(max(dot(reflectDir, normal), 0.0f), 64.0f);
-  vec3 specular = spec * lightColor;
+         light += BlinnPhong(vs_out.Normal, vs_out.FragPos, u_LightPos[i], u_LightColor[i]) * intensity;
+   }
+  vec4 pixelColor = texColor * vec4(light + vec3(0.2f, 0.2f, 0.2f), 1.0f);
 
-  //Attenuation
-  float max_dis = 1.5;
-  float dis = length(lightPos - fragPos);
-  float att= 1.0 / (u_Gamma ? dis * dis : dis);
+   if(u_Gamma)
+        pixelColor = pow(pixelColor, vec4(1.0/2.2) );
 
-  diffuse *= att;
-  specular *= att;
-
-  vec3 light = diffuse + specular;
-
-  return light; 
-
+  g_FragColor = pixelColor ;
 }
 
-subroutine (LightModelSub) vec3 BlinnPhong(vec3 normal, vec3 fragPos, vec3 lightPos, vec3 lightColor)
+
+
+vec3 BlinnPhong(vec3 normal, vec3 fragPos, vec3 lightPos, vec3 lightColor)
 {
   vec3 lightDir = normalize(lightPos - fragPos);
   float diff    = max(0.0f, dot(lightDir, normal) );
@@ -74,20 +73,3 @@ subroutine (LightModelSub) vec3 BlinnPhong(vec3 normal, vec3 fragPos, vec3 light
 
 }
 
-subroutine uniform LightModelSub lightModelUniform;
-
-void main()
-{
-  vec4 texColor = texture(u_WoodTex, vs_out.TexCoord);
-  vec3 light = vec3(0.0f);
-
-  for (int i = 0; i < LIGHTNUMS; ++i)
-      light += lightModelUniform(vs_out.Normal, vs_out.FragPos, u_LightPos[i], u_LightColor[i]);
-  
-  vec4 pixelColor = texColor * vec4(light + vec3(0.2f, 0.2f, 0.2f), 1.0f);
-
-   if(u_Gamma)
-        pixelColor = pow(pixelColor, vec4(1.0/2.2) );
-
-  g_FragColor = pixelColor ;
-}

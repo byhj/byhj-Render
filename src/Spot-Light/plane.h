@@ -6,6 +6,7 @@
 #include "LightGUI.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
@@ -40,6 +41,8 @@ namespace byhj
 		   GLuint viewPos;
 		   GLuint lightPos;
 		   GLuint lightColor;
+		   GLuint lightCutOff;
+		   GLuint lightOuterCutOff;
 		   GLuint woodTex;
 		   GLuint lightModelSub;
 		   GLuint lightSub[2];

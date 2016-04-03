@@ -158,6 +158,10 @@ For the DirectX:
 ## Point-Light （OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/point-light.png">
 
+----
+## Spot-Light （OpenGL3+)
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/spot.png">
+
 ---
 ## Instance Rendering （OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/instance.png">

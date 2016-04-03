@@ -6,6 +6,7 @@
 #include <memory>
 #include <gl/glew.h>
 
+
 namespace byhj
 {
 	class OGLRender : public OGLApp
