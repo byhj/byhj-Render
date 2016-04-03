@@ -116,12 +116,10 @@ void OGLApp::v_run()
 	glfwSetWindowSizeCallback(pWindow, glfw_resize);
 
 
-	//glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	//glfwSetInputMode(pWindow, GLFW_STICKY_KEYS, GL_TRUE);
 	// GLFW Options
-	//	glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	// GLFW Options
+		glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	//	glfwSetInputMode(Triangle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	if (pWindow == NULL)
 	{

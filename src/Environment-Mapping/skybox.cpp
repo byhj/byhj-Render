@@ -2,6 +2,7 @@
 #include <glfw/glfw3.h>
 #include "textureMgr.h"
 #include "windowInfo.h"
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
@@ -95,6 +96,7 @@ namespace byhj
 
 	void Skybox::render()
 	{
+		glDisable(GL_DEPTH_TEST);
 
 		glBindVertexArray(m_vao);
 		glUseProgram(m_program);
@@ -106,8 +108,8 @@ namespace byhj
 
 		auto time = glfwGetTime();
 		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -3.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
+		view = glm::mat4(glm::mat3(view));
 		glm::mat4 proj  = glm::perspective(45.0f, WindowInfo::getInstance()->getAspect(), 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
@@ -117,6 +119,8 @@ namespace byhj
 
 		glBindVertexArray(0);
 		glUseProgram(0);
+
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	void  Skybox::shutdown()
@@ -135,10 +139,10 @@ namespace byhj
 	  m_SkyboxShader.info();
 	  m_program = m_SkyboxShader.getProgram();
 
-	  uniform_loc.model = glGetUniformLocation(m_program, "g_model");
-	  uniform_loc.view  = glGetUniformLocation(m_program, "g_view");
-	  uniform_loc.proj  = glGetUniformLocation(m_program, "g_proj");
-	  uniform_loc.skytex   = glGetUniformLocation(m_program, "skybox");
+	  uniform_loc.model = glGetUniformLocation(m_program, "u_model");
+	  uniform_loc.view  = glGetUniformLocation(m_program, "u_view");
+	  uniform_loc.proj  = glGetUniformLocation(m_program, "u_proj");
+	  uniform_loc.skytex   = glGetUniformLocation(m_program, "u_skybox");
 	}
 
 	void Skybox::init_texture()

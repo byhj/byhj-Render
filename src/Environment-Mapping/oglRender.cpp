@@ -1,4 +1,6 @@
  #include "oglRender.h"
+#include "ogl/oglEulerCamera.h"
+
 #include <memory>
 
 
@@ -19,10 +21,17 @@ namespace byhj
 	{
         m_skybox.init();
 		m_meshload.init();
+		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 0.0f, 1.0f));
 	}
 
 	void OGLRender::v_update()
 	{
+		static GLfloat lastFrame = static_cast<float> (glfwGetTime());
+		GLfloat currentFrame = static_cast<float> (glfwGetTime());
+		GLfloat deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		OGLEulerCamera::getInstance()->update(deltaTime);
 		m_skybox.update();
 	}
 
