@@ -132,27 +132,6 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="SceneShader.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="shadowShader.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureMgr.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="depthShader.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Device.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="model.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderSystem.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MeshLoad.h">
@@ -254,27 +233,6 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
-    <ClInclude Include="sceneShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shadowShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureMgr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="depthShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Device.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="plane.vert">
@@ -289,19 +247,5 @@
     <None Include="shadow.frag">
       <Filter>Resource Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="scene.vsh">
-      <Filter>Header Files</Filter>
-    </FxCompile>
-    <FxCompile Include="depth.psh">
-      <Filter>Header Files</Filter>
-    </FxCompile>
-    <FxCompile Include="depth.vsh">
-      <Filter>Header Files</Filter>
-    </FxCompile>
-    <FxCompile Include="scene.psh">
-      <Filter>Header Files</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>

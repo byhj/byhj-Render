@@ -165,7 +165,14 @@ namespace byhj
 			{
 				// If texture hasn't been loaded already, load it
 				TextureMgr::getInstance()->setDir(m_dir);
-				TextureMgr::getInstance()->loadOGLTexture(str.C_Str());
+				std::string strFile = str.C_Str();
+				auto temp = strFile.substr(strFile.find_last_of('.'));
+				if (temp != ".dds" && temp != ".tga") {
+					TextureMgr::getInstance()->loadOGLTexture(str.C_Str());
+				}
+				else {
+					TextureMgr::getInstance()->loadOGLDDS(str.C_Str());
+				}
 				OGLMesh::Texture texture;
 				texture.id = TextureMgr::getInstance()->getOGLTextureByName(str.C_Str());
 				texture.type = typeName;

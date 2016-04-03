@@ -29,6 +29,7 @@ namespace byhj
 			GLuint model;
 		    GLuint view;
 			GLuint proj;
+			GLuint camPos;
 		}uniform_loc;
 
 		GLfloat m_Aspect = 1.0f;

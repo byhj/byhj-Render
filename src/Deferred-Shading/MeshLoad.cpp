@@ -76,7 +76,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		ModelMgr::getInstance()->loadOGLModel("BB8/bb8.FBX");
+		ModelMgr::getInstance()->loadOGLModel("venusm.obj");
 
 		sw = WindowInfo::getInstance()->getWidth();
 		sh = WindowInfo::getInstance()->getHeight();

@@ -1,6 +1,7 @@
  #include "oglRender.h"
 #include <memory>
 
+#include "ogl/oglEulerCamera.h"
 
 namespace byhj
 {
@@ -17,11 +18,18 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
+		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 0.0f, 5.0f));
 		m_MeshLoad.Init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
 	}
 
 	void OGLRender::v_update()
 	{
+		static GLfloat lastFrame = static_cast<float> (glfwGetTime());
+		GLfloat currentFrame = static_cast<float> (glfwGetTime());
+		GLfloat deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		OGLEulerCamera::getInstance()->update(deltaTime * 10.0f);
 		m_MeshLoad.Update();
 	}
 

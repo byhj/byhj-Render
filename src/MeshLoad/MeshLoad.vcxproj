@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -111,7 +111,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp" />
@@ -148,7 +147,6 @@
     <ClCompile Include="oglRender.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFWFont.h" />

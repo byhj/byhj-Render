@@ -17,8 +17,8 @@ out VS_OUT
 
 void main(void)
 {
-   vs_out.FragPos  = g_Position;
-   vs_out.Normal   = g_Normal;
+   vs_out.FragPos  = mat3(u_View * u_Model) * g_Position;
+   vs_out.Normal   = mat3( transpose( inverse(u_Model) ) ) * g_Normal;
    vs_out.TexCoord = g_TexCoord;
 
    mat4 mvp = u_Proj * u_View * u_Model;
