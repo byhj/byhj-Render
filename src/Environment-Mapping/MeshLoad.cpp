@@ -30,11 +30,11 @@ namespace byhj {
 
 
 	  glActiveTexture(GL_TEXTURE0);
-	  GLuint skybox_tex = TextureMgr::getInstance()->getOGLTextureByName("sea");
+	  GLuint skybox_tex = TextureMgr::getInstance()->getOGLTextureByName("house");
 	  glBindTexture(GL_TEXTURE_CUBE_MAP, skybox_tex);
 
 	  glm::mat4 model = glm::mat4(1.0f);
-	  glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, -3.0f),
+	  glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f),
 	                                glm::vec3(0.0f, 1.0f, 0.0f));
 	  glm::mat4 proj  = glm::perspective(45.0f, WindowInfo::getInstance()->getAspect(), 0.1f, 1000.0f);
 
@@ -42,7 +42,7 @@ namespace byhj {
 	  glUniformMatrix4fv(uniformLoc.view, 1, GL_FALSE, &view[0][0]);
 	  glUniformMatrix4fv(uniformLoc.proj, 1, GL_FALSE, &proj[0][0]);
 
-	  ModelMgr::getInstance()->render(m_program);
+	  ModelMgr::getInstance()->render("venusm.obj", m_program);
 
 	  glUseProgram(0);
   }
@@ -54,17 +54,7 @@ namespace byhj {
 
   void MeshLoad::init_buffer()
   {
-	  ModelMgr::getInstance()->loadOGLModel("dragon.obj");
-
-	  std::vector<std::string> faces;
-	  faces.push_back("/skyboxs/sea/right.jpg");
-	  faces.push_back("/skyboxs/sea/left.jpg");
-	  faces.push_back("/skyboxs/sea/top.jpg");
-	  faces.push_back("/skyboxs/sea/bottom.jpg");
-	  faces.push_back("/skyboxs/sea/back.jpg");
-	  faces.push_back("/skyboxs/sea/front.jpg");
-
-	  skyboxTex = TextureMgr::getInstance()->loadOGLTexture("sea", faces);
+	  ModelMgr::getInstance()->loadOGLModel("venusm.obj");
   }
 
   void MeshLoad::init_shader()

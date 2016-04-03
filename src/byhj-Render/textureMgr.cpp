@@ -194,31 +194,32 @@ namespace byhj
 		if (m_oglTextures.find(texName) != m_oglTextures.end()) {
 			return m_oglTextures[texName];
 		}
-		int width = 0, height = 0;
 
-		GLuint tex = SOIL_load_OGL_cubemap(
-			(m_dir + faces[0]).c_str(),
-			(m_dir + faces[1]).c_str(),
-			(m_dir + faces[2]).c_str(),
-			(m_dir + faces[3]).c_str(),
-			(m_dir + faces[4]).c_str(),
-			(m_dir + faces[5]).c_str(),
-			SOIL_LOAD_RGBA,
-			SOIL_CREATE_NEW_ID,
-			SOIL_FLAG_MIPMAPS
-		);
-
+		GLuint textureID;
+		glGenTextures(1, &textureID);
+		int width, height;
+		unsigned char *image;
+		glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+		for (GLuint i = 0; i < faces.size(); ++i) {
+			image = SOIL_load_image( (m_dir + faces[i] ).c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+			if (!image)
+				std::cout << "Cannot load the cube map texture" << std::endl;
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB,
+				width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+			SOIL_free_image_data(image);
+		}
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-		m_oglTextures.insert(std::make_pair(texName, tex));
+		m_oglTextures.insert(std::make_pair(texName, textureID));
 
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-		return tex;
+		return textureID;
 	}
 	 ID3D11ShaderResourceView * TextureMgr::loadD3DTexture(ID3D11Device *pD3D11Device, std::string filename)
 	{

@@ -95,12 +95,14 @@ namespace byhj
 
 	void Skybox::render()
 	{
+
 		glBindVertexArray(m_vao);
 		glUseProgram(m_program);
 
 		glActiveTexture(GL_TEXTURE0);
-		GLuint skybox_tex = TextureMgr::getInstance()->getOGLTextureByName("sea");
-		glBindTexture(GL_TEXTURE_CUBE_MAP, skybox_tex);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, m_skyboxTex);
+		GLuint texLoc = glGetUniformLocation(m_program, "u_skybox");
+		glUniform1i(texLoc, 0);
 
 		auto time = glfwGetTime();
 		glm::mat4 model = glm::mat4(1.0f);
@@ -133,22 +135,22 @@ namespace byhj
 	  m_SkyboxShader.info();
 	  m_program = m_SkyboxShader.getProgram();
 
-	  uniform_loc.model = glGetUniformLocation(m_program, "u_model");
-	  uniform_loc.view  = glGetUniformLocation(m_program, "u_view");
-	  uniform_loc.proj  = glGetUniformLocation(m_program, "u_proj");
-	  uniform_loc.skytex   = glGetUniformLocation(m_program, "u_skybox");
+	  uniform_loc.model = glGetUniformLocation(m_program, "g_model");
+	  uniform_loc.view  = glGetUniformLocation(m_program, "g_view");
+	  uniform_loc.proj  = glGetUniformLocation(m_program, "g_proj");
+	  uniform_loc.skytex   = glGetUniformLocation(m_program, "skybox");
 	}
 
 	void Skybox::init_texture()
 	{
 		std::vector<std::string> faces;
-		faces.push_back("/skyboxs/sea/right.jpg");
-		faces.push_back("/skyboxs/sea/left.jpg");
-		faces.push_back("/skyboxs/sea/top.jpg");
-		faces.push_back("/skyboxs/sea/bottom.jpg");
-		faces.push_back("/skyboxs/sea/back.jpg");
-		faces.push_back("/skyboxs/sea/front.jpg");
+		faces.push_back("/house/posx.jpg");
+		faces.push_back("/house/negx.jpg");
+		faces.push_back("/house/posy.jpg");
+		faces.push_back("/house/negy.jpg");
+		faces.push_back("/house/negz.jpg");
+		faces.push_back("/house/posz.jpg");
 
-		TextureMgr::getInstance()->loadOGLTexture("sea", faces);
+		m_skyboxTex = TextureMgr::getInstance()->loadOGLTexture("house", faces);
 	}
 }

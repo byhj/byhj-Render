@@ -2,10 +2,11 @@
 #define OGLRender_H
 
 #include "ogl/oglApp.h"
-#include "skybox.h"
-#include "MeshLoad.h"
 #include <memory>
 #include <gl/glew.h>
+
+#include "skybox.h"
+#include "MeshLoad.h"
 
 namespace byhj
 {
@@ -22,7 +23,7 @@ namespace byhj
 
 	private:
 		Skybox m_skybox;
-		MeshLoad m_meshLoad;
+		MeshLoad m_meshload;
 	};
 }
 #endif

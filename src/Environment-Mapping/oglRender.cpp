@@ -18,7 +18,7 @@ namespace byhj
 	void OGLRender::v_init()
 	{
         m_skybox.init();
-		m_meshLoad.init();
+		m_meshload.init();
 	}
 
 	void OGLRender::v_update()
@@ -37,7 +37,7 @@ namespace byhj
 		glClearBufferfv(GL_DEPTH, 0, one);
 
 		m_skybox.render();
-		m_meshLoad.render();
+		m_meshload.render();
 
     }
 	void OGLRender::v_shutdown()

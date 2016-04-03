@@ -39,7 +39,7 @@ namespace byhj
 		GLuint m_vao;
 		GLuint m_ibo;
 		GLuint m_vbo;
-
+		GLuint m_skyboxTex;
 	   std::vector<GLfloat> m_VertexData;
 	   std::vector<GLuint>  m_IndexData;
 

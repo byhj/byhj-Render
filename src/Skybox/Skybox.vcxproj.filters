@@ -54,9 +54,6 @@
     <ClInclude Include="..\..\include\ogl\oglShader.h">
       <Filter>Render\ogl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3dApp.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
@@ -157,9 +154,6 @@
     </ClCompile>
     <ClCompile Include="..\..\include\ogl\oglShader.cpp">
       <Filter>Render\ogl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3dApp.cpp">
-      <Filter>Render\d3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp">
       <Filter>Render\d3d</Filter>
