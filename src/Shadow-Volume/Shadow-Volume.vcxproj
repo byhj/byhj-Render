@@ -110,6 +110,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeshLoad.cpp" />
+    <ClCompile Include="oglRender.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MeshLoad.h" />
+    <ClInclude Include="oglRender.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shadow.frag" />
+    <None Include="shadow.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

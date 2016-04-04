@@ -86,6 +86,13 @@ namespace byhj
 			iter->second.render(program);
 		}
 	}
+	void ModelMgr::renderPatch(GLuint program)
+	{
+		for (auto iter = m_OGLModels.begin(); iter != m_OGLModels.end(); ++iter) {
+			iter->second.renderPatch(program);
+		}
+	}
+
 	void ModelMgr::render(std::string modelName, GLuint program)
 	{
 		if (m_OGLModels.find(modelName) == m_OGLModels.end()) {

@@ -21,6 +21,7 @@ namespace byhj
 		~OGLModel() = default;
 
 		void render(GLuint program);
+		void renderPatch(GLuint program);
 		void renderInstance(GLuint program, GLuint amount);
 
 		void loadModel(std::string fileName);

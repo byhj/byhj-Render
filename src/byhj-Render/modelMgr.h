@@ -31,6 +31,8 @@ namespace byhj
 	  void render(std::string modelName, ID3D11DeviceContext *pD3D11DeviceContext);
 
 	  void render(GLuint program);
+	  void renderPatch(GLuint program);
+
 	  void render(std::string modelName, GLuint program);
 	  void renderInstance(GLuint program, GLuint amount);
 	  void renderInstance(std::string modelName, GLuint program, GLuint amount);

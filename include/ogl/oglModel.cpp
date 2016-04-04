@@ -11,7 +11,12 @@ namespace byhj
 			m_OGLMeshes[i].draw(program);
 		}
 	}
-
+	void OGLModel::renderPatch(GLuint program)
+	{
+		for (GLuint i = 0; i < m_OGLMeshes.size(); i++) {
+			m_OGLMeshes[i].drawPatch(program);
+		}
+	}
 	void OGLModel::renderInstance(GLuint program, GLuint amount)
 	{
 		glUseProgram(program);

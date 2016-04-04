@@ -14,11 +14,10 @@ namespace byhj
 
 	}
 
-
 	void OGLRender::v_init()
 	{
-		m_MeshLoad.init();
-		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 0.0f, 2.0f));
+		m_MeshLoad.Init();
+		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 5.0f, 25.0f));
 	}
 
 	void OGLRender::v_update()
@@ -28,18 +27,26 @@ namespace byhj
 		GLfloat deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		OGLEulerCamera::getInstance()->update(deltaTime);
+		OGLEulerCamera::getInstance()->update(deltaTime * 5.0f);
 
-		m_MeshLoad.update();
+		m_MeshLoad.Update();
 	}
 
     void OGLRender::v_render()
 	{
-		m_MeshLoad.render();
+		static const GLfloat black[] ={ 0.2f, 0.3f, 0.5f, 1.0f };
+		glClearBufferfv(GL_COLOR, 0, black);
+		static const GLfloat one[] ={ 1.0f };
+		glClearBufferfv(GL_DEPTH, 0, one);
+
+		glEnable(GL_DEPTH_TEST);
+
+		m_MeshLoad.Render();
 
     }
 	void OGLRender::v_shutdown()
 	{
+
 	}
 
 }

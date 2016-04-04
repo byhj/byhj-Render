@@ -27,6 +27,8 @@ namespace byhj
 
 	void MeshLoad::render()
 	{
+		glEnable(GL_DEPTH_TEST);
+
 		static const GLfloat black[] ={ 0.0f, 0.0f, 0.0f, 1.0f };
 		static const GLfloat one[] ={ 1.0f };
 		glBindFramebuffer(GL_FRAMEBUFFER, gbuffer.fbo);
@@ -76,7 +78,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		ModelMgr::getInstance()->loadOGLModel("venusm.obj");
+		ModelMgr::getInstance()->loadOGLModel("buddha.obj");
 
 		sw = WindowInfo::getInstance()->getWidth();
 		sh = WindowInfo::getInstance()->getHeight();

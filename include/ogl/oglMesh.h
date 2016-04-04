@@ -45,6 +45,7 @@ namespace byhj
 		~OGLMesh() = default;
 
 		void draw(GLuint program);
+		void drawPatch(GLuint program);
 		void drawInstance(GLuint program, GLuint amount);
 		void setup();
 

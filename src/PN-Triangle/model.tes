@@ -1,0 +1,68 @@
+#version 430 core
+
+layout (triangles, equal_spacing, ccw) in;
+
+uniform mat4 u_model;
+uniform mat4 u_view;
+uniform mat4 u_proj;
+
+struct OutputPatch                                                                              
+{                                                                                               
+    vec3 WorldPos_B030;                                                                         
+    vec3 WorldPos_B021;                                                                         
+    vec3 WorldPos_B012;                                                                         
+    vec3 WorldPos_B003;                                                                         
+    vec3 WorldPos_B102;                                                                         
+    vec3 WorldPos_B201;                                                                         
+    vec3 WorldPos_B300;                                                                         
+    vec3 WorldPos_B210;                                                                         
+    vec3 WorldPos_B120;                                                                         
+    vec3 WorldPos_B111;                                                                         
+    vec3 Normal[3];                                                                             
+    vec2 TexCoord[3];                                                                           
+};     
+
+in patch OutputPatch patch0;
+
+out TES_OUT {
+  vec3 fragPos;
+  vec3 normal;
+  vec2 texcoord;
+}tes_out;
+
+vec2 interpolate2D(vec2 v0, vec2 v1, vec2 v2)                                                   
+{                                                                                               
+    return vec2(gl_TessCoord.x) * v0 + vec2(gl_TessCoord.y) * v1 + vec2(gl_TessCoord.z) * v2;   
+}                                                                                               
+                                                                                                
+vec3 interpolate3D(vec3 v0, vec3 v1, vec3 v2)                                                   
+{                                                                                               
+    return vec3(gl_TessCoord.x) * v0 + vec3(gl_TessCoord.y) * v1 + vec3(gl_TessCoord.z) * v2;   
+}   
+
+
+void main()                                                                                     
+{                                                                                               
+    // Interpolate the attributes of the output vertex using the barycentric coordinates        
+    tes_out.texcoord = interpolate2D(patch0.TexCoord[0], patch0.TexCoord[1], patch0.TexCoord[2]); 
+    tes_out.normal   = interpolate3D(patch0.Normal[0],   patch0.Normal[1],   patch0.Normal[2]);         
+                                                                                                
+    float u = gl_TessCoord.x;                                                                   
+    float v = gl_TessCoord.y;                                                                   
+    float w = gl_TessCoord.z;   
+	                                                                
+    float uPow3 = pow(u, 3);                                                                    
+    float vPow3 = pow(v, 3);                                                                    
+    float wPow3 = pow(w, 3);                                                                    
+    float uPow2 = pow(u, 2);                                                                    
+    float vPow2 = pow(v, 2);                                                                    
+    float wPow2 = pow(w, 2);  
+	                                                                  
+    tes_out.fragPos = patch0.WorldPos_B300 * wPow3 + patch0.WorldPos_B030 * uPow3 + patch0.WorldPos_B003 * vPow3 +                               
+                      patch0.WorldPos_B210 * 3.0 * wPow2 * u + patch0.WorldPos_B120 * 3.0 * w * uPow2 + patch0.WorldPos_B201 * 3.0 * wPow2 * v + 
+                      patch0.WorldPos_B021 * 3.0 * uPow2 * v + patch0.WorldPos_B102 * 3.0 * w * vPow2 + patch0.WorldPos_B012 * 3.0 * u * vPow2 + 
+                      patch0.WorldPos_B111 * 6.0 * w * u * v;                                    
+  
+    mat4 mvp = u_proj * u_view * u_model;
+    gl_Position = mvp * vec4(tes_out.fragPos , 1.0);                                              
+}                                                                                               

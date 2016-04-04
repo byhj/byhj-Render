@@ -18,6 +18,6 @@ uniform sampler2D texture_specular;
 void main(void)
 {
    g_PosTex = vs_out.FragPos;
-   g_NormalTex = vs_out.Normal;
+   g_NormalTex = normalize(vs_out.Normal);
    g_ColorTex = vec3(abs(vs_out.Normal.z) );
 }
