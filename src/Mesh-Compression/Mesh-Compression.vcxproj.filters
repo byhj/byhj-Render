@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="o3dgc">
+      <UniqueIdentifier>{92b395be-37b8-4ad0-b12a-29252e0d2c52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="o3dgc\decode">
+      <UniqueIdentifier>{8f54a20b-0256-4fe9-8cc7-62a6ae103945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="o3dgc\encode">
+      <UniqueIdentifier>{6a7f66e1-9340-487e-b6f5-ab8b862ddfa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="o3dgc\common">
+      <UniqueIdentifier>{5aa84560-b422-416a-96b3-7c532dffbc1b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="model.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extern\o3dgc\decode\o3dgcDynamicVectorDecoder.cpp">
+      <Filter>o3dgc\decode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extern\o3dgc\encode\o3dgcDynamicVectorEncoder.cpp">
+      <Filter>o3dgc\encode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extern\o3dgc\common\o3dgcArithmeticCodec.cpp">
+      <Filter>o3dgc\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extern\o3dgc\common\o3dgcTools.cpp">
+      <Filter>o3dgc\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\extern\o3dgc\common\o3dgcTriangleFans.cpp">
+      <Filter>o3dgc\common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\decode\o3dgcDynamicVectorDecoder.h">
+      <Filter>o3dgc\decode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\decode\o3dgcSC3DMCDecoder.h">
+      <Filter>o3dgc\decode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\decode\o3dgcTriangleListDecoder.h">
+      <Filter>o3dgc\decode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\encode\o3dgcDynamicVectorEncoder.h">
+      <Filter>o3dgc\encode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\encode\o3dgcSC3DMCEncoder.h">
+      <Filter>o3dgc\encode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\encode\o3dgcTriangleListEncoder.h">
+      <Filter>o3dgc\encode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcAdjacencyInfo.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcArithmeticCodec.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcBinaryStream.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcCommon.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcDVEncodeParams.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcDynamicVector.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcFIFO.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcIndexedFaceSet.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcSC3DMCEncodeParams.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcTimer.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcTriangleFans.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extern\o3dgc\common\o3dgcVector.h">
+      <Filter>o3dgc\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\extern\o3dgc\decode\o3dgcSC3DMCDecoder.inl">
+      <Filter>o3dgc\decode</Filter>
+    </None>
+    <None Include="..\..\extern\o3dgc\decode\o3dgcTriangleListDecoder.inl">
+      <Filter>o3dgc\decode</Filter>
+    </None>
+    <None Include="..\..\extern\o3dgc\encode\o3dgcSC3DMCEncoder.inl">
+      <Filter>o3dgc\encode</Filter>
+    </None>
+    <None Include="..\..\extern\o3dgc\encode\o3dgcTriangleListEncoder.inl">
+      <Filter>o3dgc\encode</Filter>
+    </None>
+    <None Include="..\..\extern\o3dgc\common\o3dgcIndexedFaceSet.inl">
+      <Filter>o3dgc\common</Filter>
+    </None>
+    <None Include="..\..\extern\o3dgc\common\o3dgcVector.inl">
+      <Filter>o3dgc\common</Filter>
+    </None>
+  </ItemGroup>
+</Project>
