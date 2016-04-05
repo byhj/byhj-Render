@@ -1,9 +1,5 @@
-
-
+#include "textureMgr.h"
 #include "Plane.h"
-#include "ogl/loadTexture.h"
-
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -25,7 +21,7 @@ namespace byhj
 
 #pragma endregion
 
-	void Plane::Init()
+	void Plane::init()
 	{
 		init_shader();
 		init_buffer();
@@ -33,7 +29,7 @@ namespace byhj
 		init_texture();
 	}
 
-	void Plane::Render(const const ogl::MvpMatrix &matrix)
+	void Plane::render(const OGLMVPMatrix &matrix)
 	{
 		glUseProgram(program);
 		glBindVertexArray(vao);
@@ -55,7 +51,7 @@ namespace byhj
 		glUseProgram(0);
 	}
 
-	void Plane::Shutdown()
+	void Plane::shutdown()
 	{
 		glDeleteProgram(program);
 		glDeleteVertexArrays(1, &vao);
@@ -69,7 +65,7 @@ namespace byhj
 		PlaneShader.attach(GL_FRAGMENT_SHADER, "plane.frag");
 		PlaneShader.link();
 		PlaneShader.info();
-		program = PlaneShader.GetProgram();
+		program = PlaneShader.getProgram();
 
 		model_loc = glGetUniformLocation(program, "model");
 		view_loc  = glGetUniformLocation(program, "view");
@@ -101,7 +97,7 @@ namespace byhj
 
 	void Plane::init_texture()
 	{
-		texture = ogl::loadTexture("../../../media/textures/metal.png");
+		TextureMgr::getInstance()->loadOGLTexture("metal.png");
 	}
 
 

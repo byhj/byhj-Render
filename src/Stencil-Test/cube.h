@@ -17,8 +17,8 @@ namespace byhj
 
 	public:
 		void init();
-		void render();
-		void renderColor();
+		void render(const OGLMVPMatrix &matrix);
+		void renderColor(const OGLMVPMatrix &matrix);
 		void shutdown();
 	
 	private:
@@ -33,8 +33,8 @@ namespace byhj
 		GLuint model_loc, view_loc, proj_loc;
 		GLuint color_model_loc, color_view_loc, color_proj_loc; 
 
-		ogl::Shader CubeShader;		
-		ogl::Shader ColorShader;
+		OGLShader CubeShader;		
+		OGLShader ColorShader;
 	};
 
 }

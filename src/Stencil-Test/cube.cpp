@@ -1,6 +1,6 @@
 #include "cube.h"
-#include "ogl/loadTexture.h"
-
+#include "textureMgr.h"
+ 
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -57,7 +57,7 @@ namespace byhj
 
 #pragma endregion
 
-	void Cube::Init()
+	void Cube::init()
 	{
 		init_shader();
 		init_buffer();
@@ -65,7 +65,7 @@ namespace byhj
 		init_texture();
 	}
 
-	void Cube::Render(const const ogl::MvpMatrix &matrix)
+	void Cube::render(const OGLMVPMatrix &matrix)
 	{
 		glUseProgram(cube_prog);
 		glBindVertexArray(vao);
@@ -92,7 +92,7 @@ namespace byhj
 		glUseProgram(0);
 	}
 
-	void Cube::RenderColor(const const ogl::MvpMatrix &matrix)
+	void Cube::renderColor(const OGLMVPMatrix &matrix)
 	{
 		glUseProgram(color_prog);
 
@@ -121,7 +121,7 @@ namespace byhj
 		glUseProgram(0);
 	}
 
-	void Cube::Shutdown()
+	void Cube::shutdown()
 	{
 		glDeleteProgram(color_prog);
 		glDeleteProgram(cube_prog);
@@ -136,7 +136,7 @@ namespace byhj
 		CubeShader.attach(GL_FRAGMENT_SHADER, "cube.frag");
 		CubeShader.link();
 		CubeShader.info();
-		cube_prog = CubeShader.GetProgram();
+		cube_prog = CubeShader.getProgram();
 		model_loc = glGetUniformLocation(cube_prog, "model");
 		view_loc  = glGetUniformLocation(cube_prog, "view");
 		proj_loc  = glGetUniformLocation(cube_prog, "proj");
@@ -147,7 +147,7 @@ namespace byhj
 		ColorShader.attach(GL_FRAGMENT_SHADER, "color.frag");
 		ColorShader.link();
 		ColorShader.info();
-		color_prog = ColorShader.GetProgram();
+		color_prog = ColorShader.getProgram();
 		color_model_loc = glGetUniformLocation(color_prog, "model");
 		color_view_loc  = glGetUniformLocation(color_prog, "view");
 		color_proj_loc  = glGetUniformLocation(color_prog, "proj");
@@ -177,7 +177,7 @@ namespace byhj
 
 	void Cube::init_texture()
 	{
-	    texture = ogl::loadTexture("../../../media/textures/marble.jpg");
+	    texture = TextureMgr::getInstance()->loadOGLTexture("marble.jpg");
 	}
 
 

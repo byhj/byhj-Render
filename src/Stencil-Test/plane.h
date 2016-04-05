@@ -1,8 +1,8 @@
 #ifndef Plane_H
 #define Plane_H
 
-#include "ogl/Shader.h"
-#include "ogl/Utility.h"
+#include "ogl/oglShader.h"
+#include "ogl/oglUtility.h"
 
 #include <glfw/glfw3.h>
 
@@ -16,9 +16,10 @@ namespace byhj
 		~Plane() {}
 
 	public:
-		void Init();
-		void Render(const const ogl::MvpMatrix &matrix);
-		void Shutdown();
+		void init();
+		void update();
+		void render(const OGLMVPMatrix &matrix);
+		void shutdown();
 
 	private:
 		void init_shader();
@@ -29,7 +30,7 @@ namespace byhj
 		GLuint vao, vbo, program;
 		GLuint texture, tex_loc;
 		GLuint model_loc, view_loc, proj_loc;
-		ogl::Shader PlaneShader;			
+		OGLShader PlaneShader;			
 	};
 
 }
