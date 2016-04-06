@@ -16,8 +16,10 @@ uniform sampler2D texture_diffuse;
 uniform sampler2D texture_specular;
  
 void main(void)
-{
+{   
+    vec3 diffuse = texture2D(texture_diffuse, vs_out.TexCoord).rgb;
+    vec3 specular = texture2D(texture_specular, vs_out.TexCoord).rgb;
    g_PosTex = vs_out.FragPos;
    g_NormalTex = normalize(vs_out.Normal);
-   g_ColorTex = vec3(abs(vs_out.Normal.z) );
+   g_ColorTex = vec3(diffuse );
 }

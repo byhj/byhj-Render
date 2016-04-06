@@ -39,7 +39,7 @@ namespace byhj
 
 		glUseProgram(m_DeferredProgram);
 
-		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
+		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 
@@ -78,7 +78,7 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		ModelMgr::getInstance()->loadOGLModel("buddha.obj");
+		ModelMgr::getInstance()->loadOGLModel("cyborg/cyborg.obj");
 
 		sw = WindowInfo::getInstance()->getWidth();
 		sh = WindowInfo::getInstance()->getHeight();

@@ -15,6 +15,9 @@ out VS_OUT
    vec2 TexCoord;
 }vs_out;
 
+uniform sampler2D texture_diffuse;
+uniform sampler2D texture_specular;
+
 void main(void)
 {
    vs_out.FragPos  = g_Position;
