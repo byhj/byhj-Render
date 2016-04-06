@@ -178,14 +178,16 @@ For the DirectX:
 
 ---
 
-## GUI
-- CEGUI
+## CEGUI
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/cegui.png">
 
-- DXUT
+---
+## DXUT
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/dxut.png">
 
-- AntWeakbar
+
+---
+## AntWeakbar
 
 ---
 
