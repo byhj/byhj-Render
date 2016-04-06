@@ -55,7 +55,7 @@ void DXUTHelper::render()
 	DXUTInit(true, true, nullptr); // Parse the command line, show msgboxes on error, no extra command line params
 	DXUTSetCursorSettings(true, true); // Show the cursor and clip it when in full screen
 
-	DXUTCreateWindow(L"Tutorial10");
+	DXUTCreateWindow(L"DXUT");
 	DXUTCreateDevice(D3D_FEATURE_LEVEL_11_0, true, m_ScreenWidth, m_ScreenHeight);
 	DXUTMainLoop();
 
@@ -233,14 +233,14 @@ HRESULT CALLBACK DXUTHelper::AppD3D11CreateDevice(ID3D11Device* pd3dDevice, cons
 
 	HRESULT hr = S_OK;
 
-	auto pD3D11DeviceContext = DXUTGetD3D11DeviceContext();
-	V_RETURN( m_DialogResourceManager.OnD3D11CreateDevice(pd3dDevice, pD3D11DeviceContext) );
+	m_pD3D11DeviceContext = DXUTGetD3D11DeviceContext();
+	V_RETURN( m_DialogResourceManager.OnD3D11CreateDevice(pd3dDevice, m_pD3D11DeviceContext.Get()) );
 	V_RETURN( m_SettingsDlg.OnD3D11CreateDevice(pd3dDevice) );
 
-	m_pTextHelper = new CDXUTTextHelper(pd3dDevice, pD3D11DeviceContext, &m_DialogResourceManager, 15);
+	m_pTextHelper = new CDXUTTextHelper(pd3dDevice, m_pD3D11DeviceContext.Get(), &m_DialogResourceManager, 15);
 
 
-	m_RenderSystem.init(pd3dDevice, pD3D11DeviceContext);
+	m_RenderSystem.init(pd3dDevice, m_pD3D11DeviceContext.Get());
 
 	// Setup the camera's view parameters
 	static const XMVECTORF32 s_Eye ={0.0f, 3.0f, -800.0f, 0.f};
@@ -260,9 +260,9 @@ HRESULT CALLBACK DXUTHelper::AppD3D11ResizedSwapChain(ID3D11Device* pd3dDevice, 
 	float fWidth = static_cast<float>(pBackBufferSurfaceDesc->Width);
 	float fHeight = static_cast<float>(pBackBufferSurfaceDesc->Height);
 
-	auto pD3D11DeviceContext = DXUTGetD3D11DeviceContext();
+	m_pD3D11DeviceContext = DXUTGetD3D11DeviceContext();
 
-	m_RenderSystem.init_camera(fWidth, fHeight, pD3D11DeviceContext);
+	m_RenderSystem.init_camera(fWidth, fHeight, m_pD3D11DeviceContext.Get());
 
 	HRESULT hr;
 
@@ -303,7 +303,7 @@ void CALLBACK DXUTHelper::AppFrameMove(double fTime, float fElapsedTime, void* p
 	{
 		World = XMMatrixRotationY(XMConvertToRadians(180.f));
 	}
-
+	World = XMMatrixIdentity();
 	XMMATRIX mRot = XMMatrixRotationX(XMConvertToRadians(-90.0f));
 	World = mRot * World;
 

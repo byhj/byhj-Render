@@ -10,12 +10,16 @@
 #include "DXUTcamera.h"
 #include "DXUTgui.h"
 #include "DXUTsettingsdlg.h"
-#include "RenderSystem.h"
 
+
+#include "RenderSystem.h"
 #include "d3d/d3dUtility.h"
 
 #pragma comment(lib, "DXUT.lib")
 #pragma comment(lib, "DXUTOpt.lib")
+
+#include <wrl.h>
+using namespace Microsoft::WRL;
 
 namespace byhj
 {
@@ -117,7 +121,7 @@ private:
 
 	byhj::RenderSystem m_RenderSystem;
 	static std::shared_ptr<DXUTHelper> pDXUTHelper;
-
+	ComPtr<ID3D11DeviceContext> m_pD3D11DeviceContext;
 	D3DMVPMatrix m_Matrix;
 
 };

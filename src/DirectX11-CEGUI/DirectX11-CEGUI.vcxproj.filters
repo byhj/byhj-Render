@@ -129,6 +129,9 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\d3d\d3dCEGUI.cpp">
+      <Filter>Render\d3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d3d11Render.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\d3d\d3dCEGUI.h">
+      <Filter>Render\d3d</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

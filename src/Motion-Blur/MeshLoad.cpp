@@ -40,7 +40,7 @@ namespace byhj
 
 		static glm::mat4 preMVP = glm::mat4(1.0f);
 
-		glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 model = glm::mat4(1.0f); // glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 		glm::mat4 mvp = proj * view * model;
@@ -52,12 +52,15 @@ namespace byhj
 
 		ModelMgr::getInstance()->render(m_DeferredProgram);
 
+
+		//////////////////////////////////////////////////////////////////////////////
+
+		glUseProgram(m_LightProgram);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClearBufferfv(GL_COLOR, 0, black);
 		glClearBufferfv(GL_DEPTH, 0, one);
 		preMVP = mvp;
 
-		glUseProgram(m_LightProgram);
 		glUniform1i(glGetUniformLocation(m_LightProgram, "motionVec"), 0);
 		glUniform1i(glGetUniformLocation(m_LightProgram, "colorTex"), 1);
 		glActiveTexture(GL_TEXTURE0);

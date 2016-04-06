@@ -1,7 +1,8 @@
 #include "cube.h"
 
 #include "geometry.h"
-#include "DirectXTK/DDSTextureLoader.h"
+#include "textureMgr.h"
+
 
 namespace byhj
 {
@@ -22,7 +23,7 @@ namespace byhj
 
 	void Cube::render(ID3D11DeviceContext *pD3D11DeviceContext, D3DMVPMatrix matrix)
 	{
-		m_EffectHelper.render(pD3D11DeviceContext);
+
 
 		// Set vertex buffer stride and offset
 		unsigned int stride;
@@ -32,6 +33,7 @@ namespace byhj
 		pD3D11DeviceContext->IASetVertexBuffers(0, 1, &m_pCubeVB, &stride, &offset);
 		pD3D11DeviceContext->IASetIndexBuffer(m_pCubeIB, DXGI_FORMAT_R32_UINT, 0);
 		pD3D11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		m_EffectHelper.render(pD3D11DeviceContext);
 
 		cbMatrix.model = matrix.model;
 		cbMatrix.view  = matrix.view;
@@ -126,8 +128,7 @@ namespace byhj
 void Cube::init_texture(ID3D11Device *pD3D11Device)
 {
 	HRESULT hr;
-	hr = CreateDDSTextureFromFile(pD3D11Device, L"../../media/textures/WoodCrate01.dds", 0,  &m_pDiffuseTexSRV);
-	//DebugHR(hr);
+	m_pDiffuseTexSRV = TextureMgr::getInstance()->loadD3DTexture(pD3D11Device, "WoodCrate01.dds");
 }
 
 void Cube::init_shader(ID3D11Device *pD3D11Device, HWND hWnd)

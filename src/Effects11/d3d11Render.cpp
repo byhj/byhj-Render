@@ -168,7 +168,7 @@ namespace byhj
 
 		//MVP Matrix
 		static auto aspect = WindowInfo::getInstance()->getAspect();
-		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -100.0f, 0.0f);
+		XMVECTOR camPos    = XMVectorSet(0.0f, 0.0f, -3.0f, 0.0f);
 		XMVECTOR camTarget = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 		XMVECTOR camUp     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 		XMMATRIX View      = XMMatrixLookAtLH(camPos, camTarget, camUp);

@@ -48,14 +48,23 @@ namespace byhj
 			parser->setProperty("SchemaDefaultResourceGroup", "schemas");
 
 		// load TaharezLook scheme and DejaVuSans-10 font
-		SchemeManager::getSingleton().createFromFile("TaharezLook.scheme", "schemes");
+		SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
+		SchemeManager::getSingleton().createFromFile("AlfiskoSkin.scheme");
+		SchemeManager::getSingleton().createFromFile("WindowsLook.scheme");
+		SchemeManager::getSingleton().createFromFile("VanillaSkin.scheme");
+		SchemeManager::getSingleton().createFromFile("OgreTray.scheme");
+
 		FontManager::getSingleton().createFromFile("DejaVuSans-10.font");
 
 		// set default font and cursor image and tooltip type
 		System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-10");
-		System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+		System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("Vanilla-Images/MouseArrow");
 		System::getSingleton().getDefaultGUIContext().setDefaultTooltipType("TaharezLook/Tooltip");
-	
+
+		// load an image to use as a background
+		if (!ImageManager::getSingleton().isDefined("SpaceBackgroundImage"))
+			ImageManager::getSingleton().addFromImageFile("SpaceBackgroundImage", "SpaceBackground.jpg");
+
 		/////////////////////////////////////////////////////////////
 	// Add your gui initialisation code in here.
 	// You should preferably use layout loading because you won't
@@ -63,11 +72,12 @@ namespace byhj
 	// can also use static window creation code here, of course.
 	/////////////////////////////////////////////////////////////
 
-		System::getSingleton().notifyDisplaySizeChanged(Sizef(800.f, 600.f));
+		System::getSingleton().notifyDisplaySizeChanged(Sizef(getClientWidth(),getClientHeight()));
 
-	// load layout
-		Window* root = WindowManager::getSingleton().loadLayoutFromFile("application_templates.layout");
+	   // load layout
+		Window* root = WindowManager::getSingleton().loadLayoutFromFile("Demo8.layout");
 		System::getSingleton().getDefaultGUIContext().setRootWindow(root);
+
 		// notify system of the window size
 		renderer= static_cast<Direct3D11Renderer*>(System::getSingleton().getRenderer());
 	}

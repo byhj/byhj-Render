@@ -23,5 +23,5 @@ float4 PS(VS_OUT vs_out) : SV_TARGET
    float  intensity = max( dot(lightDir.xyz, vs_out.Normal), 0.0f);
    float4 diffuse = intensity  * float4(1.0f, 1.0f, 1.0f, 1.0f);
 
-   return texColor * diffuse;
+   return texColor;//* diffuse;
 }
