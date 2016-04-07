@@ -22,5 +22,5 @@ void main(void)
    vec3 prevNdcPos = (vs_out.prevClipSpacePos / vs_out.prevClipSpacePos.w).xyz;
  
    g_MotionVec = (ndcPos - prevNdcPos).xy;
-   g_ColorTex = vec3(abs(vs_out.Normal.z) );
+   g_ColorTex = texture2D(texture_diffuse, vs_out.TexCoord).xyz;
 }

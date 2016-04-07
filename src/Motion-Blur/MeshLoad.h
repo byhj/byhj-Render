@@ -41,10 +41,11 @@ namespace byhj
 			GLuint normalTex;
 			GLuint colorTex;
 		}gbuffer;
+
 		GLuint planeVAO, planeVBO;
 		OGLShader m_LightShader;
 		OGLShader m_DeferredShader;
-
+		GLuint m_tex;
 		GLuint m_DeferredProgram;
 		GLuint m_LightProgram;
 		GLfloat sw, sh, aspect;

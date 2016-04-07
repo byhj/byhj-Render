@@ -1,6 +1,7 @@
 #include "MeshLoad.h"
 #include "windowInfo.h"
 #include "ogl/oglEulerCamera.h"
+#include "textureMgr.h"
 
 namespace byhj
 {
@@ -38,28 +39,43 @@ namespace byhj
 
 		glUseProgram(m_DeferredProgram);
 
-		static glm::mat4 preMVP = glm::mat4(1.0f);
+		static glm::mat4 preHouseMVP = glm::mat4(1.0f);
+		static glm::mat4 preFanMVP = glm::mat4(1.0f);
 
-		glm::mat4 model = glm::mat4(1.0f); // glm::rotate(glm::mat4(1.0f), (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::vec3 pos   = glm::vec3(0.00000000f, 8.74925041f, 2.67939997f);
+		glm::mat4 model = glm::translate(glm::mat4(1.0f), -pos);
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
-		glm::mat4 mvp = proj * view * model;
+		glm::mat4 houseMVP = proj * view * model;
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, m_tex);
+		glUniform1i(glGetUniformLocation(m_DeferredProgram, "texture_diffuse"), 0);
 
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &view[0][0]);
 		glUniformMatrix4fv(uniform_loc.proj, 1, GL_FALSE, &proj[0][0]);
-		glUniformMatrix4fv(uniform_loc.prevMVP, 1, GL_FALSE, &preMVP[0][0]);
+		glUniformMatrix4fv(uniform_loc.prevMVP, 1, GL_FALSE, &preHouseMVP[0][0]);
 
-		ModelMgr::getInstance()->render(m_DeferredProgram);
+		preHouseMVP = houseMVP;
 
+		ModelMgr::getInstance()->render("house.obj", m_DeferredProgram);
 
+		model = glm::rotate(glm::mat4(1.0f), (float)glfwGetTime() * 5.0f, glm::vec3(0.0f, 0.0f, 1.0f)) * model;
+		glm::mat4 fanMVP = proj * view * model;
+
+		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
+		glUniformMatrix4fv(uniform_loc.prevMVP, 1, GL_FALSE, &preFanMVP[0][0]);
+
+		ModelMgr::getInstance()->render("fan.obj", m_DeferredProgram);
 		//////////////////////////////////////////////////////////////////////////////
+	    preFanMVP = fanMVP;
 
 		glUseProgram(m_LightProgram);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClearBufferfv(GL_COLOR, 0, black);
 		glClearBufferfv(GL_DEPTH, 0, one);
-		preMVP = mvp;
+
 
 		glUniform1i(glGetUniformLocation(m_LightProgram, "motionVec"), 0);
 		glUniform1i(glGetUniformLocation(m_LightProgram, "colorTex"), 1);
@@ -74,6 +90,8 @@ namespace byhj
 
 		GLfloat time = glfwGetTime();
 		glUseProgram(0);
+
+	
 	}
 
 	void MeshLoad::shutdown()
@@ -82,7 +100,8 @@ namespace byhj
 
 	void MeshLoad::init_buffer()
 	{
-		ModelMgr::getInstance()->loadOGLModel("buddha.obj");
+		ModelMgr::getInstance()->loadOGLModel("fan.obj");
+		ModelMgr::getInstance()->loadOGLModel("house.obj");
 
 		sw = WindowInfo::getInstance()->getWidth();
 		sh = WindowInfo::getInstance()->getHeight();
@@ -123,6 +142,8 @@ namespace byhj
 		m_LightShader.link();
 		m_LightShader.info();
 		m_LightProgram= m_LightShader.getProgram();
+
+		m_tex = TextureMgr::getInstance()->loadOGLDDS("windmill_diffuse.dds");
 	}
 
 	void MeshLoad::init_fbo()
@@ -150,7 +171,7 @@ namespace byhj
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sw, sh, 0, GL_RGBA, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gbuffer.colorTex, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gbuffer.colorTex, 0);
 
 		// - Tell OpenGL which color attachments we'll use (of this frame buffer) for rendering 
 		GLuint attachments[2] ={ GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
@@ -163,8 +184,10 @@ namespace byhj
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, sw, sh);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
 		// - Finally check if frame buffer is complete
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 			std::cout << "Frame buffer not complete!" << std::endl;
+		}
+
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 

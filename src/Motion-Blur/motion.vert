@@ -20,9 +20,10 @@ out VS_OUT
 void main(void)
 {
    mat4 mvp = u_Proj * u_View * u_Model;
-   vs_out.ClipSpacePos  = mvp * vec4(g_Position, 1.0f);
+   vs_out.ClipSpacePos   = mvp * vec4(g_Position, 1.0f);
    vs_out.Normal         = normalize(g_Normal);
    vs_out.TexCoord       = g_TexCoord;
    vs_out.prevClipSpacePos = u_prevMVP * vec4(g_Position, 1.0f);
+
    gl_Position = mvp * vec4(g_Position, 1.0f);
 }

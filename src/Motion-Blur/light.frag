@@ -13,21 +13,22 @@ in VS_OUT
 {
    vec2 TexCoord;
 }vs_out;
- 
+
+const int nSamples = 16;
+
 void main(void)
 {
-    vec2 motion  = texture(motionVec, vs_out.TexCoord).xy / 2.0f;
+    vec2 motion  = texture(motionVec, vs_out.TexCoord).xy;
+	vec4 result = texture(colorTex, vs_out.TexCoord);
+
+   for (int i = 1; i < nSamples; ++i) {
+   // get offset in range [-0.5, 0.5]:
+      vec2 offset = motion * (float(i) / float(nSamples - 1) - 0.5);
+   // sample & add to result:
+      result += texture(colorTex, vs_out.TexCoord + offset);
+   }
  
-    vec2 texCoord = vs_out.TexCoord;
-	vec4 Color = vec4(0.0f);
+   result /= float(nSamples);
 
-    Color += texture(colorTex, texCoord) * 0.4;
-    texCoord -= motion;
-    Color += texture(colorTex, texCoord) * 0.3;
-    texCoord -= motion;
-    Color += texture(colorTex, texCoord) * 0.2;
-    texCoord -= motion;
-    Color += texture(colorTex, texCoord) * 0.1;
-
-    g_fragColor = Color;
+    g_fragColor = result;
 }

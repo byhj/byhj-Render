@@ -18,7 +18,7 @@ namespace byhj
 	void OGLRender::v_init()
 	{
 		m_MeshLoad.init();
-		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 0.0f, 5.0f));
+		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 0.0f, 15.0f));
 	}
 
 	void OGLRender::v_update()
