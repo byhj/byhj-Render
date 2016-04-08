@@ -19,18 +19,19 @@
 
 ## Notice:
 For the OpenGL:
-    For the shader effect, the opengl3+ will need, the shader file will be:
-    - .vert : GL_VERTEX_SHADER
-    - .tcs  : GL_TESS_CONTROL_SHADER
-    - .tes  : GL_TESS_EVALUATION_SHADER
-    - .geom : GL_GEOMETRY_SHADER
-    - .farg : GL_FRAGMENT_SHADER
-    - .comp : GL_COMPUTE_SHADER
+For the shader effect, the opengl3+ will need, the shader file will be:
+  - .vert : GL_VERTEX_SHADER
+  - .tcs  : GL_TESS_CONTROL_SHADER
+  - .tes  : GL_TESS_EVALUATION_SHADER
+  - .geom : GL_GEOMETRY_SHADER
+  - .farg : GL_FRAGMENT_SHADER
+  - .comp : GL_COMPUTE_SHADER
 Your can use [NShader](https://nshader.codeplex.com/) to make shader file heightlight.
 
 For the DirectX:
+
 　　The D3DX is not include since Windows8+, so the d3dx support part is use old directx11 sdk.
-For more information about d3dx obsolete, read the[Living without D3DX](https://blogs.msdn.microsoft.com/chuckw/2013/08/20/living-without-d3dx/).
+For more information about d3dx obsolete, read the　[Living without D3DX](https://blogs.msdn.microsoft.com/chuckw/2013/08/20/living-without-d3dx/).
 
 The directx shader file will be:
    - .vsh: D3D_VERTEX_SHADER
@@ -102,10 +103,10 @@ The directx shader file will be:
               |-- lib
               |-- extern
               |-- doc
-         The output dir:
+        |Output
               |-- bin(Execute Dir)
               |-- temp(temp file we possibly not need)
-              
+
   Notice: .props file is the command properties file, it set up the develop environment easily.
 
 ---
