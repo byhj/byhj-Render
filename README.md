@@ -30,17 +30,43 @@ For the DirectX:
   by yourself if your want.
 
 ## Dependences:
-  - Texture (DevIL, FreeImage, SOIL, DirectXTK, gli)
-  - Model (Assimp)
-  - GUI (AntWeakbar, CEGUI, DXUT)
-  - Winodw (glfw3)
-  - Audio (irrKlang, XAudio)
-  - Font (Freetype, FW1FontWrapper, SpriteFont)
-  - Memory (VLD)
+  - OpenGL:
+    [OpenGL Mathematics (GLM)](http://glm.g-truc.net/0.9.7/index.html)
+    [GLFW](http://www.glfw.org/)
+    [The OpenGL Extension Wrangler Library(GLEW)](http://glew.sourceforge.net/)
+    [OpenGL Image (GLI)](http://gli.g-truc.net/0.8.1/index.html)
+
+  - Texture:
+   [SOIL](http://www.lonesock.net/soil.html)
+   [(DevIL)](http://openil.sourceforge.net/)
+   [FreeImage](http://freeimage.sourceforge.net/)
+
+  - Model
+    [Open Asset Import Library(Assimp)](http://www.assimp.org/)
+
+  - GUI
+   [AntWeakbar](http://anttweakbar.sourceforge.net/doc/)
+   [Crazy Eddie’s GUI(CEGUI)](http://cegui.org.uk/)
+   [DXUT](https://github.com/Microsoft/DXUT)
+
+  - Audio
+    [irrKlang](http://www.ambiera.com/irrklang/)
+
+  - DirectX
+     [DirectX Tool Kit(DirectXTK)](https://github.com/Microsoft/DirectXTK)
+     [Effects for Direct3D 11(FX11)](https://github.com/Microsoft/FX11)
+
+  - Font
+    [Freetype](http://www.freetype.org/)
+    [FW1FontWrapper](https://fw1.codeplex.com/)
+    [SpriteFont](https://directxtk.codeplex.com/)
+
+  - Memory
+    [Visual Leak Detector(VLD)](https://vld.codeplex.com/)
 
 ## Next GPU API Sample
-    -  Vulkan (SPIRV, glslang)
-    -  DiectX12
+    -  [Vulkan SDK](https://vulkan.lunarg.com/app/download)
+    -  [DiectX12](https://msdn.microsoft.com/en-us/library/windows/desktop/dn899121(v=vs.85).aspx)
 ---
 
 # How to Buil
@@ -193,6 +219,10 @@ For the DirectX:
 
 ## Deffered-Shading
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/deferred.jpg">
+
+---
+## Motion-Blur
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/motionblur.png">
 
 ---
 

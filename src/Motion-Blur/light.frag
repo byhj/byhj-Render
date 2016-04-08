@@ -18,7 +18,7 @@ const int nSamples = 16;
 
 void main(void)
 {
-    vec2 motion  = texture(motionVec, vs_out.TexCoord).xy;
+    vec2 motion  = texture(motionVec, vs_out.TexCoord).xy * 4.0f;
 	vec4 result = texture(colorTex, vs_out.TexCoord);
 
    for (int i = 1; i < nSamples; ++i) {

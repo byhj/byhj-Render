@@ -11,10 +11,11 @@ uniform mat4 u_prevMVP;
 
 out VS_OUT
 {
-   vec4 ClipSpacePos;
+   smooth vec4 ClipSpacePos;
    vec3 Normal;
    vec2 TexCoord;
-   vec4 prevClipSpacePos;
+   smooth vec4 prevClipSpacePos;
+
 }vs_out;
 
 void main(void)
