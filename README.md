@@ -1,33 +1,52 @@
 # byhj-Render
 
-　　　Welcome，this is a render by byhj. I write it by using OpenGL3+ and DirectX11. I classify this project by the book of real-time rending.
+　　　Welcome，this is a gpu render by byhj. I write it by using OpenGL3+ and DirectX11. I classify this project by the book of real-time rending.
 
 ---
 
 # Introduction
-　　The all project will be three part:
+　　The whole project will be three parts:
 
 ## Render:
-   This part include the render base code. It has resource manager and other.
+   This part is the render base code. It has resource(texture, model, audio) manager and render framework.
 
 ## Sample:     
-   The sample has OpenGL3+ and DirectX11 Sample code. I also write the Next GPU API
-base part(DirectX12 & Vulkan).
+   The sample part include OpenGL3+ and DirectX11 Sample code. I also write the base supprot for  Next GPU API
+(DirectX12 & Vulkan).
 
 ## Utility:
-   The utility show the render some part how it work. It include camera, gui, font, audio, mesh, texture, window.
+   The utility part show the important extension: camera, gui, font, audio, mesh, texture, window.
 
+## Notice:
 For the OpenGL:
+    For the shader effect, the opengl3+ will need, the shader file will be:
+    - .vert : GL_VERTEX_SHADER
+    - .tcs  : GL_TESS_CONTROL_SHADER
+    - .tes  : GL_TESS_EVALUATION_SHADER
+    - .geom : GL_GEOMETRY_SHADER
+    - .farg : GL_FRAGMENT_SHADER
+    - .comp : GL_COMPUTE_SHADER
+Your can use [NShader](https://nshader.codeplex.com/) to make shader file heightlight.
 
 For the DirectX:
-　　The D3DX is not include since Windows8+, so the d3dx support part is use old dx sdk.
+　　The D3DX is not include since Windows8+, so the d3dx support part is use old directx11 sdk.
+For more information about d3dx obsolete, read the[Living without D3DX](https://blogs.msdn.microsoft.com/chuckw/2013/08/20/living-without-d3dx/).
+
+The directx shader file will be:
+   - .vsh: D3D_VERTEX_SHADER
+   - .hsh: D3D_HULL_SHADER
+   - .dsh: D3D_DOMAIN_SHADER
+   - .gsh: D3D_GEOMETRY_SHADER
+   - .psh: D3D_PIXEL_SHADER
+   - .csh: D3D_COMPUTE_SHADER
+
 ---
 
 # Requirements
 
 ## Compiler
-  - Visual Studio 2015 (I will write the cmake file in the future). Your can build the dependences
-  by yourself if your want.
+  Visual Studio 2015 (I will write the cmake file in the future). I provide the (x86) dependences file only.
+  Your can build the dependences by yourself.
 
 ## Dependences
 
@@ -38,12 +57,12 @@ For the DirectX:
   -  [OpenGL Image (GLI)](http://gli.g-truc.net/0.8.1/index.html)
 
 ###  DirectX
-      - [DirectX Tool Kit(DirectXTK)](https://github.com/Microsoft/DirectXTK)
-      - [Effects for Direct3D 11(FX11)](https://github.com/Microsoft/FX11)
-      
+  - [DirectX Tool Kit(DirectXTK)](https://github.com/Microsoft/DirectXTK)
+  - [Effects for Direct3D 11(FX11)](https://github.com/Microsoft/FX11)
+
 ### Texture
   - [SOIL](http://www.lonesock.net/soil.html)
-  - [(DevIL)](http://openil.sourceforge.net/)
+  - [DevIL](http://openil.sourceforge.net/)
   - [FreeImage](http://freeimage.sourceforge.net/)
 
 ### Model
@@ -62,34 +81,32 @@ For the DirectX:
   - [FW1FontWrapper](https://fw1.codeplex.com/)
   - [SpriteFont](https://directxtk.codeplex.com/)
 
-  - Memory
-    [Visual Leak Detector(VLD)](https://vld.codeplex.com/)
+### Memory
+  - [Visual Leak Detector(VLD)](https://vld.codeplex.com/)
 
 ## Next GPU API Sample
-    -  [Vulkan SDK](https://vulkan.lunarg.com/app/download)
-    -  [DiectX12](https://msdn.microsoft.com/en-us/library/windows/desktop/dn899121(v=vs.85).aspx)
+  - [Vulkan SDK](https://vulkan.lunarg.com/app/download)
+  - [DiectX12](https://msdn.microsoft.com/en-us/library/windows/desktop/dn899121(v=vs.85).aspx)
 ---
 
 # How to Buil
 
  1. Make sure you develop environment is right. I write some code by c++ 11, so the compiler should support the
+ c++11, use vs2015 will be the best choice or modifed by yourself if you use other compilers.
 
- 2. You can build the environment by yourself according your target.
- 3. Project Organization:
-
+ 2. Project Organization:
 		  |Root
-
               |-- include
               |-- src
               |-- media
               |-- lib
               |-- extern
- Notice: I use the Visual Studio project props file to share the project setting.
-
+              |-- doc
          The output dir:
-
               |-- bin(Execute Dir)
               |-- temp(temp file we possibly not need)
+              
+  Notice: .props file is the command properties file, it set up the develop environment easily.
 
 ---
 
