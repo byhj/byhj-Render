@@ -130,6 +130,7 @@ namespace byhj
 		ILboolean success = ilLoadImage(texFile.c_str()); 	// Load the image file
 #endif
 		if (success) {
+			std::cout << ilGetInteger(IL_IMAGE_FORMAT) << std::endl;
 			glGenTextures(1, &textureID); //创建Opengl纹理接口
 			glBindTexture(GL_TEXTURE_2D, textureID);
 			//设置纹理的过滤和环绕模式
@@ -163,6 +164,63 @@ namespace byhj
 
 		//return success
 		return textureID;
+
+	/*
+		std::string texFile = m_dir + fileName;
+		//image format
+		FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+		//pointer to the image, once loaded
+		FIBITMAP *dib(0);
+		//pointer to the image data
+		BYTE* bits(0);
+		//image width and height
+		unsigned int width(0), height(0);
+		//OpenGL's image ID to map to
+		GLuint gl_texID;
+		FREE_IMAGE_COLOR_TYPE type;
+
+		//check the file signature and deduce its format
+		fif = FreeImage_GetFileType(texFile.c_str(), 0);
+		//if still unknown, try to guess the file format from the file extension
+		if (fif == FIF_UNKNOWN)
+			fif = FreeImage_GetFIFFromFilename(texFile.c_str());
+		//if still unkown, return failure
+		if (fif == FIF_UNKNOWN)
+			return false;
+
+		//check that the plugin has reading capabilities and load the file
+		if (FreeImage_FIFSupportsReading(fif))
+			dib = FreeImage_Load(fif, texFile.c_str());
+
+
+		bits = FreeImage_GetBits(dib);
+		width = FreeImage_GetWidth(dib);
+		height = FreeImage_GetHeight(dib);
+		type  = FreeImage_GetColorType(dib);
+		std::cout << type << std::endl;
+		//if this somehow one of these failed (they shouldn't), return failure
+		if ((bits == 0) || (width == 0) || (height == 0))
+			return false;
+
+		glGenTextures(1, &gl_texID);
+		glBindTexture(GL_TEXTURE_2D, gl_texID);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0,   GL_RGB, 
+			          width, height, 0,  GL_RGB,
+			          GL_UNSIGNED_BYTE, bits);
+
+		//Free FreeImage's copy of the data
+		FreeImage_Unload(dib);
+
+		std::cout << "Load the texture:" << fileName << std::endl;
+
+		m_oglTextures.insert(std::make_pair(fileName, gl_texID));
+
+		return gl_texID;
+		*/
 	}
 
 	GLuint TextureMgr::loadOGLTexture(std::vector<std::string> &texArray)
