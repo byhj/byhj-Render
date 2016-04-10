@@ -1,6 +1,6 @@
 #include  "cube.h"
 #include <glfw/glfw3.h>
-#include "Utility.h"
+#include "ogl/oglUtility.h"
 #include "textureMgr.h"
 #include "windowInfo.h"
 

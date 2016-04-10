@@ -1,26 +1,41 @@
 #version 430 core
 
-layout (location = 0) in vec3 g_Position;
-layout (location = 1) in vec3 g_Normal;
-layout (location = 2) in vec2 g_TexCoord;
+layout (location = 0) in vec3 g_position;
+layout (location = 1) in vec3 g_normal;
+layout (location = 2) in vec2 g_texcoord;
+layout (location = 3) in vec3 g_tangent;
+layout (location = 4) in vec3 g_bitangent;
 
-uniform mat4 u_Model;
-uniform mat4 u_View;
-uniform mat4 u_Proj;
+uniform mat4 u_model;
+uniform mat4 u_view;
+uniform mat4 u_proj;
 
 out VS_OUT
 {
-   vec3 FragPos;
-   vec3 Normal;
-   vec2 TexCoord;
+  vec2 texcoord;
+  vec3 fragPos;
+  vec3 tangentLightPos;
+  vec3 tangentViewPos;
+  vec3 tangentFragPos;
 }vs_out;
+
+uniform vec3 u_lightPos = vec3(0.0f,  20.0f, 15.0f);
+uniform vec3 u_camPos  = vec3(0.0f, 10.0f, 15.0f);
 
 void main(void)
 {
-   vs_out.FragPos  = mat3(u_View * u_Model) * g_Position;
-   vs_out.Normal   = mat3( transpose( inverse(u_Model) ) ) * g_Normal;
-   vs_out.TexCoord = g_TexCoord;
+   mat3 normalMat = transpose(inverse(mat3(u_view * u_model)));
+   vec3 T = normalize(normalMat * g_tangent);
+   vec3 B = normalize(normalMat * g_bitangent);
+   vec3 N = normalize(normalMat * g_normal);   
+   mat3 TBN = transpose(mat3(T, B, N));  
 
-   mat4 mvp = u_Proj * u_View * u_Model;
-   gl_Position = mvp * vec4(g_Position, 1.0f);
+   vs_out.texcoord  = g_texcoord;
+   vs_out.fragPos  =  mat3(u_model) * g_position;
+   vs_out.tangentLightPos = TBN * u_lightPos;
+   vs_out.tangentViewPos  = TBN * u_camPos;
+   vs_out.tangentFragPos  = TBN * g_position;
+
+   mat4 mvp = u_proj * u_view * u_model;
+   gl_Position = mvp * vec4(g_position, 1.0f);
 }

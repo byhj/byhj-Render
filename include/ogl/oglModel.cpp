@@ -132,11 +132,16 @@ namespace byhj
 			// Normal: texture_normalN
 
 			// 1. Diffuse maps
-			std::vector<OGLMesh::Texture> diffuseMaps = this->loadOGLTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+			std::vector<OGLMesh::Texture> diffuseMaps = this->loadOGLTextures(material, aiTextureType_DIFFUSE, "u_diffuseTex");
 			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+		
 			// 2. Specular maps
-			std::vector<OGLMesh::Texture> specularMaps = this->loadOGLTextures(material, aiTextureType_SPECULAR, "texture_specular");
+			std::vector<OGLMesh::Texture> specularMaps = this->loadOGLTextures(material, aiTextureType_SPECULAR, "u_specularTex");
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+
+			// 3. Normal maps
+			std::vector<OGLMesh::Texture> normalMaps = this->loadOGLTextures(material, aiTextureType_HEIGHT, "u_normalTex");
+			textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 		}
 
 		// Return a mesh object created from the extracted mesh data

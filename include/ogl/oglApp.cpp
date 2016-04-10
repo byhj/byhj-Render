@@ -118,7 +118,7 @@ void OGLApp::v_run()
 
 	//glfwSetInputMode(pWindow, GLFW_STICKY_KEYS, GL_TRUE);
 	// GLFW Options
-		//glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+//	glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
 	if (pWindow == NULL)

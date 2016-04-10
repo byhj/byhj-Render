@@ -23,6 +23,8 @@ namespace byhj
 			glm::vec3 position;
 			glm::vec3 normal;
 			glm::vec2 texcoord;
+			glm::vec3 tangent;
+			glm::vec3 bitangent;
 		};
 
 		struct Texture {
@@ -54,6 +56,8 @@ namespace byhj
 		GLuint getIBO() const;
 
 	private:
+		void calcTangent();
+
 		GLuint m_vao, m_ibo, m_vbo;
 
 		std::vector<Vertex> m_VertexData;

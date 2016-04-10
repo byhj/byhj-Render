@@ -18,7 +18,7 @@ namespace byhj
 
 	void OGLRender::v_init()
 	{
-		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 0.0f, 5.0f));
+		OGLEulerCamera::getInstance()->setPos(glm::vec3(0.0f, 10.0f, 15.0f));
 		m_MeshLoad.Init(WindowInfo::getInstance()->getWidth(), WindowInfo::getInstance()->getHeight());
 	}
 
@@ -29,7 +29,7 @@ namespace byhj
 		GLfloat deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		OGLEulerCamera::getInstance()->update(deltaTime * 10.0f);
+		OGLEulerCamera::getInstance()->update(deltaTime * 15.0f);
 		m_MeshLoad.Update();
 	}
 

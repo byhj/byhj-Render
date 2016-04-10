@@ -12,8 +12,9 @@ namespace byhj
 
 		m_LightGui.v_init();
 
-		init_buffer();
 		init_shader();
+		init_buffer();
+
 	}
 
 	void MeshLoad::Update()
@@ -29,6 +30,8 @@ namespace byhj
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
 		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);
 		glm::vec3 camPos = OGLEulerCamera::getInstance()->getPos();
+		//std::cout << camPos.x << " " << camPos.y << " " << camPos.z << std::endl;
+
 		glUniform3fv(uniform_loc.camPos, 1, &camPos[0]);
 		glUniformMatrix4fv(uniform_loc.model, 1, GL_FALSE, &model[0][0]);
 		glUniformMatrix4fv(uniform_loc.view, 1, GL_FALSE, &view[0][0]);
@@ -69,9 +72,9 @@ namespace byhj
 		m_MeshLoadShader.info();
 
 		m_Program = m_MeshLoadShader.getProgram();
-		uniform_loc.model = glGetUniformLocation(m_Program, "u_Model");
-		uniform_loc.view  = glGetUniformLocation(m_Program, "u_View");
-		uniform_loc.proj  = glGetUniformLocation(m_Program, "u_Proj");
+		uniform_loc.model = glGetUniformLocation(m_Program, "u_model");
+		uniform_loc.view  = glGetUniformLocation(m_Program, "u_view");
+		uniform_loc.proj  = glGetUniformLocation(m_Program, "u_proj");
 		uniform_loc.camPos = glGetUniformLocation(m_Program, "u_camPos");
 		
 	}
