@@ -63,6 +63,8 @@ public:
 		XMFLOAT3 position;
 		XMFLOAT3 normal;
 		XMFLOAT2 texcoord;
+		XMFLOAT3 tangent;
+		XMFLOAT3 bitangent;
 	};
 
 	struct Texture {
@@ -100,7 +102,6 @@ private:
 	void init_state(ID3D11Device *pD3D11Device, ID3D11DeviceContext *pD3D11DeviceContext);
 	void init_buffer(ID3D11Device *pD3D11Device);
 	void init_texture(ID3D11Device *pD3D11Device);
-
 
 	struct MaterialBuffer
 	{

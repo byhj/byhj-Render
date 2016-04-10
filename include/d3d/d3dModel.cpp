@@ -111,9 +111,10 @@ namespace byhj
 		std::vector<GLuint> indices;
 		std::vector<D3DMesh::Texture> textures;
 		D3DMesh::Material mat;
+		XMVECTOR v[3], uv[3];
 
 		// Walk through each of the mesh's vertices
-		for (GLuint i = 0; i < mesh->mNumVertices; i++) {
+		for (UINT i = 0, j = 0; i < mesh->mNumVertices; i++) {
 			D3DMesh::Vertex vertex;
 			XMFLOAT3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
 			// Positions
@@ -142,7 +143,41 @@ namespace byhj
 			}
 
 			vertices.push_back(vertex);
+		
+		    v[j]  = XMLoadFloat3(&vertex.position);
+		    uv[j] = XMLoadFloat2(&vertex.texcoord);
+		    
+		    if ( (j+1) % 3 == 0)
+		    {
+		    	// Edges of the triangle : postion delta
+		    	XMVECTOR deltaPos1 = v[1]  - v[0];
+		    	XMVECTOR deltaPos2 = v[2]  - v[0];
+		    	XMVECTOR deltaUV1  = uv[1] - uv[0];
+		    	XMVECTOR deltaUV2  = uv[2] - uv[0];
+		    
+		    	float uv1x = XMVectorGetX(deltaUV1);
+		    	float uv1y = XMVectorGetY(deltaUV1);
+		    	float uv2x = XMVectorGetX(deltaUV2);
+		    	float uv2y = XMVectorGetY(deltaUV2);
+		    
+		    	float r = 1.0f / (uv1x * uv2y - uv1y * uv2x);
+		    	XMVECTOR tangent = (deltaPos1 * uv2y   - deltaPos2 * uv1y) * r;
+		    	XMVECTOR bitangent = (deltaPos2 * uv1x   - deltaPos1 * uv2x) * r;
+		    
+		    	XMStoreFloat3(&vertices[i].tangent, tangent);
+		    	XMStoreFloat3(&vertices[i-1].tangent, tangent);
+		    	XMStoreFloat3(&vertices[i-2].tangent, tangent);
+		    
+		    	XMStoreFloat3(&  vertices[i].bitangent, bitangent);
+		    	XMStoreFloat3(&vertices[i-1].bitangent, bitangent);
+		    	XMStoreFloat3(&vertices[i-2].bitangent, bitangent);
+		    	j = 0;
+		    } else {
+		    	++j;
+		    }
+
 		}
+
 
 		// Now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 		for (GLuint i = 0; i < mesh->mNumFaces; i++) {

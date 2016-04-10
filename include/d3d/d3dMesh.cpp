@@ -21,6 +21,8 @@ namespace byhj {
 		// Bind appropriate textures
 		int diffuseNr = 1;
 		int specularNr = 1;
+		int normalNr = 1;
+
 		for (int i = 0; i < m_Textures.size(); i++)
 		{
 			// Retrieve texture number (the N in diffuse_textureN)
@@ -31,6 +33,9 @@ namespace byhj {
 				ss << diffuseNr++; // Transfer GLuint to stream
 			else if (name == "texture_specular")
 				ss << specularNr++; // Transfer GLuint to stream
+			else if (name == "texture_normal")
+				ss << normalNr++;
+
 			number = ss.str();
 
 			pD3D11DeviceContext->PSSetShaderResources(i, 1, &m_Textures[i].pTextureSRV);
@@ -54,6 +59,7 @@ namespace byhj {
 	void D3DMesh::shutdown()
 	{
 	}
+
 
 	void D3DMesh::init_buffer(ID3D11Device *pD3D11Device)
 	{
