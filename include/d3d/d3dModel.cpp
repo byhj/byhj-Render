@@ -68,6 +68,7 @@ namespace byhj
 		auto dir = ModelMgr::getInstance()->getDir();
 		auto fileDir = dir + modelFile;
 
+
 		Assimp::Importer importer;
 		const aiScene *pScene = importer.ReadFile(dir + modelFile, aiProcess_Triangulate | aiProcess_FlipUVs);
 
@@ -80,6 +81,7 @@ namespace byhj
 		}
 
 		m_dir = fileDir.substr(0, fileDir.find_last_of('/') + 1);
+				TextureMgr::getInstance()->setDir(m_dir);
 		processNode(pScene->mRootNode, pScene);
 	}
 

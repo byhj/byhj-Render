@@ -79,7 +79,11 @@ bool D3DApp::init_window()
 
 	if (!RegisterClassEx(&wc))
 	{
+#ifdef _UNICODE
 		MessageBox(NULL, L"Registering Class Fail",	L"Error", MB_OK | MB_ICONERROR);
+#else
+		MessageBox(NULL, "Registering Class Fail",	"Error", MB_OK | MB_ICONERROR);
+#endif
 		return 1;
 	}
 
@@ -101,7 +105,12 @@ bool D3DApp::init_window()
 
 	if (!m_hWnd )	
 	{
+#ifdef _UNICODE
 		MessageBox(NULL, L"Creating Window Failed", L"Error", MB_OK | MB_ICONERROR);
+#else
+		MessageBox(NULL, "Creating Window Failed", "Error", MB_OK | MB_ICONERROR);
+#endif
+
 		return 1;
 	}
 

@@ -129,8 +129,9 @@ namespace byhj
 #else
 		ILboolean success = ilLoadImage(texFile.c_str()); 	// Load the image file
 #endif
+		 ilGetError();
 		if (success) {
-			std::cout << ilGetInteger(IL_IMAGE_FORMAT) << std::endl;
+		//	std::cout << ilGetInteger(IL_IMAGE_FORMAT) << std::endl;
 			glGenTextures(1, &textureID); //创建Opengl纹理接口
 			glBindTexture(GL_TEXTURE_2D, textureID);
 			//设置纹理的过滤和环绕模式

@@ -17,7 +17,11 @@
 #pragma comment(lib, "FreeImage")
 
 #include <IL/il.h>
+#ifdef _UNICODE
+#pragma comment(lib, "DevILu.lib")
+#else 
 #pragma comment(lib, "DevIL.lib")
+#endif
 
 #include "DirectXTK/DDSTextureLoader.h"
 #pragma comment(lib, "DirectXTK.lib")

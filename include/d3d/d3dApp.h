@@ -58,10 +58,13 @@ public:
 	int getClientHeight() const;
 
 protected:
-
+#ifdef _UNICODE
 	LPCTSTR m_AppName      = L"DirectX:";
 	LPCTSTR m_WndClassName = L"Window";
-
+#else
+	LPCTSTR m_AppName      = "DirectX:";
+	LPCTSTR m_WndClassName = "Window";
+#endif
 	HINSTANCE getAppInst() const;
 	HWND      getHwnd()    const;
 
