@@ -98,7 +98,7 @@ typedef long long unsigned int ILuint64;
 
 
 #include <limits.h>
-#ifdef _UNICODE
+#ifdef a_UNICODE
 	#ifndef _WIN32_WCE
 		#include <wchar.h>
 	#endif

@@ -124,11 +124,11 @@ namespace byhj
 
 		ilGenImages(1, &imageID); 		// Generate the image ID
 		ilBindImage(imageID); 			// Bind the image
-#ifdef _UNICODE
-		ILboolean success = ilLoadImage(wtexFile.c_str()); 	// Load the image file
-#else
+//#ifdef _UNICODE
+		//ILboolean success = ilLoadImage(wtexFile.c_str()); 	// Load the image file
+//#else
 		ILboolean success = ilLoadImage(texFile.c_str()); 	// Load the image file
-#endif
+//#endif
 		 ilGetError();
 		if (success) {
 		//	std::cout << ilGetInteger(IL_IMAGE_FORMAT) << std::endl;
