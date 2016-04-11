@@ -22,7 +22,7 @@
 #pragma comment(lib, "opengl32")
 
 #define USE_ANT
-//#define USE_FONT
+#define USE_FONT
 #define USE_CAMERA
 
 #ifdef USE_CEGUI

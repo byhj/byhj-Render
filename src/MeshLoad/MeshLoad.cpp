@@ -1,16 +1,12 @@
 #include "MeshLoad.h"
 #include "modelMgr.h"
 #include "ogl/oglEulerCamera.h"
+#include "windowInfo.h"
 
 namespace byhj
 {
 	void MeshLoad::Init(int sw, int sh)
 	{
-
-
-		m_Aspect = static_cast<GLfloat>(sw) / sh;
-
-		m_LightGui.v_init();
 
 		init_shader();
 		init_buffer();
@@ -22,13 +18,11 @@ namespace byhj
 
 		glUseProgram(m_Program);
 
-		m_LightGui.v_update();
-
 	    GLfloat time = glfwGetTime();
 
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view  = OGLEulerCamera::getInstance()->getViewMat();
-		glm::mat4 proj  = glm::perspective(45.0f, m_Aspect, 0.1f, 1000.0f);
+		glm::mat4 proj  = glm::perspective(45.0f, WindowInfo::getInstance()->getAspect(), 0.1f, 1000.0f);
 		glm::vec3 camPos = OGLEulerCamera::getInstance()->getPos();
 		//std::cout << camPos.x << " " << camPos.y << " " << camPos.z << std::endl;
 
@@ -48,7 +42,6 @@ namespace byhj
 
 		ModelMgr::getInstance()->render(m_Program);
 
-		m_LightGui.v_render();
 
 		glUseProgram(0);
 	}

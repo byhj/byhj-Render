@@ -111,16 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="base.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="step.cpp" />
-    <ClCompile Include="util.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="base.h" />
-    <ClInclude Include="cube_data.h" />
-    <ClInclude Include="step.h" />
-    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="triangle.frag" />
