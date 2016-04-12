@@ -135,6 +135,24 @@
     <ClCompile Include="..\..\include\vk\vulkanApp.cpp">
       <Filter>Render\vk</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\vk\vulkanDebug.cpp">
+      <Filter>Render\vk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vk\vulkanMeshLoader.cpp">
+      <Filter>Render\vk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vk\vulkanSwapChain.cpp">
+      <Filter>Render\vk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vk\vulkanTextureLoader.cpp">
+      <Filter>Render\vk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vk\vulkanUtility.cpp">
+      <Filter>Render\vk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vk\vulkanBase.cpp">
+      <Filter>Render\vk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
@@ -234,6 +252,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vk\vulkanApp.h">
+      <Filter>Render\vk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vk\vulkanDebug.h">
+      <Filter>Render\vk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vk\vulkanMeshLoader.h">
+      <Filter>Render\vk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vk\vulkanSwapChain.h">
+      <Filter>Render\vk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vk\vulkanTextureLoader.h">
+      <Filter>Render\vk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vk\vulkanUtility.h">
+      <Filter>Render\vk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vk\vulkanBase.h">
       <Filter>Render\vk</Filter>
     </ClInclude>
   </ItemGroup>

@@ -127,6 +127,12 @@
     <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
     <ClCompile Include="..\..\include\vk\vulkanApp.cpp" />
+    <ClCompile Include="..\..\include\vk\vulkanBase.cpp" />
+    <ClCompile Include="..\..\include\vk\vulkanDebug.cpp" />
+    <ClCompile Include="..\..\include\vk\vulkanMeshLoader.cpp" />
+    <ClCompile Include="..\..\include\vk\vulkanSwapChain.cpp" />
+    <ClCompile Include="..\..\include\vk\vulkanTextureLoader.cpp" />
+    <ClCompile Include="..\..\include\vk\vulkanUtility.cpp" />
     <ClCompile Include="..\byhj-Render\app.cpp" />
     <ClCompile Include="..\byhj-Render\camera.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
@@ -163,6 +169,12 @@
     <ClInclude Include="..\..\include\ogl\oglModel.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="..\..\include\vk\vulkanApp.h" />
+    <ClInclude Include="..\..\include\vk\vulkanBase.h" />
+    <ClInclude Include="..\..\include\vk\vulkanDebug.h" />
+    <ClInclude Include="..\..\include\vk\vulkanMeshLoader.h" />
+    <ClInclude Include="..\..\include\vk\vulkanSwapChain.h" />
+    <ClInclude Include="..\..\include\vk\vulkanTextureLoader.h" />
+    <ClInclude Include="..\..\include\vk\vulkanUtility.h" />
     <ClInclude Include="..\byhj-Render\app.h" />
     <ClInclude Include="..\byhj-Render\camera.h" />
     <ClInclude Include="..\byhj-Render\font.h" />

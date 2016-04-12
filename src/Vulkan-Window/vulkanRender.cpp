@@ -8,16 +8,95 @@ void VulkanRender::v_init()
 	if (m_enableValidation) {
 		Vulkan::Debug::setupDebugging(m_instance, VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT, NULL);
 	}
-	init_instance();
-	init_device();
+	init_vulkan();
 	init_commandPool();
-	init_commandBuffers();
+	create_setupCmdBuffer();
 	init_swapchain();
-	init_renderpass();
+	init_commandBuffers();
 	init_depthStencil();
-	init_framebuffer();
+	init_renderpass();
 	init_pipelineCache();
+	init_framebuffer();
+
+	flush_setupCmdBuffer();
+	// Recreate setup command buffer for derived class
+	create_setupCmdBuffer();
+
+
 }
+
+void VulkanRender::init_vulkan()
+{
+	m_vulkanSwapChain.init(getHwnd(), getHinstance());
+
+	VkResult err = VK_SUCCESS;
+
+	init_instance();
+
+	if (err) {
+		Vulkan::exitFatal("Could not create Vulkan instance : \n" + Vulkan::errorString(err), "Fatal error");
+	}
+
+	// Physical m_device
+	uint32_t gpuCount = 0;
+	// Get number of available physical devices
+	err = vkEnumeratePhysicalDevices(m_instance, &gpuCount, nullptr);
+	assert(!err);
+	assert(gpuCount > 0);
+	// Enumerate devices
+	std::vector<VkPhysicalDevice> physicalDevices(gpuCount);
+	err = vkEnumeratePhysicalDevices(m_instance, &gpuCount, physicalDevices.data());
+	if (err)
+	{
+		Vulkan::exitFatal("Could not enumerate phyiscal devices : \n" + Vulkan::errorString(err), "Fatal error");
+	}
+
+	// Note : 
+	// This example will always use the first physical m_device reported, 
+	// change the vector index if you have multiple Vulkan devices installed 
+	// and want to use another one
+	m_physicalDevice = physicalDevices[0];
+
+	// Find a queue that supports graphics operations
+	uint32_t graphicsQueueIndex = 0;
+	uint32_t queueCount;
+	vkGetPhysicalDeviceQueueFamilyProperties(m_physicalDevice, &queueCount, NULL);
+	assert(queueCount >= 1);
+
+	std::vector<VkQueueFamilyProperties> queueProps;
+	queueProps.resize(queueCount);
+	vkGetPhysicalDeviceQueueFamilyProperties(m_physicalDevice, &queueCount, queueProps.data());
+
+	for (graphicsQueueIndex = 0; graphicsQueueIndex < queueCount; graphicsQueueIndex++)
+	{
+		if (queueProps[graphicsQueueIndex].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			break;
+	}
+	assert(graphicsQueueIndex < queueCount);
+
+	// Vulkan m_device
+	std::array<float, 1> queuePriorities ={ 0.0f };
+	VkDeviceQueueCreateInfo queueCreateInfo ={};
+	queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+	queueCreateInfo.queueFamilyIndex = graphicsQueueIndex;
+	queueCreateInfo.queueCount = 1;
+	queueCreateInfo.pQueuePriorities = queuePriorities.data();
+
+	init_device();
+
+	// Gather physical m_device memory properties
+	vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &m_deviceMemoryProperties);
+	                                                       
+	// Get the graphics queue
+	vkGetDeviceQueue(m_device, graphicsQueueIndex, 0, &m_queue);
+
+	// Find a suitable depth format
+	VkBool32 validDepthFormat = Vulkan::getSupportedDepthFormat(m_physicalDevice, &m_depthFormat);
+	assert(validDepthFormat);
+
+	m_vulkanSwapChain.init(m_instance, m_physicalDevice, m_device);
+}
+
 
 void VulkanRender::v_update()
 {
@@ -29,6 +108,48 @@ void VulkanRender::v_render()
 
 void VulkanRender::v_shutdown()
 {
+	// Clean up Vulkan resources
+	m_vulkanSwapChain.shutdown();
+
+	vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
+	if (m_setupCmdBuffer != VK_NULL_HANDLE)
+	{
+		vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_setupCmdBuffer);
+
+	}
+	destroy_cmdBuffers();
+
+	vkDestroyRenderPass(m_device, m_renderPass, nullptr);
+	for (uint32_t i = 0; i < m_frameBuffers.size(); i++)
+	{
+		vkDestroyFramebuffer(m_device, m_frameBuffers[i], nullptr);
+	}
+
+	for (auto& shaderModule : m_shaderModules)
+	{
+		vkDestroyShaderModule(m_device, shaderModule, nullptr);
+	}
+	vkDestroyImageView(m_device, m_depthStencil.view, nullptr);
+	vkDestroyImage(m_device, m_depthStencil.image, nullptr);
+	vkFreeMemory(m_device, m_depthStencil.mem, nullptr);
+
+	vkDestroyPipelineCache(m_device, m_pipelineCache, nullptr);
+
+
+	vkDestroyCommandPool(m_device, m_commandPool, nullptr);
+
+	vkDestroyDevice(m_device, nullptr);
+
+	if (m_enableValidation) {
+		Vulkan::Debug::freeDebugCallback(m_instance);
+	}
+
+	vkDestroyInstance(m_instance, nullptr);
+
+#ifndef _WIN32
+	xcb_destroy_window(connection, window);
+	xcb_disconnect(connection);
+#endif 
 }
 
 //Create a vulkan instance
@@ -48,8 +169,8 @@ void VulkanRender::init_instance()
    enabledExtensions.push_back(VK_KHR_XCB_SURFACE_EXTENSION_NAME);
 #endif
    VkInstanceCreateInfo instanceCreateInfo ={};
-   instanceCreateInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-   instanceCreateInfo.pNext = NULL;
+   instanceCreateInfo.sType            = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+   instanceCreateInfo.pNext            = NULL;
    instanceCreateInfo.pApplicationInfo = &appInfo;
    if (enabledExtensions.size() > 0) {
 	   if (m_enableValidation) {
@@ -66,18 +187,18 @@ void VulkanRender::init_instance()
 }
 
 
-//Create a device
+//Create a m_device
 void VulkanRender::init_device() 
 {
 	VkDeviceQueueCreateInfo requestedQueues;
 	std::vector<const char*> enabledExtensions ={ VK_KHR_SWAPCHAIN_EXTENSION_NAME };
 
 	VkDeviceCreateInfo deviceCreateInfo ={};
-	deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-	deviceCreateInfo.pNext = NULL;
+	deviceCreateInfo.sType                = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+	deviceCreateInfo.pNext                = NULL;
 	deviceCreateInfo.queueCreateInfoCount = 1;
-	deviceCreateInfo.pQueueCreateInfos = &requestedQueues;
-	deviceCreateInfo.pEnabledFeatures = NULL;
+	deviceCreateInfo.pQueueCreateInfos    = &requestedQueues;
+	deviceCreateInfo.pEnabledFeatures     = NULL;
 
 	if (enabledExtensions.size() > 0) {
 		deviceCreateInfo.enabledExtensionCount = (uint32_t)enabledExtensions.size();
@@ -108,9 +229,65 @@ void VulkanRender::init_swapchain()
 {
 	uint32_t sw = getClientWidth();
 	uint32_t sh = getClientHeight();
-
-	m_vulkanSwapChain.init(getHwnd(), getHinstance());
 	m_vulkanSwapChain.setup(m_setupCmdBuffer, &sw, &sh);
+}
+
+void VulkanRender::create_setupCmdBuffer()
+{
+	if (m_setupCmdBuffer != VK_NULL_HANDLE)
+	{
+		vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_setupCmdBuffer);
+		m_setupCmdBuffer = VK_NULL_HANDLE; // todo : check if still necessary
+	}
+
+	VkCommandBufferAllocateInfo cmdBufAllocateInfo =
+		Vulkan::Init::commandBufferAllocateInfo(
+			m_commandPool,
+			VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+			1);
+
+	VkResult vkRes = vkAllocateCommandBuffers(m_device, &cmdBufAllocateInfo, &m_setupCmdBuffer);
+	assert(!vkRes);
+
+	// todo : Command buffer is also started here, better put somewhere else
+	// todo : Check if necessaray at all...
+	VkCommandBufferBeginInfo cmdBufInfo ={};
+	cmdBufInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+	// todo : check null handles, flags?
+
+	vkRes = vkBeginCommandBuffer(m_setupCmdBuffer, &cmdBufInfo);
+	assert(!vkRes);
+}
+
+void VulkanRender::flush_setupCmdBuffer()
+{
+	VkResult err;
+
+	if (m_setupCmdBuffer == VK_NULL_HANDLE)
+		return;
+
+	err = vkEndCommandBuffer(m_setupCmdBuffer);
+	assert(!err);
+
+	VkSubmitInfo submitInfo ={};
+	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+	submitInfo.commandBufferCount = 1;
+	submitInfo.pCommandBuffers = &m_setupCmdBuffer;
+
+	err = vkQueueSubmit(m_queue, 1, &submitInfo, VK_NULL_HANDLE);
+	assert(!err);
+
+	err = vkQueueWaitIdle(m_queue);
+	assert(!err);
+
+	vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_setupCmdBuffer);
+	m_setupCmdBuffer = VK_NULL_HANDLE; // todo : check if still necessary
+}
+
+void VulkanRender::destroy_cmdBuffers()
+{
+	vkFreeCommandBuffers(m_device, m_commandPool, (uint32_t)m_drawCmdBuffers.size(), m_drawCmdBuffers.data());
+	vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_postPresentCmdBuffer);
 }
 
 void VulkanRender::init_commandBuffers()
@@ -118,8 +295,32 @@ void VulkanRender::init_commandBuffers()
 // Create one command buffer per frame buffer in the swap chain
 // Command buffers store a reference to the frame buffer inside their render pass info
 // so for static usage withouth having to rebuild them each frame, we use one per frame buffer
+	// Create one command buffer per frame buffer 
+	// in the swap chain
+	// Command buffers store a reference to the 
+	// frame buffer inside their render pass info
+	// so for static usage withouth having to rebuild 
+	// them each frame, we use one per frame buffer
 
+	m_drawCmdBuffers.resize(m_vulkanSwapChain.m_imageCount);
+
+	VkCommandBufferAllocateInfo cmdBufAllocateInfo =
+		Vulkan::Init::commandBufferAllocateInfo(
+			m_commandPool,
+			VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+			(uint32_t)m_drawCmdBuffers.size());
+
+	VkResult vkRes = vkAllocateCommandBuffers(m_device, &cmdBufAllocateInfo, m_drawCmdBuffers.data());
+	assert(!vkRes);
+
+	// Create one command buffer for submitting the
+	// post present image memory barrier
+	cmdBufAllocateInfo.commandBufferCount = 1;
+
+	vkRes = vkAllocateCommandBuffers(m_device, &cmdBufAllocateInfo, &m_postPresentCmdBuffer);
+	assert(!vkRes);
 }
+
 
 void VulkanRender::init_pipelineCache()
 {
@@ -260,8 +461,8 @@ void VulkanRender::init_framebuffer()
 
 	// Create frame buffers for every swap chain image
 	m_frameBuffers.resize(m_vulkanSwapChain.m_imageCount);
-	for (uint32_t i = 0; i < m_frameBuffers.size(); i++)
-	{
+
+	for (uint32_t i = 0; i < m_frameBuffers.size(); i++) {
 		attachments[0] = m_vulkanSwapChain.m_pBuffers[i].view;
 		VkResult err = vkCreateFramebuffer(m_device, &frameBufferCreateInfo, nullptr, &m_frameBuffers[i]);
 		assert(!err);
@@ -274,7 +475,7 @@ VkBool32 VulkanRender::getMemoryType(uint32_t typeBits, VkFlags properties, uint
 {
 	for (uint32_t i = 0; i < 32; i++) {
 		if ((typeBits & 1) == 1) {
-			if ( (m_deivceMemoryProperties.memoryTypes[i].propertyFlags & properties) == properties ) {
+			if ( (m_deviceMemoryProperties.memoryTypes[i].propertyFlags & properties) == properties ) {
 				*typeIndex = i;
 				return true;
 			}

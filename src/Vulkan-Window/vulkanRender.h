@@ -25,15 +25,22 @@ namespace byhj {
 		  };
 
    	 private:
+		 void init_vulkan();
 		 void init_instance();
 		 void init_device();
 		 void init_commandPool();
+		 void init_swapchain();
 		 void init_commandBuffers();
 		 void init_depthStencil();
-		 void init_framebuffer();
 		 void init_renderpass();
-         void init_swapchain();
 		 void init_pipelineCache();
+		 void init_framebuffer();
+
+		 void flush_setupCmdBuffer();
+		 void create_setupCmdBuffer();
+		 void destroy_cmdBuffers();
+     
+
 
 		 // Get memory type for a given memory allocation (flags and bits)
 		 VkBool32 getMemoryType(uint32_t typeBits, VkFlags properties, uint32_t *typeIndex);
@@ -53,7 +60,7 @@ namespace byhj {
 		 VkPipelineCache  m_pipelineCache;
 
 		 VkPhysicalDevice m_physicalDevice;
-		 VkPhysicalDeviceMemoryProperties m_deivceMemoryProperties;
+		 VkPhysicalDeviceMemoryProperties m_deviceMemoryProperties;
 
 		 VulkanSwapChain m_vulkanSwapChain;
 		 VulkanDepthStencil m_depthStencil;
