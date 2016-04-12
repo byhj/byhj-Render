@@ -178,7 +178,7 @@ void VulkanBase::createPipelineCache()
 
 void VulkanBase::prepare()
 {
-	if (enableValidation)
+ 	if (enableValidation)
 	{
 		Vulkan::Debug::setupDebugging(instance, VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT, NULL);
 	}
@@ -870,10 +870,10 @@ VkBool32 VulkanBase::getMemoryType(uint32_t typeBits, VkFlags properties, uint32
 void VulkanBase::createCommandPool()
 {
 	VkCommandPoolCreateInfo cmdPoolInfo ={};
-	cmdPoolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+	cmdPoolInfo.sType            = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
 	cmdPoolInfo.queueFamilyIndex = swapChain.queueNodeIndex;
-	cmdPoolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-	VkResult vkRes = vkCreateCommandPool(device, &cmdPoolInfo, nullptr, &cmdPool);
+	cmdPoolInfo.flags            = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+	VkResult vkRes               = vkCreateCommandPool(device, &cmdPoolInfo, nullptr, &cmdPool);
 	assert(!vkRes);
 }
 

@@ -135,6 +135,9 @@
     <ClCompile Include="..\byhj-Render\geometry.cpp">
       <Filter>Render\render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglUtility.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="oglRender.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="..\byhj-Render\geometry.h">
       <Filter>Render\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglUtility.h">
+      <Filter>Render\ogl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,10 +20,10 @@ void VulkanSwapChain::initSwapChain(
 
 	// Create surface depending on OS
 #ifdef _WIN32
-	VkWin32SurfaceCreateInfoKHR surfaceCreateInfo ={};
-	surfaceCreateInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+	VkWin32SurfaceCreateInfoKHR surfaceCreateInfo = {};
+	surfaceCreateInfo.sType     = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
 	surfaceCreateInfo.hinstance = (HINSTANCE)platformHandle;
-	surfaceCreateInfo.hwnd = (HWND)platformWindow;
+	surfaceCreateInfo.hwnd      = (HWND)platformWindow;
 	err = vkCreateWin32SurfaceKHR(instance, &surfaceCreateInfo, nullptr, &surface);
 #else
 #ifdef __ANDROID__

@@ -2,6 +2,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "ogl/oglUtility.h"
+
 namespace byhj {
 	Scene::Scene()
 	{
