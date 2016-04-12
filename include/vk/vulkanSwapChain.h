@@ -1,4 +1,6 @@
-#pragma once
+#ifndef VulkanSwapChain_H
+#define VulkanSwapChain_H
+
 
 #include <stdlib.h>
 #include <string>
@@ -6,20 +8,12 @@
 #include <assert.h>
 #include <stdio.h>
 
-#ifdef _WIN32
 #include <windows.h>
 #include <fcntl.h>
 #include <io.h>
-#else
-#endif
 
 #include <vulkan/vulkan.h>
-
 #include "vulkanUtility.h"
-
-#ifdef __ANDROID__
-#include "vulkanandroid.h"
-#endif
 
 
 // Macro to get a procedure address based on a vulkan instance
@@ -42,63 +36,59 @@
     }                                                                   \
 }
 
-typedef struct _SwapChainBuffers {
-	VkImage image;
-	VkImageView view;
-} SwapChainBuffer;
+namespace byhj {
 
-class VulkanSwapChain
-{
-private:
-	VkInstance instance;
-	VkDevice device;
-	VkPhysicalDevice physicalDevice;
-	VkSurfaceKHR surface;
+    class VulkanSwapChain
+    {   
+    public:
+		struct SwapChainBuffer {
+			VkImage image;
+			VkImageView view;
+		};
 
-	// Function pointers
-	PFN_vkGetPhysicalDeviceSurfaceSupportKHR fpGetPhysicalDeviceSurfaceSupportKHR;
-	PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR fpGetPhysicalDeviceSurfaceCapabilitiesKHR;
-	PFN_vkGetPhysicalDeviceSurfaceFormatsKHR fpGetPhysicalDeviceSurfaceFormatsKHR;
-	PFN_vkGetPhysicalDeviceSurfacePresentModesKHR fpGetPhysicalDeviceSurfacePresentModesKHR;
-	PFN_vkCreateSwapchainKHR fpCreateSwapchainKHR;
-	PFN_vkDestroySwapchainKHR fpDestroySwapchainKHR;
-	PFN_vkGetSwapchainImagesKHR fpGetSwapchainImagesKHR;
-	PFN_vkAcquireNextImageKHR fpAcquireNextImageKHR;
-	PFN_vkQueuePresentKHR fpQueuePresentKHR;
+		VkFormat   m_colorFormat;
+		VkColorSpaceKHR m_colorSpace;
+		VkSwapchainKHR m_swapChain = VK_NULL_HANDLE;
+		VkImage   *m_pSwapChainImages;
+		SwapChainBuffer  * m_pBuffers;
 
-public:
-	VkFormat colorFormat;
-	VkColorSpaceKHR colorSpace;
-	VkImage* swapchainImages;
+		uint32_t m_imageCount;
+		// Index of the deteced graphics and presenting device queue
+		uint32_t m_queueNodeIndex = UINT32_MAX;
 
-	VkSwapchainKHR swapChain = VK_NULL_HANDLE;
+    	// wip naming
+    	void init(void* platformHandle, void* platformWindow);  
+    	void init(VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device);
+    	void setup(VkCommandBuffer cmdBuffer, uint32_t *width, uint32_t *height);
+    	void shutdown();
+    
+    	// Acquires the next image in the swap chain
+    	VkResult acquireNextImage(VkSemaphore presentCompleteSemaphore, uint32_t *currentBuffer);
 
-	uint32_t imageCount;
-	SwapChainBuffer* buffers;
+    	// Present the current image to the queue
+    	VkResult queuePresent(VkQueue queue, uint32_t currentBuffer);
 
-	// Index of the deteced graphics and presenting device queue
-	uint32_t queueNodeIndex = UINT32_MAX;
+	private:
 
-	// wip naming
-	void initSwapChain(
-#ifdef _WIN32
-		void* platformHandle, void* platformWindow
-#else
-#ifdef __ANDROID__
-		ANativeWindow* window
-#else
-		xcb_connection_t* connection, xcb_window_t window
+		VkInstance        m_instance;
+		VkDevice          m_device;
+		VkPhysicalDevice  m_physicalDevice;
+		VkSurfaceKHR      m_surface;
+
+
+
+
+		// Function pointers
+		PFN_vkGetPhysicalDeviceSurfaceSupportKHR fpGetPhysicalDeviceSurfaceSupportKHR;
+		PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR fpGetPhysicalDeviceSurfaceCapabilitiesKHR;
+		PFN_vkGetPhysicalDeviceSurfaceFormatsKHR fpGetPhysicalDeviceSurfaceFormatsKHR;
+		PFN_vkGetPhysicalDeviceSurfacePresentModesKHR fpGetPhysicalDeviceSurfacePresentModesKHR;
+		PFN_vkCreateSwapchainKHR fpCreateSwapchainKHR;
+		PFN_vkDestroySwapchainKHR fpDestroySwapchainKHR;
+		PFN_vkGetSwapchainImagesKHR fpGetSwapchainImagesKHR;
+		PFN_vkAcquireNextImageKHR fpAcquireNextImageKHR;
+		PFN_vkQueuePresentKHR fpQueuePresentKHR;
+    };
+    
+}
 #endif
-#endif
-		);
-
-	void init(VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device);
-
-	void setup(VkCommandBuffer cmdBuffer, uint32_t *width, uint32_t *height);
-	void cleanup();
-
-	// Acquires the next image in the swap chain
-	VkResult acquireNextImage(VkSemaphore presentCompleteSemaphore, uint32_t *currentBuffer);
-	// Present the current image to the queue
-	VkResult queuePresent(VkQueue queue, uint32_t currentBuffer);
-};

@@ -2,17 +2,70 @@
 #define VulkanRender_H
 
 #include "vk/vulkanApp.h"
+#include "vk/vulkanSwapChain.h"
+
+#include <vector>
 
 namespace byhj {
   
 	class VulkanRender : public VulkanApp {
 	  public:
+		  VulkanRender() = default;
+		  ~VulkanRender() = default;
+
 		  void v_init() override;
 		  void v_update() override;
 		  void v_render() override;
 		  void v_shutdown() override;
 
+		  struct VulkanDepthStencil {
+			  VkImage image;
+			  VkDeviceMemory mem;
+			  VkImageView view;
+		  };
+
    	 private:
+		 void init_instance();
+		 void init_device();
+		 void init_commandPool();
+		 void init_commandBuffers();
+		 void init_depthStencil();
+		 void init_framebuffer();
+		 void init_renderpass();
+         void init_swapchain();
+		 void init_pipelineCache();
+
+		 // Get memory type for a given memory allocation (flags and bits)
+		 VkBool32 getMemoryType(uint32_t typeBits, VkFlags properties, uint32_t *typeIndex);
+
+		 bool m_enableValidation = false;
+		 
+		 VkDevice         m_device;
+		 VkQueue          m_queue;
+		 VkInstance       m_instance;
+		 VkRenderPass     m_renderPass;
+
+		 VkCommandPool    m_commandPool;
+		 VkCommandBuffer  m_setupCmdBuffer ;
+		 VkCommandBuffer  m_postPresentCmdBuffer;
+
+		 VkDescriptorPool m_descriptorPool;
+		 VkPipelineCache  m_pipelineCache;
+
+		 VkPhysicalDevice m_physicalDevice;
+		 VkPhysicalDeviceMemoryProperties m_deivceMemoryProperties;
+
+		 VulkanSwapChain m_vulkanSwapChain;
+		 VulkanDepthStencil m_depthStencil;
+
+		 std::vector<VkCommandBuffer> m_drawCmdBuffers;
+		 std::vector<VkShaderModule> m_shaderModules;
+		 std::vector<VkFramebuffer>  m_frameBuffers;
+		 VkFormat m_colorFormat = VK_FORMAT_B8G8R8A8_UNORM;
+		 VkFormat m_depthFormat;
+		 uint32_t m_currentBuffer = 0;
+
+
 
 
   };

@@ -128,7 +128,7 @@ bool D3DApp::init_window()
 	return true;
 }
 
-int D3DApp::getClientWidth() const 
+int D3DApp::getClientWidth() const
 {
 	return m_clientWidth;
 

@@ -33,8 +33,18 @@ namespace byhj {
 
 		 LRESULT CALLBACK handleMessages(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-     private:
+		 int getClientWidth() const;
+		 int getClientHeight() const;
+		 HWND getHwnd() {
+		 return m_hWnd;
+		 }
+		 HINSTANCE getHinstance() {
+		   return m_hInstance;
+		  }
 
+     private:
+		 int m_clientWidth;
+		 int m_clientHeight;
 		 std::string m_title = "Vulkan App";
 		 std::string m_name  = "vulkanExample";
 		 bool prepared = false;

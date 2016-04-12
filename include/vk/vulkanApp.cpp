@@ -151,9 +151,23 @@ static VulkanApp *pVulkanAppHandle = 0;
 		 exit(1);
 	 }
 
+	 RECT   rect;
+	 GetClientRect(m_hWnd, &rect);
+	 m_clientWidth  = rect.right - rect.left;
+	 m_clientHeight  = rect.bottom - rect.top;
+
 	 ShowWindow(m_hWnd, SW_SHOW);
 	 SetForegroundWindow(m_hWnd);
 	 SetFocus(m_hWnd);
+ }
+ int VulkanApp::getClientWidth() const
+ {
+	 return m_clientWidth;
+
+ }
+ int  VulkanApp::getClientHeight() const
+ {
+	 return m_clientHeight;
  }
 
 LRESULT CALLBACK VulkanApp::handleMessages(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
