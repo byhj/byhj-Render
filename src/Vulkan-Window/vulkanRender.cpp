@@ -22,7 +22,7 @@ void VulkanRender::v_init()
 	flush_setupCmdBuffer();
 	// Recreate setup command buffer for derived class
 	create_setupCmdBuffer();
-
+	build_commandBuffers();
 
 }
 
@@ -104,6 +104,81 @@ void VulkanRender::v_update()
 
 void VulkanRender::v_render()
 {
+
+	VkResult res = VK_SUCCESS;
+
+	vkDeviceWaitIdle(m_device);
+	VkSemaphore presentCompleteSemaphore;
+	VkSemaphoreCreateInfo presentCompleteSemaphoreCreateInfo ={};
+	presentCompleteSemaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+	presentCompleteSemaphoreCreateInfo.pNext = nullptr;
+	presentCompleteSemaphoreCreateInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+	res = vkCreateSemaphore(m_device, &presentCompleteSemaphoreCreateInfo, nullptr, &presentCompleteSemaphore);
+	assert(!res);
+
+	//Get next image in the swap chain (back/front buffer)
+	res = m_vulkanSwapChain.acquireNextImage(presentCompleteSemaphore, &m_currentBuffer);
+
+	assert(!res);
+
+	//The submit infor structure contains a list of command buffers and semaphores to 
+	// be submitted to a queue, if you want to submit multiple command buffer, pass a array
+	VkSubmitInfo submitInfo ={};
+	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+	submitInfo.waitSemaphoreCount =1;
+	submitInfo.pWaitSemaphores = &presentCompleteSemaphore;
+	submitInfo.commandBufferCount = 1;
+	submitInfo.pCommandBuffers = &m_drawCmdBuffers[m_currentBuffer];
+	//Submit to the graphics queue
+	res = vkQueueSubmit(m_queue, 1, &submitInfo, VK_NULL_HANDLE);
+	assert(!res);
+
+	//Present the current buffer to the swap chain, this will display the image
+	res =m_vulkanSwapChain.queuePresent(m_queue, m_currentBuffer);
+	assert(!res);
+
+	vkDestroySemaphore(m_device, presentCompleteSemaphore, nullptr);
+
+
+	//Add as post present image memory barrier, this will transform the frame buffer color 
+	//attachment back to it's initial layout after it has been presented to the windowing system
+	//see buildcCommandBuffers for the pre present barrier that does the opposite transformation
+	VkImageMemoryBarrier postPresentBarrier ={};
+	postPresentBarrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	postPresentBarrier.pNext = nullptr;
+	postPresentBarrier.srcAccessMask = 0;
+	postPresentBarrier.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+	postPresentBarrier.oldLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+	postPresentBarrier.newLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+	postPresentBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+	postPresentBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+	postPresentBarrier.subresourceRange ={ VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };
+	postPresentBarrier.image = m_vulkanSwapChain.m_pBuffers[m_currentBuffer].image;
+
+	//Use dedicated command buffer from example base class for submitting the post present barrier
+	VkCommandBufferBeginInfo cmdBufferInfo ={};
+	cmdBufferInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+	res = vkBeginCommandBuffer(m_postPresentCmdBuffer, &cmdBufferInfo);
+	assert(!res);
+
+	//Put post present barrier into command buffer
+	vkCmdPipelineBarrier(m_postPresentCmdBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+		VK_FLAGS_NONE, 0, nullptr, 0, nullptr, 1, &postPresentBarrier);
+
+	res = vkEndCommandBuffer(m_postPresentCmdBuffer);
+	assert(!res);
+
+	//Submit to the queue
+	submitInfo ={};
+	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+	submitInfo.commandBufferCount = 1;
+	submitInfo.pCommandBuffers = &m_postPresentCmdBuffer;
+	res = vkQueueSubmit(m_queue, 1, &submitInfo, VK_NULL_HANDLE);
+	assert(!res);
+	res = vkQueueWaitIdle(m_queue);
+	assert(!res);
+
+	vkDeviceWaitIdle(m_device);
 }
 
 void VulkanRender::v_shutdown()
@@ -111,7 +186,7 @@ void VulkanRender::v_shutdown()
 	// Clean up Vulkan resources
 	m_vulkanSwapChain.shutdown();
 
-	vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
+    //	vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
 	if (m_setupCmdBuffer != VK_NULL_HANDLE)
 	{
 		vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_setupCmdBuffer);
@@ -471,6 +546,221 @@ void VulkanRender::init_framebuffer()
 	}
 
 
+}
+
+void VulkanRender::build_commandBuffers()
+{
+	VkCommandBufferBeginInfo cmdBufInfo ={};
+	cmdBufInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+	cmdBufInfo.pNext = NULL;
+
+	VkClearValue clearValues[2];
+	clearValues[0].color = m_defaultClearColor;
+	clearValues[1].depthStencil ={ 1.0f, 0 };
+
+	VkRenderPassBeginInfo renderPassBeginInfo ={};
+	renderPassBeginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+	renderPassBeginInfo.pNext = nullptr;
+	renderPassBeginInfo.renderPass = m_renderPass;
+	renderPassBeginInfo.renderArea.offset.x = 0;
+	renderPassBeginInfo.renderArea.offset.y = 0;
+	renderPassBeginInfo.renderArea.extent.width = getClientWidth();
+	renderPassBeginInfo.renderArea.extent.height = getClientHeight();
+	renderPassBeginInfo.clearValueCount = 2;
+	renderPassBeginInfo.pClearValues = clearValues;
+
+	VkResult res = VK_SUCCESS;
+
+	for (int32_t i = 0; i < m_drawCmdBuffers.size(); ++i) {
+		//for target frame buffer
+		renderPassBeginInfo.framebuffer = m_frameBuffers[i];
+
+		res = vkBeginCommandBuffer(m_drawCmdBuffers[i], &cmdBufInfo);
+		assert(!res);
+
+		vkCmdBeginRenderPass(m_drawCmdBuffers[i], &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
+
+		//update dynamic viewport state
+		VkViewport viewport ={};
+		viewport.width  = static_cast<float>(getClientWidth());
+		viewport.height = static_cast<float>(getClientHeight());
+		viewport.minDepth = 0.0f;
+		viewport.maxDepth = 1.0f;
+		vkCmdSetViewport(m_drawCmdBuffers[i], 0, 1, &viewport);
+
+		//update dynamic scssor state
+		VkRect2D scissor ={};
+		scissor.extent.width = getClientWidth();
+		scissor.extent.height = getClientWidth();
+		scissor.offset.x = 0;
+		scissor.offset.y = 0;
+		vkCmdSetScissor(m_drawCmdBuffers[i], 0, 1, &scissor);
+
+		/*
+
+		//Bing desciptor sets describing shader binding points
+		vkCmdBindDescriptorSets(m_drawCmdBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout,
+			0, 1, &descriptorSet, 0, NULL);
+
+		//Bind the rendering pipeline (including the shaders)
+		vkCmdBindPipeline(m_drawCmdBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
+
+		//Bind Triangle vertices
+		VkDeviceSize offsets[1] ={ 0 };
+		vkCmdBindVertexBuffers(m_drawCmdBuffers[i], VERTEX_BUFFER_BIND_ID, 1, &vertices.buffer, offsets);
+
+		//Bind Triangle indices
+		vkCmdBindIndexBuffer(m_drawCmdBuffers[i], indices.buffer, 0, VK_INDEX_TYPE_UINT32);
+
+		//Draw indexed Triangle
+		vkCmdDrawIndexed(drawCmdBuffers[i], indices.count, 1, 0, 0, 1);
+		*/
+		vkCmdEndRenderPass(m_drawCmdBuffers[i]);
+
+		//Add a present memory barrier to the end of the command buffer
+		// This will transform the frame buffer color attachment to a 
+		// new layout for presenting it to the windowing system integration
+		VkImageMemoryBarrier prePresentBarrier ={};
+		prePresentBarrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+		prePresentBarrier.pNext = NULL;
+		prePresentBarrier.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+		prePresentBarrier.dstAccessMask = 0;
+		prePresentBarrier.oldLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+		prePresentBarrier.newLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+		prePresentBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+		prePresentBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+		prePresentBarrier.subresourceRange ={ VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };
+		prePresentBarrier.image = m_vulkanSwapChain.m_pBuffers[i].image;
+
+		VkImageMemoryBarrier *pMemoryBarrier = &prePresentBarrier;
+		vkCmdPipelineBarrier(
+			m_drawCmdBuffers[i],
+			VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+			VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+			VK_FLAGS_NONE,
+			0, nullptr,
+			0, nullptr,
+			1, &prePresentBarrier);
+
+		res = vkEndCommandBuffer(m_drawCmdBuffers[i]);
+		assert(!res);
+	}
+
+}
+
+
+void VulkanRender::init_pipeline()
+{
+	//Create out rendering pipeline used in this example
+	//Vulkan uses the  concept of rendering pipelines to encapsulate fixed states
+	//This replaces OpenGL's hube(and cumbersome) state machine
+	//A pipeline is then storeed and hashed on the GPU making pipleine changes 
+	//much faster than having to set dozens of states
+	//In a real world application you'd have dozens of pipelines for every shader
+	//set used in a scene
+	//Note that there are a few states that are not stored with the pipeline
+	//These are called dynamic  states and the pipeline only stores that they are
+	//used with this pipeline, but not their states
+
+	VkResult res = VK_SUCCESS;
+
+	VkGraphicsPipelineCreateInfo pipelineCreateInfo ={};
+	pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+	pipelineCreateInfo.layout = m_pipelineLayout;
+	pipelineCreateInfo.renderPass = m_renderPass;
+
+	//Vertex input state
+
+	//Describes the topolo used with this pipeline
+	VkPipelineInputAssemblyStateCreateInfo inputAssemblyState ={};
+	inputAssemblyState.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+	inputAssemblyState.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+
+	//Rasterization state
+	VkPipelineRasterizationStateCreateInfo rasterizationState ={};
+	rasterizationState.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+	rasterizationState.polygonMode = VK_POLYGON_MODE_FILL;
+	//No culling
+	rasterizationState.cullMode = VK_CULL_MODE_NONE;
+	rasterizationState.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+	rasterizationState.depthClampEnable = VK_FALSE;
+	rasterizationState.rasterizerDiscardEnable = VK_FALSE;
+	rasterizationState.depthBiasEnable = VK_FALSE;
+
+	//Color blend state
+	//Describes blend modes and color masks
+	VkPipelineColorBlendStateCreateInfo colorBlendState ={};
+	colorBlendState.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+	//One blend attachment state
+	//Blending is not used in this example
+	VkPipelineColorBlendAttachmentState blendAttachmentState[1] ={};
+	blendAttachmentState[0].colorWriteMask = 0xf;
+	blendAttachmentState[0].blendEnable = VK_FALSE;
+	colorBlendState.attachmentCount = 1;
+	colorBlendState.pAttachments = blendAttachmentState;
+
+	//Viewport state
+	VkPipelineViewportStateCreateInfo viewportState ={};
+	viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+	viewportState.viewportCount = 1;
+	viewportState.scissorCount = 1;
+
+	//Enable dynamic states
+	//Descibes the dynamic states to be used with this pipeline
+	//Dynamic states can be set even after pipeline has been created
+	//So there is no need to create new pipelines just for changing
+	//a viewport's demensions or a scissor box
+
+	//The dynamic state properties themselves are stored in the command buffer
+	std::vector<VkDynamicState> dynamicStatesEnables;
+	dynamicStatesEnables.push_back(VK_DYNAMIC_STATE_VIEWPORT);
+	dynamicStatesEnables.push_back(VK_DYNAMIC_STATE_SCISSOR);
+
+	VkPipelineDynamicStateCreateInfo pipelineDynamicState ={};
+	pipelineDynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+	pipelineDynamicState.pDynamicStates = dynamicStatesEnables.data();
+	pipelineDynamicState.dynamicStateCount = dynamicStatesEnables.size();
+
+	//Depth and stencil state
+	//Describes depth and stenctil test and compare ops
+	// Basic depth compare setup with depth writes and depth test enabled,  No stencil used 
+	VkPipelineDepthStencilStateCreateInfo depthStencilState ={};
+	depthStencilState.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+	depthStencilState.depthTestEnable = VK_TRUE;
+	depthStencilState.depthWriteEnable = VK_TRUE;
+	depthStencilState.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+	depthStencilState.depthBoundsTestEnable = VK_FALSE;
+	depthStencilState.back.failOp = VK_STENCIL_OP_KEEP;
+	depthStencilState.back.passOp = VK_STENCIL_OP_KEEP;
+	depthStencilState.back.compareOp = VK_COMPARE_OP_ALWAYS;
+	depthStencilState.stencilTestEnable = VK_FALSE;
+	depthStencilState.front = depthStencilState.back;
+
+
+	//Multi sampling state, No multi sampling used in this example
+	VkPipelineMultisampleStateCreateInfo multiSampleState ={};
+	multiSampleState.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+	multiSampleState.pSampleMask = nullptr;
+	multiSampleState.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+	//Load Shaders
+	VkPipelineShaderStageCreateInfo shaderStages[2] ={ {},{} };
+
+	//Assign states, two shader stages
+	pipelineCreateInfo.stageCount = 2;
+	pipelineCreateInfo.pVertexInputState = nullptr;
+	pipelineCreateInfo.pInputAssemblyState = &inputAssemblyState;
+	pipelineCreateInfo.pRasterizationState = &rasterizationState;
+	pipelineCreateInfo.pColorBlendState = &colorBlendState;
+	pipelineCreateInfo.pMultisampleState = &multiSampleState;
+	pipelineCreateInfo.pViewportState = &viewportState;
+	pipelineCreateInfo.pDepthStencilState = &depthStencilState;
+	pipelineCreateInfo.pStages = shaderStages;
+	pipelineCreateInfo.renderPass = m_renderPass;
+	pipelineCreateInfo.pDynamicState = &pipelineDynamicState;
+
+	res = vkCreateGraphicsPipelines(m_device, m_pipelineCache, 1, &pipelineCreateInfo, nullptr, &m_pipeline);
+	assert(!res);
 }
 
 VkBool32 VulkanRender::getMemoryType(uint32_t typeBits, VkFlags properties, uint32_t * typeIndex)

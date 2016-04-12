@@ -35,18 +35,20 @@ namespace byhj {
 		 void init_renderpass();
 		 void init_pipelineCache();
 		 void init_framebuffer();
+		 void init_pipeline();
 
 		 void flush_setupCmdBuffer();
 		 void create_setupCmdBuffer();
 		 void destroy_cmdBuffers();
-     
+		 void build_commandBuffers();
 
 
 		 // Get memory type for a given memory allocation (flags and bits)
 		 VkBool32 getMemoryType(uint32_t typeBits, VkFlags properties, uint32_t *typeIndex);
 
 		 bool m_enableValidation = false;
-		 
+		 VkClearColorValue m_defaultClearColor ={ { 0.2f, 0.3f, 0.4f, 1.0f } };
+
 		 VkDevice         m_device;
 		 VkQueue          m_queue;
 		 VkInstance       m_instance;
@@ -57,7 +59,9 @@ namespace byhj {
 		 VkCommandBuffer  m_postPresentCmdBuffer;
 
 		 VkDescriptorPool m_descriptorPool;
+		 VkPipeline  m_pipeline;
 		 VkPipelineCache  m_pipelineCache;
+		 VkPipelineLayout   m_pipelineLayout;
 
 		 VkPhysicalDevice m_physicalDevice;
 		 VkPhysicalDeviceMemoryProperties m_deviceMemoryProperties;

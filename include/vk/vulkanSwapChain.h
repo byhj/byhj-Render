@@ -75,9 +75,6 @@ namespace byhj {
 		VkPhysicalDevice  m_physicalDevice;
 		VkSurfaceKHR      m_surface;
 
-
-
-
 		// Function pointers
 		PFN_vkGetPhysicalDeviceSurfaceSupportKHR fpGetPhysicalDeviceSurfaceSupportKHR;
 		PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR fpGetPhysicalDeviceSurfaceCapabilitiesKHR;

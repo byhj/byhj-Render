@@ -308,7 +308,7 @@ namespace byhj {
     void VulkanSwapChain::shutdown()
     {
     	for (uint32_t i = 0; i < m_imageCount; i++) {
-    		vkDestroyImageView(m_device, m_pBuffers[i].view, nullptr);
+    		//vkDestroyImageView(m_device, m_pBuffers[i].view, nullptr);
     	}
     	fpDestroySwapchainKHR(m_device, m_swapChain, nullptr);
     	vkDestroySurfaceKHR(m_instance, m_surface, nullptr);
