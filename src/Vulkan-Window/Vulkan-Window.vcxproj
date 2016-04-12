@@ -75,6 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;VK_PROTOTYPES;VK_USE_PLATFORM_WIN32_KHR;_USE_MATH_DEFINES;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,7 +128,6 @@
     <ClCompile Include="..\..\include\ogl\oglModel.cpp" />
     <ClCompile Include="..\..\include\ogl\oglShader.cpp" />
     <ClCompile Include="..\..\include\vk\vulkanApp.cpp" />
-    <ClCompile Include="..\..\include\vk\vulkanBase.cpp" />
     <ClCompile Include="..\..\include\vk\vulkanDebug.cpp" />
     <ClCompile Include="..\..\include\vk\vulkanMeshLoader.cpp" />
     <ClCompile Include="..\..\include\vk\vulkanSwapChain.cpp" />
@@ -169,7 +169,6 @@
     <ClInclude Include="..\..\include\ogl\oglModel.h" />
     <ClInclude Include="..\..\include\ogl\oglShader.h" />
     <ClInclude Include="..\..\include\vk\vulkanApp.h" />
-    <ClInclude Include="..\..\include\vk\vulkanBase.h" />
     <ClInclude Include="..\..\include\vk\vulkanDebug.h" />
     <ClInclude Include="..\..\include\vk\vulkanMeshLoader.h" />
     <ClInclude Include="..\..\include\vk\vulkanSwapChain.h" />

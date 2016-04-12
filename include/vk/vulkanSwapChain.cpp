@@ -1,9 +1,10 @@
 #include "vulkanSwapChain.h"
+#define VK_USE_PLATFORM_WIN32_KHR
 
 namespace byhj {
 
 
-    void VulkanSwapChain::init(void* platformHandle, void* platformWindow)
+    void VulkanSwapChain::init(void* platformWindow, void* platformHandle)
     {
     	uint32_t queueCount; 
     	VkQueueFamilyProperties *queueProps;
@@ -12,7 +13,7 @@ namespace byhj {
     
     	// Create surface depending on OS
     #ifdef _WIN32
-    	VkWin32SurfaceCreateInfoKHR surfaceCreateInfo ={};
+    	VkWin32SurfaceCreateInfoKHR surfaceCreateInfo = {};
     	surfaceCreateInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
     	surfaceCreateInfo.hinstance = (HINSTANCE)platformHandle;
     	surfaceCreateInfo.hwnd = (HWND)platformWindow;
@@ -36,7 +37,7 @@ namespace byhj {
     
     	// Get queue properties
     	vkGetPhysicalDeviceQueueFamilyProperties(m_physicalDevice, &queueCount, NULL);
-    
+
     	queueProps = (VkQueueFamilyProperties *)malloc(queueCount * sizeof(VkQueueFamilyProperties));
     	vkGetPhysicalDeviceQueueFamilyProperties(m_physicalDevice, &queueCount, queueProps);
     	assert(queueCount >= 1);
@@ -97,7 +98,7 @@ namespace byhj {
     		// todo : error message
     	}
     
-    	queueNodeIndex = graphicsQueueNodeIndex;
+    	m_queueNodeIndex = graphicsQueueNodeIndex;
     
     	// Get list of supported formats
     	uint32_t formatCount;
@@ -141,11 +142,11 @@ namespace byhj {
     
     void VulkanSwapChain::setup(VkCommandBuffer cmdBuffer, uint32_t *width, uint32_t *height)
     {
-    	VkResult err;
+    	VkResult err = VK_SUCCESS;
     	VkSwapchainKHR oldSwapchain = m_swapChain;
     
     	// Get physical device surface properties and formats
-    	VkSurfaceCapabilitiesKHR surfCaps;
+		VkSurfaceCapabilitiesKHR surfCaps ={};
     	err = fpGetPhysicalDeviceSurfaceCapabilitiesKHR(m_physicalDevice, m_surface, &surfCaps);
     	assert(!err);
     

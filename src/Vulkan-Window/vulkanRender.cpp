@@ -9,6 +9,7 @@ void VulkanRender::v_init()
 		Vulkan::Debug::setupDebugging(m_instance, VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT, NULL);
 	}
 	init_vulkan();
+
 	init_commandPool();
 	create_setupCmdBuffer();
 	init_swapchain();
@@ -27,8 +28,6 @@ void VulkanRender::v_init()
 
 void VulkanRender::init_vulkan()
 {
-	m_vulkanSwapChain.init(getHwnd(), getHinstance());
-
 	VkResult err = VK_SUCCESS;
 
 	init_instance();
@@ -82,7 +81,7 @@ void VulkanRender::init_vulkan()
 	queueCreateInfo.queueCount = 1;
 	queueCreateInfo.pQueuePriorities = queuePriorities.data();
 
-	init_device();
+	init_device(queueCreateInfo);
 
 	// Gather physical m_device memory properties
 	vkGetPhysicalDeviceMemoryProperties(m_physicalDevice, &m_deviceMemoryProperties);
@@ -95,6 +94,7 @@ void VulkanRender::init_vulkan()
 	assert(validDepthFormat);
 
 	m_vulkanSwapChain.init(m_instance, m_physicalDevice, m_device);
+	m_vulkanSwapChain.init(getHwnd(), getHinstance());
 }
 
 
@@ -159,7 +159,7 @@ void VulkanRender::init_instance()
    appInfo.sType            = VK_STRUCTURE_TYPE_APPLICATION_INFO;
    appInfo.pApplicationName = "Test";
    appInfo.pEngineName      = "Vulkan";
-   appInfo.apiVersion       = VK_MAKE_VERSION(1, 0, 8);
+   appInfo.apiVersion       = VK_MAKE_VERSION(1, 0, 3);
 
    std::vector<const char*> enabledExtensions = {VK_KHR_SURFACE_EXTENSION_NAME};
 #ifdef _WIN32
@@ -188,9 +188,8 @@ void VulkanRender::init_instance()
 
 
 //Create a m_device
-void VulkanRender::init_device() 
+void VulkanRender::init_device(VkDeviceQueueCreateInfo requestedQueues)
 {
-	VkDeviceQueueCreateInfo requestedQueues;
 	std::vector<const char*> enabledExtensions ={ VK_KHR_SWAPCHAIN_EXTENSION_NAME };
 
 	VkDeviceCreateInfo deviceCreateInfo ={};
@@ -209,7 +208,7 @@ void VulkanRender::init_device()
 		deviceCreateInfo.ppEnabledLayerNames = Vulkan::Debug::validationLayerNames;
 	}
 
-	vkCreateDevice(m_physicalDevice, &deviceCreateInfo, nullptr, &m_device);
+	auto res = vkCreateDevice(m_physicalDevice, &deviceCreateInfo, nullptr, &m_device);
 }
 
 
@@ -332,12 +331,15 @@ void VulkanRender::init_pipelineCache()
 
 void VulkanRender::init_depthStencil()
 {
+	uint32_t sw = getClientWidth();
+	uint32_t sh = getClientHeight();
+
 	VkImageCreateInfo image ={};
 	image.sType       = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
 	image.pNext       = NULL;
 	image.imageType   = VK_IMAGE_TYPE_2D;
 	image.format      = m_depthFormat;
-	image.extent      = { getClientWidth(), getClientHeight(), 1 };
+	image.extent      = { sw, sh, 1 };
 	image.mipLevels   = 1;
 	image.arrayLayers = 1;
 	image.samples     = VK_SAMPLE_COUNT_1_BIT;

@@ -57,7 +57,7 @@ namespace byhj {
 		uint32_t m_queueNodeIndex = UINT32_MAX;
 
     	// wip naming
-    	void init(void* platformHandle, void* platformWindow);  
+    	void init(void* platformWindow, void* platformHandle);
     	void init(VkInstance instance, VkPhysicalDevice physicalDevice, VkDevice device);
     	void setup(VkCommandBuffer cmdBuffer, uint32_t *width, uint32_t *height);
     	void shutdown();

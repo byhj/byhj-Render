@@ -150,9 +150,6 @@
     <ClCompile Include="..\..\include\vk\vulkanUtility.cpp">
       <Filter>Render\vk</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vk\vulkanBase.cpp">
-      <Filter>Render\vk</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ogl\oglApp.h">
@@ -267,9 +264,6 @@
       <Filter>Render\vk</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vk\vulkanUtility.h">
-      <Filter>Render\vk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vk\vulkanBase.h">
       <Filter>Render\vk</Filter>
     </ClInclude>
   </ItemGroup>

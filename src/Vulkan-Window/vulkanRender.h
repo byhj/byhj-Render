@@ -27,7 +27,7 @@ namespace byhj {
    	 private:
 		 void init_vulkan();
 		 void init_instance();
-		 void init_device();
+		 void init_device(VkDeviceQueueCreateInfo requestedQueues);
 		 void init_commandPool();
 		 void init_swapchain();
 		 void init_commandBuffers();

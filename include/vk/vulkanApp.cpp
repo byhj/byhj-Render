@@ -50,6 +50,7 @@ static VulkanApp *pVulkanAppHandle = 0;
 
 	 bool fullscreen = false;
 	 pVulkanAppHandle = this;
+	 m_hInstance = GetModuleHandle(NULL);
 
 	 WNDCLASSEX wndClass;
 	 wndClass.cbSize = sizeof(WNDCLASSEX);
