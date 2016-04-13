@@ -12,7 +12,7 @@ namespace Vulkan
 	struct Texture
 	{
 		VkSampler sampler;
-		VkImage image;
+		VkImage   image;
 		VkImageLayout imageLayout;
 		VkDeviceMemory deviceMemory;
 		VkImageView view;

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <vector>
 #include <map>
+
 #ifdef _WIN32
 #include <windows.h>
 #include <fcntl.h>
@@ -15,7 +16,6 @@
 #endif
 
 #include "vulkanUtility.h"
-
 #include <vulkan/vulkan.h>
 
 #include <assimp/Importer.hpp> 

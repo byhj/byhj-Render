@@ -24,11 +24,22 @@
 // todo : remove if added to SDK
 #define VK_FLAGS_NONE 0
 
+// #include "SPIRV/GlslangToSpv.h"
+// #pragma  comment(lib, "glslang.lib")
+// #pragma  comment(lib, "SPIRV.lib")
+// #pragma  comment(lib, "SPIRV-Tools.lib")
+// #pragma  comment(lib, "OGLCompiler.lib")
+
 namespace Vulkan {
 
 	// Get memory type for a given memory allocation (flags and bits)
 	VkBool32 getMemoryType(VkPhysicalDeviceMemoryProperties  dmp, uint32_t typeBits, VkFlags properties, uint32_t *typeIndex);
-
+	/*
+	void init_resources(TBuiltInResource &Resources);
+	EShLanguage FindLanguage(const VkShaderStageFlagBits shader_type);
+	bool GLSLtoSPV(const VkShaderStageFlagBits shader_type, const char *pshader,
+		std::vector<unsigned int> &spirv);
+*/
 	// Check if extension is globally available
 	VkBool32 checkGlobalExtensionPresent(const char* extensionName);
 
@@ -37,6 +48,7 @@ namespace Vulkan {
 
 	// Return string representation of a vulkan error string
 	std::string errorString(VkResult errorCode);
+
 
 	// Selected a suitable supported depth format starting with 32 bit down to 16 bit
 	// Returns false if none of the depth formats in the list is supported by the device
