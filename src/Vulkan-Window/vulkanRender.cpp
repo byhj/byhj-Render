@@ -181,12 +181,12 @@ void VulkanRender::v_render()
 	vkDeviceWaitIdle(m_device);
 }
 
-void VulkanRender::v_shutdown()
+void VulkanRender::v_shutdown() 
 {
 	// Clean up Vulkan resources
 	m_vulkanSwapChain.shutdown();
 
-    //	vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
+  // 	vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
 	if (m_setupCmdBuffer != VK_NULL_HANDLE)
 	{
 		vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_setupCmdBuffer);

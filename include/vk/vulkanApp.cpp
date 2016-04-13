@@ -43,7 +43,6 @@ static VulkanApp *pVulkanAppHandle = 0;
 		 }
 	 }
 
-	 v_shutdown();
  }
 
  void VulkanApp::setupWindow() {

@@ -58,20 +58,21 @@ namespace byhj {
 		 VkCommandBuffer  m_setupCmdBuffer ;
 		 VkCommandBuffer  m_postPresentCmdBuffer;
 
-		 VkDescriptorPool m_descriptorPool;
-		 VkPipeline  m_pipeline;
-		 VkPipelineCache  m_pipelineCache;
+		 VkDescriptorPool   m_descriptorPool;
+		 VkPipeline         m_pipeline;
+		 VkPipelineCache    m_pipelineCache;
 		 VkPipelineLayout   m_pipelineLayout;
 
 		 VkPhysicalDevice m_physicalDevice;
 		 VkPhysicalDeviceMemoryProperties m_deviceMemoryProperties;
 
-		 VulkanSwapChain m_vulkanSwapChain;
+		 VulkanSwapChain    m_vulkanSwapChain;
 		 VulkanDepthStencil m_depthStencil;
 
 		 std::vector<VkCommandBuffer> m_drawCmdBuffers;
 		 std::vector<VkShaderModule> m_shaderModules;
 		 std::vector<VkFramebuffer>  m_frameBuffers;
+
 		 VkFormat m_colorFormat = VK_FORMAT_B8G8R8A8_UNORM;
 		 VkFormat m_depthFormat;
 		 uint32_t m_currentBuffer = 0;
