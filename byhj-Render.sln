@@ -22,6 +22,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Render", "Render", "{EBDF24EF-DEAE-47F3-8360-DF67E65C66F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utility", "Utility", "{945A6EBD-8771-481C-9B34-977B07DA0C4D}"
+	ProjectSection(SolutionItems) = preProject
+		src\Vulkan-Test\main.cpp = src\Vulkan-Test\main.cpp
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{1A750ACF-1F72-46D4-9B2F-B5CE62398DB7}"
 EndProject
@@ -288,6 +291,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lua", "src\Lua\Lua.vcxproj", "{92344F03-3379-4833-8BD7-895C7383D18E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vulkan-Cube", "src\Vulkan-Cube\Vulkan-Cube.vcxproj", "{15C62A4E-A893-401E-BE0D-EAAB4B5BBCBE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vulkan-Test", "src\Vulkan-Test\Vulkan-Test.vcxproj", "{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1241,6 +1246,14 @@ Global
 		{15C62A4E-A893-401E-BE0D-EAAB4B5BBCBE}.Release|x64.Build.0 = Release|x64
 		{15C62A4E-A893-401E-BE0D-EAAB4B5BBCBE}.Release|x86.ActiveCfg = Release|Win32
 		{15C62A4E-A893-401E-BE0D-EAAB4B5BBCBE}.Release|x86.Build.0 = Release|Win32
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Debug|x64.ActiveCfg = Debug|x64
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Debug|x64.Build.0 = Debug|x64
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Debug|x86.ActiveCfg = Debug|Win32
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Debug|x86.Build.0 = Debug|Win32
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Release|x64.ActiveCfg = Release|x64
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Release|x64.Build.0 = Release|x64
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Release|x86.ActiveCfg = Release|Win32
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1386,5 +1399,6 @@ Global
 		{11098114-384C-4806-8CEF-2363D765A0E2} = {945A6EBD-8771-481C-9B34-977B07DA0C4D}
 		{92344F03-3379-4833-8BD7-895C7383D18E} = {945A6EBD-8771-481C-9B34-977B07DA0C4D}
 		{15C62A4E-A893-401E-BE0D-EAAB4B5BBCBE} = {EA5C2EE3-1F59-4453-ACA9-0367C24DF849}
+		{29662A72-25DE-4CB6-A8B9-D85B55CAA1F1} = {EA5C2EE3-1F59-4453-ACA9-0367C24DF849}
 	EndGlobalSection
 EndGlobal

@@ -71,7 +71,7 @@ namespace byhj {
     	void shutdown();
          
 		void setupCmd(const VkCommandBuffer drawCmdBuffer);
-		void init_pipeline(VkRenderPass renderPass,VkPipelineCache pipelineCache);
+		void init_pipeline(VkRenderPass &renderPass,VkPipelineCache &pipelineCache);
 
     private: 
     	void init_vertex();

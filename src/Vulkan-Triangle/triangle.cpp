@@ -8,11 +8,10 @@ void Triangle::init(VkDevice device)
 	m_triangleShader.init(device);
 	init_vertex();
 	init_ubo();
-	init_descriptorPool();
 	init_descriptorSetLayout();
+
+	init_descriptorPool();
 	init_descriptorSet();
-
-
 }
 
 void Triangle::update()
@@ -264,7 +263,7 @@ void Triangle::init_descriptorSetLayout()
 	assert(!res);
 }
 
-void Triangle::init_pipeline(VkRenderPass renderPass, VkPipelineCache pipelineCache)
+void Triangle::init_pipeline(VkRenderPass &renderPass, VkPipelineCache &pipelineCache)
 {
 	//Create out rendering pipeline used in this example
 	//Vulkan uses the  concept of rendering pipelines to encapsulate fixed states
@@ -278,11 +277,6 @@ void Triangle::init_pipeline(VkRenderPass renderPass, VkPipelineCache pipelineCa
 	//used with this pipeline, but not their states
 
 	VkResult res = VK_SUCCESS;
-
-	VkGraphicsPipelineCreateInfo pipelineCreateInfo = {};
-	pipelineCreateInfo.sType      = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-	pipelineCreateInfo.layout     = m_pipelineLayout;
-	pipelineCreateInfo.renderPass = renderPass;
 
 	//Vertex input state
 	
@@ -366,8 +360,12 @@ void Triangle::init_pipeline(VkRenderPass renderPass, VkPipelineCache pipelineCa
 	m_triangleShader.loadSPIR( VK_SHADER_STAGE_VERTEX_BIT, "triangle.vert.spv");
 	m_triangleShader.loadSPIR( VK_SHADER_STAGE_FRAGMENT_BIT, "triangle.frag.spv");
 #endif
-	VkPipelineShaderStageCreateInfo shaderStages[2] = {};
+	std::vector<VkPipelineShaderStageCreateInfo> shaderStages = m_triangleShader.getStages();
 
+	VkGraphicsPipelineCreateInfo pipelineCreateInfo ={};
+	pipelineCreateInfo.sType      = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+	pipelineCreateInfo.layout     = m_pipelineLayout;
+	pipelineCreateInfo.renderPass = renderPass;
     //Assign states, two shader stages
 	pipelineCreateInfo.stageCount          = 2;
 	pipelineCreateInfo.pVertexInputState   = &m_vertices.inputStateInfo;
@@ -377,9 +375,10 @@ void Triangle::init_pipeline(VkRenderPass renderPass, VkPipelineCache pipelineCa
 	pipelineCreateInfo.pMultisampleState   = &multiSampleState;
 	pipelineCreateInfo.pViewportState      = &viewportState;
 	pipelineCreateInfo.pDepthStencilState  = &depthStencilState;
-	pipelineCreateInfo.pStages             = shaderStages; //& (m_triangleShader.getStages() )[0];
+	pipelineCreateInfo.pStages             = &shaderStages[0];
 	pipelineCreateInfo.renderPass          = renderPass;
 	pipelineCreateInfo.pDynamicState       = &pipelineDynamicState;
+
 
 	res = vkCreateGraphicsPipelines(m_device, pipelineCache, 1, &pipelineCreateInfo, nullptr, &m_pipeline);
 	assert(!res);

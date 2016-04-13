@@ -19,8 +19,8 @@ void VulkanRender::v_init()
 	init_pipelineCache();
 	init_framebuffer();
 
+//	init_pipeline();
 	flush_setupCmdBuffer();
-	// Recreate setup command buffer for derived class
 	create_setupCmdBuffer();
 	build_commandBuffers();
 
@@ -664,10 +664,6 @@ void VulkanRender::init_pipeline()
 
 	VkResult res = VK_SUCCESS;
 
-	VkGraphicsPipelineCreateInfo pipelineCreateInfo ={};
-	pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-	pipelineCreateInfo.layout = m_pipelineLayout;
-	pipelineCreateInfo.renderPass = m_renderPass;
 
 	//Vertex input state
 
@@ -745,6 +741,11 @@ void VulkanRender::init_pipeline()
 
 	//Load Shaders
 	VkPipelineShaderStageCreateInfo shaderStages[2] ={ {},{} };
+
+	VkGraphicsPipelineCreateInfo pipelineCreateInfo ={};
+	pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+	pipelineCreateInfo.layout = m_pipelineLayout;
+	pipelineCreateInfo.renderPass = m_renderPass;
 
 	//Assign states, two shader stages
 	pipelineCreateInfo.stageCount = 2;

@@ -16,7 +16,6 @@ void VulkanRender::v_init()
 	init_commandBuffers();
 	init_depthStencil();
 	init_renderpass();
-
 	init_pipelineCache();
 	init_framebuffer();
 
@@ -26,10 +25,6 @@ void VulkanRender::v_init()
 	m_triangle.init(m_device);
 	m_triangle.init_pipeline(m_renderPass, m_pipelineCache);
 	build_commandBuffers();
-
-
-
-
 }
 
 void VulkanRender::v_update()
