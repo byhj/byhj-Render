@@ -1,223 +1,83 @@
 #include "Triangle.h"
 
-void Triangle::init()
+namespace byhj {
+
+void Triangle::init(VkDevice device)
 {
-	VulkanBase::prepare();
+	m_device = device;
+	m_triangleShader.init(device);
+	init_vertex();
+	init_ubo();
+	init_descriptorPool();
+	init_descriptorSetLayout();
+	init_descriptorSet();
 
-	initVertex();
-	initUbo();
-	initDescriptorSetLayout();
-	initPipeline();
-	initDescriptorPool();
-	initDescriptorSet();
-	buildCmdBuffers();
 
-	prepared = true;
 }
 
 void Triangle::update()
 {
-	void updateUbo();
+	void update_ubo();
 }
 
 void Triangle::render()
 {
-	if (!prepared) {
-	   return;
-	}
-	VkResult res = VK_SUCCESS;
 
-	vkDeviceWaitIdle(device);
-	VkSemaphore presentCompleteSemaphore;
-	VkSemaphoreCreateInfo presentCompleteSemaphoreCreateInfo = {};
-	presentCompleteSemaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
-	presentCompleteSemaphoreCreateInfo.pNext = nullptr;
-	presentCompleteSemaphoreCreateInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
-	res = vkCreateSemaphore(device, &presentCompleteSemaphoreCreateInfo, nullptr, &presentCompleteSemaphore);
-	assert(!res);
-
-	//Get next image in the swap chain (back/front buffer)
-	res = swapChain.acquireNextImage(presentCompleteSemaphore, &currentBuffer);
-	assert(!res);
-
-	//The submit infor structure contains a list of command buffers and semaphores to 
-	// be submitted to a queue, if you want to submit multiple command buffer, pass a array
-	VkSubmitInfo submitInfo = {};
-	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-	submitInfo.waitSemaphoreCount =1;
-	submitInfo.pWaitSemaphores = &presentCompleteSemaphore;
-	submitInfo.commandBufferCount = 1;
-	submitInfo.pCommandBuffers = &drawCmdBuffers[currentBuffer];
-	//Submit to the graphics queue
-	res = vkQueueSubmit(queue, 1, &submitInfo, VK_NULL_HANDLE);
-	assert(!res);
-
-	//Present the current buffer to the swap chain, this will display the image
-	res = swapChain.queuePresent(queue,  currentBuffer);
-	assert(!res);
-
-	vkDestroySemaphore(device, presentCompleteSemaphore, nullptr);
-
-
-	//Add as post present image memory barrier, this will transform the frame buffer color 
-	//attachment back to it's initial layout after it has been presented to the windowing system
-	//see buildcCommandBuffers for the pre present barrier that does the opposite transformation
-	VkImageMemoryBarrier postPresentBarrier = {};
-	postPresentBarrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-	postPresentBarrier.pNext = nullptr;
-	postPresentBarrier.srcAccessMask = 0;
-	postPresentBarrier.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-	postPresentBarrier.oldLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
-	postPresentBarrier.newLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-	postPresentBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-	postPresentBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-	postPresentBarrier.subresourceRange = {VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1};
-	postPresentBarrier.image = swapChain.buffers[currentBuffer].image;
-
-	//Use dedicated command buffer from example base class for submitting the post present barrier
-	VkCommandBufferBeginInfo cmdBufferInfo = {};
-	cmdBufferInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-	res = vkBeginCommandBuffer(postPresentCmdBuffer, &cmdBufferInfo);
-	assert(!res);
-
-	//Put post present barrier into command buffer
-	vkCmdPipelineBarrier(postPresentCmdBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-		                 VK_FLAGS_NONE, 0, nullptr, 0, nullptr, 1, &postPresentBarrier);
-
-	res = vkEndCommandBuffer(postPresentCmdBuffer);
-	assert(!res);
-
-	//Submit to the queue
-	submitInfo = {};
-	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-	submitInfo.commandBufferCount = 1;
-	submitInfo.pCommandBuffers = &postPresentCmdBuffer;
-	res = vkQueueSubmit(queue, 1, &submitInfo, VK_NULL_HANDLE);
-	assert(!res);
-	res = vkQueueWaitIdle(queue);
-	assert(!res);
-
-	vkDeviceWaitIdle(device);
 }
 
 void Triangle::shutdown()
 {
+	// Clean up used Vulkan resources 
+// Note : Inherited destructor cleans up resources stored in base class
+	vkDestroyPipeline(m_device, m_pipeline, nullptr);
+
+	vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
+	vkDestroyDescriptorSetLayout(m_device, m_descriptorSetLayout, nullptr);
+
+	vkDestroyBuffer(m_device, m_vertices.buffer, nullptr);
+	vkFreeMemory(m_device, m_vertices.memory, nullptr);
+
+	vkDestroyBuffer(m_device, m_indices.buffer, nullptr);
+	vkFreeMemory(m_device, m_indices.memory, nullptr);
+
+	vkDestroyBuffer(m_device, m_uniform.buffer, nullptr);
+	vkFreeMemory(m_device, m_uniform.memory, nullptr);
 }
 
-// Build separate command buffers for every framebuffer image
-// Unlike in OpenGL all rendering commands are recorded once
-// into command buffers that are then resubmitted to the queue
-void Triangle::buildCmdBuffers()
+
+void Triangle::setupCmd(const VkCommandBuffer drawCmdBuffer)
 {
-	VkCommandBufferBeginInfo cmdBufInfo = {};
-	cmdBufInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-	cmdBufInfo.pNext = NULL;
+	//Bing desciptor sets describing shader binding points
+	vkCmdBindDescriptorSets(drawCmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipelineLayout,
+		0, 1, &m_descriptorSet, 0, NULL);
 
-	VkClearValue clearValues[2];
-	clearValues[0].color = defaultClearColor;
-	clearValues[1].depthStencil = {1.0f, 0};
+	//Bind the rendering pipeline (including the shaders)
+	vkCmdBindPipeline(drawCmdBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline);
 
-	VkRenderPassBeginInfo renderPassBeginInfo = {};
-	renderPassBeginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-	renderPassBeginInfo.pNext = nullptr;
-	renderPassBeginInfo.renderPass = renderPass;
-	renderPassBeginInfo.renderArea.offset.x = 0;
-	renderPassBeginInfo.renderArea.offset.y = 0;
-	renderPassBeginInfo.renderArea.extent.width = width;
-	renderPassBeginInfo.renderArea.extent.height = height;
-	renderPassBeginInfo.clearValueCount = 2;
-	renderPassBeginInfo.pClearValues = clearValues;
+	//Bind Triangle vertices
+	VkDeviceSize offsets[1] ={ 0 };
+	vkCmdBindVertexBuffers(drawCmdBuffer, VERTEX_BUFFER_BIND_ID, 1, &m_vertices.buffer, offsets);
 
-	VkResult res = VK_SUCCESS;
+	//Bind Triangle indices
+	vkCmdBindIndexBuffer(drawCmdBuffer, m_indices.buffer, 0, VK_INDEX_TYPE_UINT32);
 
-	for (int32_t i = 0; i < drawCmdBuffers.size(); ++i) {
-	  //for target frame buffer
-		renderPassBeginInfo.framebuffer = frameBuffers[i];
-
-		res = vkBeginCommandBuffer(drawCmdBuffers[i], &cmdBufInfo);
-		assert(!res);
-
-		vkCmdBeginRenderPass(drawCmdBuffers[i], &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
-         
-		//update dynamic viewport state
-		VkViewport viewport = {};
-		viewport.width  = static_cast<float>(width);
-		viewport.height = static_cast<float>(height);
-		viewport.minDepth = 0.0f;
-		viewport.maxDepth = 1.0f;
-		vkCmdSetViewport(drawCmdBuffers[i], 0, 1, &viewport);
-
-       //update dynamic scssor state
-		VkRect2D scissor = {};
-		scissor.extent.width = width;
-		scissor.extent.height = height;
-		scissor.offset.x = 0;
-		scissor.offset.y = 0;
-		vkCmdSetScissor(drawCmdBuffers[i], 0, 1, &scissor);
-
-        //Bing desciptor sets describing shader binding points
-		vkCmdBindDescriptorSets(drawCmdBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout,
-			                    0, 1, &descriptorSet, 0, NULL);
-
-		//Bind the rendering pipeline (including the shaders)
-		vkCmdBindPipeline(drawCmdBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
-
-		//Bind Triangle vertices
-		VkDeviceSize offsets[1] = {0};
-		vkCmdBindVertexBuffers(drawCmdBuffers[i], VERTEX_BUFFER_BIND_ID, 1, &vertices.buffer, offsets);
-
-		//Bind Triangle indices
-		vkCmdBindIndexBuffer(drawCmdBuffers[i], indices.buffer, 0, VK_INDEX_TYPE_UINT32);
-
-		//Draw indexed Triangle
-		vkCmdDrawIndexed(drawCmdBuffers[i], indices.count, 1, 0, 0, 1);
-
-		vkCmdEndRenderPass(drawCmdBuffers[i]);
-
-		//Add a present memory barrier to the end of the command buffer
-		// This will transform the frame buffer color attachment to a 
-		// new layout for presenting it to the windowing system integration
-		VkImageMemoryBarrier prePresentBarrier = {};
-		prePresentBarrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-		prePresentBarrier.pNext = NULL;
-		prePresentBarrier.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
-		prePresentBarrier.dstAccessMask = 0;
-		prePresentBarrier.oldLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-		prePresentBarrier.newLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
-		prePresentBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-		prePresentBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-		prePresentBarrier.subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1};
-		prePresentBarrier.image = swapChain.buffers[i].image;
-
-		VkImageMemoryBarrier *pMemoryBarrier = &prePresentBarrier;
-		vkCmdPipelineBarrier( 
-			drawCmdBuffers[i],
-			VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
-			VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-			VK_FLAGS_NONE,
-			0, nullptr,
-			0, nullptr,
-			1, &prePresentBarrier);
-
-		res = vkEndCommandBuffer(drawCmdBuffers[i]);
-		assert(!res);
-	}
-
-
+	//Draw indexed Triangle
+	vkCmdDrawIndexed(drawCmdBuffer, m_indices.count, 1, 0, 0, 1);
 }
+
 
 //Setups vertex and index buffers for an indexed triangle
 //uploads them to the vram and sets binding points and attribute
 //descriptions to match locations inside the shaders
 
-void Triangle::initVertex()
+void Triangle::init_vertex()
 {
 	struct Vertex {
 		float pos[3];
 		float col[3];
 	};
 
-	// Setup vertices
+	// Setup m_vertices
 	std::vector<Vertex> vertexBuffer ={
 		{ { 1.0f,  1.0f, 0.0f },{ 1.0f, 0.0f, 0.0f } },
 		{ { -1.0f,  1.0f, 0.0f },{ 0.0f, 1.0f, 0.0f } },
@@ -226,7 +86,7 @@ void Triangle::initVertex()
 
 	auto vertexBufferSize = vertexBuffer.size() * sizeof(Vertex);
 
-	//Setup indices
+	//Setup m_indices
 	std::vector<uint32_t> indexBuffer = {0, 1, 2};
 	int indexBufferSize = indexBuffer.size() * sizeof(uint32_t);
 
@@ -250,21 +110,21 @@ void Triangle::initVertex()
 	bufferIno.flags = 0;
 
 	//Copy vertex data to VRAM
-     memset(&vertices, 0, sizeof(vertices));
-	 res = vkCreateBuffer(device, &bufferIno, nullptr, &vertices.buffer);
+     memset(&m_vertices, 0, sizeof(m_vertices));
+	 res = vkCreateBuffer(m_device, &bufferIno, nullptr, &m_vertices.buffer);
 	 assert(!res);
 
-	 vkGetBufferMemoryRequirements(device, vertices.buffer, &memoryReqs);
+	 vkGetBufferMemoryRequirements(m_device, m_vertices.buffer, &memoryReqs);
 	 memoryAlloc.allocationSize = memoryReqs.size;
-	 getMemoryType(memoryReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,  &memoryAlloc.memoryTypeIndex);
-	 vkAllocateMemory(device, &memoryAlloc, nullptr, &vertices.memory);
+	 Vulkan::getMemoryType({}, memoryReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,  &memoryAlloc.memoryTypeIndex);
+	 vkAllocateMemory(m_device, &memoryAlloc, nullptr, &m_vertices.memory);
 	 
-	 res = vkMapMemory(device, vertices.memory, 0, memoryAlloc.allocationSize, 0, &data);
+	 res = vkMapMemory(m_device, m_vertices.memory, 0, memoryAlloc.allocationSize, 0, &data);
 	 assert(!res);
 	 memcpy(data, vertexBuffer.data(), vertexBufferSize);
-	 vkUnmapMemory(device, vertices.memory);
+	 vkUnmapMemory(m_device, m_vertices.memory);
 	  
-	 vkBindBufferMemory(device, vertices.buffer, vertices.memory, 0);
+	 vkBindBufferMemory(m_device, m_vertices.buffer, m_vertices.memory, 0);
 
 	 //Generate index buffer
 	 VkBufferCreateInfo indexbufferInfo = {};
@@ -274,101 +134,101 @@ void Triangle::initVertex()
 	 indexbufferInfo.flags = 0;
 
 	 //Copy index data  to vram
-	 memset(&indices, 0, sizeof(indices));
-	 res = vkCreateBuffer(device, &indexbufferInfo, nullptr, &indices.buffer);
+	 memset(&m_indices, 0, sizeof(m_indices));
+	 res = vkCreateBuffer(m_device, &indexbufferInfo, nullptr, &m_indices.buffer);
 	 assert(!res);
-	 vkGetBufferMemoryRequirements(device, indices.buffer, &memoryReqs);
+	 vkGetBufferMemoryRequirements(m_device, m_indices.buffer, &memoryReqs);
 	 memoryAlloc.allocationSize = memoryReqs.size;
-	 getMemoryType(memoryReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, &memoryAlloc.memoryTypeIndex);
-	 res = vkAllocateMemory(device, &memoryAlloc, nullptr, &indices.memory);
+	 Vulkan::getMemoryType({}, memoryReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, &memoryAlloc.memoryTypeIndex);
+	 res = vkAllocateMemory(m_device, &memoryAlloc, nullptr, &m_indices.memory);
 	 assert(!res);
 	 
-	 res = vkMapMemory(device, indices.memory, 0, indexBufferSize, 0, &data);
+	 res = vkMapMemory(m_device, m_indices.memory, 0, indexBufferSize, 0, &data);
 	 assert(!res);
 	 memcpy(data, indexBuffer.data(), indexBufferSize);
-	 vkUnmapMemory(device, indices.memory);
-	 res = vkBindBufferMemory(device, indices.buffer, indices.memory, 0);
+	 vkUnmapMemory(m_device, m_indices.memory);
+	 res = vkBindBufferMemory(m_device, m_indices.buffer, m_indices.memory, 0);
 	 assert(!res);
-     indices.count = indexBuffer.size();
+     m_indices.count = indexBuffer.size();
 
      //Bind description
-	 vertices.bindingDescs.resize(1);
-	 vertices.bindingDescs[0].binding = VERTEX_BUFFER_BIND_ID;
-	 vertices.bindingDescs[0].stride  = sizeof(Vertex);
-	 vertices.bindingDescs[0].inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+	 m_vertices.bindingDescs.resize(1);
+	 m_vertices.bindingDescs[0].binding   = VERTEX_BUFFER_BIND_ID;
+	 m_vertices.bindingDescs[0].stride    = sizeof(Vertex);
+	 m_vertices.bindingDescs[0].inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 
 	 //Attribute descriptions
 	 //Describes memory layout and shader attribute locations
-	 vertices.attributeDescs.resize(2);
+	 m_vertices.attributeDescs.resize(2);
 	 //Location 0: Position
-	 vertices.attributeDescs[0].binding = VERTEX_BUFFER_BIND_ID;
-	 vertices.attributeDescs[0].location = 0;
-	 vertices.attributeDescs[0].format = VK_FORMAT_R32G32B32_SFLOAT;
-	 vertices.attributeDescs[0].binding = 0;
+	 m_vertices.attributeDescs[0].binding  = VERTEX_BUFFER_BIND_ID;
+	 m_vertices.attributeDescs[0].location = 0;
+	 m_vertices.attributeDescs[0].format   = VK_FORMAT_R32G32B32_SFLOAT;
+	 m_vertices.attributeDescs[0].binding  = 0;
 
 	 //Location 1: Color
-	 vertices.attributeDescs[1].binding = VERTEX_BUFFER_BIND_ID;
-	 vertices.attributeDescs[1].location = 1;
-	 vertices.attributeDescs[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-	 vertices.attributeDescs[1].offset = sizeof(float) * 3;
-	 vertices.attributeDescs[1].binding = 0;
+	 m_vertices.attributeDescs[1].binding  = VERTEX_BUFFER_BIND_ID;
+	 m_vertices.attributeDescs[1].location = 1;
+	 m_vertices.attributeDescs[1].format   = VK_FORMAT_R32G32B32_SFLOAT;
+	 m_vertices.attributeDescs[1].offset   = sizeof(float) * 3;
+	 m_vertices.attributeDescs[1].binding  = 0;
 
 	 //Assign to vertex buffer
-	 vertices.vi.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-	 vertices.vi.pNext = nullptr;
-	 vertices.vi.vertexBindingDescriptionCount = vertices.bindingDescs.size();
-	 vertices.vi.pVertexBindingDescriptions  = vertices.bindingDescs.data();
-	 vertices.vi.vertexAttributeDescriptionCount = vertices.attributeDescs.size();
-	 vertices.vi.pVertexAttributeDescriptions = vertices.attributeDescs.data();
+	 m_vertices.inputStateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+	 m_vertices.inputStateInfo.pNext = nullptr;
+	 m_vertices.inputStateInfo.vertexBindingDescriptionCount   = m_vertices.bindingDescs.size();
+	 m_vertices.inputStateInfo.pVertexBindingDescriptions      = m_vertices.bindingDescs.data();
+	 m_vertices.inputStateInfo.vertexAttributeDescriptionCount = m_vertices.attributeDescs.size();
+	 m_vertices.inputStateInfo.pVertexAttributeDescriptions    = m_vertices.attributeDescs.data();
 
 }
 
-void Triangle::initUbo()
+void Triangle::init_ubo()
 {
 	//Prepare and initialize uniform buffer containing shader uniforms
 
 	//Vertex shader uniform buffer block
 	VkMemoryAllocateInfo allocInfo = {};
-	allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-	allocInfo.pNext = nullptr;
-	allocInfo.allocationSize = 0;
+	allocInfo.sType           = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+	allocInfo.pNext           = nullptr;
+	allocInfo.allocationSize  = 0;
 	allocInfo.memoryTypeIndex = 0;
 
 	VkBufferCreateInfo bufferInfo = {};
 	bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-	bufferInfo.size  = sizeof(uniform);
+	bufferInfo.size  = sizeof(m_uniform);
 	bufferInfo.usage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
 
 	//Create a new buffer
 	VkResult res = VK_SUCCESS;
-	res = vkCreateBuffer(device, &bufferInfo, nullptr, &uniform.buffer);
+	res = vkCreateBuffer(m_device, &bufferInfo, nullptr, &m_uniform.buffer);
 	assert(!res);
 
 
 	//Get memory requirements including size, alignment and memory type
 	VkMemoryRequirements memReqs;
-	vkGetBufferMemoryRequirements(device, uniform.buffer, &memReqs);
+	vkGetBufferMemoryRequirements(m_device, m_uniform.buffer, &memReqs);
 	allocInfo.allocationSize = memReqs.size;
-
+	 
 	//Get the appropriate memory type for this type of buffer allocation
 	//Only memory types that are visible to the host
-	getMemoryType(memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, &allocInfo.memoryTypeIndex);
+	Vulkan::getMemoryType({}, memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, &allocInfo.memoryTypeIndex);
 	//Allocate memory for the uniform buffer
-	res = vkAllocateMemory(device, &allocInfo, nullptr, &uniform.memory);
+	res = vkAllocateMemory(m_device, &allocInfo, nullptr, &m_uniform.memory);
 	assert(!res);
     //Bind memory to buffer
-	res = vkBindBufferMemory(device, uniform.buffer, uniform.memory, 0);
+	res = vkBindBufferMemory(m_device, m_uniform.buffer, m_uniform.memory, 0);
 	assert(!res);
 
 	//Store information in the uniform's descriptor
-	uniform.desc.buffer = uniform.buffer;
-	uniform.desc.offset = 0;
-	uniform.desc.range  = sizeof(Uniform);
+	m_uniform.desc.buffer = m_uniform.buffer;
+	m_uniform.desc.offset = 0;
+	m_uniform.desc.range  = sizeof(Uniform);
 
-	updateUbo();
+	update_ubo();
 
 }
-void Triangle::initDescriptorSetLayout()
+void Triangle::init_descriptorSetLayout()
 {
 	//Setup layout of descriptors used in this example
 	//Basically connects the different shader stages to descriptors
@@ -377,34 +237,34 @@ void Triangle::initDescriptorSetLayout()
 	
 	//Binding 0: Uniform Buffer (Vertex Shader)
 	VkDescriptorSetLayoutBinding layoutBinding = {};
-	layoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	layoutBinding.descriptorCount = 1;
-	layoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+	layoutBinding.descriptorType     = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	layoutBinding.descriptorCount    = 1;
+	layoutBinding.stageFlags         = VK_SHADER_STAGE_VERTEX_BIT;
 	layoutBinding.pImmutableSamplers = nullptr;
 
 	VkDescriptorSetLayoutCreateInfo descSetLayoutInfo = {};
-	descSetLayoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
-	descSetLayoutInfo.pNext = nullptr;
+	descSetLayoutInfo.sType        = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+	descSetLayoutInfo.pNext        = nullptr;
 	descSetLayoutInfo.bindingCount = 1;
-	descSetLayoutInfo.pBindings = &layoutBinding;
-    VkResult res = vkCreateDescriptorSetLayout(device, &descSetLayoutInfo, nullptr, &descriptorSetLayout);
+	descSetLayoutInfo.pBindings    = &layoutBinding;
+    VkResult res = vkCreateDescriptorSetLayout(m_device, &descSetLayoutInfo, nullptr, &m_descriptorSetLayout);
 	assert(!res);
 
 	// Create the pipeline layout that is used to generate the rendering pipelines that are based on this
-	// descriptor set layou 
+	// descriptor set layout
 	// In a more complex scenario you would have different pipeline layouts for different descriptor set 
 	// Layouts that could be reused.
 	VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
-	pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-	pipelineLayoutInfo.pNext = NULL;
+	pipelineLayoutInfo.sType          = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+	pipelineLayoutInfo.pNext          = NULL;
 	pipelineLayoutInfo.setLayoutCount = 1;
-	pipelineLayoutInfo.pSetLayouts = &descriptorSetLayout;
+	pipelineLayoutInfo.pSetLayouts    = &m_descriptorSetLayout;
 
-	res = vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout);
+	res = vkCreatePipelineLayout(m_device, &pipelineLayoutInfo, nullptr, &m_pipelineLayout);
 	assert(!res);
 }
 
-void Triangle::initPipeline()
+void Triangle::init_pipeline(VkRenderPass renderPass, VkPipelineCache pipelineCache)
 {
 	//Create out rendering pipeline used in this example
 	//Vulkan uses the  concept of rendering pipelines to encapsulate fixed states
@@ -420,8 +280,8 @@ void Triangle::initPipeline()
 	VkResult res = VK_SUCCESS;
 
 	VkGraphicsPipelineCreateInfo pipelineCreateInfo = {};
-	pipelineCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-	pipelineCreateInfo.layout = pipelineLayout;
+	pipelineCreateInfo.sType      = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+	pipelineCreateInfo.layout     = m_pipelineLayout;
 	pipelineCreateInfo.renderPass = renderPass;
 
 	//Vertex input state
@@ -450,9 +310,9 @@ void Triangle::initPipeline()
 	//Blending is not used in this example
 	VkPipelineColorBlendAttachmentState blendAttachmentState[1] = {};
 	blendAttachmentState[0].colorWriteMask = 0xf;
-	blendAttachmentState[0].blendEnable = VK_FALSE;
-	colorBlendState.attachmentCount = 1;
-	colorBlendState.pAttachments = blendAttachmentState;
+	blendAttachmentState[0].blendEnable    = VK_FALSE;
+	colorBlendState.attachmentCount        = 1;
+	colorBlendState.pAttachments           = blendAttachmentState;
 
 	//Viewport state
 	VkPipelineViewportStateCreateInfo viewportState = {};
@@ -498,34 +358,34 @@ void Triangle::initPipeline()
 	multiSampleState.pSampleMask = nullptr;
 	multiSampleState.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
 
-	//Load Shaders
-	VkPipelineShaderStageCreateInfo shaderStages[2] = { {}, {} };
+
 #ifdef USE_GLSL
-	shaderStages[0] = loadShaderGLSL("test.vert", VK_SHADER_STAGE_VERTEX_BIT);
-	shaderStages[1] = loadShaderGLSL("test.frag", VK_SHADER_STAGE_FRAGMENT_BIT);
+	m_triangleShader.loadGLSL(VK_SHADER_STAGE_VERTEX_BIT, "triangle.vert");
+	m_triangleShader.loadGLSL(VK_SHADER_STAGE_FRAGMENT_BIT, "triangle.frag");
 #else
-	shaderStages[0] = loadShader("triangle.vert.spv", VK_SHADER_STAGE_VERTEX_BIT);
-	shaderStages[1] = loadShader("triangle.frag.spv", VK_SHADER_STAGE_FRAGMENT_BIT);
+	m_triangleShader.loadSPIR( VK_SHADER_STAGE_VERTEX_BIT, "triangle.vert.spv");
+	m_triangleShader.loadSPIR( VK_SHADER_STAGE_FRAGMENT_BIT, "triangle.frag.spv");
 #endif
+	VkPipelineShaderStageCreateInfo shaderStages[2] = {};
 
     //Assign states, two shader stages
-	pipelineCreateInfo.stageCount = 2;
-	pipelineCreateInfo.pVertexInputState = &vertices.vi;
+	pipelineCreateInfo.stageCount          = 2;
+	pipelineCreateInfo.pVertexInputState   = &m_vertices.inputStateInfo;
 	pipelineCreateInfo.pInputAssemblyState = &inputAssemblyState;
 	pipelineCreateInfo.pRasterizationState = &rasterizationState;
-	pipelineCreateInfo.pColorBlendState = &colorBlendState;
-	pipelineCreateInfo.pMultisampleState = &multiSampleState;
-	pipelineCreateInfo.pViewportState = &viewportState;
-	pipelineCreateInfo.pDepthStencilState = &depthStencilState;
-	pipelineCreateInfo.pStages = shaderStages;
-	pipelineCreateInfo.renderPass = renderPass;
-	pipelineCreateInfo.pDynamicState = &pipelineDynamicState;
+	pipelineCreateInfo.pColorBlendState    = &colorBlendState;
+	pipelineCreateInfo.pMultisampleState   = &multiSampleState;
+	pipelineCreateInfo.pViewportState      = &viewportState;
+	pipelineCreateInfo.pDepthStencilState  = &depthStencilState;
+	pipelineCreateInfo.pStages             = shaderStages; //& (m_triangleShader.getStages() )[0];
+	pipelineCreateInfo.renderPass          = renderPass;
+	pipelineCreateInfo.pDynamicState       = &pipelineDynamicState;
 
-	res = vkCreateGraphicsPipelines(device, pipelineCache, 1, &pipelineCreateInfo, nullptr, &pipeline);
+	res = vkCreateGraphicsPipelines(m_device, pipelineCache, 1, &pipelineCreateInfo, nullptr, &m_pipeline);
 	assert(!res);
 }
 
-void Triangle::initDescriptorPool()
+void Triangle::init_descriptorPool()
 {
 	//We need to tell the api the number of max requessted descriptors per type
 	VkDescriptorPoolSize typeCounts[1];
@@ -549,12 +409,12 @@ void Triangle::initDescriptorPool()
     // Requesting descriptors beyond maxSets will result in an error
 	descPoolInfo.maxSets = 1;
 
-	VkResult res = vkCreateDescriptorPool(device, &descPoolInfo, nullptr, &descriptorPool);
+	VkResult res = vkCreateDescriptorPool(m_device, &descPoolInfo, nullptr, &m_descriptorPool);
 	assert(!res);
 
 }
 
-void Triangle::initDescriptorSet()
+void Triangle::init_descriptorSet()
 {
 	//Update descirptor sets determing the shader binding points 
 	//For every binding point used in a shader there needs to be one
@@ -562,37 +422,40 @@ void Triangle::initDescriptorSet()
 	VkResult res = VK_SUCCESS;
 
 	VkDescriptorSetAllocateInfo descAllocInfo = {};
-	descAllocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-	descAllocInfo.descriptorPool = descriptorPool;
+	descAllocInfo.sType              = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+	descAllocInfo.descriptorPool     = m_descriptorPool;
 	descAllocInfo.descriptorSetCount = 1;
-	descAllocInfo.pSetLayouts = &descriptorSetLayout;
-	res = vkAllocateDescriptorSets(device, &descAllocInfo, &descriptorSet);
+	descAllocInfo.pSetLayouts        = &m_descriptorSetLayout;
+	res                              = vkAllocateDescriptorSets(m_device, &descAllocInfo, &m_descriptorSet);
 	assert(!res);
 
    //Binding 0: Uniform buffer
 	VkWriteDescriptorSet writeDescSet  = {};
-	writeDescSet.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-	writeDescSet.dstSet = descriptorSet;
+	writeDescSet.sType           = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+	writeDescSet.dstSet          = m_descriptorSet;
 	writeDescSet.descriptorCount = 1;
-	writeDescSet.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	writeDescSet.pBufferInfo  = &uniform.desc;
-	writeDescSet.dstBinding = 0;
-	vkUpdateDescriptorSets(device, 1, &writeDescSet, 0, nullptr);
+	writeDescSet.descriptorType  = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	writeDescSet.pBufferInfo     = &m_uniform.desc;
+	writeDescSet.dstBinding      = 0;
+	vkUpdateDescriptorSets(m_device, 1, &writeDescSet, 0, nullptr);
 }
 
 
-void Triangle::updateUbo()
+void Triangle::update_ubo()
 {
 
-	matrix.model = glm::mat4(1.0f);
-	matrix.view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	matrix.proj  = glm::perspective(45.0f, static_cast<float>(width)/height, 0.1f, 1000.0f);
+	m_matrix.model = glm::mat4(1.0f);
+	m_matrix.view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	m_matrix.proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 
 	//Map uniform buffer and update it
 	uint8_t *pData;
-	VkResult res = vkMapMemory(device, uniform.memory, 0, sizeof(matrix), 0, (void**)&pData);
+	VkResult res = vkMapMemory(m_device, m_uniform.memory, 0, sizeof(m_matrix), 0, (void**)&pData);
 	assert(!res);
-	memcpy(pData, &matrix, sizeof(matrix));
-	vkUnmapMemory(device, uniform.memory);
+	memcpy(pData, &m_matrix, sizeof(MVPMatrix));
+	vkUnmapMemory(m_device, m_uniform.memory);
+
+}
+
 
 }

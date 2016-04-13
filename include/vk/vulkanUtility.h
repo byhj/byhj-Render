@@ -26,6 +26,9 @@
 
 namespace Vulkan {
 
+	// Get memory type for a given memory allocation (flags and bits)
+	VkBool32 getMemoryType(VkPhysicalDeviceMemoryProperties  dmp, uint32_t typeBits, VkFlags properties, uint32_t *typeIndex);
+
 	// Check if extension is globally available
 	VkBool32 checkGlobalExtensionPresent(const char* extensionName);
 

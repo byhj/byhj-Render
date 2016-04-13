@@ -1,4 +1,8 @@
-#pragma once
+
+#ifndef Triangle_H
+#define Triangle_H
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +14,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <vulkan/vulkan.h>
-#include "vulkanBase.h" 
 
 #define VERTEX_BUFFER_BIND_ID 0
 // Note : 
@@ -22,91 +25,81 @@
 // See vulkandebug.cpp for details
 #define ENABLE_VALIDATION false
 
-class Triangle : public VulkanBase
-{
-public:
-	Triangle() :VulkanBase(ENABLE_VALIDATION)
-	{
-		width = 1280;
-		height = 720;
-		zoom = -2.5f;
-		title = "Vulkan Example - Basic indexed triangle";
-		// Values not set here are initialized in the base class constructor
-	}
+#include "vk/vulkanShader.h"
 
-	~Triangle() {
-		// Clean up used Vulkan resources 
-       // Note : Inherited destructor cleans up resources stored in base class
-		vkDestroyPipeline(device, pipeline, nullptr);
+namespace byhj {
 
-		vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
-		vkDestroyDescriptorSetLayout(device, descriptorSetLayout, nullptr);
+    class Triangle 
+    {
+    public:
+    	Triangle() = default;
+    	~Triangle() = default;
+    
+    	struct  Vertex
+    	{
+    		VkBuffer buffer;
+    		VkDeviceMemory memory;
+    		VkPipelineVertexInputStateCreateInfo inputStateInfo;
+    		std::vector<VkVertexInputBindingDescription>   bindingDescs;
+    		std::vector<VkVertexInputAttributeDescription> attributeDescs;
+    	};
+    	
+    	struct Index {
+    		int count;
+    		VkBuffer buffer;
+    		VkDeviceMemory memory;
+    	};
+    
+    	struct Uniform {
+    	   VkBuffer buffer;
+    	   VkDeviceMemory memory;
+    	   VkDescriptorBufferInfo desc;
+    	};
+    
+    	struct MVPMatrix {
+    	   glm::mat4 model;
+    	   glm::mat4 view;
+    	   glm::mat4 proj;
+    	};
+    
 
-		vkDestroyBuffer(device, vertices.buffer, nullptr);
-		vkFreeMemory(device, vertices.memory, nullptr);
+    
+    
+    	void init(VkDevice device);
+    	void update();
+    	void render();
+    	void shutdown();
+         
+		void setupCmd(const VkCommandBuffer drawCmdBuffer);
+		void init_pipeline(VkRenderPass renderPass,VkPipelineCache pipelineCache);
 
-		vkDestroyBuffer(device, indices.buffer, nullptr);
-		vkFreeMemory(device, indices.memory, nullptr);
+    private: 
+    	void init_vertex();
+		void init_ubo();
 
-		vkDestroyBuffer(device, uniform.buffer, nullptr);
-		vkFreeMemory(device, uniform.memory, nullptr);
-	}
+        void init_descriptorPool();
+    	void init_descriptorSet();
+    	void init_descriptorSetLayout();
+    
+    	void update_ubo();
 
-	struct  Vertex
-	{
-		VkBuffer buffer;
-		VkDeviceMemory memory;
-		VkPipelineVertexInputStateCreateInfo vi;
-		std::vector<VkVertexInputBindingDescription>   bindingDescs;
-		std::vector<VkVertexInputAttributeDescription> attributeDescs;
-	};
-	
-	struct Index {
-		int count;
-		VkBuffer buffer;
-		VkDeviceMemory memory;
-	};
+		VkDevice  m_device;
 
-	struct Uniform {
-	   VkBuffer buffer;
-	   VkDeviceMemory memory;
-	   VkDescriptorBufferInfo desc;
-	};
+		Vertex    m_vertices;
+		Index     m_indices;
+		Uniform   m_uniform;
+		MVPMatrix m_matrix;
 
-	struct Matrix {
-	   glm::mat4 model;
-	   glm::mat4 view;
-	   glm::mat4 proj;
-	};
+		VkPipeline            m_pipeline;
+		VkPipelineLayout      m_pipelineLayout;
+		VkDescriptorPool      m_descriptorPool;
+		VkDescriptorSet       m_descriptorSet;
+		VkDescriptorSetLayout m_descriptorSetLayout;
+		VulkanShader m_triangleShader;
 
-	Vertex vertices;
-	Index  indices;
-	Uniform uniform;
-	Matrix matrix;
-
-	VkPipeline pipeline;
-	VkPipelineLayout pipelineLayout;
-	VkDescriptorSet descriptorSet;
-	VkDescriptorSetLayout descriptorSetLayout;
+    };
 
 
-	void init();
-	void update();
-	void render() override;
-	void shutdown();
+}
 
-private:
-
-	void buildCmdBuffers();
-
-	void initVertex();
-	void initPipeline();
-	void initUbo();
-
-    void initDescriptorPool();
-	void initDescriptorSet();
-	void initDescriptorSetLayout();
-
-	void updateUbo();
-
-};
+#endif

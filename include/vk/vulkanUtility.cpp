@@ -16,6 +16,20 @@
 
 namespace Vulkan
 {
+	VkBool32 getMemoryType(VkPhysicalDeviceMemoryProperties  dmp,  uint32_t typeBits, VkFlags properties, uint32_t * typeIndex)
+	{
+		static 	VkPhysicalDeviceMemoryProperties deviceMemoryProperties = dmp;
+		for (uint32_t i = 0; i < 32; i++) {
+			if ((typeBits & 1) == 1) {
+				if ((deviceMemoryProperties.memoryTypes[i].propertyFlags & properties) == properties) {
+					*typeIndex = i;
+					return true;
+				}
+			}
+			typeBits >>= 1;
+		}
+		return false;
+	}
 
 	VkBool32 checkGlobalExtensionPresent(const char* extensionName)
 	{
