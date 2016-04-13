@@ -5,6 +5,7 @@
 #include <gli/gli.hpp>
 
 #include "vulkanUtility.h"
+#include <memory>
 
 namespace Vulkan
 {
@@ -23,8 +24,10 @@ namespace Vulkan
 class VulkanTextureLoader
 {
 public:
-	VulkanTextureLoader(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, VkCommandPool cmdPool);
+	VulkanTextureLoader();
 	~VulkanTextureLoader();
+
+	void init(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, VkCommandPool cmdPool);
 
 	// Load a 2D texture
 	void loadTexture(const char* filename, VkFormat format, Vulkan::Texture *texture);
@@ -37,6 +40,8 @@ public:
 
 	// Load a cubemap texture (single file)
 	void loadCubemap(const char* filename, VkFormat format, Vulkan::Texture *texture);
+	
+	static std::shared_ptr<VulkanTextureLoader> getInstance();
 
 private:
 	// Try to find appropriate memory type for a memory allocation

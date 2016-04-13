@@ -8,6 +8,8 @@ void Cube::init(VkDevice device)
 	m_triangleShader.init(device);
 	init_vertex();
 	init_ubo();
+	init_texture();
+
 	init_descriptorSetLayout();
 
 	init_descriptorPool();
@@ -61,7 +63,7 @@ void Cube::setupCmd(const VkCommandBuffer drawCmdBuffer)
 	vkCmdBindIndexBuffer(drawCmdBuffer, m_indices.buffer, 0, VK_INDEX_TYPE_UINT32);
 
 	//Draw indexed Cube
-	vkCmdDrawIndexed(drawCmdBuffer, m_indices.count, 1, 0, 0, 1);
+	vkCmdDrawIndexed(drawCmdBuffer, m_indices.count, 1, 0, 0, 0);
 }
 
 
@@ -72,21 +74,23 @@ void Cube::setupCmd(const VkCommandBuffer drawCmdBuffer)
 void Cube::init_vertex()
 {
 	struct Vertex {
-		float pos[3];
-		float col[3];
+		float position[3];
+		float texcoord[2];
 	};
 
+#define dim 1.0f
 	// Setup m_vertices
 	std::vector<Vertex> vertexBuffer ={
-		{ { 1.0f,  1.0f, 0.0f },{ 1.0f, 0.0f, 0.0f } },
-		{ { -1.0f,  1.0f, 0.0f },{ 0.0f, 1.0f, 0.0f } },
-		{ { 0.0f, -1.0f, 0.0f },{ 0.0f, 0.0f, 1.0f } }
+		{ { dim,  dim, 0.0f },{ 1.0f, 1.0f } },
+		{ { -dim,  dim, 0.0f },{ 0.0f, 1.0f } },
+		{ { -dim, -dim, 0.0f },{ 0.0f, 0.0f } },
+		{ { dim, -dim, 0.0f },{ 1.0f, 0.0f } }
 	};
 
 	auto vertexBufferSize = vertexBuffer.size() * sizeof(Vertex);
 
 	//Setup m_indices
-	std::vector<uint32_t> indexBuffer = {0, 1, 2};
+	std::vector<uint32_t> indexBuffer = { 0,1,2, 2,3,0 };
 	int indexBufferSize = indexBuffer.size() * sizeof(uint32_t);
 
 	VkMemoryAllocateInfo memoryAlloc = {};
@@ -163,14 +167,14 @@ void Cube::init_vertex()
 	 m_vertices.attributeDescs[0].binding  = VERTEX_BUFFER_BIND_ID;
 	 m_vertices.attributeDescs[0].location = 0;
 	 m_vertices.attributeDescs[0].format   = VK_FORMAT_R32G32B32_SFLOAT;
-	 m_vertices.attributeDescs[0].binding  = 0;
+	 m_vertices.attributeDescs[0].offset   = 0;
 
 	 //Location 1: Color
 	 m_vertices.attributeDescs[1].binding  = VERTEX_BUFFER_BIND_ID;
 	 m_vertices.attributeDescs[1].location = 1;
-	 m_vertices.attributeDescs[1].format   = VK_FORMAT_R32G32B32_SFLOAT;
+	 m_vertices.attributeDescs[1].format   = VK_FORMAT_R32G32_SFLOAT;
 	 m_vertices.attributeDescs[1].offset   = sizeof(float) * 3;
-	 m_vertices.attributeDescs[1].binding  = 0;
+
 
 	 //Assign to vertex buffer
 	 m_vertices.inputStateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
@@ -227,6 +231,14 @@ void Cube::init_ubo()
 	update_ubo();
 
 }
+void Cube::init_texture()
+{
+	VulkanTextureLoader::getInstance()->loadTexture(
+		"igor_and_pal_bc3.ktx",
+		VK_FORMAT_BC3_UNORM_BLOCK,
+		&m_texture);
+}
+
 void Cube::init_descriptorSetLayout()
 {
 	//Setup layout of descriptors used in this example
@@ -234,18 +246,28 @@ void Cube::init_descriptorSetLayout()
 	//for binding uniform buffers, image samplers, etc.
 	//so every shader binding should map to one descriptor set layout binding
 	
+
+	std::vector<VkDescriptorSetLayoutBinding> layoutBindings(2);
+
 	//Binding 0: Uniform Buffer (Vertex Shader)
-	VkDescriptorSetLayoutBinding layoutBinding = {};
-	layoutBinding.descriptorType     = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	layoutBinding.descriptorCount    = 1;
-	layoutBinding.stageFlags         = VK_SHADER_STAGE_VERTEX_BIT;
-	layoutBinding.pImmutableSamplers = nullptr;
+	layoutBindings[0].descriptorType     = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	layoutBindings[0].descriptorCount    = 1;
+	layoutBindings[0].stageFlags         = VK_SHADER_STAGE_VERTEX_BIT;
+	layoutBindings[0].binding = 0;
+	layoutBindings[0].pImmutableSamplers = nullptr;
+
+	// Binding 1 : Fragment shader image sampler
+	layoutBindings[1].descriptorType     = 	VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+	layoutBindings[1].descriptorCount    = 1;
+	layoutBindings[1].stageFlags         = VK_SHADER_STAGE_FRAGMENT_BIT,
+	layoutBindings[1].pImmutableSamplers = nullptr;
+	layoutBindings[1].binding = 1;
 
 	VkDescriptorSetLayoutCreateInfo descSetLayoutInfo = {};
 	descSetLayoutInfo.sType        = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
 	descSetLayoutInfo.pNext        = nullptr;
-	descSetLayoutInfo.bindingCount = 1;
-	descSetLayoutInfo.pBindings    = &layoutBinding;
+	descSetLayoutInfo.bindingCount = layoutBindings.size();
+	descSetLayoutInfo.pBindings    = &layoutBindings[0];
     VkResult res = vkCreateDescriptorSetLayout(m_device, &descSetLayoutInfo, nullptr, &m_descriptorSetLayout);
 	assert(!res);
 
@@ -354,8 +376,8 @@ void Cube::init_pipeline(VkRenderPass &renderPass, VkPipelineCache &pipelineCach
 
 
 #ifdef USE_GLSL
-	m_triangleShader.loadGLSL(VK_SHADER_STAGE_VERTEX_BIT, "Cube.vert");
-	m_triangleShader.loadGLSL(VK_SHADER_STAGE_FRAGMENT_BIT, "Cube.frag");
+	m_triangleShader.loadGLSL(VK_SHADER_STAGE_VERTEX_BIT, "texture.vert");
+	m_triangleShader.loadGLSL(VK_SHADER_STAGE_FRAGMENT_BIT, "texture.frag");
 #else
 	m_triangleShader.loadSPIR( VK_SHADER_STAGE_VERTEX_BIT, "Cube.vert.spv");
 	m_triangleShader.loadSPIR( VK_SHADER_STAGE_FRAGMENT_BIT, "Cube.frag.spv");
@@ -375,6 +397,7 @@ void Cube::init_pipeline(VkRenderPass &renderPass, VkPipelineCache &pipelineCach
 	pipelineCreateInfo.pMultisampleState   = &multiSampleState;
 	pipelineCreateInfo.pViewportState      = &viewportState;
 	pipelineCreateInfo.pDepthStencilState  = &depthStencilState;
+	pipelineCreateInfo.stageCount          = shaderStages.size();
 	pipelineCreateInfo.pStages             = &shaderStages[0];
 	pipelineCreateInfo.renderPass          = renderPass;
 	pipelineCreateInfo.pDynamicState       = &pipelineDynamicState;
@@ -387,26 +410,23 @@ void Cube::init_pipeline(VkRenderPass &renderPass, VkPipelineCache &pipelineCach
 void Cube::init_descriptorPool()
 {
 	//We need to tell the api the number of max requessted descriptors per type
-	VkDescriptorPoolSize typeCounts[1];
+	VkDescriptorPoolSize typeCounts[2] = {};
+
 	//This example only uses one descriptor type (uniform buffer) and only requests one descriptor of this type
 	typeCounts[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
 	typeCounts[0].descriptorCount = 1;
 
-	//For additionnal types you need to add new entries in the type count list
-	//E.g for two combined image samplers:
-	// typeCounts[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	// typeCounts[1].descriptorCount = 2;
+	typeCounts[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+	typeCounts[1].descriptorCount = 1;
 
-	//Create the global descriptor pool
-    //All descriptors used in this example are allocated form this pool
 	VkDescriptorPoolCreateInfo descPoolInfo = {};
 	descPoolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
 	descPoolInfo.pNext = nullptr;
-	descPoolInfo.poolSizeCount = 1;
+	descPoolInfo.poolSizeCount = 2;
 	descPoolInfo.pPoolSizes = typeCounts;
 	// Set the max. number of sets that can be requested
     // Requesting descriptors beyond maxSets will result in an error
-	descPoolInfo.maxSets = 1;
+	descPoolInfo.maxSets = 2;
 
 	VkResult res = vkCreateDescriptorPool(m_device, &descPoolInfo, nullptr, &m_descriptorPool);
 	assert(!res);
@@ -428,15 +448,33 @@ void Cube::init_descriptorSet()
 	res                              = vkAllocateDescriptorSets(m_device, &descAllocInfo, &m_descriptorSet);
 	assert(!res);
 
+	// Image descriptor for the color map texture
+	VkDescriptorImageInfo descriptorImageInfo ={};
+	descriptorImageInfo.sampler = m_texture.sampler;
+	descriptorImageInfo.imageView = m_texture.view;
+	descriptorImageInfo.imageLayout = VK_IMAGE_LAYOUT_GENERAL;
+
+
    //Binding 0: Uniform buffer
-	VkWriteDescriptorSet writeDescSet  = {};
-	writeDescSet.sType           = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-	writeDescSet.dstSet          = m_descriptorSet;
-	writeDescSet.descriptorCount = 1;
-	writeDescSet.descriptorType  = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	writeDescSet.pBufferInfo     = &m_uniform.desc;
-	writeDescSet.dstBinding      = 0;
-	vkUpdateDescriptorSets(m_device, 1, &writeDescSet, 0, nullptr);
+	std::vector<VkWriteDescriptorSet> writeDescSets(2);
+	writeDescSets[0].sType           = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+	writeDescSets[0].dstSet          = m_descriptorSet;
+	writeDescSets[0].descriptorCount = 1;
+	writeDescSets[0].descriptorType  = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+	writeDescSets[0].pBufferInfo     = &m_uniform.desc;
+	writeDescSets[0].dstBinding      = 0;
+	writeDescSets[0].descriptorCount = 1;
+
+	// Binding 1 : Fragment shader texture samplers
+	writeDescSets[1].sType           = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+	writeDescSets[1].dstSet          = m_descriptorSet;
+	writeDescSets[1].descriptorCount = 1;
+	writeDescSets[1].descriptorType  = 	VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+	writeDescSets[1].pImageInfo      = &descriptorImageInfo;
+	writeDescSets[1].dstBinding      = 1;
+	writeDescSets[1].descriptorCount = 1;
+
+	vkUpdateDescriptorSets(m_device, writeDescSets.size(), &writeDescSets[0], 0, nullptr);
 }
 
 

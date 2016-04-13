@@ -161,6 +161,21 @@
     <None Include="cube.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="texture.frag.spv">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="texture.vert">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="texture.vert.spv">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="texture.frag">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="igor_and_pal_bc3.ktx">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vulkanRender.cpp">

@@ -159,6 +159,11 @@
   <ItemGroup>
     <None Include="cube.frag" />
     <None Include="cube.vert" />
+    <None Include="igor_and_pal_bc3.ktx" />
+    <None Include="texture.frag" />
+    <None Include="texture.frag.spv" />
+    <None Include="texture.vert" />
+    <None Include="texture.vert.spv" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />

@@ -26,6 +26,7 @@
 #define ENABLE_VALIDATION false
 
 #include "vk/vulkanShader.h"
+#include "vk/vulkanTextureLoader.h"
 
 namespace byhj {
 
@@ -61,9 +62,8 @@ namespace byhj {
     	   glm::mat4 view;
     	   glm::mat4 proj;
     	};
-    
-
-    
+        Vulkan::Texture m_texture;
+		VulkanTextureLoader m_textureLoader;
     
     	void init(VkDevice device);
     	void update();
@@ -76,6 +76,7 @@ namespace byhj {
     private: 
     	void init_vertex();
 		void init_ubo();
+		void init_texture();
 
         void init_descriptorPool();
     	void init_descriptorSet();

@@ -1,11 +1,28 @@
 #include "vulkanTextureLoader.h"
 
-VulkanTextureLoader::VulkanTextureLoader(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, VkCommandPool cmdPool)
+std::shared_ptr<VulkanTextureLoader> VulkanTextureLoader::getInstance()
+{
+	static std::shared_ptr<VulkanTextureLoader> pInstance = std::make_shared<VulkanTextureLoader>();
+	return pInstance;
+}
+
+VulkanTextureLoader::VulkanTextureLoader()
+{
+
+}
+
+VulkanTextureLoader::~VulkanTextureLoader()
+{
+	//vkFreeCommandBuffers(device, cmdPool, 1, &cmdBuffer);
+}
+
+void VulkanTextureLoader::init(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, VkCommandPool cmdPool)
 {
 	this->physicalDevice = physicalDevice;
 	this->device = device;
 	this->queue = queue;
 	this->cmdPool = cmdPool;
+
 	vkGetPhysicalDeviceMemoryProperties(physicalDevice, &deviceMemoryProperties);
 
 	// Create command buffer for submitting image barriers
@@ -19,13 +36,6 @@ VulkanTextureLoader::VulkanTextureLoader(VkPhysicalDevice physicalDevice, VkDevi
 	VkResult vkRes = vkAllocateCommandBuffers(device, &cmdBufInfo, &cmdBuffer);
 	assert(vkRes == VK_SUCCESS);
 }
-
-VulkanTextureLoader::~VulkanTextureLoader()
-{
-	vkFreeCommandBuffers(device, cmdPool, 1, &cmdBuffer);
-}
-
-
 
 	void  VulkanTextureLoader::loadTexture(const char* filename, VkFormat format, Vulkan::Texture *texture)
 	{

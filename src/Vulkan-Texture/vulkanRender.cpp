@@ -1,5 +1,6 @@
 #include "vulkanRender.h"
 #include "vk/vulkanDebug.h"
+#include "vk/vulkanTextureLoader.h"
 
 namespace byhj {
 
@@ -22,6 +23,8 @@ void VulkanRender::v_init()
 	flush_setupCmdBuffer();
 	// Recreate setup command buffer for derived class
 	create_setupCmdBuffer();
+	VulkanTextureLoader::getInstance()->init(m_physicalDevice, m_device, m_queue, m_commandPool);
+
 	m_cube.init(m_device);
 	m_cube.init_pipeline(m_renderPass, m_pipelineCache);
 	build_commandBuffers();
