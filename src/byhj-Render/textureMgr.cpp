@@ -77,7 +77,7 @@ namespace byhj
 		static std::shared_ptr<TextureMgr> pInsance = std::make_shared<TextureMgr>();
 
 		if (pInsance != nullptr)
-		   return pInsance;
+			return pInsance;
 	}
 
 	//Use SOIL to load the ogl texture
@@ -86,10 +86,11 @@ namespace byhj
 		std::string texFile = m_dir + fileName;
 		int width = 0, height = 0;
 		auto image = SOIL_load_image(texFile.c_str(), &width, &height, 0, alpha ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
-		
+
 		if (image == nullptr) {
 			std::cerr << "Fail to load the texture file:" << texFile << std::endl;
-		} else {
+		}
+		else {
 			std::cout << "Load the texture file:" << texFile << std::endl;
 		}
 
@@ -102,7 +103,7 @@ namespace byhj
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexImage2D(GL_TEXTURE_2D, 0, alpha ? GL_RGBA : GL_RGB, width, height, 0,
-			         alpha ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, image);
+			alpha ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		m_oglTextures.insert(std::make_pair(fileName, texId));
@@ -124,14 +125,14 @@ namespace byhj
 
 		ilGenImages(1, &imageID); 		// Generate the image ID
 		ilBindImage(imageID); 			// Bind the image
-//#ifdef _UNICODE
-		//ILboolean success = ilLoadImage(wtexFile.c_str()); 	// Load the image file
-//#else
+										//#ifdef _UNICODE
+										//ILboolean success = ilLoadImage(wtexFile.c_str()); 	// Load the image file
+										//#else
 		ILboolean success = ilLoadImage(texFile.c_str()); 	// Load the image file
-//#endif
-		 ilGetError();
+															//#endif
+		ilGetError();
 		if (success) {
-		//	std::cout << ilGetInteger(IL_IMAGE_FORMAT) << std::endl;
+			//	std::cout << ilGetInteger(IL_IMAGE_FORMAT) << std::endl;
 			glGenTextures(1, &textureID); //创建Opengl纹理接口
 			glBindTexture(GL_TEXTURE_2D, textureID);
 			//设置纹理的过滤和环绕模式
@@ -153,12 +154,13 @@ namespace byhj
 				ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
 				GL_UNSIGNED_BYTE,		// Image data type
 				ilGetData());			// The actual image data itself
-		} else {
+		}
+		else {
 			std::cout << "Fail to load the texture:" << texFile << std::endl;
 			return -1;
 		}
 		ilDeleteImages(1, &imageID); // Because we have already copied image data into texture data we can release memory used by image.
-		
+
 		std::cout << "Load the texture:" << texFile << std::endl;
 
 		m_oglTextures.insert(std::make_pair(fileName, textureID));
@@ -166,7 +168,7 @@ namespace byhj
 		//return success
 		return textureID;
 
-	/*
+		/*
 		std::string texFile = m_dir + fileName;
 		//image format
 		FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
@@ -184,14 +186,14 @@ namespace byhj
 		fif = FreeImage_GetFileType(texFile.c_str(), 0);
 		//if still unknown, try to guess the file format from the file extension
 		if (fif == FIF_UNKNOWN)
-			fif = FreeImage_GetFIFFromFilename(texFile.c_str());
+		fif = FreeImage_GetFIFFromFilename(texFile.c_str());
 		//if still unkown, return failure
 		if (fif == FIF_UNKNOWN)
-			return false;
+		return false;
 
 		//check that the plugin has reading capabilities and load the file
 		if (FreeImage_FIFSupportsReading(fif))
-			dib = FreeImage_Load(fif, texFile.c_str());
+		dib = FreeImage_Load(fif, texFile.c_str());
 
 
 		bits = FreeImage_GetBits(dib);
@@ -201,7 +203,7 @@ namespace byhj
 		std::cout << type << std::endl;
 		//if this somehow one of these failed (they shouldn't), return failure
 		if ((bits == 0) || (width == 0) || (height == 0))
-			return false;
+		return false;
 
 		glGenTextures(1, &gl_texID);
 		glBindTexture(GL_TEXTURE_2D, gl_texID);
@@ -209,9 +211,9 @@ namespace byhj
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0,   GL_RGB, 
-			          width, height, 0,  GL_RGB,
-			          GL_UNSIGNED_BYTE, bits);
+		glTexImage2D(GL_TEXTURE_2D, 0,   GL_RGB,
+		width, height, 0,  GL_RGB,
+		GL_UNSIGNED_BYTE, bits);
 
 		//Free FreeImage's copy of the data
 		FreeImage_Unload(dib);
@@ -223,11 +225,16 @@ namespace byhj
 		return gl_texID;
 		*/
 	}
+	void TextureMgr::getTexData(std::string fileName, int &width, int &height, unsigned char *data)
+	{
+		std::string texFile = m_dir + fileName;
+		data  = SOIL_load_image(texFile.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	}
 
 	GLuint TextureMgr::loadOGLTexture(std::vector<std::string> &texArray)
 	{
 		if (m_oglTextures.find(texArray[0]) != m_oglTextures.end()) {
-		  return m_oglTextures[texArray[0]];
+			return m_oglTextures[texArray[0]];
 		}
 
 		GLuint texId;
@@ -260,7 +267,7 @@ namespace byhj
 		unsigned char *image;
 		glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 		for (GLuint i = 0; i < faces.size(); ++i) {
-			image = SOIL_load_image( (m_dir + faces[i] ).c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+			image = SOIL_load_image((m_dir + faces[i]).c_str(), &width, &height, 0, SOIL_LOAD_RGB);
 			if (!image)
 				std::cout << "Cannot load the cube map texture" << std::endl;
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB,
@@ -280,10 +287,10 @@ namespace byhj
 
 		return textureID;
 	}
-	 ID3D11ShaderResourceView * TextureMgr::loadD3DTexture(ID3D11Device *pD3D11Device, std::string filename)
+	ID3D11ShaderResourceView * TextureMgr::loadD3DTexture(ID3D11Device *pD3D11Device, std::string filename)
 	{
-	    if (m_d3dTextures.find(filename) != m_d3dTextures.end()) {
-		    return m_d3dTextures[filename];
+		if (m_d3dTextures.find(filename) != m_d3dTextures.end()) {
+			return m_d3dTextures[filename];
 		}
 
 		std::string texFile = m_dir + filename;
@@ -304,27 +311,29 @@ namespace byhj
 		assert(hr == S_OK);
 
 		m_d3dTextures.insert(std::make_pair(filename, pTextureSRV));
-		
+
 		return pTextureSRV;
 	}
 
 	GLuint TextureMgr::getOGLTextureByName(std::string fileName)
 	{
-	     auto iter = m_oglTextures.find(fileName);
-		 if (iter != m_oglTextures.end()) {
-		     return m_oglTextures[fileName];
-		 } else {
-		   std::cerr << "Texture "  << fileName << " is not load." << std::endl;
-		   return -1;
-		 }
+		auto iter = m_oglTextures.find(fileName);
+		if (iter != m_oglTextures.end()) {
+			return m_oglTextures[fileName];
+		}
+		else {
+			std::cerr << "Texture " << fileName << " is not load." << std::endl;
+			return -1;
+		}
 	}
 
 	ID3D11ShaderResourceView* TextureMgr::getD3DTextureByName(std::string fileName)
 	{
 		auto iter = m_d3dTextures.find(fileName);
 		if (iter != m_d3dTextures.end()) {
-		    return m_d3dTextures[fileName];
-		} else {
+			return m_d3dTextures[fileName];
+		}
+		else {
 			std::cerr << "Texture " << fileName << " is not load." << std::endl;
 			return nullptr;
 		}

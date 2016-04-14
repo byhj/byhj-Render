@@ -1,4 +1,3 @@
-
 #ifndef Triangle_H
 #define Triangle_H
 
@@ -27,64 +26,66 @@
 
 #include "vk/vulkanShader.h"
 #include "vk/vulkanTextureLoader.h"
+#include "timer.h"
 
 namespace byhj {
 
-    class Cube
-    {
-    public:
-    	 Cube() = default;
-    	~Cube() = default;
-    
-    	struct  Vertex
-    	{
-    		VkBuffer buffer;
-    		VkDeviceMemory memory;
-    		VkPipelineVertexInputStateCreateInfo inputStateInfo;
-    		std::vector<VkVertexInputBindingDescription>   bindingDescs;
-    		std::vector<VkVertexInputAttributeDescription> attributeDescs;
-    	};
-    	
-    	struct Index {
-    		int count;
-    		VkBuffer buffer;
-    		VkDeviceMemory memory;
-    	};
-    
-    	struct Uniform {
-    	   VkBuffer buffer;
-    	   VkDeviceMemory memory;
-    	   VkDescriptorBufferInfo desc;
-    	};
-    
-    	struct MVPMatrix {
-    	   glm::mat4 model;
-    	   glm::mat4 view;
-    	   glm::mat4 proj;
-    	};
-        Vulkan::Texture m_texture;
-		VulkanTextureLoader m_textureLoader;
-    
-    	void init(VkDevice device);
-    	void update();
-    	void render();
-    	void shutdown();
-         
-		void setupCmd(const VkCommandBuffer drawCmdBuffer);
-		void init_pipeline(VkRenderPass &renderPass,VkPipelineCache &pipelineCache);
+	class Cube
+	{
+	public:
+		Cube() = default;
+		~Cube() = default;
 
-    private: 
-    	void init_vertex();
+		struct  Vertex
+		{
+			VkBuffer buffer;
+			VkDeviceMemory memory;
+			VkPipelineVertexInputStateCreateInfo inputStateInfo;
+			std::vector<VkVertexInputBindingDescription>   bindingDescs;
+			std::vector<VkVertexInputAttributeDescription> attributeDescs;
+		};
+
+		struct Index {
+			int count;
+			VkBuffer buffer;
+			VkDeviceMemory memory;
+		};
+
+		struct Uniform {
+			VkBuffer buffer;
+			VkDeviceMemory memory;
+			VkDescriptorBufferInfo desc;
+		};
+
+		struct MVPMatrix {
+			glm::mat4 model;
+			glm::mat4 view;
+			glm::mat4 proj;
+		};
+		Vulkan::Texture m_texture;
+		VulkanTextureLoader m_textureLoader;
+
+		void init(VkDevice device);
+		void update();
+		void render();
+		void shutdown();
+
+		void setupCmd(const VkCommandBuffer drawCmdBuffer);
+		void init_pipeline(VkRenderPass &renderPass, VkPipelineCache &pipelineCache);
+
+	private:
+		void init_vertex();
 		void init_ubo();
 		void init_texture();
 
-        void init_descriptorPool();
-    	void init_descriptorSet();
-    	void init_descriptorSetLayout();
-    
-    	void update_ubo();
+		void init_descriptorPool();
+		void init_descriptorSet();
+		void init_descriptorSetLayout();
+
+		void update_ubo();
 
 		VkDevice  m_device;
+		Timer m_timer;
 
 		Vertex    m_vertices;
 		Index     m_indices;
@@ -98,7 +99,7 @@ namespace byhj {
 		VkDescriptorSetLayout m_descriptorSetLayout;
 		VulkanShader m_triangleShader;
 
-    };
+	};
 
 
 }

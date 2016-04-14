@@ -155,26 +155,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cube.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="cube.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="texture.frag.spv">
+    <None Include="igor_and_pal_bc3.ktx">
       <Filter>Header Files</Filter>
     </None>
     <None Include="texture.vert">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="texture.vert.spv">
-      <Filter>Header Files</Filter>
+    <None Include="texture.frag.spv">
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="texture.frag">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
-    <None Include="igor_and_pal_bc3.ktx">
-      <Filter>Header Files</Filter>
+    <None Include="texture.vert.spv">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

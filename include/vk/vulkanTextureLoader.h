@@ -40,7 +40,7 @@ public:
 
 	// Load a cubemap texture (single file)
 	void loadCubemap(const char* filename, VkFormat format, Vulkan::Texture *texture);
-	
+
 	static std::shared_ptr<VulkanTextureLoader> getInstance();
 
 private:

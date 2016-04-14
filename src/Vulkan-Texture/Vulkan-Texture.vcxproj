@@ -157,8 +157,6 @@
     <ClInclude Include="vulkanRender.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cube.frag" />
-    <None Include="cube.vert" />
     <None Include="igor_and_pal_bc3.ktx" />
     <None Include="texture.frag" />
     <None Include="texture.frag.spv" />
