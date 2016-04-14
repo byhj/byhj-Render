@@ -18,7 +18,7 @@
    The utility part show the important extension: camera, gui, font, audio, mesh, texture, window.
 
 ## Notice:
-For the OpenGL:
+OpenGL:
 For the shader effect, the opengl3+ will need, the shader file will be:
   - .vert : GL_VERTEX_SHADER
   - .tcs  : GL_TESS_CONTROL_SHADER
@@ -28,7 +28,7 @@ For the shader effect, the opengl3+ will need, the shader file will be:
   - .comp : GL_COMPUTE_SHADER
 Your can use [NShader](https://nshader.codeplex.com/) to make shader file heightlight.
 
-For the DirectX:
+DirectX:
 
 　　The D3DX is not include since Windows8+, so the d3dx support part is use old directx11 sdk.
 For more information about d3dx obsolete, read the　[Living without D3DX](https://blogs.msdn.microsoft.com/chuckw/2013/08/20/living-without-d3dx/).
@@ -41,6 +41,8 @@ The directx shader file will be:
    - .psh: D3D_PIXEL_SHADER
    - .csh: D3D_COMPUTE_SHADER
 
+Vulkan:
+     Vulkan is the next gpu api, more information read [Vulkan](https://www.khronos.org/vulkan/)
 ---
 
 # Requirements
@@ -134,8 +136,6 @@ The directx shader file will be:
 ---
 ## Fog (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/fog.png">
----
-## Environment Mapping (OpenGL3+)
 
 ---
 ## Bezier (OpenGL3+)
@@ -155,29 +155,26 @@ The directx shader file will be:
 
 ---
 
-## Sprites
+## Sprites (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/sprite.png">
 ---
 
-## Texture-Array
+## Texture-Array (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/tessarray.png">
 
 ---
 
-## Texture-Light
+## Texture-Light (DirectX11)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/textLight.png">
 
 ---
 
-## Toon Mapping
+## Toon Mapping (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/toon.png">
-
 ---
 
 ## Shadow Mapping (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/shadow-mapping.png">
----
-## Sprites (OpenGL3+)
 
 ---
 ## Tessellation-Triangle (OpenGL3+)
@@ -220,7 +217,6 @@ The directx shader file will be:
 ## Fur (OpenGL3+)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/fur.png">
 
-
 ---
 
 ## CEGUI
@@ -229,10 +225,6 @@ The directx shader file will be:
 ---
 ## DXUT
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/dxut.png">
-
-
----
-## AntWeakbar
 
 ---
 
@@ -243,13 +235,4 @@ The directx shader file will be:
 ## Motion-Blur
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/motionblur.png">
 
----
-
-## Water
-
----
-## Screen-Fades (DirectX11)
-
----
-## MSAA
 ---

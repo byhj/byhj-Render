@@ -285,7 +285,7 @@ namespace byhj {
 	{
 		VulkanTextureLoader::getInstance()->loadTexture(
 			"wood.png",
-			VK_FORMAT_R8G8B8_UNORM,
+			VK_FORMAT_R8G8B8A8_UNORM,
 			&m_texture);
 	}
 
