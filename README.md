@@ -8,14 +8,14 @@
 　　The whole project will be three parts:
 
 ## Render:
-   This part is the render base code. It has resource(texture, model, audio) manager and render framework.
+   This part is the render base code. It has resource(texture, model, audio) manager and the render framework.
 
 ## Sample:     
    The sample part include OpenGL3+ and DirectX11 Sample code. I also write the base supprot for  Next GPU API
 (DirectX12 & Vulkan).
 
 ## Utility:
-   The utility part show the important extension: camera, gui, font, audio, mesh, texture, window.
+   The utility part show the important extensions : camera, gui, font, audio, meshload, texture, window, script, resource
 
 ## Notice:
 OpenGL:
@@ -42,7 +42,8 @@ The directx shader file will be:
    - .csh: D3D_COMPUTE_SHADER
 
 Vulkan:
-     Vulkan is the next gpu api, more information read [Vulkan](https://www.khronos.org/vulkan/)
+     Vulkan is the next gpu api, more information read the [Vulkan](https://www.khronos.org/vulkan/)
+     
 ---
 
 # Requirements
@@ -87,9 +88,13 @@ Vulkan:
 ### Memory
   - [Visual Leak Detector(VLD)](https://vld.codeplex.com/)
 
+### other
+  - [Lua](https://www.lua.org/)
+  - [TinyXML2](http://www.grinninglizard.com/tinyxml2/)
+
 ## Next GPU API Sample
   - [Vulkan SDK](https://vulkan.lunarg.com/app/download)
-  - [DiectX12](https://msdn.microsoft.com/en-us/library/windows/desktop/dn899121(v=vs.85).aspx)
+  - <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dn899121(v=vs.85).aspx">DiectX12</a>
 ---
 
 # How to Buil
@@ -237,6 +242,6 @@ Vulkan:
 
 ---
 ## Mesh Load (OpenGL3+ & DirectX11)
-<img width = "400" src= " http://7xs5mn.com1.z0.glb.clouddn.com/meshload.png">
+<img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/meshload.png">
 
 ---

@@ -22,9 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Render", "Render", "{EBDF24EF-DEAE-47F3-8360-DF67E65C66F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utility", "Utility", "{945A6EBD-8771-481C-9B34-977B07DA0C4D}"
-	ProjectSection(SolutionItems) = preProject
-		src\Vulkan-Test\main.cpp = src\Vulkan-Test\main.cpp
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{1A750ACF-1F72-46D4-9B2F-B5CE62398DB7}"
 EndProject
