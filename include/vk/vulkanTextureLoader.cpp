@@ -46,17 +46,22 @@ void  VulkanTextureLoader::loadTexture(const char* filename, VkFormat format, Vu
 // Load a 2D texture
 void VulkanTextureLoader::loadTexture(const char* filename, VkFormat format, Vulkan::Texture *texture, bool forceLinear)
 {
-	//gli::texture2D tex2D(gli::load(filename));
-	//assert(!tex2D.empty());
-	unsigned char *texData = nullptr;
-	int width, height;
-	//byhj::TextureMgr::getInstance()->getTexData(filename, width, heigt, data);
-	std::string fileDir = "../../media/textures/" + std::string(filename);
+	gli::texture2D tex2D(gli::load(filename));
+	assert(!tex2D.empty());
 
-	texData = SOIL_load_image(fileDir.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+	texture->width = tex2D[0].dimensions().x;
+	texture->height = tex2D[0].dimensions().y;
+	texture->mipLevels = tex2D.levels();
 
-	texture->width  = width;
-	texture->height = height;
+	// uint8_t  *texData = nullptr;
+	// int width, height;
+	// //byhj::TextureMgr::getInstance()->getTexData(filename, width, heigt, data);
+	// std::string fileDir = "../../media/textures/" + std::string(filename);
+	// 
+	// texData = SOIL_load_image(fileDir.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
+	// 
+	// texture->width  = width;
+	// texture->height = height;
 
 	// texture->width = (uint32_t)tex2D[0].dimensions().x;
 	// texture->height = (uint32_t)tex2D[0].dimensions().y;
@@ -145,8 +150,8 @@ void VulkanTextureLoader::loadTexture(const char* filename, VkFormat format, Vul
 	assert(!err);
 
 	// Copy image data into memory
-	memcpy(data, texData, width * height * sizeof(unsigned char));
-
+	//memcpy(data, texData, width * height  * 4);
+	 memcpy(data, tex2D[subRes.mipLevel].data(), tex2D[subRes.mipLevel].size());
 
 	vkUnmapMemory(device, mappableMemory);
 
@@ -272,18 +277,19 @@ void VulkanTextureLoader::loadTexture(const char* filename, VkFormat format, Vul
 	// This is similar to the samplers available with OpenGL 3.3
 	VkSamplerCreateInfo sampler ={};
 	sampler.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
-	sampler.magFilter = VK_FILTER_LINEAR;
-	sampler.minFilter = VK_FILTER_LINEAR;
-	sampler.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
-	sampler.addressModeU = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-	sampler.addressModeV = VK_SAMPLER_ADDRESS_MODE_REPEAT;
-	sampler.addressModeW = VK_SAMPLER_ADDRESS_MODE_REPEAT;
+	sampler.magFilter = VK_FILTER_NEAREST;
+	sampler.minFilter = VK_FILTER_NEAREST;
+	sampler.mipmapMode =VK_SAMPLER_MIPMAP_MODE_NEAREST;
+	sampler.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+	sampler.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+	sampler.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
 	sampler.mipLodBias = 0.0f;
 	sampler.maxAnisotropy = 0;
 	sampler.compareOp = VK_COMPARE_OP_NEVER;
 	sampler.minLod = 0.0f;
 	sampler.maxLod = 0.0f;
 	sampler.borderColor = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE;
+	sampler.unnormalizedCoordinates = VK_FALSE,
 	err = vkCreateSampler(device, &sampler, nullptr, &texture->sampler);
 	assert(!err);
 

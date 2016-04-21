@@ -43,7 +43,7 @@ The directx shader file will be:
 
 Vulkan:
      Vulkan is the next gpu api, more information read the [Vulkan](https://www.khronos.org/vulkan/)
-     
+
 ---
 
 # Requirements
@@ -120,8 +120,16 @@ Vulkan:
 
 # Sample
 
+## Triangle (Vulkan)
+<img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/vulkanTriangle.png">
+---
+
+## Texture (Vulkan)
+<img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/vulkanTexutre.png">
+---
+
 ## Billboard (OpenGL3+)
-　　Use Geometry Shader to make billboard. The shader coed is base the OpenGL Step by Step
+　　Use Geometry Shader to make billboard. The shader code is base the OpenGL Step by Step
 [Tutorial27](http://ogldev.atspace.co.uk/www/tutorial27/tutorial27.html)
 
 <img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/Billboard.png">

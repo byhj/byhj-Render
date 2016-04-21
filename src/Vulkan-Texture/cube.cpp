@@ -76,61 +76,109 @@ namespace byhj {
 	//Setups vertex and index buffers for an indexed Cube
 	//uploads them to the vram and sets binding points and attribute
 	//descriptions to match locations inside the shaders
+	static const glm::vec3 vd[] ={
+        glm::vec3(-1.0f,-1.0f,-1.0f),  // -X side
+        glm::vec3(-1.0f,-1.0f, 1.0f),
+        glm::vec3(-1.0f, 1.0f, 1.0f),
+        glm::vec3(-1.0f, 1.0f, 1.0f),
+        glm::vec3(-1.0f, 1.0f,-1.0f),
+        glm::vec3(-1.0f,-1.0f,-1.0f),
+        
+        glm::vec3(-1.0f,-1.0f,-1.0f),  // -Z side
+        glm::vec3(1.0f, 1.0f,-1.0f),
+        glm::vec3(1.0f,-1.0f,-1.0f),
+        glm::vec3(-1.0f,-1.0f,-1.0f),
+        glm::vec3(-1.0f, 1.0f,-1.0f),
+        glm::vec3(1.0f, 1.0f,-1.0f),
+        
+        glm::vec3(-1.0f,-1.0f,-1.0f),  // -Y side
+        glm::vec3(1.0f,-1.0f,-1.0f),
+        glm::vec3(1.0f,-1.0f, 1.0f),
+        glm::vec3(-1.0f,-1.0f,-1.0f),
+        glm::vec3(1.0f,-1.0f, 1.0f),
+        glm::vec3(-1.0f,-1.0f, 1.0f),
+        
+        glm::vec3(-1.0f, 1.0f,-1.0f),  // +Y side
+        glm::vec3(-1.0f, 1.0f, 1.0f),
+        glm::vec3(1.0f, 1.0f, 1.0f),
+        glm::vec3(-1.0f, 1.0f,-1.0f),
+        glm::vec3(1.0f, 1.0f, 1.0f),
+        glm::vec3(1.0f, 1.0f,-1.0f),
+        
+        glm::vec3(1.0f, 1.0f,-1.0f),  // +X side
+        glm::vec3(1.0f, 1.0f, 1.0f),
+        glm::vec3(1.0f,-1.0f, 1.0f),
+        glm::vec3(1.0f,-1.0f, 1.0f),
+        glm::vec3(1.0f,-1.0f,-1.0f),
+        glm::vec3(1.0f, 1.0f,-1.0f),
+        
+        glm::vec3(-1.0f, 1.0f, 1.0f),  // +Z side
+        glm::vec3(-1.0f,-1.0f, 1.0f),
+        glm::vec3(1.0f, 1.0f, 1.0f),
+        glm::vec3(-1.0f,-1.0f, 1.0f),
+        glm::vec3(1.0f,-1.0f, 1.0f),
+        glm::vec3(1.0f, 1.0f, 1.0f),
+	};
 
+	static const glm::vec2 tb[] ={
+		glm::vec2(0.0f, 0.0f),  // -X side
+		glm::vec2(1.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+		glm::vec2(1.0f, 1.0f),
+		glm::vec2(0.0f, 1.0f),
+		glm::vec2(0.0f, 0.0f),
+
+		glm::vec2(1.0f, 0.0f),  // -Z side
+		glm::vec2(0.0f, 1.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+		glm::vec2(0.0f, 1.0f),
+
+		glm::vec2(1.0f, 1.0f),  // -Y side
+		glm::vec2(1.0f, 0.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(0.0f, 1.0f),
+
+		glm::vec2(1.0f, 1.0f),  // +Y side
+		glm::vec2(0.0f, 1.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 0.0f),
+
+		glm::vec2(1.0f, 1.0f),  // +X side
+		glm::vec2(0.0f, 1.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+
+		glm::vec2(0.0f, 1.0f),  // +Z side
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+		glm::vec2(0.0f, 0.0f),
+		glm::vec2(1.0f, 0.0f),
+		glm::vec2(1.0f, 1.0f),
+	};
 	void Cube::init_vertex()
 	{
 		struct Vertex {
-			Vertex(float px, float py, float pz, float u, float v)
-				:position(px, py, pz), texcoord(u, v) {}
+			Vertex() {}
+			Vertex(const glm::vec3 &pos, const glm::vec2 &tc)
+				:position(pos), texcoord(tc) {}
 			glm::vec3 position;
 			glm::vec2 texcoord;
 		};
 
 		// Setup m_vertices
-		std::vector<Vertex> vertexBuffer = {
-			// Positions           // Texture Coords
-			Vertex(-0.5f, -0.5f, -0.5f,  0.0f,  0.0f),
-			Vertex(0.5f, -0.5f, -0.5f,  1.0f,  0.0f),
-			Vertex(0.5f,  0.5f, -0.5f,  1.0f,  1.0f),
-			Vertex(0.5f,  0.5f, -0.5f,  1.0f,  1.0f),
-			Vertex(-0.5f,  0.5f, -0.5f,  0.0f,  1.0f),
-			Vertex(-0.5f, -0.5f, -0.5f,  0.0f,  0.0f),
+		std::vector<Vertex> vertexBuffer(36);
+		for (int i = 0; i != 36; ++i) {
+		   vertexBuffer[i] = Vertex(vd[i], tb[i]);
+		}
 
-			Vertex(-0.5f, -0.5f,  0.5f,  0.0f,  0.0f),
-			Vertex(0.5f, -0.5f,  0.5f,  1.0f,  0.0f),
-			Vertex(0.5f,  0.5f,  0.5f,  1.0f,  1.0f),
-			Vertex(0.5f,  0.5f,  0.5f,  1.0f,  1.0f),
-			Vertex(-0.5f,  0.5f,  0.5f,  0.0f,  1.0f),
-			Vertex(-0.5f, -0.5f,  0.5f,  0.0f,  0.0f),
-
-			Vertex(-0.5f,  0.5f,  0.5f,  1.0f,  0.0f),
-			Vertex(-0.5f,  0.5f, -0.5f,  1.0f,  1.0f),
-			Vertex(-0.5f, -0.5f, -0.5f,  0.0f,  1.0f),
-			Vertex(-0.5f, -0.5f, -0.5f,  0.0f,  1.0f),
-			Vertex(-0.5f, -0.5f,  0.5f,  0.0f,  0.0f),
-			Vertex(-0.5f,  0.5f,  0.5f,  1.0f,  0.0f),
-
-			Vertex(0.5f,  0.5f,  0.5f,  1.0f,  0.0f),
-			Vertex(0.5f,  0.5f, -0.5f,  1.0f,  1.0f),
-			Vertex(0.5f, -0.5f, -0.5f,  0.0f,  1.0f),
-			Vertex(0.5f, -0.5f, -0.5f,  0.0f,  1.0f),
-			Vertex(0.5f, -0.5f,  0.5f,  0.0f,  0.0f),
-			Vertex(0.5f,  0.5f,  0.5f,  1.0f,  0.0f),
-
-			Vertex(-0.5f, -0.5f, -0.5f,  0.0f,  1.0f),
-			Vertex(0.5f, -0.5f, -0.5f,  1.0f,  1.0f),
-			Vertex(0.5f, -0.5f,  0.5f,  1.0f,  0.0f),
-			Vertex(0.5f, -0.5f,  0.5f,  1.0f,  0.0f),
-			Vertex(-0.5f, -0.5f,  0.5f,  0.0f,  0.0f),
-			Vertex(-0.5f, -0.5f, -0.5f,  0.0f,  1.0f),
-
-			Vertex(-0.5f,  0.5f, -0.5f,  0.0f,  1.0f),
-			Vertex(0.5f,  0.5f, -0.5f,  1.0f,  1.0f),
-			Vertex(0.5f,  0.5f,  0.5f,  1.0f,  0.0f),
-			Vertex(0.5f,  0.5f,  0.5f,  1.0f,  0.0f),
-			Vertex(-0.5f,  0.5f,  0.5f,  0.0f,  0.0f),
-			Vertex(-0.5f,  0.5f, -0.5f,  0.0f,  1.0f),
-		};
 
 		auto vertexBufferSize = vertexBuffer.size() * sizeof(Vertex);
 
@@ -213,13 +261,14 @@ namespace byhj {
 		//Attribute descriptions
 		//Describes memory layout and shader attribute locations
 		m_vertices.attributeDescs.resize(2);
+
 		//Location 0: Position
 		m_vertices.attributeDescs[0].binding  = VERTEX_BUFFER_BIND_ID;
 		m_vertices.attributeDescs[0].location = 0;
 		m_vertices.attributeDescs[0].format   = VK_FORMAT_R32G32B32_SFLOAT;
 		m_vertices.attributeDescs[0].offset   = 0;
 
-		//Location 1: Color
+		//Location 1: TexCoord
 		m_vertices.attributeDescs[1].binding  = VERTEX_BUFFER_BIND_ID;
 		m_vertices.attributeDescs[1].location = 1;
 		m_vertices.attributeDescs[1].format   = VK_FORMAT_R32G32_SFLOAT;
@@ -284,8 +333,8 @@ namespace byhj {
 	void Cube::init_texture()
 	{
 		VulkanTextureLoader::getInstance()->loadTexture(
-			"wood.png",
-			VK_FORMAT_R8G8B8A8_UNORM,
+			"../../media/textures/vulkan_space_rgba8.ktx",
+			    VK_FORMAT_R8G8B8A8_UNORM,
 			&m_texture);
 	}
 
@@ -359,15 +408,13 @@ namespace byhj {
 
 		//Rasterization state
 		VkPipelineRasterizationStateCreateInfo rasterizationState ={};
-		rasterizationState.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
-		rasterizationState.polygonMode = VK_POLYGON_MODE_FILL;
-
-		//No culling
-		rasterizationState.cullMode = VK_CULL_MODE_FRONT_BIT;
-		rasterizationState.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
-		rasterizationState.depthClampEnable = VK_FALSE;
+		rasterizationState.sType                   = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+		rasterizationState.polygonMode             = VK_POLYGON_MODE_FILL;
+		rasterizationState.cullMode                = VK_CULL_MODE_FRONT_BIT;
+		rasterizationState.frontFace               = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+		rasterizationState.depthClampEnable        = VK_FALSE;
 		rasterizationState.rasterizerDiscardEnable = VK_FALSE;
-		rasterizationState.depthBiasEnable = VK_FALSE;
+		rasterizationState.depthBiasEnable         = VK_FALSE;
 
 		//Color blend state
 		//Describes blend modes and color masks
@@ -407,16 +454,16 @@ namespace byhj {
 		//Describes depth and stenctil test and compare ops
 		// Basic depth compare setup with depth writes and depth test enabled,  No stencil used 
 		VkPipelineDepthStencilStateCreateInfo depthStencilState ={};
-		depthStencilState.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
-		depthStencilState.depthTestEnable = VK_TRUE;
-		depthStencilState.depthWriteEnable = VK_TRUE;
-		depthStencilState.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+		depthStencilState.sType                 = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+		depthStencilState.depthTestEnable       = VK_TRUE;
+		depthStencilState.depthWriteEnable      = VK_TRUE;
+		depthStencilState.depthCompareOp        = VK_COMPARE_OP_LESS_OR_EQUAL;
 		depthStencilState.depthBoundsTestEnable = VK_FALSE;
-		depthStencilState.back.failOp = VK_STENCIL_OP_KEEP;
-		depthStencilState.back.passOp = VK_STENCIL_OP_KEEP;
-		depthStencilState.back.compareOp = VK_COMPARE_OP_ALWAYS;
-		depthStencilState.stencilTestEnable = VK_FALSE;
-		depthStencilState.front = depthStencilState.back;
+		depthStencilState.back.failOp           = VK_STENCIL_OP_KEEP;
+		depthStencilState.back.passOp           = VK_STENCIL_OP_KEEP;
+		depthStencilState.back.compareOp        = VK_COMPARE_OP_ALWAYS;
+		depthStencilState.stencilTestEnable     = VK_FALSE;
+		depthStencilState.front                 = depthStencilState.back;
 
 
 		//Multi sampling state, No multi sampling used in this example
@@ -534,9 +581,8 @@ namespace byhj {
 		static float deltaTime = 0.0f;
 		deltaTime += m_timer.getDeltaTime();
 
-		std::cout << deltaTime << std::endl;
 		m_matrix.model = glm::rotate(glm::mat4(1.0f), deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
-		m_matrix.view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		m_matrix.view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		m_matrix.proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 
 		//Map uniform buffer and update it

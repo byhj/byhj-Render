@@ -1,4 +1,5 @@
 #include "vulkanApp.h"
+#include "windowInfo.h"
 
 namespace byhj {
 
@@ -72,8 +73,10 @@ static VulkanApp *pVulkanAppHandle = 0;
 		 exit(1);
 	 }
 
-	 int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-	 int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+	 float screenWidth = WindowInfo::getInstance()->getWidth();
+	 float screenHeight = WindowInfo::getInstance()->getHeight();
+	 width = screenWidth;
+	 height = screenHeight;
 
 	 if (fullscreen)
 	 {
@@ -122,9 +125,9 @@ static VulkanApp *pVulkanAppHandle = 0;
 	 }
 	 else
 	 {
-		 windowRect.left = (long)screenWidth / 2 - width / 2;
+		 windowRect.left = WindowInfo::getInstance()->getPosX() - 50;
 		 windowRect.right = (long)width;
-		 windowRect.top = (long)screenHeight / 2 - height / 2;
+		 windowRect.top = WindowInfo::getInstance()->getPosY() -50;
 		 windowRect.bottom = (long)height;
 	 }
 

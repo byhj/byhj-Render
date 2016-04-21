@@ -155,16 +155,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="igor_and_pal_bc3.ktx">
-      <Filter>Header Files</Filter>
-    </None>
     <None Include="texture.vert">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="texture.frag.spv">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="texture.frag">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="texture.vert.spv">
