@@ -98,6 +98,9 @@ void OGLApp::v_run()
 	sw = WindowInfo::getInstance()->getWidth();
 	sh = WindowInfo::getInstance()->getHeight();
 
+	int MonitorCount;
+	GLFWmonitor ** monitors = glfwGetMonitors(&MonitorCount);
+
 #ifdef _DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif

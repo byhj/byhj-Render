@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8D5ACADB-9ABF-498A-9304-E787C38D7C88}</ProjectGuid>
-    <RootNamespace>Window</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{19E86494-60EC-4FAB-8E6A-366C421E5BDE}</ProjectGuid>
+    <RootNamespace>MultiWindow</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -144,11 +144,8 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
-    <ClCompile Include="d3d12Render.cpp" />
-    <ClCompile Include="d3d11Render.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="oglRender.cpp" />
-    <ClCompile Include="oglWin32App.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -158,7 +155,6 @@
     <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
     <ClInclude Include="..\..\include\d3d\d3dModel.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />
-    <ClInclude Include="..\..\include\d3d\d3dSPFont.h" />
     <ClInclude Include="..\..\include\d3d\d3dSphereCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dUtility.h" />
     <ClInclude Include="..\..\include\ogl\oglApp.h" />
@@ -185,10 +181,7 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="d3d12Render.h" />
-    <ClInclude Include="d3d11Render.h" />
     <ClInclude Include="oglRender.h" />
-    <ClInclude Include="oglWin32App.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
