@@ -1,5 +1,6 @@
 #include "Plane.h"
 #include "textureMgr.h"
+#include "ogl/oglUtility.h"
 
 namespace byhj {
 
@@ -44,7 +45,7 @@ namespace byhj {
 		glUseProgram(m_program);
 		glBindVertexArray(m_vao);
 
-		GLuint texId = TextureMgr::getInstance()->getOGLTextureByName("wall.jpg");
+		GLuint texId = TextureMgr::getInstance()->getOGLTextureByName("byhj.jpg");
 		glBindTexture(GL_TEXTURE_2D, texId);
 		glActiveTexture(GL_TEXTURE0);
 
@@ -106,6 +107,6 @@ namespace byhj {
 
 	void Plane::init_texture()
 	{
-		TextureMgr::getInstance()->loadOGLTexture("wall.jpg");
+		TextureMgr::getInstance()->loadOGLTexture("byhj.jpg");
 	}
 }
