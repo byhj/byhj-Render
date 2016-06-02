@@ -97,8 +97,7 @@ namespace byhj
 
 		auto time = glfwGetTime();
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), (float)time, glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 view  = glm::lookAt(glm::vec3(0.0f, 0.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 proj  = glm::perspective(45.0f, 1.5f, 0.1f, 1000.0f);
 
 		glUniformMatrix4fv(u_model, 1, GL_FALSE, &model[0][0]);
@@ -120,8 +119,8 @@ namespace byhj
 	void Cube::init_shader()
 	{
 	  m_CubeShader.init();
-	  m_CubeShader.attach(GL_VERTEX_SHADER, "Cube.vert");
-	  m_CubeShader.attach(GL_FRAGMENT_SHADER, "Cube.frag");
+	  m_CubeShader.attach(GL_VERTEX_SHADER, "cube.vert");
+	  m_CubeShader.attach(GL_FRAGMENT_SHADER, "cube.frag");
 	  m_CubeShader.link();
 	  m_CubeShader.info();
 	  m_program = m_CubeShader.getProgram();

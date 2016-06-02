@@ -30,7 +30,7 @@ namespace byhj
 
 		static ogl::MvpMatrix matrix;
 		matrix.view  = camera.GetViewMatrix();
-		matrix.proj  = glm::perspective(glm::radians( camera.GetZoom() ), GetAspect(), 0.1f, 1000.0f);
+		matrix.proj  = glm::perspective(glm::radians( camera.GetZoom() ), getAspect(), 0.1f, 1000.0f);
 		matrix.model = glm::rotate(glm::mat4(1.0f), 60.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		cube.Render(matrix, camera);
