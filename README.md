@@ -1,6 +1,6 @@
 # byhj-Render
 
-　　　Welcome，this is a gpu render by byhj. I write it by using OpenGL3+ and DirectX11. I classify this project by the book of real-time rending.
+　　　Welcome，this is a gpu render by byhj. I write it by using OpenGL3+ and Direct3D11. I classify this project by the book of real-time rending.
 
 ---
 
@@ -12,7 +12,7 @@
 
 ## Sample:     
    The sample part include OpenGL3+ and DirectX11 Sample code. I also write the base supprot for  Next GPU API
-(DirectX12 & Vulkan).
+(Direct3D12 & Vulkan).
 
 ## Utility:
    The utility part show the important extensions : camera, gui, font, audio, meshload, texture, window, script, resource
@@ -28,12 +28,12 @@ For the shader effect, the opengl3+ will need, the shader file will be:
   - .comp : GL_COMPUTE_SHADER
 Your can use [NShader](https://nshader.codeplex.com/) to make shader file heightlight.
 
-DirectX:
+Direct3D:
 
 　　The D3DX is not include since Windows8+, so the d3dx support part is use old directx11 sdk.
 For more information about d3dx obsolete, read the　[Living without D3DX](https://blogs.msdn.microsoft.com/chuckw/2013/08/20/living-without-d3dx/).
 
-The directx shader file will be:
+The direct3d shader file will be:
    - .vsh: D3D_VERTEX_SHADER
    - .hsh: D3D_HULL_SHADER
    - .dsh: D3D_DOMAIN_SHADER
@@ -43,7 +43,7 @@ The directx shader file will be:
 
 Vulkan:
      Vulkan is the next gpu api, more information read the [Vulkan](https://www.khronos.org/vulkan/)
-     
+
 ---
 
 # Requirements
@@ -94,7 +94,9 @@ Vulkan:
 
 ## Next GPU API Sample
   - [Vulkan SDK](https://vulkan.lunarg.com/app/download)
-  - <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dn899121(v=vs.85).aspx">DiectX12</a>
+  - [Direct3D12](https://msdn.microsoft.com/en-us/library/windows/desktop/dn899121(v=vs.85).aspx)
+    For the DirectX12, your need the [Win10SDK](https://developer.microsoft.com/zh-cn/windows/downloads/windows-10-sdk)
+
 ---
 
 # How to Buil
@@ -103,6 +105,8 @@ Vulkan:
  c++11, use vs2015 will be the best choice or modifed by yourself if you use other compilers.
 
  2. Project Organization:
+
+```
 		  |Root
               |-- include
               |-- src
@@ -113,6 +117,7 @@ Vulkan:
         |Output
               |-- bin(Execute Dir)
               |-- temp(temp file we possibly not need)
+```
 
   Notice: .props file is the command properties file, it set up the develop environment easily.
 
@@ -120,8 +125,16 @@ Vulkan:
 
 # Sample
 
+## Triangle (Vulkan & Direct3D12)
+<img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/vulkanTriangle.png">
+---
+
+## Texture (Vulkan & Direct3D12)
+<img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/vulkanTexutre.png">
+---
+
 ## Billboard (OpenGL3+)
-　　Use Geometry Shader to make billboard. The shader coed is base the OpenGL Step by Step
+　　Use Geometry Shader to make billboard. The shader code is base the OpenGL Step by Step
 [Tutorial27](http://ogldev.atspace.co.uk/www/tutorial27/tutorial27.html)
 
 <img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/Billboard.png">
@@ -134,7 +147,7 @@ Vulkan:
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/bloom.png">
 
 ---
-## Terrain (DirectX11)
+## Terrain (Direct3D11)
 　　Use height map to make the terrain. Then, use slope based texturing to make grass and rock effect.
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/Terrain-height.png">
 
@@ -169,7 +182,7 @@ Vulkan:
 
 ---
 
-## Texture-Light (DirectX11)
+## Texture-Light (Direct3D11)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/textLight.png">
 
 ---
@@ -187,7 +200,7 @@ Vulkan:
 
 ---
 
-## Render To Texture (OpenGL3+ & DirectX11)
+## Render To Texture (OpenGL3+ & Direct3D11)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/RTT.png">
 
 ---
@@ -215,7 +228,7 @@ Vulkan:
 
 ---
 
-## Model Blending  （DirectX11)
+## Model Blending  （Direct3D11)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/blend.png">
 
 ---
@@ -241,7 +254,7 @@ Vulkan:
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/motionblur.png">
 
 ---
-## Mesh Load (OpenGL3+ & DirectX11)
+## Mesh Load (OpenGL3+ & Direct3D11)
 <img width = "400" src= "http://7xs5mn.com1.z0.glb.clouddn.com/meshload.png">
 
 ---

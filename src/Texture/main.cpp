@@ -1,10 +1,6 @@
 #include "oglRender.h"
 #include "root.h"
 
-#ifdef _DEBUG
-#include <vld.h>
-#endif
-
 int main()
 {
 	auto app = std::make_shared<byhj::OGLRender>();

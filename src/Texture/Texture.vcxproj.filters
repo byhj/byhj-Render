@@ -129,6 +129,9 @@
     <ClCompile Include="..\..\include\d3d\d3dUtility.cpp">
       <Filter>Render\d3d</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\ogl\oglUtility.cpp">
+      <Filter>Render\ogl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="oglRender.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dUtility.h">
       <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ogl\oglUtility.h">
+      <Filter>Render\ogl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
