@@ -185,8 +185,12 @@
     <ClInclude Include="triangle.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="triangle.psh" />
-    <FxCompile Include="triangle.vsh" />
+    <None Include="triangle.psh">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="triangle.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

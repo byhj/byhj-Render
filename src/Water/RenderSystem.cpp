@@ -146,7 +146,7 @@ void  RenderSystem::v_OnMouseUp(WPARAM btnState, int x, int y)
 }
 void  RenderSystem::v_OnMouseWheel(WPARAM btnState, int x, int y)
 {
-	m_Camera.OnMouseWheel(btnState, x, y, GetAspect());
+	m_Camera.OnMouseWheel(btnState, x, y, getAspect());
 }
 
 void RenderSystem::init_device()
@@ -320,7 +320,7 @@ void RenderSystem::init_camera()
 	XMVECTOR camTarget = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 	XMVECTOR camUp     = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 	XMMATRIX View      = XMMatrixLookAtLH(camPos, camTarget, camUp);
-	XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, GetAspect(), 1.0f, 1000.0f);
+	XMMATRIX Proj      = XMMatrixPerspectiveFovLH(0.4f*3.14f, getAspect(), 1.0f, 1000.0f);
 	XMMATRIX Model     = XMMatrixRotationY(60.0f);
 
 

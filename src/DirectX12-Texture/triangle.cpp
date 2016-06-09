@@ -15,7 +15,7 @@ namespace byhj {
 
 	void Triangle::render(ComPtr<ID3D12GraphicsCommandList> pCommandList)
 	{
-		pCommandList->SetDescriptorHeaps(1, m_pSamplerDescHeap);
+		pCommandList->SetDescriptorHeaps(1, m_pSamplerDescHeap.GetAddressOf());
 		pCommandList->SetGraphicsRootDescriptorTable(1, m_pSamplerDescHeap->GetGPUDescriptorHandleForHeapStart());
 		pCommandList->IASetVertexBuffers(VERTEX_BUFFER_SLOT, 1, &m_vertexBufferView);
 		pCommandList->DrawInstanced(VERTEX_NUM, 1, 0, 0);

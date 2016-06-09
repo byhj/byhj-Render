@@ -11,13 +11,13 @@ namespace byhj
 	class OGLRender : public byhj::OGLApp
 	{
 	public:
-		OGLRender();
-		~OGLRender();
+		OGLRender()  = default;
+		~OGLRender() = default;
 
-		void v_init();
-		void v_update();
-		void v_render();
-		void v_shutdown();
+		void v_init()     override;
+		void v_update()   override;
+		void v_render()   override;
+		void v_shutdown() override;
 
 	private:
 		Cube m_cube;

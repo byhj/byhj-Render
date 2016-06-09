@@ -30,7 +30,7 @@ void RenderSystem::v_Init()
 void RenderSystem::v_Render()
 {
 
-	m_Sphere.Render(GetAspect());
+	m_Sphere.Render(getAspect());
 
 }
 

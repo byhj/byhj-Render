@@ -1,53 +1,132 @@
+//***************************************************************************************
+// D3D12Render.h by Frank Luna (C) 2015 All Rights Reserved.
+//***************************************************************************************
+
 #pragma once
 
+#if defined(DEBUG) || defined(_DEBUG)
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#endif
+
+#include "d3d12Util.h"
+#include "timer.h"
 #include "d3d/d3dApp.h"
-#include <d3d12.h>
-#include <DirectXMath.h>
-#include <dxgi1_4.h>
-#include <windows.h>
-#include <wrl.h>
 
-#include "d3d/d3dx12.h"
-#include "triangle.h"
-
-#pragma comment(lib, "d3d12")
-
-using namespace DirectX;
-using namespace Microsoft::WRL;
+// Link necessary d3d12 libraries.
+#pragma comment(lib,"d3dcompiler.lib")
+#pragma comment(lib, "D3D12.lib")
+#pragma comment(lib, "dxgi.lib")
 
 namespace byhj {
 
-	class D3D12Render : public D3DApp {
-	public:
-		void v_init()     override;
-		void v_update()   override;
-		void v_render()   override;
-		void v_shutdown() override;
+class D3D12Render : public D3DApp
+{
+protected:
 
-	private:
-		void populateCommandList();
-		void waitForPreviousFrame();
-		void loadAssets();
-		void loadPipeline();
+    D3D12Render(HINSTANCE hInstance);
+    D3D12Render(const D3D12Render& rhs) = delete;
+    D3D12Render& operator=(const D3D12Render& rhs) = delete;
+    virtual ~D3D12Render();
 
-		static const UINT FrameCount = 2;
-		D3D12_VIEWPORT m_viewport;
-		D3D12_RECT     m_scissorRect;
+public:
 
-		ComPtr<IDXGISwapChain3>           m_pSwapChain;
-		ComPtr<ID3D12Device>              m_pD3D12Device;
-		ComPtr<ID3D12Fence>               m_pD3D12Fence;
-		ComPtr<ID3D12Resource>            m_pRenderTargets[FrameCount];
-		ComPtr<ID3D12CommandAllocator>    m_pCommandAllocator;
-		ComPtr<ID3D12CommandQueue>        m_pCommandQueue;
-		ComPtr<ID3D12DescriptorHeap>      m_pRTVHeap;
-		ComPtr<ID3D12GraphicsCommandList> m_pCommandList;
+    static D3D12Render* GetApp();
+    
+	HINSTANCE AppInst()const;
+	HWND      MainWnd()const;
+	float     AspectRatio()const;
 
-		UINT   m_rtvDescSize;
-		UINT   m_frameIndex;
-		HANDLE m_fenceEvent;
-		UINT64 m_fenceValue;
+    bool Get4xMsaaState()const;
+    void Set4xMsaaState(bool value);
 
-		Triangle m_triangle;
-	};
+	int Run();
+ 
+    virtual bool Initialize();
+    virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+protected:
+    virtual void CreateRtvAndDsvDescriptorHeaps();
+	virtual void OnResize(); 
+	virtual void Update(const GameTimer& gt)=0;
+    virtual void Draw(const GameTimer& gt)=0;
+
+	// Convenience overrides for handling mouse input.
+	virtual void OnMouseDown(WPARAM btnState, int x, int y){ }
+	virtual void OnMouseUp(WPARAM btnState, int x, int y)  { }
+	virtual void OnMouseMove(WPARAM btnState, int x, int y){ }
+
+protected:
+
+	bool InitMainWindow();
+	bool InitDirect3D();
+	void CreateCommandObjects();
+    void CreateSwapChain();
+
+	void FlushCommandQueue();
+
+	ID3D12Resource* CurrentBackBuffer()const;
+	D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView()const;
+	D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView()const;
+
+	void CalculateFrameStats();
+
+    void LogAdapters();
+    void LogAdapterOutputs(IDXGIAdapter* adapter);
+    void LogOutputDisplayModes(IDXGIOutput* output, DXGI_FORMAT format);
+
+protected:
+
+    static D3D12Render* mApp;
+
+    HINSTANCE mhAppInst = nullptr; // application instance handle
+    HWND      mhMainWnd = nullptr; // main window handle
+	bool      mAppPaused = false;  // is the application paused?
+	bool      mMinimized = false;  // is the application minimized?
+	bool      mMaximized = false;  // is the application maximized?
+	bool      mResizing = false;   // are the resize bars being dragged?
+    bool      mFullscreenState = false;// fullscreen enabled
+
+	// Set true to use 4X MSAA (?.1.8).  The default is false.
+    bool      m4xMsaaState = false;    // 4X MSAA enabled
+    UINT      m4xMsaaQuality = 0;      // quality level of 4X MSAA
+
+	// Used to keep track of the “delta-time?and game time (?.4).
+	GameTimer mTimer;
+	
+    Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;
+    Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
+    Microsoft::WRL::ComPtr<ID3D12Device> md3dDevice;
+
+    Microsoft::WRL::ComPtr<ID3D12Fence> mFence;
+    UINT64 mCurrentFence = 0;
+	
+    Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;
+    Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
+    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
+
+	static const int SwapChainBufferCount = 2;
+	int mCurrBackBuffer = 0;
+    Microsoft::WRL::ComPtr<ID3D12Resource> mSwapChainBuffer[SwapChainBufferCount];
+    Microsoft::WRL::ComPtr<ID3D12Resource> mDepthStencilBuffer;
+
+    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mRtvHeap;
+    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mDsvHeap;
+
+    D3D12_VIEWPORT mScreenViewport; 
+    D3D12_RECT mScissorRect;
+
+	UINT mRtvDescriptorSize = 0;
+	UINT mDsvDescriptorSize = 0;
+	UINT mCbvSrvUavDescriptorSize = 0;
+
+	// Derived class should set these in derived constructor to customize starting values.
+	std::wstring mMainWndCaption = L"d3d App";
+	D3D_DRIVER_TYPE md3dDriverType = D3D_DRIVER_TYPE_HARDWARE;
+    DXGI_FORMAT mBackBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
+    DXGI_FORMAT mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	int mClientWidth = 800;
+	int mClientHeight = 600;
+};
+
 }

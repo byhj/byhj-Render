@@ -38,7 +38,7 @@ namespace byhj
 	   std::vector<GLfloat> m_VertexData;
 	   std::vector<GLuint>  m_IndexData;
 
-	   OGLShader m_CubeShader ={ "CubeShader" };
+	   OGLShader m_CubeShader = { "CubeShader" };
 	};
 }
 #endif

@@ -7,7 +7,4 @@ namespace byhj
 	{
 	}
 
-	Font::~Font()
-	{
-	}
 }

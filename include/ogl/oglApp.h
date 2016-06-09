@@ -4,8 +4,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "AntTweakBar.h"
-
 #include <iostream>
 #include <string>
 #include <memory>
@@ -14,8 +12,8 @@
 #include "oglRender.h"
 #include "oglFTFont.h"
 #include "windowInfo.h"
+#include "AntTweakBar.h"
 
-#include <memory>
 
 #pragma comment(lib, "glfw3")
 #pragma comment(lib, "glew32")
@@ -43,8 +41,8 @@ class OGLApp : public App
     private:
 
 	public:
-		OGLApp();
-		~OGLApp();
+		OGLApp() = default;
+		~OGLApp() = default;
 
 	public:
 
@@ -58,9 +56,9 @@ protected:
 
 	OGLFTFont   m_pFont;
 //	OGLCamera m_camera;
-	int sw ;
-	int sh ;
-	static  OGLApp* app;
+	int sw  = 0;
+	int sh  = 0;
+	static  std::shared_ptr<OGLApp> app;
 
 
 	virtual void v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -76,13 +74,11 @@ protected:
 	static void glfw_char(GLFWwindow *window, unsigned int x);
 	static void glfw_resize(GLFWwindow* window, int width, int height);
 
-	void resizeCallback(GLFWwindow* window, int width, int height)
-	{
-		glViewport(0, 0, width, height);
-	}
+	void resizeCallback(GLFWwindow* window, int width, int height);
 
 	 void countFps();
-	 float GetAspect() const;
+	 float getAspect() const;
+
   protected:
 		std::string m_GLRenderer;
 		std::string m_GLVersion;

@@ -134,7 +134,7 @@ public:
                                               vmath::vec3(0.0f, 0.0f, 0.0f),
                                               vmath::vec3(0.0f, 1.0f, 0.0f));
         vmath::mat4 proj_matrix = vmath::perspective(60.0f,
-                                                     GetAspect(),
+                                                     getAspect(),
                                                      0.1f,
                                                      3000.0f);
         vmath::mat4 mvp = proj_matrix * mv_matrix;

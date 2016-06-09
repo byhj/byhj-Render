@@ -3,24 +3,15 @@
 namespace byhj
 {
 
-	OGLApp::OGLApp()
-	{
-	}
-
-	OGLApp::~OGLApp()
-	{
-
-	}
-
-OGLApp * OGLApp::app = nullptr;
-
+std::shared_ptr<OGLApp>  OGLApp::app = nullptr;
 
 void OGLApp::v_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
 	OGLEulerCamera::getInstance()->key_callback(window, key, scancode, action, mode);
 }
 
-void OGLApp::v_movement(GLFWwindow *window) {
+void OGLApp::v_movement(GLFWwindow *window) 
+{
 	OGLEulerCamera::getInstance()->movement(window);
 }
 
@@ -30,7 +21,8 @@ void OGLApp::v_mouseCallback(GLFWwindow* window, double xpos, double ypos)
 	OGLEulerCamera::getInstance()->mouse_callback(window, xpos, ypos);
 }
 
-void OGLApp::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+void OGLApp::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset) 
+{
 
 	//OGLSphereCamera::getInstance()->scroll_callback(window, xoffset, yoffset);
 	OGLEulerCamera::getInstance()->scroll_callback(window, xoffset, yoffset);
@@ -74,21 +66,29 @@ void OGLApp::v_scrollCallback(GLFWwindow* window, double xoffset, double yoffset
 		//OGLSphereCamera::getInstance()->mouseButton_callback(window, x, y, z);
 		TwEventMouseButtonGLFW(x, y);
 	}
+
 	void OGLApp::glfw_char(GLFWwindow *window, unsigned int x)
 	{
 		TwEventCharGLFW(x, GLFW_PRESS);
 	}
+
 	void OGLApp::glfw_resize(GLFWwindow* window, int width, int height)
 	{
 		WindowInfo::getInstance()->setWidth(width);
 		WindowInfo::getInstance()->setHeight(height);
 		app->resizeCallback(window, width, height);
 	}
+
+	void OGLApp::resizeCallback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////
 
 void OGLApp::v_run()
 {	
-	app = this;
+	app = std::make_shared<OGLApp>(*this);
+
 	std::cout << "Starting GLFW context" << std::endl;
 	if (!glfwInit())
 	{
@@ -121,11 +121,10 @@ void OGLApp::v_run()
 
 	//glfwSetInputMode(pWindow, GLFW_STICKY_KEYS, GL_TRUE);
 	// GLFW Options
-	glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
-	if (pWindow == NULL)
-	{
+	if (pWindow == NULL) {
 		std::cerr << "Failed to create GLFW pWindow" << std::endl;
 		glfwTerminate();
 		return;

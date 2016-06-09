@@ -30,7 +30,7 @@ namespace byhj
 
 		static ogl::MvpMatrix matrix;
 		matrix.view  = m_Camera.GetViewMatrix();
-		matrix.proj  = glm::perspective(glm::radians(m_Camera.GetZoom() ), GetAspect(), 0.1f, 1000.0f);
+		matrix.proj  = glm::perspective(glm::radians(m_Camera.GetZoom() ), getAspect(), 0.1f, 1000.0f);
 		matrix.model = glm::mat4(1.0f);
 
 		// 1. Draw scene as normal in multisampled buffers

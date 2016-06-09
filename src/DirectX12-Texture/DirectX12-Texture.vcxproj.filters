@@ -244,11 +244,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="triangle.psh">
+    <None Include="triangle.vsh">
       <Filter>Header Files</Filter>
-    </FxCompile>
-    <FxCompile Include="triangle.vsh">
+    </None>
+    <None Include="triangle.psh">
       <Filter>Header Files</Filter>
-    </FxCompile>
+    </None>
   </ItemGroup>
 </Project>

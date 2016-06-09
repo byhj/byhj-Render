@@ -1,40 +1,35 @@
-/*****************************************************************
- * Copyright (c) 2015 Leif Erkenbrach
- * Distributed under the terms of the MIT License.
- * (See accompanying file LICENSE or copy at
- * http://opensource.org/licenses/MIT)
- *****************************************************************/
+//--------------------------------------------------------------------------------------
+// File: DDSTextureLoader.h
+//
+// Functions for loading a DDS texture and creating a Direct3D 11 runtime resource for it
+//
+// Note these functions are useful as a light-weight runtime loader for DDS files. For
+// a full-featured DDS file reader, writer, and texture processing pipeline see
+// the 'Texconv' sample and the 'DirectXTex' library.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// http://go.microsoft.com/fwlink/?LinkId=248926
+// http://go.microsoft.com/fwlink/?LinkId=248929
+//--------------------------------------------------------------------------------------
 
-/**
- *	Light-weight runtime DDS file loader
- *	
- *	Port of DDSTextureLoader to support the Direct3D 12 runtime by Leif Erkenbrach
- *
- *	Does not support automatic mip-mapping at the moment because Direct3D 12 does not support it. 
- *	You will need to generate the mipmaps in an external tool for now.
- *
- *	Note: Loaded texture resources are currently stored as commited resources with the heap type D3D12_HEAP_TYPE_UPLOAD.
- *			D3D12_HEAP_TYPE_UPLOAD is not recommended for use on resources commonly sampled by the GPU.
- *			In some artificial tests it took about 30x as long to sample from an upload heap instead of a default heap. 
- *			Though the times will differ based on the hardware and driver.
- *			At the moment it is left up to the user to initialize a heap with the type D3D12_HEAP_TYPE_DEFAULT and copy the loaded texture to that heap.
- *	
- *	Original D3D11 version: http://go.microsoft.com/fwlink/?LinkId=248926
- */
-
+#ifdef _MSC_VER
 #pragma once
-
-#include <d3d12.h>
-
-#ifdef _WIN32_WINNT
-#undef _WIN32_WINNT
 #endif
 
-#define _WIN32_WINNT 0x0601
+#include <wrl.h>
+#include <d3d11_1.h>
+#include "d3dx12.h"
 
 #pragma warning(push)
 #pragma warning(disable : 4005)
 #include <stdint.h>
+
 #pragma warning(pop)
 
 #if defined(_MSC_VER) && (_MSC_VER<1610) && !defined(_In_reads_)
@@ -48,94 +43,33 @@
 #ifndef _Use_decl_annotations_
 #define _Use_decl_annotations_
 #endif
-
 namespace DirectX
 {
 	enum DDS_ALPHA_MODE
 	{
-		DDS_ALPHA_MODE_UNKNOWN = 0,
-		DDS_ALPHA_MODE_STRAIGHT = 1,
+		DDS_ALPHA_MODE_UNKNOWN       = 0,
+		DDS_ALPHA_MODE_STRAIGHT      = 1,
 		DDS_ALPHA_MODE_PREMULTIPLIED = 2,
-		DDS_ALPHA_MODE_OPAQUE = 3,
-		DDS_ALPHA_MODE_CUSTOM = 4,
+		DDS_ALPHA_MODE_OPAQUE        = 3,
+		DDS_ALPHA_MODE_CUSTOM        = 4,
 	};
-
-	// Standard version
-	HRESULT CreateDDSTextureFromMemory(_In_ ID3D12Device* d3dDevice,
-		ID3D12GraphicsCommandList* d3dContext,
+	HRESULT CreateDDSTextureFromMemory12(_In_ ID3D12Device* device,
+		_In_ ID3D12GraphicsCommandList* cmdList,
 		_In_reads_bytes_(ddsDataSize) const uint8_t* ddsData,
 		_In_ size_t ddsDataSize,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
+		_Out_ Microsoft::WRL::ComPtr<ID3D12Resource>& texture,
+		_Out_ Microsoft::WRL::ComPtr<ID3D12Resource>& textureUploadHeap,
 		_In_ size_t maxsize = 0,
 		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
-
-	HRESULT CreateDDSTextureFromMemory(_In_ ID3D12Device* d3dDevice,
-		_In_reads_bytes_(ddsDataSize) const uint8_t* ddsData,
-		_In_ size_t ddsDataSize,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
+	);	
+	
+	HRESULT CreateDDSTextureFromFile12(_In_ ID3D12Device* device,
+		_In_ ID3D12GraphicsCommandList* cmdList,
+		_In_z_ const wchar_t* szFileName,
+		_Out_ Microsoft::WRL::ComPtr<ID3D12Resource>& texture,
+		_Out_ Microsoft::WRL::ComPtr<ID3D12Resource>& textureUploadHeap,
 		_In_ size_t maxsize = 0,
 		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
+	);
 
-
-	HRESULT CreateDDSTextureFromFile(_In_ ID3D12Device* d3dDevice,
-		ID3D12GraphicsCommandList* d3dContext,
-		_In_z_ const wchar_t* szFileName,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
-		_In_ size_t maxsize = 0,
-		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
-
-	HRESULT CreateDDSTextureFromFile(_In_ ID3D12Device* d3dDevice,
-		_In_z_ const wchar_t* szFileName,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
-		_In_ size_t maxsize = 0,
-		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
-
-	// Extended version
-	HRESULT CreateDDSTextureFromMemoryEx(_In_ ID3D12Device* d3dDevice,
-		ID3D12GraphicsCommandList* d3dContext,
-		_In_reads_bytes_(ddsDataSize) const uint8_t* ddsData,
-		_In_ size_t ddsDataSize,
-		_In_ size_t maxsize,
-		_In_ bool forceSRGB,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
-		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
-
-	HRESULT CreateDDSTextureFromMemoryEx(_In_ ID3D12Device* d3dDevice,
-		_In_reads_bytes_(ddsDataSize) const uint8_t* ddsData,
-		_In_ size_t ddsDataSize,
-		_In_ size_t maxsize,
-		_In_ bool forceSRGB,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
-		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
-
-	HRESULT CreateDDSTextureFromFileEx(_In_ ID3D12Device* d3dDevice,
-		ID3D12GraphicsCommandList* d3dContext,
-		_In_z_ const wchar_t* szFileName,
-		_In_ size_t maxsize,
-		_In_ bool forceSRGB,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
-		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
-
-	HRESULT CreateDDSTextureFromFileEx(_In_ ID3D12Device* d3dDevice,
-		_In_z_ const wchar_t* szFileName,
-		_In_ size_t maxsize,
-		_In_ bool forceSRGB,
-		_Outptr_ ID3D12Resource** texture,
-		_Outptr_opt_ D3D12_SHADER_RESOURCE_VIEW_DESC* textureView,
-		_Out_opt_ DDS_ALPHA_MODE* alphaMode = nullptr
-		);
 }

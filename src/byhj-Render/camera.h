@@ -6,8 +6,8 @@ namespace byhj
 	class Camera
 	{
 	public:
-		Camera();
-		virtual ~Camera();
+		Camera() = default;
+		virtual ~Camera() = default;
 	};
 }
 #endif

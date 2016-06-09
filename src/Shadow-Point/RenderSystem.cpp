@@ -28,10 +28,10 @@ namespace byhj
 
 		static ogl::MvpMatrix matrix;
 		matrix.view  = m_Camera.GetViewMatrix();
-		matrix.proj  = glm::perspective(glm::radians(m_Camera.GetZoom() ), GetAspect(), 0.1f, 100.0f);
+		matrix.proj  = glm::perspective(glm::radians(m_Camera.GetZoom() ), getAspect(), 0.1f, 100.0f);
 		matrix.model = glm::mat4(1.0f);
 
-	    m_Scene.Render(matrix, m_Camera, GetAspect());
+	    m_Scene.Render(matrix, m_Camera, getAspect());
 
 	}
 
