@@ -1,7 +1,3 @@
-//***************************************************************************************
-// D3D12Render.h by Frank Luna (C) 2015 All Rights Reserved.
-//***************************************************************************************
-
 #pragma once
 
 #if defined(DEBUG) || defined(_DEBUG)
@@ -10,59 +6,42 @@
 #endif
 
 #include "d3d12Util.h"
-#include "timer.h"
 #include "d3d/d3dApp.h"
+#include "timer.h"
 
 // Link necessary d3d12 libraries.
 #pragma comment(lib,"d3dcompiler.lib")
 #pragma comment(lib, "D3D12.lib")
 #pragma comment(lib, "dxgi.lib")
 
+using Microsoft::WRL::ComPtr;
+using namespace std;
+using namespace DirectX;
+
 namespace byhj {
 
 class D3D12Render : public D3DApp
 {
-protected:
-
-    D3D12Render(HINSTANCE hInstance);
-    D3D12Render(const D3D12Render& rhs) = delete;
-    D3D12Render& operator=(const D3D12Render& rhs) = delete;
-    virtual ~D3D12Render();
 
 public:
 
-    static D3D12Render* GetApp();
-    
-	HINSTANCE AppInst()const;
-	HWND      MainWnd()const;
-	float     AspectRatio()const;
+	D3D12Render();
+	~D3D12Render();
 
+	void v_init();
+	void v_update();
+	void v_render();
+	void v_shutdown();
+
+   
     bool Get4xMsaaState()const;
     void Set4xMsaaState(bool value);
-
-	int Run();
- 
-    virtual bool Initialize();
-    virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
+	void OnResize();
 protected:
-    virtual void CreateRtvAndDsvDescriptorHeaps();
-	virtual void OnResize(); 
-	virtual void Update(const GameTimer& gt)=0;
-    virtual void Draw(const GameTimer& gt)=0;
-
-	// Convenience overrides for handling mouse input.
-	virtual void OnMouseDown(WPARAM btnState, int x, int y){ }
-	virtual void OnMouseUp(WPARAM btnState, int x, int y)  { }
-	virtual void OnMouseMove(WPARAM btnState, int x, int y){ }
-
-protected:
-
-	bool InitMainWindow();
 	bool InitDirect3D();
 	void CreateCommandObjects();
     void CreateSwapChain();
-
+	void CreateRtvAndDsvDescriptorHeaps();
 	void FlushCommandQueue();
 
 	ID3D12Resource* CurrentBackBuffer()const;
@@ -77,7 +56,6 @@ protected:
 
 protected:
 
-    static D3D12Render* mApp;
 
     HINSTANCE mhAppInst = nullptr; // application instance handle
     HWND      mhMainWnd = nullptr; // main window handle
@@ -91,31 +69,13 @@ protected:
     bool      m4xMsaaState = false;    // 4X MSAA enabled
     UINT      m4xMsaaQuality = 0;      // quality level of 4X MSAA
 
-	// Used to keep track of the “delta-time?and game time (?.4).
-	GameTimer mTimer;
-	
-    Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;
-    Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
-    Microsoft::WRL::ComPtr<ID3D12Device> md3dDevice;
 
-    Microsoft::WRL::ComPtr<ID3D12Fence> mFence;
     UINT64 mCurrentFence = 0;
-	
-    Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;
-    Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
-    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
-
 	static const int SwapChainBufferCount = 2;
 	int mCurrBackBuffer = 0;
-    Microsoft::WRL::ComPtr<ID3D12Resource> mSwapChainBuffer[SwapChainBufferCount];
-    Microsoft::WRL::ComPtr<ID3D12Resource> mDepthStencilBuffer;
-
-    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mRtvHeap;
-    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mDsvHeap;
 
     D3D12_VIEWPORT mScreenViewport; 
     D3D12_RECT mScissorRect;
-
 	UINT mRtvDescriptorSize = 0;
 	UINT mDsvDescriptorSize = 0;
 	UINT mCbvSrvUavDescriptorSize = 0;
@@ -125,8 +85,22 @@ protected:
 	D3D_DRIVER_TYPE md3dDriverType = D3D_DRIVER_TYPE_HARDWARE;
     DXGI_FORMAT mBackBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
     DXGI_FORMAT mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	int mClientWidth = 800;
-	int mClientHeight = 600;
+
+
+
+	ComPtr<IDXGIFactory4> mdxgiFactory;
+	ComPtr<IDXGISwapChain> mSwapChain;
+	ComPtr<ID3D12Device> md3dDevice;
+	ComPtr<ID3D12Fence> mFence;
+	ComPtr<ID3D12CommandQueue> mCommandQueue;
+	ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
+	ComPtr<ID3D12GraphicsCommandList> mCommandList;
+	ComPtr<ID3D12Resource> mSwapChainBuffer[SwapChainBufferCount];
+	ComPtr<ID3D12Resource> mDepthStencilBuffer;
+	ComPtr<ID3D12DescriptorHeap> mRtvHeap;
+	ComPtr<ID3D12DescriptorHeap> mDsvHeap;
+
+
 };
 
 }

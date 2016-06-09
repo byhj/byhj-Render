@@ -241,11 +241,5 @@
     <None Include="cube.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="font.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="font.frag">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
 </Project>
