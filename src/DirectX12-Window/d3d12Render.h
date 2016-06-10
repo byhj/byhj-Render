@@ -29,6 +29,7 @@ public:
     bool Get4xMsaaState()const;
     void Set4xMsaaState(bool value);
 	void CreateSwapChain();
+
 protected:
 	void init_d3d();
 	void CreateRtvAndDsvDescriptorHeaps();
@@ -50,46 +51,46 @@ protected:
 protected:
 
 
-    HINSTANCE mhAppInst = nullptr; // application instance handle
-    HWND      mhMainWnd = nullptr; // main window handle
-	bool      mAppPaused = false;  // is the application paused?
-	bool      mMinimized = false;  // is the application minimized?
-	bool      mMaximized = false;  // is the application maximized?
-	bool      mResizing = false;   // are the resize bars being dragged?
-    bool      mFullscreenState = false;// fullscreen enabled
+    HINSTANCE m_hAppInst = nullptr; // application instance handle
+    HWND      m_hMainWnd = nullptr; // main window handle
+	bool      m_AppPaused = false;  // is the application paused?
+	bool      m_Minimized = false;  // is the application minimized?
+	bool      m_Maximized = false;  // is the application maximized?
+	bool      m_Resizing = false;   // are the resize bars being dragged?
+    bool      m_FullscreenState = false;// fullscreen enabled
 
 	// Set true to use 4X MSAA (?.1.8).  The default is false.
-    bool      m4xMsaaState = false;    // 4X MSAA enabled
-    UINT      m4xMsaaQuality = 0;      // quality level of 4X MSAA
+    bool      m_4xMsaaState = false;    // 4X MSAA enabled
+    UINT      m_4xMsaaQuality = 0;      // quality level of 4X MSAA
 
 	// Used to keep track of the “delta-time?and game time (?.4).
-	Timer mTimer;
-	UINT64 mCurrentFence = 0;
-	static const int SwapChainBufferCount = 2;
-	int mCurrBackBuffer = 0;
+	Timer m_Timer;
+	UINT64 m_CurrentFence = 0;
+	static const int m_SwapChainBufferCount = 2;
+	int m_CurrBackBuffer = 0;
 
-    ComPtr<IDXGIFactory4> mdxgiFactory;
-    ComPtr<IDXGISwapChain> mSwapChain;
-    ComPtr<ID3D12Device> md3dDevice;
-    ComPtr<ID3D12Fence> mFence;
-    ComPtr<ID3D12CommandQueue> mCommandQueue;
-    ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
-    ComPtr<ID3D12GraphicsCommandList> mCommandList;
-    ComPtr<ID3D12Resource> mSwapChainBuffer[SwapChainBufferCount];
-    ComPtr<ID3D12Resource> mDepthStencilBuffer;
-    ComPtr<ID3D12DescriptorHeap> mRtvHeap;
-    ComPtr<ID3D12DescriptorHeap> mDsvHeap;
+    ComPtr<IDXGIFactory4>             m_pFactory;
+    ComPtr<IDXGISwapChain>            m_pSwapChain;
+    ComPtr<ID3D12Device>              m_pD3D12Device;
+    ComPtr<ID3D12Fence>               m_pFence;
+    ComPtr<ID3D12CommandQueue>        m_pCommandQueue;
+    ComPtr<ID3D12CommandAllocator>    m_pCommandAlloc;
+    ComPtr<ID3D12GraphicsCommandList> m_pCommandList;
+    ComPtr<ID3D12Resource>            m_pSwapChainBuffer[m_SwapChainBufferCount];
+    ComPtr<ID3D12Resource>            m_pDepthStencilBuffer;
+    ComPtr<ID3D12DescriptorHeap>      m_pRtvHeap;
+    ComPtr<ID3D12DescriptorHeap>      m_pDsvHeap;
 
-    D3D12_VIEWPORT mScreenViewport; 
-    D3D12_RECT mScissorRect;
+    D3D12_VIEWPORT m_ScreenViewport; 
+    D3D12_RECT m_ScissorRect;
 
-	UINT mRtvDescriptorSize = 0;
-	UINT mDsvDescriptorSize = 0;
-	UINT mCbvSrvUavDescriptorSize = 0;
+	UINT m_RtvDescriptorSize = 0;
+	UINT m_DsvDescriptorSize = 0;
+	UINT m_CbvSrvUavDescriptorSize = 0;
 
-	D3D_DRIVER_TYPE md3dDriverType = D3D_DRIVER_TYPE_HARDWARE;
-    DXGI_FORMAT mBackBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
-    DXGI_FORMAT mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	D3D_DRIVER_TYPE m_D3DDriverType = D3D_DRIVER_TYPE_HARDWARE;
+    DXGI_FORMAT     m_BackBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
+    DXGI_FORMAT     m_DepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	int mClientWidth = 800;
 	int mClientHeight = 600;
