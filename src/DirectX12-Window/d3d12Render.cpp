@@ -1,7 +1,3 @@
-//***************************************************************************************
-// D3D12Render.cpp by Frank Luna (C) 2015 All Rights Reserved.
-//***************************************************************************************
-
 #include "D3D12Render.h"
 #include <WindowsX.h>
 
@@ -23,7 +19,7 @@ D3D12Render::~D3D12Render()
 }
 
 
-bool D3D12Render::Get4xMsaaState()const
+bool D3D12Render::Get4xMsaaState() const
 {
     return m_4xMsaaState;
 }
@@ -34,21 +30,21 @@ void D3D12Render::Set4xMsaaState(bool value)
         m_4xMsaaState = value;
 
         // Recreate the swapchain and buffers with new multisample settings.
-        CreateSwapChain();
-        OnResize();
+		init_swapchain();
+		init_size();
     }
 }
 
 void  D3D12Render::v_init()
 {
 	init_d3d();
-	OnResize();
+	init_size();
 }
 
 void  D3D12Render::v_update()
 {
 	// Reuse the memory associated with command recording.
-// We can only reset when the associated command lists have finished execution on the GPU.
+    // We can only reset when the associated command lists have finished execution on the GPU.
 	ThrowIfFailed(m_pCommandAlloc->Reset());
 
 	// A command list can be reset after it has been added to the command queue via ExecuteCommandList.
@@ -101,27 +97,27 @@ void  D3D12Render::v_shutdown()
 
 }
 
-void D3D12Render::CreateRtvAndDsvDescriptorHeaps()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void D3D12Render::init_descHeaps()
 {
     D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc;
-    rtvHeapDesc.NumDescriptors = m_SwapChainBufferCount;
-    rtvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-    rtvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-	rtvHeapDesc.NodeMask = 0;
-    ThrowIfFailed(m_pD3D12Device->CreateDescriptorHeap(
-        &rtvHeapDesc, IID_PPV_ARGS(m_pRtvHeap.GetAddressOf())));
+	rtvHeapDesc.NumDescriptors = m_SwapChainBufferCount;
+	rtvHeapDesc.Type           = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+	rtvHeapDesc.Flags          = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	rtvHeapDesc.NodeMask       = 0;
+    ThrowIfFailed(m_pD3D12Device->CreateDescriptorHeap( &rtvHeapDesc, IID_PPV_ARGS(m_pRtvHeap.GetAddressOf())));
 
 
     D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc;
-    dsvHeapDesc.NumDescriptors = 1;
-    dsvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
-    dsvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-	dsvHeapDesc.NodeMask = 0;
-    ThrowIfFailed(m_pD3D12Device->CreateDescriptorHeap(
-        &dsvHeapDesc, IID_PPV_ARGS(m_pDsvHeap.GetAddressOf())));
+	dsvHeapDesc.NumDescriptors = 1;
+	dsvHeapDesc.Type           = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+	dsvHeapDesc.Flags          = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	dsvHeapDesc.NodeMask       = 0;
+    ThrowIfFailed(m_pD3D12Device->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(m_pDsvHeap.GetAddressOf())));
 }
 
-void D3D12Render::OnResize()
+void D3D12Render::init_size()
 {
 	assert(m_pD3D12Device);
 	assert(m_pSwapChain);
@@ -155,17 +151,17 @@ void D3D12Render::OnResize()
 
     // Create the depth/stencil buffer and view.
     D3D12_RESOURCE_DESC depthStencilDesc;
-    depthStencilDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-    depthStencilDesc.Alignment = 0;
-    depthStencilDesc.Width = mClientWidth;
-    depthStencilDesc.Height = mClientHeight;
-    depthStencilDesc.DepthOrArraySize = 1;
-    depthStencilDesc.MipLevels = 1;
-    depthStencilDesc.Format = m_DepthStencilFormat;
-    depthStencilDesc.SampleDesc.Count = m_4xMsaaState ? 4 : 1;
+    depthStencilDesc.Dimension          = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+    depthStencilDesc.Alignment          = 0;
+    depthStencilDesc.Width              = mClientWidth;
+    depthStencilDesc.Height             = mClientHeight;
+    depthStencilDesc.DepthOrArraySize   = 1;
+    depthStencilDesc.MipLevels          = 1;
+    depthStencilDesc.Format             = m_DepthStencilFormat;
+    depthStencilDesc.SampleDesc.Count   = m_4xMsaaState ? 4 : 1;
     depthStencilDesc.SampleDesc.Quality = m_4xMsaaState ? (m_4xMsaaQuality - 1) : 0;
-    depthStencilDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
-    depthStencilDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+    depthStencilDesc.Layout             = D3D12_TEXTURE_LAYOUT_UNKNOWN;
+    depthStencilDesc.Flags              = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
 
     D3D12_CLEAR_VALUE optClear;
     optClear.Format = m_DepthStencilFormat;
@@ -265,13 +261,13 @@ void D3D12Render::init_d3d()
     LogAdapters();
 #endif
 
-	CreateCommandObjects();
-    CreateSwapChain();
-    CreateRtvAndDsvDescriptorHeaps();
+	init_cmd();
+	init_swapchain();
+	init_descHeaps();
 
 }
 
-void D3D12Render::CreateCommandObjects()
+void D3D12Render::init_cmd()
 {
 	D3D12_COMMAND_QUEUE_DESC queueDesc = {};
 	queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
@@ -295,7 +291,7 @@ void D3D12Render::CreateCommandObjects()
 	m_pCommandList->Close();
 }
 
-void D3D12Render::CreateSwapChain()
+void D3D12Render::init_swapchain()
 {
     // Release the previous swapchain we will be recreating.
     m_pSwapChain.Reset();
@@ -366,7 +362,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE D3D12Render::DepthStencilView()const
 	return m_pDsvHeap->GetCPUDescriptorHandleForHeapStart();
 }
 
-void D3D12Render::CalculateFrameStats()
+void D3D12Render::calc_fps()
 {
 	// Code computes the average frames per second, and also the 
 	// average time it takes to render one frame.  These stats 

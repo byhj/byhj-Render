@@ -28,17 +28,17 @@ public:
 
     bool Get4xMsaaState()const;
     void Set4xMsaaState(bool value);
-	void CreateSwapChain();
 
 protected:
-	void init_d3d();
-	void CreateRtvAndDsvDescriptorHeaps();
-	void OnResize();
-	void CreateCommandObjects();
 
+	void init_d3d();
+	void init_swapchain();
+	void init_cmd();
+	void init_descHeaps();
+	void init_size();
 
 	void FlushCommandQueue();
-	void CalculateFrameStats();
+	void calc_fps();
 
 	ID3D12Resource* CurrentBackBuffer()const;
 	D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView()const;
@@ -49,26 +49,18 @@ protected:
     void LogOutputDisplayModes(IDXGIOutput* output, DXGI_FORMAT format);
 
 protected:
-
-
-    HINSTANCE m_hAppInst = nullptr; // application instance handle
-    HWND      m_hMainWnd = nullptr; // main window handle
-	bool      m_AppPaused = false;  // is the application paused?
-	bool      m_Minimized = false;  // is the application minimized?
-	bool      m_Maximized = false;  // is the application maximized?
-	bool      m_Resizing = false;   // are the resize bars being dragged?
-    bool      m_FullscreenState = false;// fullscreen enabled
-
 	// Set true to use 4X MSAA (?.1.8).  The default is false.
     bool      m_4xMsaaState = false;    // 4X MSAA enabled
     UINT      m_4xMsaaQuality = 0;      // quality level of 4X MSAA
 
 	// Used to keep track of the “delta-time?and game time (?.4).
-	Timer m_Timer;
+	Timer  m_Timer;
 	UINT64 m_CurrentFence = 0;
+	int    m_CurrBackBuffer = 0;
 	static const int m_SwapChainBufferCount = 2;
-	int m_CurrBackBuffer = 0;
 
+
+	// D3D12 COM Objects
     ComPtr<IDXGIFactory4>             m_pFactory;
     ComPtr<IDXGISwapChain>            m_pSwapChain;
     ComPtr<ID3D12Device>              m_pD3D12Device;
@@ -84,13 +76,13 @@ protected:
     D3D12_VIEWPORT m_ScreenViewport; 
     D3D12_RECT m_ScissorRect;
 
-	UINT m_RtvDescriptorSize = 0;
-	UINT m_DsvDescriptorSize = 0;
+	UINT m_RtvDescriptorSize       = 0;
+	UINT m_DsvDescriptorSize       = 0;
 	UINT m_CbvSrvUavDescriptorSize = 0;
 
-	D3D_DRIVER_TYPE m_D3DDriverType = D3D_DRIVER_TYPE_HARDWARE;
-    DXGI_FORMAT     m_BackBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
-    DXGI_FORMAT     m_DepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	D3D_DRIVER_TYPE m_D3DDriverType      = D3D_DRIVER_TYPE_HARDWARE;
+	DXGI_FORMAT     m_BackBufferFormat   = DXGI_FORMAT_R8G8B8A8_UNORM;
+	DXGI_FORMAT     m_DepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	int mClientWidth = 800;
 	int mClientHeight = 600;
