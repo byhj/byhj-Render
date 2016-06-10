@@ -146,8 +146,10 @@
     <ClCompile Include="d3d12DDSLoader.cpp" />
     <ClCompile Include="d3d12Util.cpp" />
     <ClCompile Include="d3dMathHelper.cpp" />
+    <ClCompile Include="FrameResource.cpp" />
+    <ClCompile Include="GeometryGenerator.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="triangle.cpp" />
+    <ClCompile Include="cube.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
@@ -186,13 +188,16 @@
     <ClInclude Include="d3d12DDSLoader.h" />
     <ClInclude Include="d3d12Util.h" />
     <ClInclude Include="d3dMathHelper.h" />
-    <ClInclude Include="triangle.h" />
+    <ClInclude Include="cube.h" />
+    <ClInclude Include="FrameResource.h" />
+    <ClInclude Include="GeometryGenerator.h" />
+    <ClInclude Include="UploadBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="triangle.psh">
+    <None Include="cube.psh">
       <FileType>Document</FileType>
     </None>
-    <None Include="triangle.vsh">
+    <None Include="cube.vsh">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

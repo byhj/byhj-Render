@@ -8,6 +8,7 @@
 #include "d3d12Util.h"
 #include "d3d/d3dApp.h"
 #include "timer.h"
+#include "cube.h"
 
 // Link necessary d3d12 libraries.
 #pragma comment(lib,"d3dcompiler.lib")
@@ -39,6 +40,10 @@ public:
 	void OnResize();
 
 protected:
+
+	void init_camera();
+	void init_d3d();
+
 	bool InitDirect3D();
 	void CreateCommandObjects();
     void CreateSwapChain();
@@ -97,6 +102,8 @@ protected:
 	ComPtr<ID3D12Resource> mDepthStencilBuffer;
 	ComPtr<ID3D12DescriptorHeap> mRtvHeap;
 	ComPtr<ID3D12DescriptorHeap> mDsvHeap;
+
+	Cube cube;
 
 };
 

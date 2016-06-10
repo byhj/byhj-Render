@@ -12,6 +12,7 @@
 #include "d3dMathHelper.h"
 #include "UploadBuffer.h"
 #include "FrameResource.h"
+#include "GeometryGenerator.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -31,7 +32,6 @@ struct RenderItem
 	// relative to the world space, which defines the position, orientation,
 	// and scale of the object in the world.
 	XMFLOAT4X4 World = D3DMathHelper::Identity4x4();
-
 	XMFLOAT4X4 TexTransform = D3DMathHelper::Identity4x4();
 
 	// Dirty flag indicating the object data has changed and we need to update the constant buffer.
@@ -63,17 +63,24 @@ public:
     Cube() = default;
 	~Cube() = default;
 
-	void init();
+	void init(ComPtr<ID3D12Device> md3dDevice, ComPtr<ID3D12Fence> mFence,
+		      ComPtr<ID3D12GraphicsCommandList> mCommandList, ComPtr<ID3D12CommandQueue> mCommandQueue);
+
+
 	void update();
 	void render();
 	void shutdown();
 
+	ComPtr<ID3D12PipelineState> getPipelineState();
+	ComPtr<ID3D12RootSignature> getRootSignature();
+
 private:
+
 	void UpdateObjectCBs();
 	void UpdateMaterialCBs();
 	void UpdateMainPassCB();
 
-
+	void FlushCommandQueue();
 	void LoadTextures();
 	void BuildRootSignature();
 	void BuildDescriptorHeaps();
@@ -125,4 +132,10 @@ private:
 	float mRadius = 2.5f;
 	float mClientWidth, mClientHeight;
 	POINT mLastMousePos;
+
+	ComPtr<ID3D12Device> md3dDevice;
+	ComPtr<ID3D12Fence> mFence;
+	ComPtr<ID3D12CommandQueue> mCommandQueue;
+	ComPtr<ID3D12GraphicsCommandList> mCommandList;
+	ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
 };

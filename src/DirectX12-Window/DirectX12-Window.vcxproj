@@ -111,10 +111,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\d3d\d3d12DDSLoader.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3d12Util.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dFWFont.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3dMathHelper.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dMesh.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dModel.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dShader.cpp" />
@@ -146,10 +149,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\d3d\d3d12DDSLoader.h" />
+    <ClInclude Include="..\..\include\d3d\d3d12Util.h" />
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dFWFont.h" />
+    <ClInclude Include="..\..\include\d3d\d3dMathHelper.h" />
     <ClInclude Include="..\..\include\d3d\d3dMesh.h" />
     <ClInclude Include="..\..\include\d3d\d3dModel.h" />
     <ClInclude Include="..\..\include\d3d\d3dShader.h" />

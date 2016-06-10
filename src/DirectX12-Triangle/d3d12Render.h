@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <wrl.h>
 
-#include "d3d/d3dx12.h"
+#include "d3dx12.h"
 #include "triangle.h"
 
 #pragma comment(lib, "d3d12")

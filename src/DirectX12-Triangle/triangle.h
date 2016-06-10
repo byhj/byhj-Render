@@ -6,7 +6,7 @@
 #include <wrl.h>
 #include <assert.h>
 #include <allocators>
-#include "d3d/d3dx12.h"
+#include "d3dx12.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;

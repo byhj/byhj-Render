@@ -7,8 +7,8 @@
 
 int main()
 {
-	auto d3dApp = std::make_shared<byhj::D3D12Render>();
-	byhj::Root::getInstance()->setRender(d3dApp);
+	auto D3DApp = std::make_shared<byhj::D3D12Render>();
+	byhj::Root::getInstance()->setRender(D3DApp);
 	byhj::Root::getInstance()->BeginScene();
 	byhj::Root::getInstance()->EndScene();
 

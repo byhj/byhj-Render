@@ -1,5 +1,5 @@
-#ifndef _D3DAPP_H
-#define _D3DAPP_H
+#ifndef _D3DApp_H
+#define _D3DApp_H
 
 //use window sdk, not the mfc sdk parts;
 #define WIN32_LEAN_AND_MEAN
