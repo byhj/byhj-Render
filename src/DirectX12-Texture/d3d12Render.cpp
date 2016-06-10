@@ -66,7 +66,7 @@ void D3D12Render::OnResize()
 	// Resize the swap chain.
     ThrowIfFailed(mSwapChain->ResizeBuffers(
 		SwapChainBufferCount, 
-		mClientWidth, mClientHeight, 
+		D3DApp::getClientWidth(), D3DApp::getClientHeight(),
 		mBackBufferFormat, 
 		DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH));
 
@@ -84,8 +84,8 @@ void D3D12Render::OnResize()
     D3D12_RESOURCE_DESC depthStencilDesc;
     depthStencilDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
     depthStencilDesc.Alignment = 0;
-    depthStencilDesc.Width = mClientWidth;
-    depthStencilDesc.Height = mClientHeight;
+    depthStencilDesc.Width = D3DApp::getClientWidth();
+    depthStencilDesc.Height = D3DApp::getClientHeight();
     depthStencilDesc.DepthOrArraySize = 1;
     depthStencilDesc.MipLevels = 1;
     depthStencilDesc.Format = mDepthStencilFormat;
@@ -124,12 +124,12 @@ void D3D12Render::OnResize()
 	// Update the viewport transform to cover the client area.
 	mScreenViewport.TopLeftX = 0;
 	mScreenViewport.TopLeftY = 0;
-	mScreenViewport.Width    = static_cast<float>(mClientWidth);
-	mScreenViewport.Height   = static_cast<float>(mClientHeight);
+	mScreenViewport.Width    = static_cast<float>(D3DApp::getClientWidth());
+	mScreenViewport.Height   = static_cast<float>(D3DApp::getClientHeight());
 	mScreenViewport.MinDepth = 0.0f;
 	mScreenViewport.MaxDepth = 1.0f;
 
-    mScissorRect = { 0, 0, mClientWidth, mClientHeight };
+    mScissorRect = { 0, 0, D3DApp::getClientWidth(), D3DApp::getClientHeight() };
 }
 
 
@@ -229,21 +229,21 @@ void D3D12Render::CreateSwapChain()
     mSwapChain.Reset();
 
     DXGI_SWAP_CHAIN_DESC sd;
-    sd.BufferDesc.Width = mClientWidth;
-    sd.BufferDesc.Height = mClientHeight;
-    sd.BufferDesc.RefreshRate.Numerator = 60;
-    sd.BufferDesc.RefreshRate.Denominator = 1;
-    sd.BufferDesc.Format = mBackBufferFormat;
-    sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-    sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-    sd.SampleDesc.Count = m4xMsaaState ? 4 : 1;
-    sd.SampleDesc.Quality = m4xMsaaState ? (m4xMsaaQuality - 1) : 0;
-    sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.BufferCount = SwapChainBufferCount;
-    sd.OutputWindow = mhMainWnd;
-    sd.Windowed = true;
-	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-    sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+	sd.BufferDesc.Width                   = D3DApp::getClientWidth();
+	sd.BufferDesc.Height                  = D3DApp::getClientHeight();
+	sd.BufferDesc.RefreshRate.Numerator   = 60;
+	sd.BufferDesc.RefreshRate.Denominator = 1;
+	sd.BufferDesc.Format                  = mBackBufferFormat;
+	sd.BufferDesc.ScanlineOrdering        = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	sd.BufferDesc.Scaling                 = DXGI_MODE_SCALING_UNSPECIFIED;
+	sd.SampleDesc.Count                   = m4xMsaaState ? 4 : 1;
+	sd.SampleDesc.Quality                 = m4xMsaaState ? (m4xMsaaQuality - 1) : 0;
+	sd.BufferUsage                        = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	sd.BufferCount                        = SwapChainBufferCount;
+	sd.OutputWindow                       = mhMainWnd;
+	sd.Windowed                           = true;
+	sd.SwapEffect                         = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+	sd.Flags                              = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	// Note: Swap chain uses queue to perform flush.
     ThrowIfFailed(mdxgiFactory->CreateSwapChain(
@@ -292,38 +292,6 @@ D3D12_CPU_DESCRIPTOR_HANDLE D3D12Render::CurrentBackBufferView()const
 D3D12_CPU_DESCRIPTOR_HANDLE D3D12Render::DepthStencilView()const
 {
 	return mDsvHeap->GetCPUDescriptorHandleForHeapStart();
-}
-
-void D3D12Render::CalculateFrameStats()
-{
-	// Code computes the average frames per second, and also the 
-	// average time it takes to render one frame.  These stats 
-	// are appended to the window caption bar.
-    
-	static int frameCnt = 0;
-	static float timeElapsed = 0.0f;
-
-	frameCnt++;
-
-	// Compute averages over one second period.
-	if( (mTimer.TotalTime() - timeElapsed) >= 1.0f )
-	{
-		float fps = (float)frameCnt; // fps = frameCnt / 1
-		float mspf = 1000.0f / fps;
-
-        wstring fpsStr = to_wstring(fps);
-        wstring mspfStr = to_wstring(mspf);
-
-        wstring windowText = mMainWndCaption +
-            L"    fps: " + fpsStr +
-            L"   mspf: " + mspfStr;
-
-        SetWindowText(mhMainWnd, windowText.c_str());
-		
-		// Reset for next average.
-		frameCnt = 0;
-		timeElapsed += 1.0f;
-	}
 }
 
 void D3D12Render::LogAdapters()

@@ -132,8 +132,14 @@
     <ClCompile Include="..\byhj-Render\textureMgr.cpp">
       <Filter>Render\mgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\d3d\d3d12DDSLoader.cpp">
-      <Filter>Render\d3d</Filter>
+    <ClCompile Include="d3d12DDSLoader.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12Util.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d3dMathHelper.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,11 +242,17 @@
     <ClInclude Include="..\byhj-Render\textureMgr.h">
       <Filter>Render\mgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\d3d\d3d12DDSLoader.h">
-      <Filter>Render\d3d</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\d3d\d3dx12.h">
       <Filter>Render\d3d</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12DDSLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dMathHelper.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

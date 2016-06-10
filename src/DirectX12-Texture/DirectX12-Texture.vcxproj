@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -111,7 +111,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\include\d3d\d3d12DDSLoader.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
@@ -144,11 +143,13 @@
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
     <ClCompile Include="d3d12Render.cpp" />
+    <ClCompile Include="d3d12DDSLoader.cpp" />
+    <ClCompile Include="d3d12Util.cpp" />
+    <ClCompile Include="d3dMathHelper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\d3d\d3d12DDSLoader.h" />
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
@@ -182,6 +183,9 @@
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
     <ClInclude Include="d3d12Render.h" />
+    <ClInclude Include="d3d12DDSLoader.h" />
+    <ClInclude Include="d3d12Util.h" />
+    <ClInclude Include="d3dMathHelper.h" />
     <ClInclude Include="triangle.h" />
   </ItemGroup>
   <ItemGroup>

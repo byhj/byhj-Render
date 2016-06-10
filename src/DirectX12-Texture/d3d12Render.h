@@ -28,15 +28,16 @@ public:
 	D3D12Render();
 	~D3D12Render();
 
-	void v_init();
-	void v_update();
-	void v_render();
-	void v_shutdown();
+	void v_init()      override;
+	void v_update()    override;
+	void v_render()    override;
+	void v_shutdown()  override;
 
    
     bool Get4xMsaaState()const;
     void Set4xMsaaState(bool value);
 	void OnResize();
+
 protected:
 	bool InitDirect3D();
 	void CreateCommandObjects();
@@ -48,7 +49,6 @@ protected:
 	D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView()const;
 	D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView()const;
 
-	void CalculateFrameStats();
 
     void LogAdapters();
     void LogAdapterOutputs(IDXGIAdapter* adapter);
@@ -81,12 +81,10 @@ protected:
 	UINT mCbvSrvUavDescriptorSize = 0;
 
 	// Derived class should set these in derived constructor to customize starting values.
-	std::wstring mMainWndCaption = L"d3d App";
+
 	D3D_DRIVER_TYPE md3dDriverType = D3D_DRIVER_TYPE_HARDWARE;
     DXGI_FORMAT mBackBufferFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
     DXGI_FORMAT mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
-
-
 
 	ComPtr<IDXGIFactory4> mdxgiFactory;
 	ComPtr<IDXGISwapChain> mSwapChain;
@@ -99,7 +97,6 @@ protected:
 	ComPtr<ID3D12Resource> mDepthStencilBuffer;
 	ComPtr<ID3D12DescriptorHeap> mRtvHeap;
 	ComPtr<ID3D12DescriptorHeap> mDsvHeap;
-
 
 };
 
