@@ -38,11 +38,12 @@ void D3D12Render::Set4xMsaaState(bool value)
 void  D3D12Render::v_init()
 {
 	init_d3d();
+	init_size();
 
 	// Reset the command list to prep for initialization commands.
 	ThrowIfFailed(m_pCommandList->Reset(m_pCommandAlloc.Get(), nullptr));
 
-	m_cube.init(m_pD3D12Device, m_pFence, m_pCommandList, m_pCommandQueue);
+	m_cube.init(m_pD3D12Device, m_pCommandList, m_pCommandQueue);
 
 	// Execute the initialization commands.
 	ThrowIfFailed(m_pCommandList->Close());
@@ -50,60 +51,14 @@ void  D3D12Render::v_init()
 	m_pCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
 	flush_cmdQueue();
 
-	init_size();
+
 
 }
 
 void  D3D12Render::v_update()
 {
 
-	
-	// Reuse the memory associated with command recording.
-    // We can only reset when the associated command lists have finished execution on the GPU.
-	ThrowIfFailed(m_pCommandAlloc->Reset());
-
-	// A command list can be reset after it has been added to the command queue via ExecuteCommandList.
-	// Reusing the command list reuses memory.
-	ThrowIfFailed(m_pCommandList->Reset(m_pCommandAlloc.Get(), nullptr));
-
-	// Indicate a state transition on the resource usage.
-	m_pCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
-		D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
-
-	// Set the viewport and scissor rect.  This needs to be reset whenever the command list is reset.
-	m_pCommandList->RSSetViewports(1, &m_ScreenViewport);
-	m_pCommandList->RSSetScissorRects(1, &m_ScissorRect);
-
-	// Clear the back buffer and depth buffer.
-	m_pCommandList->ClearRenderTargetView(CurrentBackBufferView(), Colors::LightSteelBlue, 0, nullptr);
-	m_pCommandList->ClearDepthStencilView(DepthStencilView(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
-
-	// Specify the buffers we are going to render to.
-	m_pCommandList->OMSetRenderTargets(1, &CurrentBackBufferView(), true, &DepthStencilView());
-
-	// Indicate a state transition on the resource usage.
-	m_pCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
-		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
-
-	// Done recording commands.
-	ThrowIfFailed(m_pCommandList->Close());
-
-	// Add the command list to the queue for execution.
-	ID3D12CommandList* cmdsLists[] ={ m_pCommandList.Get() };
-	m_pCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
-
-	// swap the back and front buffers
-	ThrowIfFailed(m_pSwapChain->Present(0, 0));
-	m_CurrBackBuffer = (m_CurrBackBuffer + 1) % m_SwapChainBufferCount;
-
-	// Wait until frame commands are complete.  This waiting is inefficient and is
-	// done for simplicity.  Later we will show how to organize our rendering code
-	// so we do not have to wait per frame.
-
 	m_cube.update();
-
-	flush_cmdQueue();
-
 
 }
 

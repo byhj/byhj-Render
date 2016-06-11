@@ -12,8 +12,8 @@ namespace byhj {
 class Cube
 {
 public:
-	void init(ComPtr<ID3D12Device> md3dDevice, ComPtr<ID3D12Fence> mFence,
-		      ComPtr<ID3D12GraphicsCommandList> mCommandList, ComPtr<ID3D12CommandQueue> mCommandQueue);
+	void init(ComPtr<ID3D12Device> md3dDevice, ComPtr<ID3D12GraphicsCommandList> mCommandList, 
+		      ComPtr<ID3D12CommandQueue> mCommandQueue);
 	void update();
 	void render();
 	void shutdown();
@@ -63,7 +63,6 @@ private:
 
 
 	ComPtr<ID3D12Device> md3dDevice;
-	ComPtr<ID3D12Fence> mFence;
 	ComPtr<ID3D12CommandQueue> mCommandQueue;
 	ComPtr<ID3D12GraphicsCommandList> mCommandList;
 	ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;

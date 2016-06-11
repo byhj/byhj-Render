@@ -3,13 +3,11 @@
 namespace byhj {
 
 void Cube::init(ComPtr<ID3D12Device> md3dDevice,
-		ComPtr<ID3D12Fence> mFence,
 		ComPtr<ID3D12GraphicsCommandList> mCommandList,
 		ComPtr<ID3D12CommandQueue> mCommandQueue)
 {
 
 	this->md3dDevice = md3dDevice;
-	this->mFence = mFence;
 	this->mCommandQueue = mCommandQueue;
 	this->mCommandList = mCommandList;
 
@@ -64,9 +62,7 @@ void Cube::render()
 
 	mCommandList->SetGraphicsRootDescriptorTable(0, mCbvHeap->GetGPUDescriptorHandleForHeapStart());
 
-	mCommandList->DrawIndexedInstanced(
-		mBoxGeo->DrawArgs["box"].IndexCount,
-		1, 0, 0, 0);
+	mCommandList->DrawIndexedInstanced(mBoxGeo->DrawArgs["box"].IndexCount, 1, 0, 0, 0);
 
 
 }
@@ -75,9 +71,9 @@ void Cube::BuildDescriptorHeaps()
 {
 	D3D12_DESCRIPTOR_HEAP_DESC cbvHeapDesc;
 	cbvHeapDesc.NumDescriptors = 1;
-	cbvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	cbvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	cbvHeapDesc.NodeMask = 0;
+	cbvHeapDesc.Type           = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	cbvHeapDesc.Flags          = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+	cbvHeapDesc.NodeMask       = 0;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&cbvHeapDesc, IID_PPV_ARGS(&mCbvHeap)));
 }
 
@@ -242,16 +238,16 @@ void Cube::BuildPSO()
 		reinterpret_cast<BYTE*>(mpsByteCode->GetBufferPointer()),
 		mpsByteCode->GetBufferSize()
 	};
-	psoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-	psoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
-	psoDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
-	psoDesc.SampleMask = UINT_MAX;
+	psoDesc.RasterizerState       = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+	psoDesc.BlendState            = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
+	psoDesc.DepthStencilState     = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
+	psoDesc.SampleMask            = UINT_MAX;
 	psoDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-	psoDesc.NumRenderTargets = 1;
-	psoDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
-	psoDesc.SampleDesc.Count =  1; //m4xMsaaState ? 4 : 1;
-	psoDesc.SampleDesc.Quality = 0; //m4xMsaaState ? (m4xMsaaQuality - 1) : 0;
-	psoDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	psoDesc.NumRenderTargets      = 1;
+	psoDesc.RTVFormats[0]         = DXGI_FORMAT_R8G8B8A8_UNORM;
+	psoDesc.SampleDesc.Count      = 1; //m4xMsaaState ? 4 : 1;
+	psoDesc.SampleDesc.Quality    = 0; //m4xMsaaState ? (m4xMsaaQuality - 1) : 0;
+	psoDesc.DSVFormat             = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	ThrowIfFailed(md3dDevice->CreateGraphicsPipelineState(&psoDesc, IID_PPV_ARGS(&mPSO)));
 }
