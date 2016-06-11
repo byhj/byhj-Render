@@ -8,6 +8,7 @@
 #include "d3d/d3dApp.h"
 #include "d3d/d3d12Util.h"
 #include "timer.h"
+#include "cube.h"
 
 #pragma comment(lib,"d3dcompiler.lib")
 #pragma comment(lib, "D3D12.lib")
@@ -87,6 +88,7 @@ protected:
 
 	int mClientWidth = 800;
 	int mClientHeight = 600;
+	Cube m_cube;
 };
 
 }

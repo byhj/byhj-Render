@@ -25,9 +25,13 @@
 #include <fstream>
 #include <sstream>
 #include <cassert>
-#include "d3dx12.h"
-#include "d3d12DDSLoader.h"
-#include "d3dMathHelper.h"
+#include "d3d/d3dx12.h"
+#include "d3d/d3d12DDSLoader.h"
+#include "d3d/d3dMathHelper.h"
+
+#pragma comment(lib,"d3dcompiler.lib")
+#pragma comment(lib, "D3D12.lib")
+#pragma comment(lib, "dxgi.lib")
 
 extern const int gNumFrameResources;
 

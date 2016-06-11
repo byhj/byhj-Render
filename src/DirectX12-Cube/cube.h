@@ -27,6 +27,7 @@ public:
 
 	struct Vertex
 	{
+		Vertex(XMFLOAT3 pos, XMFLOAT4 color) : Pos(pos), Color(color) {}
 		XMFLOAT3 Pos;
 		XMFLOAT4 Color;
 	};
@@ -36,6 +37,9 @@ public:
 		XMFLOAT4X4 WorldViewProj = D3DMathHelper::Identity4x4();
 	};
 
+		ComPtr<ID3D12PipelineState> getPSO() {
+		   return mPSO;
+		}
 private:
 
 
