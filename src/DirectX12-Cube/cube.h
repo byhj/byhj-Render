@@ -14,7 +14,7 @@ class Cube
 public:
 	void init(ComPtr<ID3D12Device> md3dDevice, ComPtr<ID3D12GraphicsCommandList> mCommandList, 
 		      ComPtr<ID3D12CommandQueue> mCommandQueue);
-	void update();
+	void update(float deltaTime);
 	void render();
 	void shutdown();
 

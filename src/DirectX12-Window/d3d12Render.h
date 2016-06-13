@@ -39,9 +39,9 @@ protected:
 	void calc_fps();
 	void flush_cmdQueue();
 
-	ID3D12Resource* CurrentBackBuffer()const;
-	D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView()const;
-	D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView()const;
+	ID3D12Resource* CurrentBackBuffer() const;
+	D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView() const;
+	D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilView() const;
 
     void LogAdapters();
     void LogAdapterOutputs(IDXGIAdapter* adapter);

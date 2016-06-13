@@ -129,7 +129,11 @@ Vulkan:
 <img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/vulkanTriangle.png">
 ---
 
-## Texture (Vulkan & Direct3D12)
+## Triangle (Direct3D12)
+<img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/dx12-cube.jpg">
+---
+
+## Texture (Vulkan)
 <img width = "400" src="http://7xs5mn.com1.z0.glb.clouddn.com/vulkanTexutre.png">
 ---
 

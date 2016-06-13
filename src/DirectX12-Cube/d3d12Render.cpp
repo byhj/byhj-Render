@@ -37,6 +37,10 @@ void D3D12Render::Set4xMsaaState(bool value)
 
 void  D3D12Render::v_init()
 {
+
+	m_Timer.reset();
+	m_Timer.start();
+
 	init_d3d();
 	init_size();
 
@@ -51,14 +55,14 @@ void  D3D12Render::v_init()
 	m_pCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
 	flush_cmdQueue();
 
-
+	
 
 }
 
 void  D3D12Render::v_update()
 {
-
-	m_cube.update();
+	m_Timer.count();
+	m_cube.update(m_Timer.getTotalTime());
 
 }
 
@@ -80,7 +84,7 @@ void  D3D12Render::v_render()
 		D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
 
 	// Clear the back buffer and depth buffer.
-	m_pCommandList->ClearRenderTargetView(CurrentBackBufferView(), Colors::LightSteelBlue, 0, nullptr);
+	m_pCommandList->ClearRenderTargetView(CurrentBackBufferView(), Colors::Black, 0, nullptr);
 	m_pCommandList->ClearDepthStencilView(DepthStencilView(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
 
 	// Specify the buffers we are going to render to.

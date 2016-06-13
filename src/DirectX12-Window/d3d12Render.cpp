@@ -9,6 +9,8 @@ namespace byhj {
 
 D3D12Render::D3D12Render() {
 
+	mClientWidth  = D3DApp::getClientWidth();
+	mClientHeight = D3DApp::getClientHeight();
 }
 
 D3D12Render::~D3D12Render()
@@ -147,6 +149,7 @@ void D3D12Render::init_size()
  
 	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHeapHandle(m_pRendetTargetViewHeap->GetCPUDescriptorHandleForHeapStart());
 	for (UINT i = 0; i < m_SwapChainBufferCount; i++) {
+
 		ThrowIfFailed(m_pSwapChain->GetBuffer(i, IID_PPV_ARGS(&m_pSwapChainBuffer[i])));
 		m_pD3D12Device->CreateRenderTargetView(m_pSwapChainBuffer[i].Get(), nullptr, rtvHeapHandle);
 		rtvHeapHandle.Offset(1, m_RtvDescriptorSize);
@@ -225,7 +228,7 @@ void D3D12Render::init_d3d()
 		IID_PPV_ARGS(&m_pD3D12Device));
 
 	// Fallback to WARP device.
-	if(FAILED(hardwareResult))
+	if(FAILED(hardwareResult)) 
 	{
 		ComPtr<IDXGIAdapter> pWarpAdapter;
 		ThrowIfFailed(m_pFactory->EnumWarpAdapter(IID_PPV_ARGS(&pWarpAdapter)));
@@ -236,8 +239,7 @@ void D3D12Render::init_d3d()
 			IID_PPV_ARGS(&m_pD3D12Device)));
 	}
 
-	ThrowIfFailed(m_pD3D12Device->CreateFence(0, D3D12_FENCE_FLAG_NONE,
-		IID_PPV_ARGS(&m_pFence)));
+	ThrowIfFailed(m_pD3D12Device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_pFence)));
 
 	m_RtvDescriptorSize       = m_pD3D12Device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	m_DsvDescriptorSize       = m_pD3D12Device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
@@ -396,6 +398,8 @@ void D3D12Render::calc_fps()
 		timeElapsed += 1.0f;
 	}
 }
+
+//////////////////////////////////// Log Functions //////////////////////////////////////////
 
 void D3D12Render::LogAdapters()
 {

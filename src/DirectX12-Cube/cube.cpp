@@ -20,7 +20,7 @@ void Cube::init(ComPtr<ID3D12Device> md3dDevice,
 }
 
 
-void Cube::update()
+void Cube::update(float deltaTime)
 {
 
 	// Build the view matrix.
@@ -35,7 +35,7 @@ void Cube::update()
 	XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f*XM_PI, 1.50, 1.0f, 1000.0f);
 	XMStoreFloat4x4(&mProj, P);
 
-	XMMATRIX world = XMLoadFloat4x4(&mWorld);
+	XMMATRIX world = XMMatrixRotationY(deltaTime);
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 	XMMATRIX worldViewProj = world*view*proj;
 
