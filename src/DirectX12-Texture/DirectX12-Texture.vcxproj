@@ -111,6 +111,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\d3d\d3d12DDSLoader.cpp" />
+    <ClCompile Include="..\..\include\d3d\d3d12Util.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dApp.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dCamera.cpp" />
     <ClCompile Include="..\..\include\d3d\d3dEulerCamera.cpp" />
@@ -142,16 +144,15 @@
     <ClCompile Include="..\byhj-Render\timer.cpp" />
     <ClCompile Include="..\byhj-Render\utility.cpp" />
     <ClCompile Include="..\byhj-Render\windowInfo.cpp" />
+    <ClCompile Include="cube.cpp" />
     <ClCompile Include="d3d12Render.cpp" />
-    <ClCompile Include="d3d12DDSLoader.cpp" />
-    <ClCompile Include="d3d12Util.cpp" />
-    <ClCompile Include="d3dMathHelper.cpp" />
     <ClCompile Include="FrameResource.cpp" />
     <ClCompile Include="GeometryGenerator.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="cube.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\d3d\d3d12DDSLoader.h" />
+    <ClInclude Include="..\..\include\d3d\d3d12Util.h" />
     <ClInclude Include="..\..\include\d3d\d3dApp.h" />
     <ClInclude Include="..\..\include\d3d\d3dCamera.h" />
     <ClInclude Include="..\..\include\d3d\d3dEulerCamera.h" />
@@ -184,11 +185,8 @@
     <ClInclude Include="..\byhj-Render\timer.h" />
     <ClInclude Include="..\byhj-Render\utility.h" />
     <ClInclude Include="..\byhj-Render\windowInfo.h" />
-    <ClInclude Include="d3d12Render.h" />
-    <ClInclude Include="d3d12DDSLoader.h" />
-    <ClInclude Include="d3d12Util.h" />
-    <ClInclude Include="d3dMathHelper.h" />
     <ClInclude Include="cube.h" />
+    <ClInclude Include="d3d12Render.h" />
     <ClInclude Include="FrameResource.h" />
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="UploadBuffer.h" />

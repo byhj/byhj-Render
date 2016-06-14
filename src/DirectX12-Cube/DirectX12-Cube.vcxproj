@@ -132,6 +132,7 @@
     <ClInclude Include="..\byhj-Render\app.h" />
     <ClInclude Include="..\byhj-Render\camera.h" />
     <ClInclude Include="..\byhj-Render\font.h" />
+    <ClInclude Include="..\byhj-Render\geometry.h" />
     <ClInclude Include="..\byhj-Render\gui.h" />
     <ClInclude Include="..\byhj-Render\mgr.h" />
     <ClInclude Include="..\byhj-Render\modelMgr.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="..\byhj-Render\app.cpp" />
     <ClCompile Include="..\byhj-Render\camera.cpp" />
     <ClCompile Include="..\byhj-Render\font.cpp" />
+    <ClCompile Include="..\byhj-Render\geometry.cpp" />
     <ClCompile Include="..\byhj-Render\gui.cpp" />
     <ClCompile Include="..\byhj-Render\mgr.cpp" />
     <ClCompile Include="..\byhj-Render\modelMgr.cpp" />

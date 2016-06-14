@@ -141,6 +141,9 @@
     <ClInclude Include="..\..\include\d3d\d3d12Util.h">
       <Filter>Render\d3d</Filter>
     </ClInclude>
+    <ClInclude Include="..\byhj-Render\geometry.h">
+      <Filter>Render\render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="d3d12Render.cpp">
@@ -250,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\d3d\d3d12DDSLoader.cpp">
       <Filter>Render\d3d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\byhj-Render\geometry.cpp">
+      <Filter>Render\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

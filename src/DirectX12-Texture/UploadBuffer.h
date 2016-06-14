@@ -1,6 +1,6 @@
 #pragma once
 
-#include "d3d12Util.h"
+#include "d3d/d3d12Util.h"
 
 template<typename T>
 

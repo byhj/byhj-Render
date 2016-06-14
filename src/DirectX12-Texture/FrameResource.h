@@ -1,7 +1,7 @@
 #pragma once
 
-#include "d3d12Util.h"
-#include "d3dMathHelper.h"
+#include "d3d/d3d12Util.h"
+#include "d3d/d3dMathHelper.h"
 #include "UploadBuffer.h"
 
 struct ObjectConstants
@@ -12,20 +12,21 @@ struct ObjectConstants
 
 struct PassConstants
 {
-    DirectX::XMFLOAT4X4 View = D3DMathHelper::Identity4x4();
-    DirectX::XMFLOAT4X4 InvView = D3DMathHelper::Identity4x4();
-    DirectX::XMFLOAT4X4 Proj = D3DMathHelper::Identity4x4();
-    DirectX::XMFLOAT4X4 InvProj = D3DMathHelper::Identity4x4();
-    DirectX::XMFLOAT4X4 ViewProj = D3DMathHelper::Identity4x4();
-    DirectX::XMFLOAT4X4 InvViewProj = D3DMathHelper::Identity4x4();
-    DirectX::XMFLOAT3 EyePosW = { 0.0f, 0.0f, 0.0f };
-    float cbPerObjectPad1 = 0.0f;
-    DirectX::XMFLOAT2 RenderTargetSize = { 0.0f, 0.0f };
-    DirectX::XMFLOAT2 InvRenderTargetSize = { 0.0f, 0.0f };
-    float NearZ = 0.0f;
-    float FarZ = 0.0f;
-    float TotalTime = 0.0f;
-    float DeltaTime = 0.0f;
+	DirectX::XMFLOAT4X4 View              = D3DMathHelper::Identity4x4();
+	DirectX::XMFLOAT4X4 InvView           = D3DMathHelper::Identity4x4();
+	DirectX::XMFLOAT4X4 Proj              = D3DMathHelper::Identity4x4();
+	DirectX::XMFLOAT4X4 InvProj           = D3DMathHelper::Identity4x4();
+	DirectX::XMFLOAT4X4 ViewProj          = D3DMathHelper::Identity4x4();
+	DirectX::XMFLOAT4X4 InvViewProj       = D3DMathHelper::Identity4x4();
+	DirectX::XMFLOAT3 EyePosW             ={ 0.0f, 0.0f, 0.0f };
+	DirectX::XMFLOAT2 RenderTargetSize    ={ 0.0f, 0.0f };
+	DirectX::XMFLOAT2 InvRenderTargetSize ={ 0.0f, 0.0f };
+
+	float cbPerObjectPad1 = 0.0f;
+	float NearZ           = 0.0f;
+	float FarZ            = 0.0f;
+	float TotalTime       = 0.0f;
+	float DeltaTime       = 0.0f;
 
     DirectX::XMFLOAT4 AmbientLight = { 0.0f, 0.0f, 0.0f, 1.0f };
 
@@ -61,9 +62,9 @@ public:
     // We cannot update a cbuffer until the GPU is done processing the commands
     // that reference it.  So each frame needs their own cbuffers.
    // std::unique_ptr<UploadBuffer<FrameConstants>> FrameCB = nullptr;
-    std::unique_ptr<UploadBuffer<PassConstants>> PassCB = nullptr;
-    std::unique_ptr<UploadBuffer<MaterialConstants>> MaterialCB = nullptr;
-    std::unique_ptr<UploadBuffer<ObjectConstants>> ObjectCB = nullptr;
+	std::unique_ptr<UploadBuffer<PassConstants>> PassCB         = nullptr;
+	std::unique_ptr<UploadBuffer<MaterialConstants>> MaterialCB = nullptr;
+	std::unique_ptr<UploadBuffer<ObjectConstants>> ObjectCB     = nullptr;
 
     // Fence value to mark commands up to this fence point.  This lets us
     // check if these frame resources are still in use by the GPU.
