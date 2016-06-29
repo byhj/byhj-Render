@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Triangle", "src\Triangle\Triangle.vcxproj", "{7B1A93DA-F28A-4A86-A81A-33C66E3E318F}"
 EndProject
@@ -302,6 +302,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGAL", "src\CGAL\CGAL.vcxproj", "{4B67006B-3148-49E5-A7ED-3076B22889F0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectX12-Cube", "src\DirectX12-Cube\DirectX12-Cube.vcxproj", "{6D85CC9A-48BA-4B70-915D-17D6E68505B0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Depth-Test", "src\Depth-Test\Depth-Test.vcxproj", "{05FB1F43-24DB-4915-8D72-3F8880860C28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1311,6 +1313,14 @@ Global
 		{6D85CC9A-48BA-4B70-915D-17D6E68505B0}.Release|x64.Build.0 = Release|x64
 		{6D85CC9A-48BA-4B70-915D-17D6E68505B0}.Release|x86.ActiveCfg = Release|Win32
 		{6D85CC9A-48BA-4B70-915D-17D6E68505B0}.Release|x86.Build.0 = Release|Win32
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Debug|x64.ActiveCfg = Debug|x64
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Debug|x64.Build.0 = Debug|x64
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Debug|x86.ActiveCfg = Debug|Win32
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Debug|x86.Build.0 = Debug|Win32
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Release|x64.ActiveCfg = Release|x64
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Release|x64.Build.0 = Release|x64
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Release|x86.ActiveCfg = Release|Win32
+		{05FB1F43-24DB-4915-8D72-3F8880860C28}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1463,5 +1473,6 @@ Global
 		{19E86494-60EC-4FAB-8E6A-366C421E5BDE} = {945A6EBD-8771-481C-9B34-977B07DA0C4D}
 		{4B67006B-3148-49E5-A7ED-3076B22889F0} = {945A6EBD-8771-481C-9B34-977B07DA0C4D}
 		{6D85CC9A-48BA-4B70-915D-17D6E68505B0} = {878993CC-3E07-4D62-AB82-472D05088815}
+		{05FB1F43-24DB-4915-8D72-3F8880860C28} = {96E2CA7C-F979-4EDD-9818-753F269DDFAF}
 	EndGlobalSection
 EndGlobal
